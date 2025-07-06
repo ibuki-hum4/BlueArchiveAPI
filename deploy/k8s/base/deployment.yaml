@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: bluearchive-api
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: bluearchive-api
+  template:
+    metadata:
+      labels:
+        app: bluearchive-api
+    spec:
+      containers:
+        - name: bluearchive-api
+          image: yourdockerhubusername/bluearchive-api:latest
+          ports:
+            - containerPort: 3000
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 3000
+            initialDelaySeconds: 5
+            periodSeconds: 10
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 3000
+            initialDelaySeconds: 15
+            periodSeconds: 20
