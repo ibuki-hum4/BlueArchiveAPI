@@ -8,7 +8,7 @@ metadata:
 spec:
   tls:
     - hosts:
-        - api.yourdomain.com
+        - bluearchive-api.skyia.jp
       secretName: bluearchive-api-tls
   rules:
     - host: bluearchive-api.skyia.jp
