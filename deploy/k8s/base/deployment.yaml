@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: bluearchive-api
-          image: yourdockerhubusername/bluearchive-api:latest
+          image: kemar1/bluearchive-api:latest
           ports:
             - containerPort: 3000
           readinessProbe:
