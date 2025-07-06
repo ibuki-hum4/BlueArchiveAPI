@@ -11,7 +11,7 @@ spec:
         - api.yourdomain.com
       secretName: bluearchive-api-tls
   rules:
-    - host: api.yourdomain.com
+    - host: bluearchive-api.skyia.jp
       http:
         paths:
           - path: /
