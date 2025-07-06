@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: bluearchive-api-service
+spec:
+  selector:
+    app: bluearchive-api
+  ports:
+    - protocol: TCP
+      port: 80          # 外部公開用のポート
+      targetPort: 3000  # Pod内のコンテナポート
+  type: ClusterIP
