@@ -2,6 +2,8 @@
 
 ## 概要
 ブルーアーカイブの生徒データAPIサーバーです。
+下のリンクでもAPIを使用できます。
+https://bluearchive-api.skyia.jp/
 
 ## セットアップ
 1. Node.jsをインストール
