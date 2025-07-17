@@ -1,0 +1,20 @@
+{
+  "name": "blue-archive-api",
+  "version": "1.0.0",
+  "description": "ブルーアーカイブ生徒データ送信用API",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.0",
+    "express": "^4.18.2",
+    "express-rate-limit": "^6.7.0",
+    "helmet": "^7.2.0",
+    "morgan": "^1.10.0",
+    "nanoid": "^5.1.5",
+    "xlsx": "^0.18.5"
+  }
+}
