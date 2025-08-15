@@ -12,7 +12,7 @@
             "class": "アタッカー",
             "position": "BACK"
         },
-        "school": "ミレニアムサイエンススクールサイエンススクールサイエンススクール",
+        "school": "ミレニアムサイエンススクール",
         "combat": {
             "attackType": "神秘",
             "defenseType": "重装甲"
@@ -156,7 +156,7 @@
             "class": "サポーター",
             "position": "MIDDLE"
         },
-        "school": "ミレニアムサイエンススクールサイエンススクールサイエンススクール",
+        "school": "ミレニアムサイエンススクール",
         "combat": {
             "attackType": "神秘",
             "defenseType": "軽装備"
@@ -180,7 +180,7 @@
             "class": "サポーター",
             "position": "MIDDLE"
         },
-        "school": "ミレニアムサイエンススクールサイエンススクールサイエンススクール",
+        "school": "ミレニアムサイエンススクール",
         "combat": {
             "attackType": "爆発",
             "defenseType": "重装甲"
@@ -228,7 +228,7 @@
             "class": "アタッカー",
             "position": "BACK"
         },
-        "school": "ミレニアムサイエンススクールサイエンススクールサイエンススクール",
+        "school": "ミレニアムサイエンススクール",
         "combat": {
             "attackType": "神秘",
             "defenseType": "特殊装甲"
@@ -252,7 +252,7 @@
             "class": "アタッカー",
             "position": "BACK"
         },
-        "school": "ミレニアムサイエンススクールサイエンススクールサイエンススクール",
+        "school": "ミレニアムサイエンススクール",
         "combat": {
             "attackType": "神秘",
             "defenseType": "軽装備"
@@ -588,7 +588,7 @@
             "class": "アタッカー",
             "position": "FRONT"
         },
-        "school": "ミレニアムサイエンススクールサイエンススクールサイエンススクール",
+        "school": "ミレニアムサイエンススクール",
         "combat": {
             "attackType": "神秘",
             "defenseType": "特殊装甲"
@@ -636,7 +636,7 @@
             "class": "タンク",
             "position": "FRONT"
         },
-        "school": "ミレニアムサイエンススクールサイエンススクールサイエンススクール",
+        "school": "ミレニアムサイエンススクール",
         "combat": {
             "attackType": "爆発",
             "defenseType": "軽装備"
@@ -660,7 +660,7 @@
             "class": "サポーター",
             "position": "BACK"
         },
-        "school": "ミレニアムサイエンススクールサイエンススクールサイエンススクール",
+        "school": "ミレニアムサイエンススクール",
         "combat": {
             "attackType": "神秘",
             "defenseType": "特殊装甲"
@@ -852,7 +852,7 @@
             "class": "アタッカー",
             "position": "BACK"
         },
-        "school": "ミレニアムサイエンススクールサイエンススクールサイエンススクール",
+        "school": "ミレニアムサイエンススクール",
         "combat": {
             "attackType": "貫通",
             "defenseType": "重装甲"
@@ -876,7 +876,7 @@
             "class": "アタッカー",
             "position": "BACK"
         },
-        "school": "ミレニアムサイエンススクールサイエンススクールサイエンススクール",
+        "school": "ミレニアムサイエンススクール",
         "combat": {
             "attackType": "神秘",
             "defenseType": "重装甲"
@@ -1068,7 +1068,7 @@
             "class": "サポーター",
             "position": "MIDDLE"
         },
-        "school": "ミレニアムサイエンススクールサイエンススクールサイエンススクール",
+        "school": "ミレニアムサイエンススクール",
         "combat": {
             "attackType": "貫通",
             "defenseType": "重装甲"
@@ -1092,7 +1092,7 @@
             "class": "アタッカー",
             "position": "BACK"
         },
-        "school": "ミレニアムサイエンススクールサイエンススクールサイエンススクール",
+        "school": "ミレニアムサイエンススクール",
         "combat": {
             "attackType": "爆発",
             "defenseType": "特殊装甲"
@@ -1140,7 +1140,7 @@
             "class": "アタッカー",
             "position": "BACK"
         },
-        "school": "ミレニアムサイエンススクールサイエンススクールサイエンススクール",
+        "school": "ミレニアムサイエンススクール",
         "combat": {
             "attackType": "神秘",
             "defenseType": "重装甲"
@@ -1620,7 +1620,7 @@
             "class": "アタッカー",
             "position": "FRONT"
         },
-        "school": "ミレニアムサイエンススクールサイエンススクールサイエンススクール",
+        "school": "ミレニアムサイエンススクール",
         "combat": {
             "attackType": "貫通",
             "defenseType": "特殊装甲"
@@ -1644,7 +1644,7 @@
             "class": "サポーター",
             "position": "BACK"
         },
-        "school": "ミレニアムサイエンススクールサイエンススクールサイエンススクール",
+        "school": "ミレニアムサイエンススクール",
         "combat": {
             "attackType": "貫通",
             "defenseType": "軽装備"
@@ -1932,7 +1932,7 @@
             "class": "アタッカー",
             "position": "BACK"
         },
-        "school": "ミレニアムサイエンススクールサイエンススクールサイエンススクール",
+        "school": "ミレニアムサイエンススクール",
         "combat": {
             "attackType": "貫通",
             "defenseType": "重装甲"
@@ -2028,7 +2028,7 @@
             "class": "アタッカー",
             "position": "MIDDLE"
         },
-        "school": "ミレニアムサイエンススクールサイエンススクールサイエンススクール",
+        "school": "ミレニアムサイエンススクール",
         "combat": {
             "attackType": "爆発",
             "defenseType": "弾力装甲"
@@ -2052,7 +2052,7 @@
             "class": "アタッカー",
             "position": "MIDDLE"
         },
-        "school": "ミレニアムサイエンススクールサイエンススクールサイエンススクール",
+        "school": "ミレニアムサイエンススクール",
         "combat": {
             "attackType": "爆発",
             "defenseType": "軽装備"
@@ -2220,7 +2220,7 @@
             "class": "アタッカー",
             "position": "FRONT"
         },
-        "school": "ミレニアムサイエンススクールサイエンススクールサイエンススクール",
+        "school": "ミレニアムサイエンススクール",
         "combat": {
             "attackType": "貫通",
             "defenseType": "軽装備"
@@ -2244,7 +2244,7 @@
             "class": "タンク",
             "position": "FRONT"
         },
-        "school": "ミレニアムサイエンススクールサイエンススクールサイエンススクール",
+        "school": "ミレニアムサイエンススクール",
         "combat": {
             "attackType": "爆発",
             "defenseType": "重装甲"
@@ -2268,7 +2268,7 @@
             "class": "アタッカー",
             "position": "FRONT"
         },
-        "school": "ミレニアムサイエンススクールサイエンススクールサイエンススクール",
+        "school": "ミレニアムサイエンススクール",
         "combat": {
             "attackType": "貫通",
             "defenseType": "弾力装甲"
@@ -2292,7 +2292,7 @@
             "class": "サポーター",
             "position": "MIDDLE"
         },
-        "school": "ミレニアムサイエンススクールサイエンススクールサイエンススクール",
+        "school": "ミレニアムサイエンススクール",
         "combat": {
             "attackType": "神秘",
             "defenseType": "特殊装甲"
@@ -2316,7 +2316,7 @@
             "class": "アタッカー",
             "position": "MIDDLE"
         },
-        "school": "ミレニアムサイエンススクールサイエンススクールサイエンススクール",
+        "school": "ミレニアムサイエンススクール",
         "combat": {
             "attackType": "貫通",
             "defenseType": "軽装備"
@@ -2556,7 +2556,7 @@
             "class": "サポーター",
             "position": "MIDDLE"
         },
-        "school": "ミレニアムサイエンススクールサイエンススクールサイエンススクール",
+        "school": "ミレニアムサイエンススクール",
         "combat": {
             "attackType": "爆発",
             "defenseType": "軽装備"
@@ -2724,7 +2724,7 @@
             "class": "アタッカー",
             "position": "BACK"
         },
-        "school": "ミレニアムサイエンススクールサイエンススクールサイエンススクール",
+        "school": "ミレニアムサイエンススクール",
         "combat": {
             "attackType": "爆発",
             "defenseType": "重装甲"
@@ -2796,7 +2796,7 @@
             "class": "サポーター",
             "position": "BACK"
         },
-        "school": "ミレニアムサイエンススクールサイエンススクールサイエンススクール",
+        "school": "ミレニアムサイエンススクール",
         "combat": {
             "attackType": "貫通",
             "defenseType": "軽装備"
@@ -3036,7 +3036,7 @@
             "class": "アタッカー",
             "position": "BACK"
         },
-        "school": "ミレニアムサイエンススクールサイエンススクールサイエンススクール",
+        "school": "ミレニアムサイエンススクール",
         "combat": {
             "attackType": "貫通",
             "defenseType": "軽装備"
@@ -3060,7 +3060,7 @@
             "class": "アタッカー",
             "position": "BACK"
         },
-        "school": "ミレニアムサイエンススクールサイエンススクールサイエンススクール",
+        "school": "ミレニアムサイエンススクール",
         "combat": {
             "attackType": "爆発",
             "defenseType": "重装甲"
@@ -3300,7 +3300,7 @@
             "class": "アタッカー",
             "position": "BACK"
         },
-        "school": "ミレニアムサイエンススクールサイエンススクールサイエンススクール",
+        "school": "ミレニアムサイエンススクール",
         "combat": {
             "attackType": "貫通",
             "defenseType": "軽装備"
@@ -3324,7 +3324,7 @@
             "class": "アタッカー",
             "position": "BACK"
         },
-        "school": "ミレニアムサイエンススクールサイエンススクールサイエンススクール",
+        "school": "ミレニアムサイエンススクール",
         "combat": {
             "attackType": "振動",
             "defenseType": "軽装備"
@@ -3660,7 +3660,7 @@
             "class": "アタッカー",
             "position": "MIDDLE"
         },
-        "school": "ミレニアムサイエンススクールサイエンススクールサイエンススクール",
+        "school": "ミレニアムサイエンススクール",
         "combat": {
             "attackType": "振動",
             "defenseType": "軽装備"
@@ -3684,7 +3684,7 @@
             "class": "タンク",
             "position": "FRONT"
         },
-        "school": "ミレニアムサイエンススクールサイエンススクールサイエンススクール",
+        "school": "ミレニアムサイエンススクール",
         "combat": {
             "attackType": "神秘",
             "defenseType": "特殊装甲"
@@ -3708,7 +3708,7 @@
             "class": "タンク",
             "position": "FRONT"
         },
-        "school": "ミレニアムサイエンススクールサイエンススクールサイエンススクール",
+        "school": "ミレニアムサイエンススクール",
         "combat": {
             "attackType": "爆発",
             "defenseType": "重装甲"
@@ -3780,7 +3780,7 @@
             "class": "アタッカー",
             "position": "MIDDLE"
         },
-        "school": "ミレニアムサイエンススクールサイエンススクールサイエンススクール",
+        "school": "ミレニアムサイエンススクール",
         "combat": {
             "attackType": "貫通",
             "defenseType": "特殊装甲"
@@ -3828,7 +3828,7 @@
             "class": "サポーター",
             "position": "BACK"
         },
-        "school": "ミレニアムサイエンススクールサイエンススクールサイエンススクール",
+        "school": "ミレニアムサイエンススクール",
         "combat": {
             "attackType": "神秘",
             "defenseType": "弾力装甲"
@@ -3876,7 +3876,7 @@
             "class": "アタッカー",
             "position": "BACK"
         },
-        "school": "ミレニアムサイエンススクールサイエンススクールサイエンススクール",
+        "school": "ミレニアムサイエンススクール",
         "combat": {
             "attackType": "振動",
             "defenseType": "軽装備"
@@ -4116,7 +4116,7 @@
             "class": "サポーター",
             "position": "MIDDLE"
         },
-        "school": "ミレニアムサイエンススクールサイエンススクールサイエンススクール",
+        "school": "ミレニアムサイエンススクール",
         "combat": {
             "attackType": "貫通",
             "defenseType": "軽装備"
@@ -4188,7 +4188,7 @@
             "class": "アタッカー",
             "position": "BACK"
         },
-        "school": "ミレニアムサイエンススクールサイエンススクールサイエンススクール",
+        "school": "ミレニアムサイエンススクール",
         "combat": {
             "attackType": "貫通",
             "defenseType": "重装甲"
@@ -4476,7 +4476,7 @@
             "class": "サポーター",
             "position": "BACK"
         },
-        "school": "ミレニアムサイエンススクールサイエンススクールサイエンススクール",
+        "school": "ミレニアムサイエンススクール",
         "combat": {
             "attackType": "爆発",
             "defenseType": "軽装備"
@@ -4596,7 +4596,7 @@
             "class": "アタッカー",
             "position": "MIDDLE"
         },
-        "school": "ミレニアムサイエンススクールサイエンススクールサイエンススクール",
+        "school": "ミレニアムサイエンススクール",
         "combat": {
             "attackType": "貫通",
             "defenseType": "軽装備"
@@ -4620,7 +4620,7 @@
             "class": "タンク",
             "position": "FRONT"
         },
-        "school": "ミレニアムサイエンススクールサイエンススクールサイエンススクール",
+        "school": "ミレニアムサイエンススクール",
         "combat": {
             "attackType": "爆発",
             "defenseType": "重装甲"
@@ -4716,7 +4716,7 @@
             "class": "アタッカー",
             "position": "MIDDLE"
         },
-        "school": "ミレニアムサイエンススクールサイエンススクールサイエンススクール",
+        "school": "ミレニアムサイエンススクール",
         "combat": {
             "attackType": "神秘",
             "defenseType": "軽装備"
@@ -4800,8 +4800,32 @@
         }
     },
     {
+        "id": "EpvfF6Pa"
+        "name": "イチカ（水着）"
+        "rarity": 1,
+        "weapon": {
+            "type": "AR",
+            "cover": false
+        },
+        "role": {
+            "type": "SPECIAL",
+            "class": "サポーター",
+            "position": "BACK"
+        },
+        "school": "トリニティ総合学園"
+        "combat": {
+            "attackType": "振動",
+            "defenseType": "特殊装甲"
+        },
+        "terrainAdaptation": {
+            "city": "A",
+            "outdoor": "B",
+            "indoor": "C"
+        }
+    },
+    {
         "id": "vQPoOnJY",
-        "name": "イブキ>イブキ",
+        "name": "イブキ",
         "rarity": 1,
         "weapon": {
             "type": "AR",
@@ -4836,7 +4860,7 @@
             "class": "アタッカー",
             "position": "BACK"
         },
-        "school": "ミレニアムサイエンススクールサイエンススクールサイエンススクール",
+        "school": "ミレニアムサイエンススクール",
         "combat": {
             "attackType": "爆発",
             "defenseType": "重装甲"
@@ -4884,7 +4908,7 @@
             "class": "サポーター",
             "position": "BACK"
         },
-        "school": "ミレニアムサイエンススクールサイエンススクールサイエンススクール",
+        "school": "ミレニアムサイエンススクール",
         "combat": {
             "attackType": "爆発",
             "defenseType": "軽装備"
@@ -4908,7 +4932,7 @@
             "class": "サポーター",
             "position": "BACK"
         },
-        "school": "ミレニアムサイエンススクールサイエンススクールサイエンススクール",
+        "school": "ミレニアムサイエンススクール",
         "combat": {
             "attackType": "貫通",
             "defenseType": "軽装備"
@@ -5244,7 +5268,7 @@
             "class": "アタッカー",
             "position": "BACK"
         },
-        "school": "ミレニアムサイエンススクールサイエンススクールサイエンススクール",
+        "school": "ミレニアムサイエンススクール",
         "combat": {
             "attackType": "爆発",
             "defenseType": "軽装備"
@@ -5388,7 +5412,7 @@
             "class": "アタッカー",
             "position": "BACK"
         },
-        "school": "ミレニアムサイエンススクールサイエンススクールサイエンススクール",
+        "school": "ミレニアムサイエンススクール",
         "combat": {
             "attackType": "爆発",
             "defenseType": "弾力装甲"
