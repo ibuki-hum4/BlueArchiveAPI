@@ -3264,6 +3264,30 @@
         }
     },
     {
+        "id": "f-n5aDqB",
+        "name": "ミカ（水着）",
+        "rarity": 3,
+        "weapon": {
+            "type": "SMG",
+            "cover": true
+        },
+        "role": {
+            "type": "STRIKER",
+            "class": "アタッカー",
+            "position": "FRONT"
+        },
+        "school": "トリニティ総合学園",
+        "combat": {
+            "attackType": "振動",
+            "defenseType": "特殊装甲"
+        },
+        "terrainAdaptation": {
+            "city": "S",
+            "outdoor": "A",
+            "indoor": "D"
+        }
+    },
+    {
         "id": "bjUQDyBg",
         "name": "ミサキ",
         "rarity": 3,
