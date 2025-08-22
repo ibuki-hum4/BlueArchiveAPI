@@ -672,6 +672,30 @@
         }
     },
     {
+        "id": "k7RAzJ73",
+        "name": "エリ",
+        "rarity": 3,
+        "weapon": {
+            "type": "SR",
+            "cover": true
+        },
+        "role": {
+            "type": "STRIKER",
+            "class": "アタッカー",
+            "position": "BACK"
+        },
+        "school": "ワイルドハント芸術学院",
+        "combat": {
+            "attackType": "振動",
+            "defenseType": "特殊装甲"
+        },
+        "terrainAdaptation": {
+            "city": "S",
+            "outdoor": "B",
+            "indoor": "D"
+        }
+    },
+    {
         "id": "A7IfAY91",
         "name": "カエデ",
         "rarity": 3,
@@ -765,6 +789,30 @@
             "city": "S",
             "outdoor": "B",
             "indoor": "D"
+        }
+    },
+    {
+        "id": "jKQNEqEG",
+        "name": "カノエ",
+        "rarity": 3,
+        "weapon": {
+            "type": "SG",
+            "cover": false
+        },
+        "role": {
+            "type": "STRIKER",
+            "class": "タンク",
+            "position": "FRONT"
+        },
+        "school": "ワイルドハント芸術学院",
+        "combat": {
+            "attackType": "神秘",
+            "defenseType": "重装甲"
+        },
+        "terrainAdaptation": {
+            "city": "D",
+            "outdoor": "B",
+            "indoor": "S"
         }
     },
     {
