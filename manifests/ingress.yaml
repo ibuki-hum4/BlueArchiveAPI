@@ -1,0 +1,19 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: bluearchive-api
+  labels:
+    name: bluearchive-api
+spec:
+  ingressClassName: traefik
+  rules:
+    - host: ibuki-api-test.uniproject.jp
+      http:
+        paths:
+          - pathType: Prefix
+            path: "/"
+            backend:
+              service:
+                name: bluearchive-api
+                port:
+                  number: 80
