@@ -1,18 +1,19 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: bluearchive-api-ingress
-  annotations:
-    kubernetes.io/ingress.class: nginx
+  name: app-ingress
+  labels:
+    name: app-ingress
 spec:
+  ingressClassName: traefik
   rules:
     - host: ibuki-api-test.uniproject.jp
       http:
         paths:
-          - path: /
-            pathType: Prefix
+          - pathType: Prefix
+            path: "/"
             backend:
               service:
-                name: bluearchive-api
+                name: ibuki-nginx
                 port:
                   number: 80
