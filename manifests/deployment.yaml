@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: bluearchive-api
+  labels:
+    app: bluearchive-api
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: bluearchive-api
+  template:
+    metadata:
+      labels:
+        app: bluearchive-api
+    spec:
+      containers:
+        - name: bluearchive-api
+          image: kemar1/bluearchiveapi:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 3000
