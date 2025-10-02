@@ -10,6 +10,12 @@ export default function Navigation() {
     setIsMenuOpen(!isMenuOpen);
   };
 
+  const handleMenuNavigate = () => {
+    setIsMenuOpen(false);
+  };
+
+  const apiEndpoint = '/api';
+
   return (
     <nav className="bg-blue-600 text-white shadow-lg">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -41,9 +47,7 @@ export default function Navigation() {
               利用規約
             </Link>
             <a
-              href="/api"
-              target="_blank"
-              rel="noopener noreferrer"
+              href={apiEndpoint}
               className="px-3 py-2 rounded-md text-sm font-medium hover:bg-blue-700 transition-colors"
             >
               API
@@ -87,29 +91,28 @@ export default function Navigation() {
               <Link
                 href="/"
                 className="block px-3 py-2 rounded-md text-base font-medium hover:bg-blue-700 transition-colors"
-                onClick={() => setIsMenuOpen(false)}
+                onClick={handleMenuNavigate}
               >
                 生徒一覧
               </Link>
               <Link
                 href="/api-docs"
                 className="block px-3 py-2 rounded-md text-base font-medium hover:bg-blue-700 transition-colors"
-                onClick={() => setIsMenuOpen(false)}
+                onClick={handleMenuNavigate}
               >
                 API使用方法
               </Link>
               <Link
                 href="/terms"
                 className="block px-3 py-2 rounded-md text-base font-medium hover:bg-blue-700 transition-colors"
-                onClick={() => setIsMenuOpen(false)}
+                onClick={handleMenuNavigate}
               >
                 利用規約
               </Link>
               <a
-                href="https://bluearchive-api.skyia.jp/"
-                target="_blank"
-                rel="noopener noreferrer"
+                href={apiEndpoint}
                 className="block px-3 py-2 rounded-md text-base font-medium hover:bg-blue-700 transition-colors"
+                onClick={handleMenuNavigate}
               >
                 API
               </a>
