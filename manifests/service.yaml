@@ -1,10 +1,10 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: bluearchive-api-test
+  name: bluearchive-api
 spec:
   selector:
-    app: bluearchive-api-test
+    app: bluearchive-api
   ports:
     - name: http
       port: 80

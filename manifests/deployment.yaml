@@ -1,18 +1,18 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: bluearchive-api-test
+  name: bluearchive-api
   labels:
-    app: bluearchive-api-test
+    app: bluearchive-api
 spec:
   replicas: 2
   selector:
     matchLabels:
-      app: bluearchive-api-test
+      app: bluearchive-api
   template:
     metadata:
       labels:
-        app: bluearchive-api-test
+        app: bluearchive-api
     spec:
       initContainers:
         - name: seed-students-data
@@ -29,7 +29,7 @@ spec:
             - name: students-data
               mountPath: /students-data
       containers:
-        - name: bluearchive-api-test
+        - name: bluearchive-api
           image: docker.io/kemar1/bluearchive-api:0.1.0
           imagePullPolicy: IfNotPresent
           env:
