@@ -4,8 +4,8 @@ import type { Student } from '@/types/student';
 
 const STUDENTS_FILE_NAME = 'students.json';
 const candidateDirectories = [
-  path.join(process.cwd(), '..', 'data'),
   path.join(process.cwd(), 'data'),
+  path.join(process.cwd(), '..', 'data'),
   path.join(process.cwd(), '.vercel', 'project', 'data')
 ];
 

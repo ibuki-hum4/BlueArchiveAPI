@@ -14,6 +14,20 @@ spec:
       labels:
         app: bluearchive-api-test
     spec:
+      initContainers:
+        - name: seed-students-data
+          image: docker.io/kemar1/bluearchive-api:0.1.0
+          command:
+            - /bin/sh
+            - -c
+          args:
+            - |
+              if [ ! -f /students-data/students.json ]; then
+                cp /app/data/students.json /students-data/students.json;
+              fi
+          volumeMounts:
+            - name: students-data
+              mountPath: /students-data
       containers:
         - name: bluearchive-api-test
           image: docker.io/kemar1/bluearchive-api:0.1.0
