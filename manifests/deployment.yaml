@@ -8,14 +8,45 @@ spec:
   replicas: 2
   selector:
     matchLabels:
-      app: bluearchive-api
+      app: bluearchive-api-test
   template:
     metadata:
       labels:
-        app: bluearchive-api
+        app: bluearchive-api-test
     spec:
       containers:
-        - name: bluearchive-api
-          image: kemar1/bluearchiveapi:latest
+        - name: bluearchive-api-test
+          image: docker.io/kemar1/bluearchive-api:0.1.0
+          imagePullPolicy: IfNotPresent
+          env:
+            - name: PORT
+              value: "3000"
           ports:
             - containerPort: 3000
+              name: http
+          readinessProbe:
+            httpGet:
+              path: /api
+              port: http
+            initialDelaySeconds: 10
+            periodSeconds: 10
+          livenessProbe:
+            httpGet:
+              path: /api
+              port: http
+            initialDelaySeconds: 30
+            periodSeconds: 20
+          resources:
+            requests:
+              cpu: 100m
+              memory: 256Mi
+            limits:
+              cpu: 500m
+              memory: 512Mi
+          volumeMounts:
+            - name: students-data
+              mountPath: /app/data
+      volumes:
+        - name: students-data
+          persistentVolumeClaim:
+            claimName: bluearchive-api-data

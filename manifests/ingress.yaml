@@ -1,19 +1,19 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: bluearchive-api
+  name: bluearchive-api-test
   labels:
-    name: bluearchive-api
+    name: bluearchive-api-test
 spec:
   ingressClassName: traefik
   rules:
-    - host: bluearchive-api.skyia.jp
+    - host: bluearchive-api-test.skyia.jp
       http:
         paths:
           - pathType: Prefix
             path: "/"
             backend:
               service:
-                name: bluearchive-api
+                name: bluearchive-api-test
                 port:
                   number: 80

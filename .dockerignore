@@ -1,0 +1,13 @@
+.git
+.gitignore
+node_modules
+frontend/node_modules
+frontend/.next
+frontend/.turbo
+frontend/.eslintcache
+frontend/.cache
+manifests
+logs
+data/*.log
+**/npm-debug.log
+**/yarn-error.log
