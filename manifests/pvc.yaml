@@ -4,8 +4,7 @@ metadata:
   name: bluearchive-api-data
 spec:
   accessModes:
-    - ReadWriteMany
+    - ReadWriteOnce
   resources:
     requests:
       storage: 1Gi
-  storageClassName: standard-rwx

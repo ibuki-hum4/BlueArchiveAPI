@@ -163,7 +163,8 @@ docker push kemar1/bluearchive-api:latest
 
 - `manifests/deployment.yaml` の `image` は `docker.io/kemar1/bluearchive-api:0.1.0` を指しています。Docker Hub にプッシュしたタグに合わせて `docker.io/<your-username>/bluearchive-api:<tag>` に更新してください。
 - 新しいバージョンを展開する際は、`kubectl apply -f manifests/` を実行する前にタグを更新し、`kubectl rollout restart deployment/bluearchive-api` で再起動すると確実です。
-- `data/students.json` は `PersistentVolumeClaim` (`manifests/pvc.yaml`) を通じて `/app/data` にマウントされます。クラスタに RWX 対応の StorageClass が必要です。
+- `manifests/pvc.yaml` はクラスタのデフォルト StorageClass を利用するようになりました。ReadWriteMany が必要な場合は、ご自身の環境で RWX 対応の StorageClass を作成し、`storageClassName` と `accessModes` を書き換えてください（その場合、Deployment の `replicas` を 2 以上にしても問題ありません）。
+- シングルノード構成やデフォルト StorageClass（たとえば `standard`）を使う場合はそのまま適用できますが、Pod が複数ノードにスケジュールされると ReadWriteOnce ボリュームは共有できない点にご注意ください。
 
 ## 🤝 貢献
 
