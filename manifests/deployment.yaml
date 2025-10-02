@@ -30,8 +30,8 @@ spec:
               mountPath: /students-data
       containers:
         - name: bluearchive-api
-          image: docker.io/kemar1/bluearchive-api:0.1.0
-          imagePullPolicy: IfNotPresent
+          image: docker.io/kemar1/bluearchive-api:0.1.1
+          imagePullPolicy: Always
           env:
             - name: PORT
               value: "3000"
