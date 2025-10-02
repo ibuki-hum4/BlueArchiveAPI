@@ -1,9 +1,9 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: bluearchive-api
+  name: bluearchive-api-test
   labels:
-    app: bluearchive-api
+    app: bluearchive-api-test
 spec:
   replicas: 2
   selector:
