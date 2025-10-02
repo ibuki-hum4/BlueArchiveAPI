@@ -41,7 +41,7 @@ export default function Navigation() {
               利用規約
             </Link>
             <a
-              href="https://bluearchive-api.skyia.jp/api"
+              href="/api"
               target="_blank"
               rel="noopener noreferrer"
               className="px-3 py-2 rounded-md text-sm font-medium hover:bg-blue-700 transition-colors"
