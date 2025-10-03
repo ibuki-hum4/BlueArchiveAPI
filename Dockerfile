@@ -18,6 +18,7 @@ WORKDIR /app
 ENV NODE_ENV=production
 COPY --from=deps /app/node_modules ./node_modules
 COPY frontend/ .
+COPY data ./data
 RUN npm run build \
     && npm prune --omit=dev
 
