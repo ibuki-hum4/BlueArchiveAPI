@@ -16,7 +16,7 @@ spec:
     spec:
       initContainers:
         - name: seed-students-data
-          image: docker.io/kemar1/bluearchive-api:0.1.0
+          image: docker.io/kemar1/bluearchive-api:0.2.1
           command:
             - /bin/sh
             - -c
@@ -30,7 +30,7 @@ spec:
               mountPath: /students-data
       containers:
         - name: bluearchive-api
-          image: docker.io/kemar1/bluearchive-api:0.1.1
+          image: docker.io/kemar1/bluearchive-api:0.2.1
           imagePullPolicy: Always
           env:
             - name: PORT
