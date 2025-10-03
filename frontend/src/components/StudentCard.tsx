@@ -6,6 +6,7 @@ interface StudentCardProps {
 }
 
 export default function StudentCard({ student }: StudentCardProps) {
+  const titleId = `student-${student.id}-name`;
   // レア度に基づく色設定
   const getRarityColor = (rarity: number): string => {
     switch (rarity) {
@@ -48,60 +49,65 @@ export default function StudentCard({ student }: StudentCardProps) {
   };
 
   return (
-    <Link href={`/${student.id}`}>
-      <div className="bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 p-4 cursor-pointer border border-gray-200">
+    <Link
+      href={`/${student.id}`}
+      className="group focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-300 rounded-3xl"
+      aria-labelledby={titleId}
+      aria-label={`${student.name}の詳細ページを開く`}
+    >
+      <article className="rounded-3xl border border-slate-200 bg-white p-5 shadow-md transition duration-300 group-hover:-translate-y-1 group-hover:border-blue-200 group-hover:shadow-lg">
         {/* ヘッダー部分 */}
-        <div className="flex items-center justify-between mb-3">
-          <div className={`px-2 py-1 rounded text-xs font-bold text-white ${getRarityColor(student.rarity)}`}>
+        <div className="flex items-center justify-between mb-4">
+          <span className={`rounded-full px-3 py-1 text-xs font-semibold uppercase tracking-wide text-white ${getRarityColor(student.rarity)}`}>
             {getRarityText(student.rarity)}
-          </div>
-          <div className="text-xs text-gray-500">
+          </span>
+          <span className="text-xs font-medium text-slate-500">
             {student.weapon.type}
-          </div>
+          </span>
         </div>
 
         {/* 生徒名 */}
-        <h3 className="text-lg font-semibold mb-2 text-gray-800 line-clamp-2">
+        <h3 id={titleId} className="text-lg font-semibold leading-tight text-slate-900 line-clamp-2">
           {student.name}
         </h3>
 
         {/* 学校 */}
-        <p className="text-sm text-gray-600 mb-3">
+        <p className="mt-2 text-sm text-slate-500">
           {student.school}
         </p>
 
         {/* 役割・攻撃タイプ */}
-        <div className="flex items-center gap-2 mb-3">
-          <span className="px-2 py-1 bg-gray-100 rounded text-xs">
+        <div className="mt-4 flex items-center gap-2">
+          <span className="rounded-full bg-blue-50 px-3 py-1 text-xs font-medium text-blue-700">
             {student.role.class}
           </span>
-          <span className={`text-xs font-medium ${getAttackTypeColor(student.combat.attackType)}`}>
+          <span className={`text-xs font-semibold ${getAttackTypeColor(student.combat.attackType)}`}>
             {student.combat.attackType}
           </span>
         </div>
 
         {/* 地形適応 */}
-        <div className="grid grid-cols-3 gap-1">
-          <div className="text-center">
-            <div className="text-xs text-gray-500 mb-1">市街地</div>
-            <div className={`text-xs px-2 py-1 rounded ${getTerrainColor(student.terrainAdaptation.city)}`}>
+        <div className="mt-5 grid grid-cols-3 gap-2">
+          <div className="rounded-2xl border border-slate-200 bg-slate-50 py-2 text-center">
+            <div className="text-xs text-slate-500">市街地</div>
+            <div className={`mt-1 inline-flex min-w-[2rem] justify-center rounded-full px-3 py-1 text-xs font-semibold ${getTerrainColor(student.terrainAdaptation.city)}`}>
               {student.terrainAdaptation.city}
             </div>
           </div>
-          <div className="text-center">
-            <div className="text-xs text-gray-500 mb-1">屋外</div>
-            <div className={`text-xs px-2 py-1 rounded ${getTerrainColor(student.terrainAdaptation.outdoor)}`}>
+          <div className="rounded-2xl border border-slate-200 bg-slate-50 py-2 text-center">
+            <div className="text-xs text-slate-500">屋外</div>
+            <div className={`mt-1 inline-flex min-w-[2rem] justify-center rounded-full px-3 py-1 text-xs font-semibold ${getTerrainColor(student.terrainAdaptation.outdoor)}`}>
               {student.terrainAdaptation.outdoor}
             </div>
           </div>
-          <div className="text-center">
-            <div className="text-xs text-gray-500 mb-1">屋内</div>
-            <div className={`text-xs px-2 py-1 rounded ${getTerrainColor(student.terrainAdaptation.indoor)}`}>
+          <div className="rounded-2xl border border-slate-200 bg-slate-50 py-2 text-center">
+            <div className="text-xs text-slate-500">屋内</div>
+            <div className={`mt-1 inline-flex min-w-[2rem] justify-center rounded-full px-3 py-1 text-xs font-semibold ${getTerrainColor(student.terrainAdaptation.indoor)}`}>
               {student.terrainAdaptation.indoor}
             </div>
           </div>
         </div>
-      </div>
+      </article>
     </Link>
   );
 }
