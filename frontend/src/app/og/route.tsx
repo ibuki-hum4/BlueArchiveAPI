@@ -62,7 +62,7 @@ export async function GET(request: Request) {
         >
           <span
             style={{
-              display: "inline-flex",
+              display: "flex",
               alignItems: "center",
               justifyContent: "center",
               width: 48,
