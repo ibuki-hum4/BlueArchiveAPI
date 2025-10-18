@@ -3,6 +3,11 @@ import Link from 'next/link';
 import Navigation from '@/components/Navigation';
 import { readStudentsData } from '@/lib/students/storage';
 
+// 追加: 動的化 + キャッシュ無効化 + Nodeランタイム
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
+export const runtime = 'nodejs';
+
 export const metadata: Metadata = {
   title: '概要',
   description:
@@ -33,7 +38,7 @@ export default async function OverviewPage() {
               Blue Archive Databaseについて
             </h1>
             <p className="mt-4 max-w-3xl text-base text-slate-600">
-              Blue Archive Databaseは、ブルーアーカイブに登場する生徒たちのプロフィールや戦闘ステータス、武器情報を継続的に整理・公開する非公式データベースです。開発者・ファン・プレイヤーが同じデータセットを共有し、幅広いコミュニティ活動に役立てられることを目指しています。
+              Blue Archive Databaseは、ブルーアーカイブに登場する生徒たちのプロフィールや戦闘ステータス、武器情報を継続的に整理・公開する非公認のデータベースです。
             </p>
             <div className="mt-6 flex flex-wrap gap-3">
               <Link
