@@ -3048,6 +3048,30 @@
         }
     },
     {
+        "id": "bs94pWwF",
+        "name": "フユ",
+        "rarity": 3,
+        "weapon": {
+            "type": "HG",
+            "cover": false
+        },
+        "role": {
+            "type": "STRIKER",
+            "class": "サポーター",
+            "position": "MIDDLE"
+        },
+        "school": "ワイルドハント芸術学院",
+        "combat": {
+            "attackType": "振動",
+            "defenseType": "特殊装甲"
+        },
+        "terrainAdaptation": {
+            "city": "S",
+            "outdoor": "D",
+            "indoor": "B"
+        }
+    },
+    {
         "id": "xErR_vD5",
         "name": "ホシノ",
         "rarity": 3,
@@ -3672,6 +3696,30 @@
         }
     },
     {
+        "id": "-s7-r1p9",
+        "name": "ミヨ",
+        "rarity": 3,
+        "weapon": {
+            "type": "SR",
+            "cover": true
+        },
+        "role": {
+            "type": "STRIKER",
+            "class": "サポーター",
+            "position": "BACK"
+        },
+        "school": "ワイルドハント芸術学院",
+        "combat": {
+            "attackType": "振動",
+            "defenseType": "弾力装甲"
+        },
+        "terrainAdaptation": {
+            "city": "S",
+            "outdoor": "D",
+            "indoor": "B"
+        }
+    },
+    {
         "id": "95-e47yz",
         "name": "ムツキ（正月）",
         "rarity": 3,
@@ -3981,6 +4029,30 @@
             "city": "A",
             "outdoor": "D",
             "indoor": "S"
+        }
+    },
+    {
+        "id": "195r47DW",
+        "name": "リツ",
+        "rarity": 3,
+        "weapon": {
+            "type": "SMG",
+            "cover": false
+        },
+        "role": {
+            "type": "SPECIAL",
+            "class": "サポーター",
+            "position": "BACK"
+        },
+        "school": "ワイルドハント芸術学院",
+        "combat": {
+            "attackType": "神秘",
+            "defenseType": "特殊装甲"
+        },
+        "terrainAdaptation": {
+            "city": "S",
+            "outdoor": "D",
+            "indoor": "B"
         }
     },
     {
