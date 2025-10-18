@@ -1,0 +1,16 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+resources:
+  - deployment.yaml
+  - service.yaml
+  - pvc.yaml
+
+configMapGenerator:
+  - name: students-config
+    files:
+      # repo 直下の data/students.json を取り込み
+      - students.json=../data/students.json
+
+generatorOptions:
+  disableNameSuffixHash: false  # 変更時に名前が変わり、Deployment がロールアウト
