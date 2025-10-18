@@ -57,26 +57,7 @@ export default async function OverviewPage() {
             </div>
           </article>
 
-          <dl className="grid gap-4 sm:grid-cols-3">
-            <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-inner">
-              <dt className="text-sm text-slate-500">登録生徒</dt>
-              <dd className="mt-2 text-2xl font-semibold tracking-wide text-slate-900">
-                {formatNumber(totalStudents)}
-              </dd>
-            </div>
-            <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-inner">
-              <dt className="text-sm text-slate-500">学校数</dt>
-              <dd className="mt-2 text-2xl font-semibold tracking-wide text-slate-900">
-                {formatNumber(uniqueSchools.size)}
-              </dd>
-            </div>
-            <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-inner">
-              <dt className="text-sm text-slate-500">武器タイプ</dt>
-              <dd className="mt-2 text-2xl font-semibold tracking-wide text-slate-900">
-                {formatNumber(uniqueWeaponTypes.size)}
-              </dd>
-            </div>
-          </dl>
+          {/* 統計カード（登録生徒・学校数・武器タイプ）は非表示にしました */}
         </section>
 
         <section className="grid gap-6 lg:grid-cols-3">

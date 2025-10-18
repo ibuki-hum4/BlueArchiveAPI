@@ -654,38 +654,39 @@ curl -X GET "https://bluearchive-api.skyia.jp/api/students?rarity=3&limit=10" \\
                   <div>
                     <h4 className="font-medium text-gray-700 mb-2">データ投稿（管理者用）</h4>
                     <div className="bg-gray-900 rounded-lg p-4 overflow-x-auto">
-                      <pre className="text-red-400 text-sm">
-{`# 新しい生徒データを追加
-curl -X POST "https://bluearchive-api.skyia.jp/api/students" \\
-     -H "Content-Type: application/json" \\
-     -H "Authorization: Bearer YOUR_API_KEY" \\
-     -d '{
-       "name": "新生徒",
-       "rarity": 3,
-       "weapon": {"type": "AR", "cover": true},
-       "role": {"type": "STRIKER", "class": "アタッカー", "position": "FRONT"},
-       "school": "ゲヘナ学園",
-       "combat": {"attackType": "爆発", "defenseType": "軽装備"},
-       "terrainAdaptation": {"city": "A", "outdoor": "B", "indoor": "S"}
-     }'`}
+                      <pre className="text-green-400 text-sm">
+{`// 全生徒データを取得（ページネーション対応）
+const fetchStudents = async (page = 1, limit = 20) => {
+  try {
+    // 例: /api/students?page=1&limit=20
+    const response = await fetch('/api/students?page=' + page + '&limit=' + limit);
+    const result = await response.json();
+
+    if (result.message === 'success') {
+      console.log(result.total + '名の生徒データを取得 (count=' + result.count + ')');
+      return result.data;
+    }
+  } catch (error) {
+    console.error('データ取得エラー:', error);
+  }
+};
+
+// 特定の生徒を検索
+const findStudent = async (id) => {
+  const response = await fetch('/api/students/' + id);
+  const result = await response.json();
+  return result.data;
+};
+
+// 学校で絞り込み
+const getStudentsBySchool = async (school, page = 1, limit = 20) => {
+  const response = await fetch('/api/students?school=' + encodeURIComponent(school) + '&page=' + page + '&limit=' + limit);
+  return (await response.json()).data;
+};`}
                       </pre>
                     </div>
                   </div>
-                </div>
-              </div>
-            </div>
-          </section>
 
-          {/* レート制限・認証 */}
-          <section className="mb-12">
-            <h2 className="text-3xl font-semibold text-gray-800 mb-6 border-b-2 border-blue-200 pb-2">🔒 制限事項・認証</h2>
-            
-            <div className="grid md:grid-cols-2 gap-6">
-              <div className="bg-white border border-gray-200 rounded-xl p-6">
-                <h3 className="text-xl font-semibold text-gray-800 mb-4 flex items-center">
-                  <span className="text-yellow-600 mr-2">⚡</span>レート制限
-                </h3>
-                <div className="space-y-4">
                   <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-4">
                     <div className="font-semibold text-yellow-800 mb-2">制限内容</div>
                     <ul className="text-yellow-700 text-sm space-y-1">
