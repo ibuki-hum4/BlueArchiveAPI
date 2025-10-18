@@ -20,12 +20,15 @@ spec:
       initContainers:
         - name: seed-students-data
           image: docker.io/kemar1/bluearchive-api:0.2.1
-          command: ["/bin/sh", "-c"]
-          args: |
-            set -e
-            # Git（ConfigMap）の内容で毎回上書きして Git 優先を担保
-            cp -f /seed/students.json /students-data/students.json
-            chown -R 1000:1000 /students-data
+          command:
+            - /bin/sh
+            - -c
+          args:
+            - |
+              set -e
+              # Git（ConfigMap）の内容で毎回上書きして Git 優先を担保
+              cp -f /seed/students.json /students-data/students.json
+              chown -R 1000:1000 /students-data
           volumeMounts:
             - name: students-data
               mountPath: /students-data
