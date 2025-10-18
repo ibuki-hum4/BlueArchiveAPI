@@ -14,17 +14,20 @@ spec:
       labels:
         app: bluearchive-api
     spec:
+      securityContext:
+        fsGroup: 1000
+        fsGroupChangePolicy: OnRootMismatch
       initContainers:
         - name: seed-students-data
           image: docker.io/kemar1/bluearchive-api:0.2.1
-          command:
-            - /bin/sh
-            - -c
+          command: ["/bin/sh", "-c"]
           args:
             - |
+              set -e
               if [ ! -f /students-data/students.json ]; then
-                cp /app/data/students.json /students-data/students.json;
+                cp /app/data/students.json /students-data/students.json
               fi
+              chown -R 1000:1000 /students-data
           volumeMounts:
             - name: students-data
               mountPath: /students-data
@@ -32,6 +35,11 @@ spec:
         - name: bluearchive-api
           image: docker.io/kemar1/bluearchive-api:0.2.1
           imagePullPolicy: Always
+          securityContext:
+            runAsUser: 1000
+            runAsGroup: 1000
+            allowPrivilegeEscalation: false
+            readOnlyRootFilesystem: false
           env:
             - name: PORT
               value: "3000"
@@ -63,4 +71,4 @@ spec:
       volumes:
         - name: students-data
           persistentVolumeClaim:
-            claimName: bluearchive-api-data
+            claimName: bluearchive-api-data-rwx
