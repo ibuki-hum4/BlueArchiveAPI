@@ -4,9 +4,12 @@ import type { Student } from '@/types/student';
 
 const STUDENTS_FILE_NAME = 'students.json';
 const candidateDirectories = [
+  // 追加: コンテナでPVCをマウントしている実体
+  path.resolve('/app', 'data'),
+  // 既存の候補（ワークディレクトリに依存）
   path.join(process.cwd(), 'data'),
   path.join(process.cwd(), '..', 'data'),
-  path.join(process.cwd(), '.vercel', 'project', 'data')
+  path.join(process.cwd(), '.vercel', 'project', 'data'),
 ];
 
 export const resolveStudentsFilePath = async (options: { ensureForWrite?: boolean } = {}) => {
