@@ -5,7 +5,7 @@ metadata:
   labels:
     app: bluearchive-api
 spec:
-  replicas: 1  # RWO PVC のため 1 に固定
+  replicas: 1
   selector:
     matchLabels:
       app: bluearchive-api
@@ -21,12 +21,11 @@ spec:
         - name: seed-students-data
           image: docker.io/kemar1/bluearchive-api:0.2.1
           command: ["/bin/sh", "-c"]
-          args:
-            - |
-              set -e
-              # Git の内容（ConfigMap）で毎回上書きして Git 優先を強制
-              cp -f /seed/students.json /students-data/students.json
-              chown -R 1000:1000 /students-data
+          args: |
+            set -e
+            # Git（ConfigMap）の内容で毎回上書きして Git 優先を担保
+            cp -f /seed/students.json /students-data/students.json
+            chown -R 1000:1000 /students-data
           volumeMounts:
             - name: students-data
               mountPath: /students-data
