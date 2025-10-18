@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: bluearchive-api-data-rwx
+  annotations:
+    argocd.argoproj.io/sync-wave: "-1"  # 先に作られるように（任意）
+spec:
+  accessModes:
+    - ReadWriteMany
+  storageClassName: nfs-csi
+  resources:
+    requests:
+      storage: 1Gi
