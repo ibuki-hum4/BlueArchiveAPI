@@ -1,0 +1,5690 @@
+[
+    {
+        "id": "B5F50C9O",
+        "name": "アカネ（バニーガール）",
+        "rarity": 3,
+        "weapon": {
+            "type": "HG",
+            "cover": false
+        },
+        "role": {
+            "type": "SPECIAL",
+            "class": "アタッカー",
+            "position": "BACK"
+        },
+        "school": "ミレニアムサイエンススクール",
+        "combat": {
+            "attackType": "神秘",
+            "defenseType": "重装甲"
+        },
+        "terrainAdaptation": {
+            "city": "B",
+            "outdoor": "D",
+            "indoor": "S"
+        }
+    },
+    {
+        "id": "027EnJyt",
+        "name": "アカリ（正月）",
+        "rarity": 3,
+        "weapon": {
+            "type": "AR",
+            "cover": false
+        },
+        "role": {
+            "type": "SPECIAL",
+            "class": "T.S",
+            "position": "BACK"
+        },
+        "school": "ゲヘナ学園",
+        "combat": {
+            "attackType": "神秘",
+            "defenseType": "特殊装甲"
+        },
+        "terrainAdaptation": {
+            "city": "B",
+            "outdoor": "S",
+            "indoor": "D"
+        }
+    },
+    {
+        "id": "C1i76YYO",
+        "name": "アコ",
+        "rarity": 3,
+        "weapon": {
+            "type": "HG",
+            "cover": false
+        },
+        "role": {
+            "type": "SPECIAL",
+            "class": "サポーター",
+            "position": "BACK"
+        },
+        "school": "ゲヘナ学園",
+        "combat": {
+            "attackType": "神秘",
+            "defenseType": "重装甲"
+        },
+        "terrainAdaptation": {
+            "city": "D",
+            "outdoor": "B",
+            "indoor": "S"
+        }
+    },
+    {
+        "id": "hqpBvs3F",
+        "name": "アコ（ドレス）",
+        "rarity": 3,
+        "weapon": {
+            "type": "HG",
+            "cover": true
+        },
+        "role": {
+            "type": "STRIKER",
+            "class": "サポーター",
+            "position": "MIDDLE"
+        },
+        "school": "ゲヘナ学園",
+        "combat": {
+            "attackType": "爆発",
+            "defenseType": "特殊装甲"
+        },
+        "terrainAdaptation": {
+            "city": "D",
+            "outdoor": "S",
+            "indoor": "B"
+        }
+    },
+    {
+        "id": "S0QfQlmB",
+        "name": "アズサ",
+        "rarity": 3,
+        "weapon": {
+            "type": "AR",
+            "cover": true
+        },
+        "role": {
+            "type": "STRIKER",
+            "class": "アタッカー",
+            "position": "MIDDLE"
+        },
+        "school": "トリニティ総合学園",
+        "combat": {
+            "attackType": "爆発",
+            "defenseType": "重装甲"
+        },
+        "terrainAdaptation": {
+            "city": "B",
+            "outdoor": "D",
+            "indoor": "S"
+        }
+    },
+    {
+        "id": "zqWbULVu",
+        "name": "アズサ（水着）",
+        "rarity": 3,
+        "weapon": {
+            "type": "AR",
+            "cover": true
+        },
+        "role": {
+            "type": "STRIKER",
+            "class": "アタッカー",
+            "position": "MIDDLE"
+        },
+        "school": "トリニティ総合学園",
+        "combat": {
+            "attackType": "神秘",
+            "defenseType": "軽装備"
+        },
+        "terrainAdaptation": {
+            "city": "C",
+            "outdoor": "C",
+            "indoor": "S"
+        }
+    },
+    {
+        "id": "cHRzy7Sw",
+        "name": "アスナ（バニーガール）",
+        "rarity": 3,
+        "weapon": {
+            "type": "AR",
+            "cover": true
+        },
+        "role": {
+            "type": "STRIKER",
+            "class": "サポーター",
+            "position": "MIDDLE"
+        },
+        "school": "ミレニアムサイエンススクール",
+        "combat": {
+            "attackType": "神秘",
+            "defenseType": "軽装備"
+        },
+        "terrainAdaptation": {
+            "city": "D",
+            "outdoor": "B",
+            "indoor": "S"
+        }
+    },
+    {
+        "id": "IsV0v6Xb",
+        "name": "アスナ（制服）",
+        "rarity": 3,
+        "weapon": {
+            "type": "AR",
+            "cover": true
+        },
+        "role": {
+            "type": "STRIKER",
+            "class": "サポーター",
+            "position": "MIDDLE"
+        },
+        "school": "ミレニアムサイエンススクール",
+        "combat": {
+            "attackType": "爆発",
+            "defenseType": "重装甲"
+        },
+        "terrainAdaptation": {
+            "city": "B",
+            "outdoor": "S",
+            "indoor": "D"
+        }
+    },
+    {
+        "id": "x-UFETpy",
+        "name": "アツコ",
+        "rarity": 3,
+        "weapon": {
+            "type": "SMG",
+            "cover": true
+        },
+        "role": {
+            "type": "STRIKER",
+            "class": "タンク",
+            "position": "FRONT"
+        },
+        "school": "アリウス分校",
+        "combat": {
+            "attackType": "爆発",
+            "defenseType": "特殊装甲"
+        },
+        "terrainAdaptation": {
+            "city": "B",
+            "outdoor": "D",
+            "indoor": "S"
+        }
+    },
+    {
+        "id": "XNWfh0nA",
+        "name": "アリス",
+        "rarity": 3,
+        "weapon": {
+            "type": "RG",
+            "cover": false
+        },
+        "role": {
+            "type": "STRIKER",
+            "class": "アタッカー",
+            "position": "BACK"
+        },
+        "school": "ミレニアムサイエンススクール",
+        "combat": {
+            "attackType": "神秘",
+            "defenseType": "特殊装甲"
+        },
+        "terrainAdaptation": {
+            "city": "B",
+            "outdoor": "D",
+            "indoor": "S"
+        }
+    },
+    {
+        "id": "rzsz7xjs",
+        "name": "アリス（メイド）",
+        "rarity": 3,
+        "weapon": {
+            "type": "RG",
+            "cover": false
+        },
+        "role": {
+            "type": "STRIKER",
+            "class": "アタッカー",
+            "position": "BACK"
+        },
+        "school": "ミレニアムサイエンススクール",
+        "combat": {
+            "attackType": "神秘",
+            "defenseType": "軽装備"
+        },
+        "terrainAdaptation": {
+            "city": "S",
+            "outdoor": "B",
+            "indoor": "D"
+        }
+    },
+    {
+        "id": "9jCbYfZC",
+        "name": "アル",
+        "rarity": 3,
+        "weapon": {
+            "type": "SR",
+            "cover": true
+        },
+        "role": {
+            "type": "STRIKER",
+            "class": "アタッカー",
+            "position": "BACK"
+        },
+        "school": "ゲヘナ学園",
+        "combat": {
+            "attackType": "爆発",
+            "defenseType": "軽装備"
+        },
+        "terrainAdaptation": {
+            "city": "S",
+            "outdoor": "B",
+            "indoor": "D"
+        }
+    },
+    {
+        "id": "hUh4ms2c",
+        "name": "アル（正月）",
+        "rarity": 3,
+        "weapon": {
+            "type": "SR",
+            "cover": true
+        },
+        "role": {
+            "type": "STRIKER",
+            "class": "アタッカー",
+            "position": "BACK"
+        },
+        "school": "ゲヘナ学園",
+        "combat": {
+            "attackType": "貫通",
+            "defenseType": "特殊装甲"
+        },
+        "terrainAdaptation": {
+            "city": "D",
+            "outdoor": "B",
+            "indoor": "S"
+        }
+    },
+    {
+        "id": "KlHRP6T_",
+        "name": "アル（ドレス）",
+        "rarity": 3,
+        "weapon": {
+            "type": "SR",
+            "cover": true
+        },
+        "role": {
+            "type": "STRIKER",
+            "class": "サポーター",
+            "position": "BACK"
+        },
+        "school": "ゲヘナ学園",
+        "combat": {
+            "attackType": "貫通",
+            "defenseType": "重装甲"
+        },
+        "terrainAdaptation": {
+            "city": "D",
+            "outdoor": "B",
+            "indoor": "S"
+        }
+    },
+    {
+        "id": "kvl3VrZr",
+        "name": "イオリ",
+        "rarity": 3,
+        "weapon": {
+            "type": "SR",
+            "cover": true
+        },
+        "role": {
+            "type": "STRIKER",
+            "class": "アタッカー",
+            "position": "BACK"
+        },
+        "school": "ゲヘナ学園",
+        "combat": {
+            "attackType": "貫通",
+            "defenseType": "重装甲"
+        },
+        "terrainAdaptation": {
+            "city": "C",
+            "outdoor": "C",
+            "indoor": "S"
+        }
+    },
+    {
+        "id": "0vjgnjec",
+        "name": "イオリ（水着）",
+        "rarity": 3,
+        "weapon": {
+            "type": "SR",
+            "cover": true
+        },
+        "role": {
+            "type": "STRIKER",
+            "class": "アタッカー",
+            "position": "BACK"
+        },
+        "school": "ゲヘナ学園",
+        "combat": {
+            "attackType": "爆発",
+            "defenseType": "特殊装甲"
+        },
+        "terrainAdaptation": {
+            "city": "B",
+            "outdoor": "S",
+            "indoor": "D"
+        }
+    },
+    {
+        "id": "kuawJLhD",
+        "name": "イズナ",
+        "rarity": 3,
+        "weapon": {
+            "type": "SMG",
+            "cover": true
+        },
+        "role": {
+            "type": "STRIKER",
+            "class": "アタッカー",
+            "position": "FRONT"
+        },
+        "school": "百鬼夜行連合学院",
+        "combat": {
+            "attackType": "神秘",
+            "defenseType": "軽装備"
+        },
+        "terrainAdaptation": {
+            "city": "S",
+            "outdoor": "B",
+            "indoor": "D"
+        }
+    },
+    {
+        "id": "PKP75WRC",
+        "name": "イズナ（水着）",
+        "rarity": 3,
+        "weapon": {
+            "type": "SMG",
+            "cover": true
+        },
+        "role": {
+            "type": "STRIKER",
+            "class": "アタッカー",
+            "position": "FRONT"
+        },
+        "school": "百鬼夜行連合学院",
+        "combat": {
+            "attackType": "神秘",
+            "defenseType": "特殊装甲"
+        },
+        "terrainAdaptation": {
+            "city": "D",
+            "outdoor": "B",
+            "indoor": "S"
+        }
+    },
+    {
+        "id": "0LF6bgxh",
+        "name": "イズミ",
+        "rarity": 3,
+        "weapon": {
+            "type": "MG",
+            "cover": false
+        },
+        "role": {
+            "type": "STRIKER",
+            "class": "アタッカー",
+            "position": "BACK"
+        },
+        "school": "ゲヘナ学園",
+        "combat": {
+            "attackType": "爆発",
+            "defenseType": "軽装備"
+        },
+        "terrainAdaptation": {
+            "city": "S",
+            "outdoor": "D",
+            "indoor": "B"
+        }
+    },
+    {
+        "id": "Ii0d2Qj6",
+        "name": "イズミ（正月）",
+        "rarity": 3,
+        "weapon": {
+            "type": "MG",
+            "cover": false
+        },
+        "role": {
+            "type": "SPECIAL",
+            "class": "サポーター",
+            "position": "BACK"
+        },
+        "school": "ゲヘナ学園",
+        "combat": {
+            "attackType": "爆発",
+            "defenseType": "軽装備"
+        },
+        "terrainAdaptation": {
+            "city": "S",
+            "outdoor": "D",
+            "indoor": "B"
+        }
+    },
+    {
+        "id": "oU12Kmed",
+        "name": "イチカ",
+        "rarity": 3,
+        "weapon": {
+            "type": "AR",
+            "cover": true
+        },
+        "role": {
+            "type": "STRIKER",
+            "class": "アタッカー",
+            "position": "MIDDLE"
+        },
+        "school": "トリニティ総合学園",
+        "combat": {
+            "attackType": "振動",
+            "defenseType": "重装甲"
+        },
+        "terrainAdaptation": {
+            "city": "S",
+            "outdoor": "B",
+            "indoor": "D"
+        }
+    },
+    {
+        "id": "kjLnAzsd",
+        "name": "イロハ",
+        "rarity": 3,
+        "weapon": {
+            "type": "HG",
+            "cover": false
+        },
+        "role": {
+            "type": "SPECIAL",
+            "class": "T.S",
+            "position": "BACK"
+        },
+        "school": "ゲヘナ学園",
+        "combat": {
+            "attackType": "神秘",
+            "defenseType": "重装甲"
+        },
+        "terrainAdaptation": {
+            "city": "D",
+            "outdoor": "B",
+            "indoor": "S"
+        }
+    },
+    {
+        "id": "Zy021PnH",
+        "name": "ウイ",
+        "rarity": 3,
+        "weapon": {
+            "type": "SR",
+            "cover": true
+        },
+        "role": {
+            "type": "STRIKER",
+            "class": "サポーター",
+            "position": "BACK"
+        },
+        "school": "トリニティ総合学園",
+        "combat": {
+            "attackType": "爆発",
+            "defenseType": "軽装備"
+        },
+        "terrainAdaptation": {
+            "city": "B",
+            "outdoor": "S",
+            "indoor": "D"
+        }
+    },
+    {
+        "id": "snmenoq8",
+        "name": "ウイ（水着）",
+        "rarity": 3,
+        "weapon": {
+            "type": "SR",
+            "cover": true
+        },
+        "role": {
+            "type": "STRIKER",
+            "class": "サポーター",
+            "position": "BACK"
+        },
+        "school": "トリニティ総合学園",
+        "combat": {
+            "attackType": "貫通",
+            "defenseType": "弾力装甲"
+        },
+        "terrainAdaptation": {
+            "city": "B",
+            "outdoor": "D",
+            "indoor": "S"
+        }
+    },
+    {
+        "id": "Zfm1D4Wt",
+        "name": "ウタハ（応援団）",
+        "rarity": 3,
+        "weapon": {
+            "type": "SMG",
+            "cover": false
+        },
+        "role": {
+            "type": "STRIKER",
+            "class": "アタッカー",
+            "position": "FRONT"
+        },
+        "school": "ミレニアムサイエンススクール",
+        "combat": {
+            "attackType": "神秘",
+            "defenseType": "特殊装甲"
+        },
+        "terrainAdaptation": {
+            "city": "D",
+            "outdoor": "B",
+            "indoor": "S"
+        }
+    },
+    {
+        "id": "hd-YNOvo",
+        "name": "ウミカ",
+        "rarity": 3,
+        "weapon": {
+            "type": "AR",
+            "cover": true
+        },
+        "role": {
+            "type": "STRIKER",
+            "class": "アタッカー",
+            "position": "MIDDLE"
+        },
+        "school": "百鬼夜行連合学院",
+        "combat": {
+            "attackType": "神秘",
+            "defenseType": "特殊装甲"
+        },
+        "terrainAdaptation": {
+            "city": "B",
+            "outdoor": "S",
+            "indoor": "D"
+        }
+    },
+    {
+        "id": "LUTkcJTa",
+        "name": "エイミ",
+        "rarity": 3,
+        "weapon": {
+            "type": "SG",
+            "cover": false
+        },
+        "role": {
+            "type": "STRIKER",
+            "class": "タンク",
+            "position": "FRONT"
+        },
+        "school": "ミレニアムサイエンススクール",
+        "combat": {
+            "attackType": "爆発",
+            "defenseType": "軽装備"
+        },
+        "terrainAdaptation": {
+            "city": "S",
+            "outdoor": "B",
+            "indoor": "D"
+        }
+    },
+    {
+        "id": "AOinj4ja",
+        "name": "エイミ（水着）",
+        "rarity": 3,
+        "weapon": {
+            "type": "SG",
+            "cover": false
+        },
+        "role": {
+            "type": "SPECIAL",
+            "class": "サポーター",
+            "position": "BACK"
+        },
+        "school": "ミレニアムサイエンススクール",
+        "combat": {
+            "attackType": "神秘",
+            "defenseType": "特殊装甲"
+        },
+        "terrainAdaptation": {
+            "city": "D",
+            "outdoor": "S",
+            "indoor": "B"
+        }
+    },
+    {
+        "id": "k7RAzJ73",
+        "name": "エリ",
+        "rarity": 3,
+        "weapon": {
+            "type": "SR",
+            "cover": true
+        },
+        "role": {
+            "type": "STRIKER",
+            "class": "アタッカー",
+            "position": "BACK"
+        },
+        "school": "ワイルドハント芸術学院",
+        "combat": {
+            "attackType": "振動",
+            "defenseType": "特殊装甲"
+        },
+        "terrainAdaptation": {
+            "city": "S",
+            "outdoor": "B",
+            "indoor": "D"
+        }
+    },
+    {
+        "id": "A7IfAY91",
+        "name": "カエデ",
+        "rarity": 3,
+        "weapon": {
+            "type": "HG",
+            "cover": false
+        },
+        "role": {
+            "type": "SPECIAL",
+            "class": "サポーター",
+            "position": "BACK"
+        },
+        "school": "百鬼夜行連合学院",
+        "combat": {
+            "attackType": "爆発",
+            "defenseType": "特殊装甲"
+        },
+        "terrainAdaptation": {
+            "city": "S",
+            "outdoor": "D",
+            "indoor": "B"
+        }
+    },
+    {
+        "id": "8YE4Xwvd",
+        "name": "カズサ",
+        "rarity": 3,
+        "weapon": {
+            "type": "MG",
+            "cover": false
+        },
+        "role": {
+            "type": "STRIKER",
+            "class": "アタッカー",
+            "position": "BACK"
+        },
+        "school": "トリニティ総合学園",
+        "combat": {
+            "attackType": "貫通",
+            "defenseType": "重装甲"
+        },
+        "terrainAdaptation": {
+            "city": "S",
+            "outdoor": "D",
+            "indoor": "B"
+        }
+    },
+    {
+        "id": "WM5Q8fEU",
+        "name": "カズサ（バンド）",
+        "rarity": 3,
+        "weapon": {
+            "type": "MG",
+            "cover": false
+        },
+        "role": {
+            "type": "STRIKER",
+            "class": "アタッカー",
+            "position": "BACK"
+        },
+        "school": "トリニティ総合学園",
+        "combat": {
+            "attackType": "爆発",
+            "defenseType": "特殊装甲"
+        },
+        "terrainAdaptation": {
+            "city": "B",
+            "outdoor": "S",
+            "indoor": "D"
+        }
+    },
+    {
+        "id": "8CbwvIMH",
+        "name": "カスミ",
+        "rarity": 3,
+        "weapon": {
+            "type": "HG",
+            "cover": true
+        },
+        "role": {
+            "type": "STRIKER",
+            "class": "アタッカー",
+            "position": "MIDDLE"
+        },
+        "school": "ゲヘナ学園",
+        "combat": {
+            "attackType": "振動",
+            "defenseType": "重装甲"
+        },
+        "terrainAdaptation": {
+            "city": "S",
+            "outdoor": "B",
+            "indoor": "D"
+        }
+    },
+    {
+        "id": "jKQNEqEG",
+        "name": "カノエ",
+        "rarity": 3,
+        "weapon": {
+            "type": "SG",
+            "cover": false
+        },
+        "role": {
+            "type": "STRIKER",
+            "class": "タンク",
+            "position": "FRONT"
+        },
+        "school": "ワイルドハント芸術学院",
+        "combat": {
+            "attackType": "神秘",
+            "defenseType": "重装甲"
+        },
+        "terrainAdaptation": {
+            "city": "D",
+            "outdoor": "B",
+            "indoor": "S"
+        }
+    },
+    {
+        "id": "E3jvEKwY",
+        "name": "カホ",
+        "rarity": 3,
+        "weapon": {
+            "type": "AR",
+            "cover": true
+        },
+        "role": {
+            "type": "STRIKER",
+            "class": "アタッカー",
+            "position": "MIDDLE"
+        },
+        "school": "百鬼夜行連合学院",
+        "combat": {
+            "attackType": "神秘",
+            "defenseType": "重装甲"
+        },
+        "terrainAdaptation": {
+            "city": "B",
+            "outdoor": "S",
+            "indoor": "D"
+        }
+    },
+    {
+        "id": "75hYD5-w",
+        "name": "カヨコ（正月）",
+        "rarity": 3,
+        "weapon": {
+            "type": "HG",
+            "cover": true
+        },
+        "role": {
+            "type": "STRIKER",
+            "class": "サポーター",
+            "position": "MIDDLE"
+        },
+        "school": "ゲヘナ学園",
+        "combat": {
+            "attackType": "神秘",
+            "defenseType": "特殊装甲"
+        },
+        "terrainAdaptation": {
+            "city": "B",
+            "outdoor": "D",
+            "indoor": "S"
+        }
+    },
+    {
+        "id": "op0wm2_3",
+        "name": "カヨコ（ドレス）",
+        "rarity": 3,
+        "weapon": {
+            "type": "HG",
+            "cover": true
+        },
+        "role": {
+            "type": "STRIKER",
+            "class": "アタッカー",
+            "position": "MIDDLE"
+        },
+        "school": "ゲヘナ学園",
+        "combat": {
+            "attackType": "貫通",
+            "defenseType": "軽装備"
+        },
+        "terrainAdaptation": {
+            "city": "S",
+            "outdoor": "B",
+            "indoor": "D"
+        }
+    },
+    {
+        "id": "OevW38TQ",
+        "name": "カリン",
+        "rarity": 3,
+        "weapon": {
+            "type": "SR",
+            "cover": false
+        },
+        "role": {
+            "type": "SPECIAL",
+            "class": "アタッカー",
+            "position": "BACK"
+        },
+        "school": "ミレニアムサイエンススクール",
+        "combat": {
+            "attackType": "貫通",
+            "defenseType": "重装甲"
+        },
+        "terrainAdaptation": {
+            "city": "D",
+            "outdoor": "S",
+            "indoor": "B"
+        }
+    },
+    {
+        "id": "PjV4dojm",
+        "name": "カリン（バニーガール）",
+        "rarity": 3,
+        "weapon": {
+            "type": "SR",
+            "cover": true
+        },
+        "role": {
+            "type": "STRIKER",
+            "class": "アタッカー",
+            "position": "BACK"
+        },
+        "school": "ミレニアムサイエンススクール",
+        "combat": {
+            "attackType": "神秘",
+            "defenseType": "重装甲"
+        },
+        "terrainAdaptation": {
+            "city": "D",
+            "outdoor": "B",
+            "indoor": "S"
+        }
+    },
+    {
+        "id": "Tc1fnvUQ",
+        "name": "カンナ",
+        "rarity": 3,
+        "weapon": {
+            "type": "HG",
+            "cover": false
+        },
+        "role": {
+            "type": "SPECIAL",
+            "class": "アタッカー",
+            "position": "BACK"
+        },
+        "school": "ヴァルキューレ警察学校",
+        "combat": {
+            "attackType": "貫通",
+            "defenseType": "重装甲"
+        },
+        "terrainAdaptation": {
+            "city": "S",
+            "outdoor": "D",
+            "indoor": "B"
+        }
+    },
+    {
+        "id": "Cnh2ATcn",
+        "name": "カンナ（水着）",
+        "rarity": 3,
+        "weapon": {
+            "type": "HG",
+            "cover": true
+        },
+        "role": {
+            "type": "STRIKER",
+            "class": "サポーター",
+            "position": "MIDDLE"
+        },
+        "school": "ヴァルキューレ警察学校",
+        "combat": {
+            "attackType": "爆発",
+            "defenseType": "軽装備"
+        },
+        "terrainAdaptation": {
+            "city": "D",
+            "outdoor": "S",
+            "indoor": "B"
+        }
+    },
+    {
+        "id": "tf148IQ_",
+        "name": "キキョウ",
+        "rarity": 3,
+        "weapon": {
+            "type": "SR",
+            "cover": true
+        },
+        "role": {
+            "type": "STRIKER",
+            "class": "サポーター",
+            "position": "BACK"
+        },
+        "school": "百鬼夜行連合学院",
+        "combat": {
+            "attackType": "振動",
+            "defenseType": "重装甲"
+        },
+        "terrainAdaptation": {
+            "city": "S",
+            "outdoor": "B",
+            "indoor": "D"
+        }
+    },
+    {
+        "id": "PxvD_XfC",
+        "name": "キキョウ（水着）",
+        "rarity": 3,
+        "weapon": {
+            "type": "SR",
+            "cover": false
+        },
+        "role": {
+            "type": "SPECIAL",
+            "class": "サポーター",
+            "position": "BACK"
+        },
+        "school": "百鬼夜行連合学院",
+        "combat": {
+            "attackType": "振動",
+            "defenseType": "重装甲"
+        },
+        "terrainAdaptation": {
+            "city": "S",
+            "outdoor": "B",
+            "indoor": "D"
+        }
+    },
+    {
+        "id": "OV3qdKPw",
+        "name": "キサキ",
+        "rarity": 3,
+        "weapon": {
+            "type": "SMG",
+            "cover": false
+        },
+        "role": {
+            "type": "SPECIAL",
+            "class": "サポーター",
+            "position": "BACK"
+        },
+        "school": "山海経高級中学校",
+        "combat": {
+            "attackType": "振動",
+            "defenseType": "弾力装甲"
+        },
+        "terrainAdaptation": {
+            "city": "B",
+            "outdoor": "D",
+            "indoor": "S"
+        }
+    },
+    {
+        "id": "5sUhtArs",
+        "name": "キララ",
+        "rarity": 3,
+        "weapon": {
+            "type": "AR",
+            "cover": true
+        },
+        "role": {
+            "type": "STRIKER",
+            "class": "アタッカー",
+            "position": "MIDDLE"
+        },
+        "school": "ゲヘナ学園",
+        "combat": {
+            "attackType": "振動",
+            "defenseType": "軽装備"
+        },
+        "terrainAdaptation": {
+            "city": "S",
+            "outdoor": "B",
+            "indoor": "D"
+        }
+    },
+    {
+        "id": "gmQYIghd",
+        "name": "ココナ",
+        "rarity": 3,
+        "weapon": {
+            "type": "AR",
+            "cover": true
+        },
+        "role": {
+            "type": "STRIKER",
+            "class": "ヒーラー",
+            "position": "MIDDLE"
+        },
+        "school": "山海経高級中学校",
+        "combat": {
+            "attackType": "貫通",
+            "defenseType": "特殊装甲"
+        },
+        "terrainAdaptation": {
+            "city": "S",
+            "outdoor": "B",
+            "indoor": "D"
+        }
+    },
+    {
+        "id": "Zf9umjC4",
+        "name": "コタマ（キャンプ）",
+        "rarity": 3,
+        "weapon": {
+            "type": "HG",
+            "cover": true
+        },
+        "role": {
+            "type": "STRIKER",
+            "class": "サポーター",
+            "position": "MIDDLE"
+        },
+        "school": "ミレニアムサイエンススクール",
+        "combat": {
+            "attackType": "貫通",
+            "defenseType": "重装甲"
+        },
+        "terrainAdaptation": {
+            "city": "B",
+            "outdoor": "S",
+            "indoor": "D"
+        }
+    },
+    {
+        "id": "R4_TE_Ex",
+        "name": "コトリ（応援団）",
+        "rarity": 3,
+        "weapon": {
+            "type": "MG",
+            "cover": false
+        },
+        "role": {
+            "type": "STRIKER",
+            "class": "アタッカー",
+            "position": "BACK"
+        },
+        "school": "ミレニアムサイエンススクール",
+        "combat": {
+            "attackType": "爆発",
+            "defenseType": "特殊装甲"
+        },
+        "terrainAdaptation": {
+            "city": "D",
+            "outdoor": "B",
+            "indoor": "S"
+        }
+    },
+    {
+        "id": "RWLYIIOu",
+        "name": "コハル",
+        "rarity": 3,
+        "weapon": {
+            "type": "SR",
+            "cover": true
+        },
+        "role": {
+            "type": "STRIKER",
+            "class": "ヒーラー",
+            "position": "BACK"
+        },
+        "school": "トリニティ総合学園",
+        "combat": {
+            "attackType": "爆発",
+            "defenseType": "重装甲"
+        },
+        "terrainAdaptation": {
+            "city": "D",
+            "outdoor": "S",
+            "indoor": "B"
+        }
+    },
+    {
+        "id": "IvcCFIQi",
+        "name": "コユキ",
+        "rarity": 3,
+        "weapon": {
+            "type": "MG",
+            "cover": false
+        },
+        "role": {
+            "type": "STRIKER",
+            "class": "アタッカー",
+            "position": "BACK"
+        },
+        "school": "ミレニアムサイエンススクール",
+        "combat": {
+            "attackType": "神秘",
+            "defenseType": "重装甲"
+        },
+        "terrainAdaptation": {
+            "city": "S",
+            "outdoor": "D",
+            "indoor": "B"
+        }
+    },
+    {
+        "id": "zCBoTwc0",
+        "name": "サオリ",
+        "rarity": 3,
+        "weapon": {
+            "type": "AR",
+            "cover": true
+        },
+        "role": {
+            "type": "STRIKER",
+            "class": "アタッカー",
+            "position": "MIDDLE"
+        },
+        "school": "アリウス分校",
+        "combat": {
+            "attackType": "爆発",
+            "defenseType": "特殊装甲"
+        },
+        "terrainAdaptation": {
+            "city": "B",
+            "outdoor": "D",
+            "indoor": "S"
+        }
+    },
+    {
+        "id": "BTmUgZva",
+        "name": "サオリ（水着）",
+        "rarity": 3,
+        "weapon": {
+            "type": "AR",
+            "cover": true
+        },
+        "role": {
+            "type": "STRIKER",
+            "class": "アタッカー",
+            "position": "MIDDLE"
+        },
+        "school": "アリウス分校",
+        "combat": {
+            "attackType": "神秘",
+            "defenseType": "重装甲"
+        },
+        "terrainAdaptation": {
+            "city": "D",
+            "outdoor": "S",
+            "indoor": "B"
+        }
+    },
+    {
+        "id": "Qn52lRYO",
+        "name": "サオリ（ドレス）",
+        "rarity": 3,
+        "weapon": {
+            "type": "AR",
+            "cover": false
+        },
+        "role": {
+            "type": "STRIKER",
+            "class": "アタッカー",
+            "position": "MIDDLE"
+        },
+        "school": "アリウス分校",
+        "combat": {
+            "attackType": "振動",
+            "defenseType": "軽装備"
+        },
+        "terrainAdaptation": {
+            "city": "D",
+            "outdoor": "B",
+            "indoor": "S"
+        }
+    },
+    {
+        "id": "nvVjY2xp",
+        "name": "サキ",
+        "rarity": 3,
+        "weapon": {
+            "type": "MG",
+            "cover": false
+        },
+        "role": {
+            "type": "SPECIAL",
+            "class": "アタッカー",
+            "position": "BACK"
+        },
+        "school": "SRT特殊学園",
+        "combat": {
+            "attackType": "貫通",
+            "defenseType": "特殊装甲"
+        },
+        "terrainAdaptation": {
+            "city": "S",
+            "outdoor": "D",
+            "indoor": "B"
+        }
+    },
+    {
+        "id": "-1Xgyfia",
+        "name": "サキ（水着）",
+        "rarity": 3,
+        "weapon": {
+            "type": "MG",
+            "cover": false
+        },
+        "role": {
+            "type": "STRIKER",
+            "class": "サポーター",
+            "position": "BACK"
+        },
+        "school": "SRT特殊学園",
+        "combat": {
+            "attackType": "爆発",
+            "defenseType": "重装甲"
+        },
+        "terrainAdaptation": {
+            "city": "D",
+            "outdoor": "B",
+            "indoor": "S"
+        }
+    },
+    {
+        "id": "-amGHZq8",
+        "name": "サクラコ",
+        "rarity": 3,
+        "weapon": {
+            "type": "AR",
+            "cover": true
+        },
+        "role": {
+            "type": "STRIKER",
+            "class": "アタッカー",
+            "position": "MIDDLE"
+        },
+        "school": "トリニティ総合学園",
+        "combat": {
+            "attackType": "神秘",
+            "defenseType": "特殊装甲"
+        },
+        "terrainAdaptation": {
+            "city": "D",
+            "outdoor": "S",
+            "indoor": "B"
+        }
+    },
+    {
+        "id": "6LIjR0im",
+        "name": "サクラコ（アイドル）",
+        "rarity": 3,
+        "weapon": {
+            "type": "AR",
+            "cover": true
+        },
+        "role": {
+            "type": "STRIKER",
+            "class": "サポーター",
+            "position": "MIDDLE"
+        },
+        "school": "トリニティ総合学園",
+        "combat": {
+            "attackType": "爆発",
+            "defenseType": "重装甲"
+        },
+        "terrainAdaptation": {
+            "city": "D",
+            "outdoor": "S",
+            "indoor": "B"
+        }
+    },
+    {
+        "id": "7Xkb49iw",
+        "name": "サツキ",
+        "rarity": 3,
+        "weapon": {
+            "type": "HG",
+            "cover": false
+        },
+        "role": {
+            "type": "SPECIAL",
+            "class": "アタッカー",
+            "position": "BACK"
+        },
+        "school": "ゲヘナ学園",
+        "combat": {
+            "attackType": "爆発",
+            "defenseType": "重装甲"
+        },
+        "terrainAdaptation": {
+            "city": "B",
+            "outdoor": "S",
+            "indoor": "D"
+        }
+    },
+    {
+        "id": "-M-DRDqf",
+        "name": "サヤ",
+        "rarity": 3,
+        "weapon": {
+            "type": "HG",
+            "cover": false
+        },
+        "role": {
+            "type": "SPECIAL",
+            "class": "アタッカー",
+            "position": "BACK"
+        },
+        "school": "山海経高級中学校",
+        "combat": {
+            "attackType": "爆発",
+            "defenseType": "軽装備"
+        },
+        "terrainAdaptation": {
+            "city": "B",
+            "outdoor": "D",
+            "indoor": "S"
+        }
+    },
+    {
+        "id": "hoIBW-7i",
+        "name": "サヤ（私服）",
+        "rarity": 3,
+        "weapon": {
+            "type": "HG",
+            "cover": false
+        },
+        "role": {
+            "type": "SPECIAL",
+            "class": "アタッカー",
+            "position": "BACK"
+        },
+        "school": "山海経高級中学校",
+        "combat": {
+            "attackType": "貫通",
+            "defenseType": "特殊装甲"
+        },
+        "terrainAdaptation": {
+            "city": "D",
+            "outdoor": "S",
+            "indoor": "B"
+        }
+    },
+    {
+        "id": "jH5ZfqP6",
+        "name": "シグレ",
+        "rarity": 3,
+        "weapon": {
+            "type": "GL",
+            "cover": true
+        },
+        "role": {
+            "type": "STRIKER",
+            "class": "アタッカー",
+            "position": "MIDDLE"
+        },
+        "school": "レッドウィンター連邦学園",
+        "combat": {
+            "attackType": "爆発",
+            "defenseType": "重装甲"
+        },
+        "terrainAdaptation": {
+            "city": "D",
+            "outdoor": "S",
+            "indoor": "B"
+        }
+    },
+    {
+        "id": "2GO4h5t-",
+        "name": "シグレ（温泉）",
+        "rarity": 3,
+        "weapon": {
+            "type": "GL",
+            "cover": false
+        },
+        "role": {
+            "type": "SPECIAL",
+            "class": "ヒーラー",
+            "position": "BACK"
+        },
+        "school": "レッドウィンター連邦学園",
+        "combat": {
+            "attackType": "貫通",
+            "defenseType": "特殊装甲"
+        },
+        "terrainAdaptation": {
+            "city": "B",
+            "outdoor": "D",
+            "indoor": "S"
+        }
+    },
+    {
+        "id": "FU1JLFiR",
+        "name": "ジュリ（アルバイト）",
+        "rarity": 3,
+        "weapon": {
+            "type": "SG",
+            "cover": false
+        },
+        "role": {
+            "type": "STRIKER",
+            "class": "タンク",
+            "position": "FRONT"
+        },
+        "school": "ゲヘナ学園",
+        "combat": {
+            "attackType": "神秘",
+            "defenseType": "軽装備"
+        },
+        "terrainAdaptation": {
+            "city": "B",
+            "outdoor": "S",
+            "indoor": "D"
+        }
+    },
+    {
+        "id": "h858Mlvd",
+        "name": "シュン",
+        "rarity": 3,
+        "weapon": {
+            "type": "SR",
+            "cover": true
+        },
+        "role": {
+            "type": "STRIKER",
+            "class": "アタッカー",
+            "position": "BACK"
+        },
+        "school": "山海経高級中学校",
+        "combat": {
+            "attackType": "爆発",
+            "defenseType": "軽装備"
+        },
+        "terrainAdaptation": {
+            "city": "S",
+            "outdoor": "B",
+            "indoor": "D"
+        }
+    },
+    {
+        "id": "yU-nvGsD",
+        "name": "シュン（幼女）",
+        "rarity": 3,
+        "weapon": {
+            "type": "SR",
+            "cover": true
+        },
+        "role": {
+            "type": "STRIKER",
+            "class": "アタッカー",
+            "position": "BACK"
+        },
+        "school": "山海経高級中学校",
+        "combat": {
+            "attackType": "爆発",
+            "defenseType": "軽装備"
+        },
+        "terrainAdaptation": {
+            "city": "S",
+            "outdoor": "D",
+            "indoor": "B"
+        }
+    },
+    {
+        "id": "k1c_MqOl",
+        "name": "シロコ",
+        "rarity": 3,
+        "weapon": {
+            "type": "AR",
+            "cover": true
+        },
+        "role": {
+            "type": "STRIKER",
+            "class": "アタッカー",
+            "position": "MIDDLE"
+        },
+        "school": "アビドス高等学校",
+        "combat": {
+            "attackType": "爆発",
+            "defenseType": "軽装備"
+        },
+        "terrainAdaptation": {
+            "city": "S",
+            "outdoor": "B",
+            "indoor": "D"
+        }
+    },
+    {
+        "id": "ltastNK0",
+        "name": "シロコ（ライディング）",
+        "rarity": 3,
+        "weapon": {
+            "type": "AR",
+            "cover": true
+        },
+        "role": {
+            "type": "STRIKER",
+            "class": "アタッカー",
+            "position": "MIDDLE"
+        },
+        "school": "アビドス高等学校",
+        "combat": {
+            "attackType": "神秘",
+            "defenseType": "重装甲"
+        },
+        "terrainAdaptation": {
+            "city": "S",
+            "outdoor": "B",
+            "indoor": "D"
+        }
+    },
+    {
+        "id": "41sdJAWn",
+        "name": "シロコ（水着）",
+        "rarity": 3,
+        "weapon": {
+            "type": "AR",
+            "cover": false
+        },
+        "role": {
+            "type": "SPECIAL",
+            "class": "アタッカー",
+            "position": "BACK"
+        },
+        "school": "アビドス高等学校",
+        "combat": {
+            "attackType": "神秘",
+            "defenseType": "軽装備"
+        },
+        "terrainAdaptation": {
+            "city": "B",
+            "outdoor": "S",
+            "indoor": "D"
+        }
+    },
+    {
+        "id": "1QyBk9du",
+        "name": "シロコ＊テラー",
+        "rarity": 3,
+        "weapon": {
+            "type": "AR",
+            "cover": false
+        },
+        "role": {
+            "type": "STRIKER",
+            "class": "アタッカー",
+            "position": "MIDDLE"
+        },
+        "school": "アビドス高等学校",
+        "combat": {
+            "attackType": "神秘",
+            "defenseType": "特殊装甲"
+        },
+        "terrainAdaptation": {
+            "city": "D",
+            "outdoor": "S",
+            "indoor": "A"
+        }
+    },
+    {
+        "id": "gsu1P3uQ",
+        "name": "スミレ",
+        "rarity": 3,
+        "weapon": {
+            "type": "SG",
+            "cover": false
+        },
+        "role": {
+            "type": "STRIKER",
+            "class": "アタッカー",
+            "position": "FRONT"
+        },
+        "school": "ミレニアムサイエンススクール",
+        "combat": {
+            "attackType": "貫通",
+            "defenseType": "特殊装甲"
+        },
+        "terrainAdaptation": {
+            "city": "B",
+            "outdoor": "D",
+            "indoor": "S"
+        }
+    },
+    {
+        "id": "hkR1UwCn",
+        "name": "スミレ（アルバイト）",
+        "rarity": 3,
+        "weapon": {
+            "type": "SG",
+            "cover": false
+        },
+        "role": {
+            "type": "SPECIAL",
+            "class": "サポーター",
+            "position": "BACK"
+        },
+        "school": "ミレニアムサイエンススクール",
+        "combat": {
+            "attackType": "貫通",
+            "defenseType": "軽装備"
+        },
+        "terrainAdaptation": {
+            "city": "B",
+            "outdoor": "S",
+            "indoor": "D"
+        }
+    },
+    {
+        "id": "Uc4cHO_F",
+        "name": "セイア",
+        "rarity": 3,
+        "weapon": {
+            "type": "HG",
+            "cover": true
+        },
+        "role": {
+            "type": "STRIKER",
+            "class": "サポーター",
+            "position": "MIDDLE"
+        },
+        "school": "トリニティ総合学園",
+        "combat": {
+            "attackType": "貫通",
+            "defenseType": "弾力装甲"
+        },
+        "terrainAdaptation": {
+            "city": "B",
+            "outdoor": "D",
+            "indoor": "S"
+        }
+    },
+    {
+        "id": "EB6lVfgW-",
+        "name": "セイア（水着）",
+        "rarity": 3,
+        "weapon": {
+            "type": "HG",
+            "cover": true
+        },
+        "role": {
+            "type": "STRIKER",
+            "class": "サポーター",
+            "position": "MIDDLE"
+        },
+        "school": "トリニティ総合学園",
+        "combat": {
+            "attackType": "貫通",
+            "defenseType": "特殊装甲"
+        },
+        "terrainAdaptation": {
+            "city": "S",
+            "outdoor": "B",
+            "indoor": "D"
+        }
+    },
+    {
+        "id": "nQmktJY0",
+        "name": "セナ",
+        "rarity": 3,
+        "weapon": {
+            "type": "GL",
+            "cover": false
+        },
+        "role": {
+            "type": "SPECIAL",
+            "class": "T.S",
+            "position": "BACK"
+        },
+        "school": "ゲヘナ学園",
+        "combat": {
+            "attackType": "神秘",
+            "defenseType": "軽装備"
+        },
+        "terrainAdaptation": {
+            "city": "B",
+            "outdoor": "S",
+            "indoor": "D"
+        }
+    },
+    {
+        "id": "P9hhgPZR",
+        "name": "セナ（私服）",
+        "rarity": 3,
+        "weapon": {
+            "type": "GL",
+            "cover": true
+        },
+        "role": {
+            "type": "STRIKER",
+            "class": "ヒーラー",
+            "position": "MIDDLE"
+        },
+        "school": "ゲヘナ学園",
+        "combat": {
+            "attackType": "振動",
+            "defenseType": "重装甲"
+        },
+        "terrainAdaptation": {
+            "city": "S",
+            "outdoor": "B",
+            "indoor": "D"
+        }
+    },
+    {
+        "id": "znwNEdGz",
+        "name": "セリカ（正月）",
+        "rarity": 3,
+        "weapon": {
+            "type": "AR",
+            "cover": false
+        },
+        "role": {
+            "type": "SPECIAL",
+            "class": "サポーター",
+            "position": "BACK"
+        },
+        "school": "アビドス高等学校",
+        "combat": {
+            "attackType": "貫通",
+            "defenseType": "特殊装甲"
+        },
+        "terrainAdaptation": {
+            "city": "C",
+            "outdoor": "C",
+            "indoor": "S"
+        }
+    },
+    {
+        "id": "hoQtlcr3",
+        "name": "セリカ（水着）",
+        "rarity": 3,
+        "weapon": {
+            "type": "AR",
+            "cover": false
+        },
+        "role": {
+            "type": "SPECIAL",
+            "class": "アタッカー",
+            "position": "BACK"
+        },
+        "school": "アビドス高等学校",
+        "combat": {
+            "attackType": "神秘",
+            "defenseType": "重装甲"
+        },
+        "terrainAdaptation": {
+            "city": "D",
+            "outdoor": "B",
+            "indoor": "S"
+        }
+    },
+    {
+        "id": "BkzM2VJ1",
+        "name": "セリナ（クリスマス）",
+        "rarity": 3,
+        "weapon": {
+            "type": "AR",
+            "cover": true
+        },
+        "role": {
+            "type": "STRIKER",
+            "class": "サポーター",
+            "position": "MIDDLE"
+        },
+        "school": "トリニティ総合学園",
+        "combat": {
+            "attackType": "貫通",
+            "defenseType": "特殊装甲"
+        },
+        "terrainAdaptation": {
+            "city": "D",
+            "outdoor": "S",
+            "indoor": "B"
+        }
+    },
+    {
+        "id": "DJHhJdcw",
+        "name": "チアキ",
+        "rarity": 3,
+        "weapon": {
+            "type": "AR",
+            "cover": true
+        },
+        "role": {
+            "type": "STRIKER",
+            "class": "アタッカー",
+            "position": "MIDDLE"
+        },
+        "school": "ゲヘナ学園",
+        "combat": {
+            "attackType": "振動",
+            "defenseType": "特殊装甲"
+        },
+        "terrainAdaptation": {
+            "city": "S",
+            "outdoor": "D",
+            "indoor": "B"
+        }
+    },
+    {
+        "id": "f_cSjyYh",
+        "name": "チェリノ",
+        "rarity": 3,
+        "weapon": {
+            "type": "HG",
+            "cover": true
+        },
+        "role": {
+            "type": "STRIKER",
+            "class": "アタッカー",
+            "position": "MIDDLE"
+        },
+        "school": "レッドウィンター連邦学園",
+        "combat": {
+            "attackType": "貫通",
+            "defenseType": "軽装備"
+        },
+        "terrainAdaptation": {
+            "city": "B",
+            "outdoor": "S",
+            "indoor": "D"
+        }
+    },
+    {
+        "id": "-mDZ-f8r",
+        "name": "チェリノ（温泉）",
+        "rarity": 3,
+        "weapon": {
+            "type": "HG",
+            "cover": false
+        },
+        "role": {
+            "type": "SPECIAL",
+            "class": "T.S",
+            "position": "BACK"
+        },
+        "school": "レッドウィンター連邦学園",
+        "combat": {
+            "attackType": "爆発",
+            "defenseType": "重装甲"
+        },
+        "terrainAdaptation": {
+            "city": "S",
+            "outdoor": "B",
+            "indoor": "D"
+        }
+    },
+    {
+        "id": "r7WThPHg",
+        "name": "チセ（水着）",
+        "rarity": 3,
+        "weapon": {
+            "type": "GL",
+            "cover": true
+        },
+        "role": {
+            "type": "STRIKER",
+            "class": "サポーター",
+            "position": "MIDDLE"
+        },
+        "school": "百鬼夜行連合学院",
+        "combat": {
+            "attackType": "神秘",
+            "defenseType": "軽装備"
+        },
+        "terrainAdaptation": {
+            "city": "B",
+            "outdoor": "S",
+            "indoor": "D"
+        }
+    },
+    {
+        "id": "R9Z5p4Vu",
+        "name": "チナツ（温泉）",
+        "rarity": 3,
+        "weapon": {
+            "type": "HG",
+            "cover": true
+        },
+        "role": {
+            "type": "STRIKER",
+            "class": "サポーター",
+            "position": "MIDDLE"
+        },
+        "school": "ゲヘナ学園",
+        "combat": {
+            "attackType": "神秘",
+            "defenseType": "軽装備"
+        },
+        "terrainAdaptation": {
+            "city": "D",
+            "outdoor": "B",
+            "indoor": "S"
+        }
+    },
+    {
+        "id": "RiwlEjR_",
+        "name": "チヒロ",
+        "rarity": 3,
+        "weapon": {
+            "type": "AR",
+            "cover": false
+        },
+        "role": {
+            "type": "SPECIAL",
+            "class": "アタッカー",
+            "position": "BACK"
+        },
+        "school": "ミレニアムサイエンススクール",
+        "combat": {
+            "attackType": "貫通",
+            "defenseType": "重装甲"
+        },
+        "terrainAdaptation": {
+            "city": "S",
+            "outdoor": "D",
+            "indoor": "B"
+        }
+    },
+    {
+        "id": "uA57NNTB",
+        "name": "ツクヨ",
+        "rarity": 3,
+        "weapon": {
+            "type": "SMG",
+            "cover": true
+        },
+        "role": {
+            "type": "STRIKER",
+            "class": "タンク",
+            "position": "FRONT"
+        },
+        "school": "百鬼夜行連合学院",
+        "combat": {
+            "attackType": "神秘",
+            "defenseType": "軽装備"
+        },
+        "terrainAdaptation": {
+            "city": "B",
+            "outdoor": "D",
+            "indoor": "S"
+        }
+    },
+    {
+        "id": "CynBq_iI",
+        "name": "ツバキ（ガイド）",
+        "rarity": 3,
+        "weapon": {
+            "type": "SMG",
+            "cover": false
+        },
+        "role": {
+            "type": "SPECIAL",
+            "class": "サポーター",
+            "position": "BACK"
+        },
+        "school": "百鬼夜行連合学院",
+        "combat": {
+            "attackType": "貫通",
+            "defenseType": "重装甲"
+        },
+        "terrainAdaptation": {
+            "city": "D",
+            "outdoor": "S",
+            "indoor": "B"
+        }
+    },
+    {
+        "id": "MjiIiM1u",
+        "name": "ツルギ",
+        "rarity": 3,
+        "weapon": {
+            "type": "SG",
+            "cover": false
+        },
+        "role": {
+            "type": "STRIKER",
+            "class": "アタッカー",
+            "position": "FRONT"
+        },
+        "school": "トリニティ総合学園",
+        "combat": {
+            "attackType": "貫通",
+            "defenseType": "重装甲"
+        },
+        "terrainAdaptation": {
+            "city": "D",
+            "outdoor": "B",
+            "indoor": "S"
+        }
+    },
+    {
+        "id": "DG7F3lVl",
+        "name": "トキ",
+        "rarity": 3,
+        "weapon": {
+            "type": "AR",
+            "cover": false
+        },
+        "role": {
+            "type": "STRIKER",
+            "class": "アタッカー",
+            "position": "MIDDLE"
+        },
+        "school": "ミレニアムサイエンススクール",
+        "combat": {
+            "attackType": "爆発",
+            "defenseType": "弾力装甲"
+        },
+        "terrainAdaptation": {
+            "city": "S",
+            "outdoor": "D",
+            "indoor": "B"
+        }
+    },
+    {
+        "id": "H-1JaaTO",
+        "name": "トキ（バニーガール）",
+        "rarity": 3,
+        "weapon": {
+            "type": "AR",
+            "cover": true
+        },
+        "role": {
+            "type": "STRIKER",
+            "class": "アタッカー",
+            "position": "MIDDLE"
+        },
+        "school": "ミレニアムサイエンススクール",
+        "combat": {
+            "attackType": "爆発",
+            "defenseType": "軽装備"
+        },
+        "terrainAdaptation": {
+            "city": "B",
+            "outdoor": "S",
+            "indoor": "D"
+        }
+    },
+    {
+        "id": "UZIAH0L_",
+        "name": "トモエ（チーパオ）",
+        "rarity": 3,
+        "weapon": {
+            "type": "SR",
+            "cover": false
+        },
+        "role": {
+            "type": "SPECIAL",
+            "class": "サポーター",
+            "position": "BACK"
+        },
+        "school": "レッドウィンター連邦学園",
+        "combat": {
+            "attackType": "神秘",
+            "defenseType": "特殊装甲"
+        },
+        "terrainAdaptation": {
+            "city": "D",
+            "outdoor": "B",
+            "indoor": "S"
+        }
+    },
+    {
+        "id": "FZ65OXuH",
+        "name": "ナギサ",
+        "rarity": 3,
+        "weapon": {
+            "type": "HG",
+            "cover": false
+        },
+        "role": {
+            "type": "SPECIAL",
+            "class": "アタッカー",
+            "position": "BACK"
+        },
+        "school": "トリニティ総合学園",
+        "combat": {
+            "attackType": "爆発",
+            "defenseType": "重装甲"
+        },
+        "terrainAdaptation": {
+            "city": "D",
+            "outdoor": "B",
+            "indoor": "S"
+        }
+    },
+    {
+        "id": "ScbTJ6-T",
+        "name": "ナギサ（水着）",
+        "rarity": 3,
+        "weapon": {
+            "type": "HG",
+            "cover": false
+        },
+        "role": {
+            "type": "SPECIAL",
+            "class": "サポーター",
+            "position": "BACK"
+        },
+        "school": "トリニティ総合学園",
+        "combat": {
+            "attackType": "振動",
+            "defenseType": "弾力装甲"
+        },
+        "terrainAdaptation": {
+            "city": "S",
+            "outdoor": "A",
+            "indoor": "D"
+        }
+    },
+    {
+        "id": "aciRxFGD",
+        "name": "ナグサ",
+        "rarity": 3,
+        "weapon": {
+            "type": "SR",
+            "cover": false
+        },
+        "role": {
+            "type": "STRIKER",
+            "class": "アタッカー",
+            "position": "BACK"
+        },
+        "school": "百鬼夜行連合学院",
+        "combat": {
+            "attackType": "振動",
+            "defenseType": "弾力装甲"
+        },
+        "terrainAdaptation": {
+            "city": "S",
+            "outdoor": "B",
+            "indoor": "D"
+        }
+    },
+    {
+        "id": "4fCqSk5_",
+        "name": "ナツ",
+        "rarity": 3,
+        "weapon": {
+            "type": "SMG",
+            "cover": false
+        },
+        "role": {
+            "type": "STRIKER",
+            "class": "タンク",
+            "position": "FRONT"
+        },
+        "school": "トリニティ総合学園",
+        "combat": {
+            "attackType": "神秘",
+            "defenseType": "重装甲"
+        },
+        "terrainAdaptation": {
+            "city": "D",
+            "outdoor": "B",
+            "indoor": "S"
+        }
+    },
+    {
+        "id": "A2t-bAxw",
+        "name": "ナツ（バンド）",
+        "rarity": 3,
+        "weapon": {
+            "type": "SMG",
+            "cover": true
+        },
+        "role": {
+            "type": "STRIKER",
+            "class": "ヒーラー",
+            "position": "FRONT"
+        },
+        "school": "トリニティ総合学園",
+        "combat": {
+            "attackType": "爆発",
+            "defenseType": "特殊装甲"
+        },
+        "terrainAdaptation": {
+            "city": "B",
+            "outdoor": "S",
+            "indoor": "D"
+        }
+    },
+    {
+        "id": "WRdJlasT",
+        "name": "ニヤ",
+        "rarity": 3,
+        "weapon": {
+            "type": "HG",
+            "cover": false
+        },
+        "role": {
+            "type": "SPECIAL",
+            "class": "アタッカー",
+            "position": "BACK"
+        },
+        "school": "百鬼夜行連合学院",
+        "combat": {
+            "attackType": "振動",
+            "defenseType": "重装甲"
+        },
+        "terrainAdaptation": {
+            "city": "S",
+            "outdoor": "D",
+            "indoor": "B"
+        }
+    },
+    {
+        "id": "ZIurXZNQ",
+        "name": "ネル",
+        "rarity": 3,
+        "weapon": {
+            "type": "SMG",
+            "cover": true
+        },
+        "role": {
+            "type": "STRIKER",
+            "class": "アタッカー",
+            "position": "FRONT"
+        },
+        "school": "ミレニアムサイエンススクール",
+        "combat": {
+            "attackType": "貫通",
+            "defenseType": "軽装備"
+        },
+        "terrainAdaptation": {
+            "city": "D",
+            "outdoor": "S",
+            "indoor": "B"
+        }
+    },
+    {
+        "id": "vdhwQWDg",
+        "name": "ネル（バニーガール）",
+        "rarity": 3,
+        "weapon": {
+            "type": "SMG",
+            "cover": true
+        },
+        "role": {
+            "type": "STRIKER",
+            "class": "タンク",
+            "position": "FRONT"
+        },
+        "school": "ミレニアムサイエンススクール",
+        "combat": {
+            "attackType": "爆発",
+            "defenseType": "重装甲"
+        },
+        "terrainAdaptation": {
+            "city": "B",
+            "outdoor": "S",
+            "indoor": "D"
+        }
+    },
+    {
+        "id": "wHvSXOzz",
+        "name": "ネル（制服）",
+        "rarity": 3,
+        "weapon": {
+            "type": "SMG",
+            "cover": true
+        },
+        "role": {
+            "type": "STRIKER",
+            "class": "アタッカー",
+            "position": "FRONT"
+        },
+        "school": "ミレニアムサイエンススクール",
+        "combat": {
+            "attackType": "貫通",
+            "defenseType": "弾力装甲"
+        },
+        "terrainAdaptation": {
+            "city": "S",
+            "outdoor": "A",
+            "indoor": "D"
+        }
+    },
+    {
+        "id": "dWgV0Ubs",
+        "name": "ノア",
+        "rarity": 3,
+        "weapon": {
+            "type": "HG",
+            "cover": true
+        },
+        "role": {
+            "type": "STRIKER",
+            "class": "サポーター",
+            "position": "MIDDLE"
+        },
+        "school": "ミレニアムサイエンススクール",
+        "combat": {
+            "attackType": "神秘",
+            "defenseType": "特殊装甲"
+        },
+        "terrainAdaptation": {
+            "city": "D",
+            "outdoor": "B",
+            "indoor": "S"
+        }
+    },
+    {
+        "id": "7lxH-5jx",
+        "name": "ノア（パジャマ）",
+        "rarity": 3,
+        "weapon": {
+            "type": "HG",
+            "cover": true
+        },
+        "role": {
+            "type": "STRIKER",
+            "class": "アタッカー",
+            "position": "MIDDLE"
+        },
+        "school": "ミレニアムサイエンススクール",
+        "combat": {
+            "attackType": "貫通",
+            "defenseType": "軽装備"
+        },
+        "terrainAdaptation": {
+            "city": "B",
+            "outdoor": "S",
+            "indoor": "D"
+        }
+    },
+    {
+        "id": "mY-m-QzG",
+        "name": "ノゾミ",
+        "rarity": 3,
+        "weapon": {
+            "type": "HG",
+            "cover": true
+        },
+        "role": {
+            "type": "STRIKER",
+            "class": "アタッカー",
+            "position": "MIDDLE"
+        },
+        "school": "ハイランダー鉄道学園",
+        "combat": {
+            "attackType": "振動",
+            "defenseType": "軽装備"
+        },
+        "terrainAdaptation": {
+            "city": "D",
+            "outdoor": "B",
+            "indoor": "S"
+        }
+    },
+    {
+        "id": "2O2zTHjG",
+        "name": "ノドカ（温泉）",
+        "rarity": 3,
+        "weapon": {
+            "type": "SMG",
+            "cover": false
+        },
+        "role": {
+            "type": "SPECIAL",
+            "class": "ヒーラー",
+            "position": "BACK"
+        },
+        "school": "レッドウィンター連邦学園",
+        "combat": {
+            "attackType": "爆発",
+            "defenseType": "特殊装甲"
+        },
+        "terrainAdaptation": {
+            "city": "B",
+            "outdoor": "D",
+            "indoor": "S"
+        }
+    },
+    {
+        "id": "PIDbbBXn",
+        "name": "ノノミ（水着）",
+        "rarity": 3,
+        "weapon": {
+            "type": "MG",
+            "cover": false
+        },
+        "role": {
+            "type": "STRIKER",
+            "class": "アタッカー",
+            "position": "BACK"
+        },
+        "school": "アビドス高等学校",
+        "combat": {
+            "attackType": "爆発",
+            "defenseType": "特殊装甲"
+        },
+        "terrainAdaptation": {
+            "city": "S",
+            "outdoor": "D",
+            "indoor": "B"
+        }
+    },
+    {
+        "id": "Kq1e-TT1",
+        "name": "ハスミ（水着）",
+        "rarity": 3,
+        "weapon": {
+            "type": "SR",
+            "cover": true
+        },
+        "role": {
+            "type": "STRIKER",
+            "class": "アタッカー",
+            "position": "BACK"
+        },
+        "school": "トリニティ総合学園",
+        "combat": {
+            "attackType": "貫通",
+            "defenseType": "軽装備"
+        },
+        "terrainAdaptation": {
+            "city": "D",
+            "outdoor": "S",
+            "indoor": "B"
+        }
+    },
+    {
+        "id": "5cshgiDh",
+        "name": "ハナエ（クリスマス）",
+        "rarity": 3,
+        "weapon": {
+            "type": "AR",
+            "cover": false
+        },
+        "role": {
+            "type": "SPECIAL",
+            "class": "ヒーラー",
+            "position": "BACK"
+        },
+        "school": "トリニティ総合学園",
+        "combat": {
+            "attackType": "神秘",
+            "defenseType": "特殊装甲"
+        },
+        "terrainAdaptation": {
+            "city": "B",
+            "outdoor": "D",
+            "indoor": "S"
+        }
+    },
+    {
+        "id": "-64seDux",
+        "name": "ハナコ（水着）",
+        "rarity": 3,
+        "weapon": {
+            "type": "AR",
+            "cover": true
+        },
+        "role": {
+            "type": "STRIKER",
+            "class": "アタッカー",
+            "position": "MIDDLE"
+        },
+        "school": "トリニティ総合学園",
+        "combat": {
+            "attackType": "振動",
+            "defenseType": "重装甲"
+        },
+        "terrainAdaptation": {
+            "city": "S",
+            "outdoor": "A",
+            "indoor": "D"
+        }
+    },
+    {
+        "id": "tH3E6bt9",
+        "name": "ハルカ（正月）",
+        "rarity": 3,
+        "weapon": {
+            "type": "SG",
+            "cover": false
+        },
+        "role": {
+            "type": "SPECIAL",
+            "class": "サポーター",
+            "position": "BACK"
+        },
+        "school": "ゲヘナ学園",
+        "combat": {
+            "attackType": "爆発",
+            "defenseType": "軽装備"
+        },
+        "terrainAdaptation": {
+            "city": "C",
+            "outdoor": "S",
+            "indoor": "C"
+        }
+    },
+    {
+        "id": "4NKqfuas",
+        "name": "ハルナ",
+        "rarity": 3,
+        "weapon": {
+            "type": "SR",
+            "cover": true
+        },
+        "role": {
+            "type": "STRIKER",
+            "class": "アタッカー",
+            "position": "BACK"
+        },
+        "school": "ゲヘナ学園",
+        "combat": {
+            "attackType": "神秘",
+            "defenseType": "重装甲"
+        },
+        "terrainAdaptation": {
+            "city": "S",
+            "outdoor": "D",
+            "indoor": "B"
+        }
+    },
+    {
+        "id": "dRjaHXZZ",
+        "name": "ハルナ（正月）",
+        "rarity": 3,
+        "weapon": {
+            "type": "SR",
+            "cover": true
+        },
+        "role": {
+            "type": "STRIKER",
+            "class": "アタッカー",
+            "position": "BACK"
+        },
+        "school": "ゲヘナ学園",
+        "combat": {
+            "attackType": "爆発",
+            "defenseType": "軽装備"
+        },
+        "terrainAdaptation": {
+            "city": "D",
+            "outdoor": "S",
+            "indoor": "B"
+        }
+    },
+    {
+        "id": "39zNVXYs",
+        "name": "ハルナ（体操服）",
+        "rarity": 3,
+        "weapon": {
+            "type": "SR",
+            "cover": false
+        },
+        "role": {
+            "type": "SPECIAL",
+            "class": "ヒーラー",
+            "position": "BACK"
+        },
+        "school": "ゲヘナ学園",
+        "combat": {
+            "attackType": "振動",
+            "defenseType": "重装甲"
+        },
+        "terrainAdaptation": {
+            "city": "S",
+            "outdoor": "B",
+            "indoor": "D"
+        }
+    },
+    {
+        "id": "WTENoLzI",
+        "name": "ハレ（キャンプ）",
+        "rarity": 3,
+        "weapon": {
+            "type": "AR",
+            "cover": true
+        },
+        "role": {
+            "type": "STRIKER",
+            "class": "サポーター",
+            "position": "MIDDLE"
+        },
+        "school": "ミレニアムサイエンススクール",
+        "combat": {
+            "attackType": "爆発",
+            "defenseType": "軽装備"
+        },
+        "terrainAdaptation": {
+            "city": "D",
+            "outdoor": "S",
+            "indoor": "B"
+        }
+    },
+    {
+        "id": "z3bb60wS",
+        "name": "ヒカリ",
+        "rarity": 3,
+        "weapon": {
+            "type": "HG",
+            "cover": true
+        },
+        "role": {
+            "type": "STRIKER",
+            "class": "サポーター",
+            "position": "MIDDLE"
+        },
+        "school": "ハイランダー鉄道学園",
+        "combat": {
+            "attackType": "振動",
+            "defenseType": "軽装備"
+        },
+        "terrainAdaptation": {
+            "city": "D",
+            "outdoor": "B",
+            "indoor": "S"
+        }
+    },
+    {
+        "id": "3gMHwU6g",
+        "name": "ヒナ",
+        "rarity": 3,
+        "weapon": {
+            "type": "MG",
+            "cover": false
+        },
+        "role": {
+            "type": "STRIKER",
+            "class": "アタッカー",
+            "position": "BACK"
+        },
+        "school": "ゲヘナ学園",
+        "combat": {
+            "attackType": "爆発",
+            "defenseType": "重装甲"
+        },
+        "terrainAdaptation": {
+            "city": "S",
+            "outdoor": "C",
+            "indoor": "C"
+        }
+    },
+    {
+        "id": "atYy4BbA",
+        "name": "ヒナ（水着）",
+        "rarity": 3,
+        "weapon": {
+            "type": "MG",
+            "cover": false
+        },
+        "role": {
+            "type": "STRIKER",
+            "class": "アタッカー",
+            "position": "BACK"
+        },
+        "school": "ゲヘナ学園",
+        "combat": {
+            "attackType": "爆発",
+            "defenseType": "重装甲"
+        },
+        "terrainAdaptation": {
+            "city": "B",
+            "outdoor": "S",
+            "indoor": "D"
+        }
+    },
+    {
+        "id": "cdOK38D8",
+        "name": "ヒナ（ドレス）",
+        "rarity": 3,
+        "weapon": {
+            "type": "MG",
+            "cover": false
+        },
+        "role": {
+            "type": "STRIKER",
+            "class": "アタッカー",
+            "position": "BACK"
+        },
+        "school": "ゲヘナ学園",
+        "combat": {
+            "attackType": "爆発",
+            "defenseType": "弾力装甲"
+        },
+        "terrainAdaptation": {
+            "city": "D",
+            "outdoor": "A",
+            "indoor": "S"
+        }
+    },
+    {
+        "id": "e52itLKG",
+        "name": "ヒナタ",
+        "rarity": 3,
+        "weapon": {
+            "type": "HG",
+            "cover": true
+        },
+        "role": {
+            "type": "STRIKER",
+            "class": "アタッカー",
+            "position": "MIDDLE"
+        },
+        "school": "トリニティ総合学園",
+        "combat": {
+            "attackType": "神秘",
+            "defenseType": "重装甲"
+        },
+        "terrainAdaptation": {
+            "city": "D",
+            "outdoor": "S",
+            "indoor": "B"
+        }
+    },
+    {
+        "id": "BmM7mGxW",
+        "name": "ヒナタ（水着）",
+        "rarity": 3,
+        "weapon": {
+            "type": "HG",
+            "cover": false
+        },
+        "role": {
+            "type": "SPECIAL",
+            "class": "アタッカー",
+            "position": "BACK"
+        },
+        "school": "トリニティ総合学園",
+        "combat": {
+            "attackType": "爆発",
+            "defenseType": "軽装備"
+        },
+        "terrainAdaptation": {
+            "city": "D",
+            "outdoor": "S",
+            "indoor": "B"
+        }
+    },
+    {
+        "id": "rX7cRuOP",
+        "name": "ヒビキ",
+        "rarity": 3,
+        "weapon": {
+            "type": "MT",
+            "cover": false
+        },
+        "role": {
+            "type": "SPECIAL",
+            "class": "アタッカー",
+            "position": "BACK"
+        },
+        "school": "ミレニアムサイエンススクール",
+        "combat": {
+            "attackType": "爆発",
+            "defenseType": "重装甲"
+        },
+        "terrainAdaptation": {
+            "city": "S",
+            "outdoor": "B",
+            "indoor": "B"
+        }
+    },
+    {
+        "id": "f5Eca1Yh",
+        "name": "ヒフミ",
+        "rarity": 3,
+        "weapon": {
+            "type": "AR",
+            "cover": true
+        },
+        "role": {
+            "type": "STRIKER",
+            "class": "サポーター",
+            "position": "MIDDLE"
+        },
+        "school": "トリニティ総合学園",
+        "combat": {
+            "attackType": "貫通",
+            "defenseType": "軽装備"
+        },
+        "terrainAdaptation": {
+            "city": "D",
+            "outdoor": "S",
+            "indoor": "B"
+        }
+    },
+    {
+        "id": "U6hhKoeP",
+        "name": "ヒフミ（水着）",
+        "rarity": 3,
+        "weapon": {
+            "type": "AR",
+            "cover": false
+        },
+        "role": {
+            "type": "SPECIAL",
+            "class": "T.S",
+            "position": "BACK"
+        },
+        "school": "トリニティ総合学園",
+        "combat": {
+            "attackType": "貫通",
+            "defenseType": "重装甲"
+        },
+        "terrainAdaptation": {
+            "city": "D",
+            "outdoor": "B",
+            "indoor": "S"
+        }
+    },
+    {
+        "id": "pNTb-lrO",
+        "name": "ヒマリ",
+        "rarity": 3,
+        "weapon": {
+            "type": "HG",
+            "cover": false
+        },
+        "role": {
+            "type": "SPECIAL",
+            "class": "サポーター",
+            "position": "BACK"
+        },
+        "school": "ミレニアムサイエンススクール",
+        "combat": {
+            "attackType": "貫通",
+            "defenseType": "軽装備"
+        },
+        "terrainAdaptation": {
+            "city": "S",
+            "outdoor": "B",
+            "indoor": "D"
+        }
+    },
+    {
+        "id": "UUZIvUxq",
+        "name": "ヒヨリ",
+        "rarity": 3,
+        "weapon": {
+            "type": "SR",
+            "cover": false
+        },
+        "role": {
+            "type": "SPECIAL",
+            "class": "サポーター",
+            "position": "BACK"
+        },
+        "school": "アリウス分校",
+        "combat": {
+            "attackType": "爆発",
+            "defenseType": "軽装備"
+        },
+        "terrainAdaptation": {
+            "city": "B",
+            "outdoor": "D",
+            "indoor": "S"
+        }
+    },
+    {
+        "id": "iUFTl1kP",
+        "name": "ヒヨリ（水着）",
+        "rarity": 3,
+        "weapon": {
+            "type": "SR",
+            "cover": true
+        },
+        "role": {
+            "type": "STRIKER",
+            "class": "アタッカー",
+            "position": "BACK"
+        },
+        "school": "アリウス分校",
+        "combat": {
+            "attackType": "貫通",
+            "defenseType": "重装甲"
+        },
+        "terrainAdaptation": {
+            "city": "D",
+            "outdoor": "S",
+            "indoor": "B"
+        }
+    },
+    {
+        "id": "P_kHiO7q",
+        "name": "フィーナ（ガイド）",
+        "rarity": 3,
+        "weapon": {
+            "type": "MG",
+            "cover": false
+        },
+        "role": {
+            "type": "SPECIAL",
+            "class": "アタッカー",
+            "position": "BACK"
+        },
+        "school": "百鬼夜行連合学院",
+        "combat": {
+            "attackType": "爆発",
+            "defenseType": "重装甲"
+        },
+        "terrainAdaptation": {
+            "city": "D",
+            "outdoor": "S",
+            "indoor": "B"
+        }
+    },
+    {
+        "id": "_Crq1uCM",
+        "name": "フウカ（正月）",
+        "rarity": 3,
+        "weapon": {
+            "type": "SMG",
+            "cover": false
+        },
+        "role": {
+            "type": "SPECIAL",
+            "class": "サポーター",
+            "position": "BACK"
+        },
+        "school": "ゲヘナ学園",
+        "combat": {
+            "attackType": "貫通",
+            "defenseType": "特殊装甲"
+        },
+        "terrainAdaptation": {
+            "city": "B",
+            "outdoor": "D",
+            "indoor": "S"
+        }
+    },
+    {
+        "id": "qgNqCaQB",
+        "name": "フブキ（水着）",
+        "rarity": 3,
+        "weapon": {
+            "type": "SR",
+            "cover": false
+        },
+        "role": {
+            "type": "SPECIAL",
+            "class": "アタッカー",
+            "position": "BACK"
+        },
+        "school": "ヴァルキューレ警察学校",
+        "combat": {
+            "attackType": "爆発",
+            "defenseType": "重装甲"
+        },
+        "terrainAdaptation": {
+            "city": "B",
+            "outdoor": "S",
+            "indoor": "D"
+        }
+    },
+    {
+        "id": "bs94pWwF",
+        "name": "フユ",
+        "rarity": 3,
+        "weapon": {
+            "type": "HG",
+            "cover": false
+        },
+        "role": {
+            "type": "STRIKER",
+            "class": "サポーター",
+            "position": "MIDDLE"
+        },
+        "school": "ワイルドハント芸術学院",
+        "combat": {
+            "attackType": "振動",
+            "defenseType": "特殊装甲"
+        },
+        "terrainAdaptation": {
+            "city": "S",
+            "outdoor": "D",
+            "indoor": "B"
+        }
+    },
+    {
+        "id": "xErR_vD5",
+        "name": "ホシノ",
+        "rarity": 3,
+        "weapon": {
+            "type": "SG",
+            "cover": false
+        },
+        "role": {
+            "type": "STRIKER",
+            "class": "タンク",
+            "position": "FRONT"
+        },
+        "school": "アビドス高等学校",
+        "combat": {
+            "attackType": "貫通",
+            "defenseType": "重装甲"
+        },
+        "terrainAdaptation": {
+            "city": "D",
+            "outdoor": "S",
+            "indoor": "B"
+        }
+    },
+    {
+        "id": "WukU7JyL",
+        "name": "ホシノ（水着）",
+        "rarity": 3,
+        "weapon": {
+            "type": "SG",
+            "cover": false
+        },
+        "role": {
+            "type": "STRIKER",
+            "class": "サポーター",
+            "position": "FRONT"
+        },
+        "school": "アビドス高等学校",
+        "combat": {
+            "attackType": "爆発",
+            "defenseType": "特殊装甲"
+        },
+        "terrainAdaptation": {
+            "city": "S",
+            "outdoor": "A",
+            "indoor": "D"
+        }
+    },
+    {
+        "id": "cmbmbPYx",
+        "name": "ホシノ（臨戦）",
+        "rarity": 3,
+        "weapon": {
+            "type": "SG",
+            "cover": false
+        },
+        "role": {
+            "type": "STRIKER",
+            "class": "タンク",
+            "position": "FRONT"
+        },
+        "school": "アビドス高等学校",
+        "combat": {
+            "attackType": "神秘",
+            "defenseType": "重装甲"
+        },
+        "terrainAdaptation": {
+            "city": "A",
+            "outdoor": "S",
+            "indoor": "D"
+        }
+    },
+    {
+        "id": "wLbxNBUc",
+        "name": "ホシノ（臨戦）",
+        "rarity": 3,
+        "weapon": {
+            "type": "SG",
+            "cover": false
+        },
+        "role": {
+            "type": "STRIKER",
+            "class": "アタッカー",
+            "position": "FRONT"
+        },
+        "school": "アビドス高等学校",
+        "combat": {
+            "attackType": "神秘",
+            "defenseType": "重装甲"
+        },
+        "terrainAdaptation": {
+            "city": "A",
+            "outdoor": "S",
+            "indoor": "D"
+        }
+    },
+    {
+        "id": "flb1hUNa",
+        "name": "マキ",
+        "rarity": 3,
+        "weapon": {
+            "type": "MG",
+            "cover": false
+        },
+        "role": {
+            "type": "STRIKER",
+            "class": "アタッカー",
+            "position": "BACK"
+        },
+        "school": "ミレニアムサイエンススクール",
+        "combat": {
+            "attackType": "貫通",
+            "defenseType": "軽装備"
+        },
+        "terrainAdaptation": {
+            "city": "C",
+            "outdoor": "S",
+            "indoor": "C"
+        }
+    },
+    {
+        "id": "nMNSPFj9",
+        "name": "マキ（キャンプ）",
+        "rarity": 3,
+        "weapon": {
+            "type": "MG",
+            "cover": false
+        },
+        "role": {
+            "type": "SPECIAL",
+            "class": "アタッカー",
+            "position": "BACK"
+        },
+        "school": "ミレニアムサイエンススクール",
+        "combat": {
+            "attackType": "爆発",
+            "defenseType": "重装甲"
+        },
+        "terrainAdaptation": {
+            "city": "D",
+            "outdoor": "S",
+            "indoor": "B"
+        }
+    },
+    {
+        "id": "KtKQlGYx",
+        "name": "マコト",
+        "rarity": 3,
+        "weapon": {
+            "type": "SR",
+            "cover": false
+        },
+        "role": {
+            "type": "SPECIAL",
+            "class": "アタッカー",
+            "position": "BACK"
+        },
+        "school": "ゲヘナ学園",
+        "combat": {
+            "attackType": "貫通",
+            "defenseType": "特殊装甲"
+        },
+        "terrainAdaptation": {
+            "city": "D",
+            "outdoor": "B",
+            "indoor": "S"
+        }
+    },
+    {
+        "id": "KN6XExOz",
+        "name": "マシロ",
+        "rarity": 3,
+        "weapon": {
+            "type": "SR",
+            "cover": false
+        },
+        "role": {
+            "type": "SPECIAL",
+            "class": "アタッカー",
+            "position": "BACK"
+        },
+        "school": "トリニティ総合学園",
+        "combat": {
+            "attackType": "爆発",
+            "defenseType": "重装甲"
+        },
+        "terrainAdaptation": {
+            "city": "B",
+            "outdoor": "S",
+            "indoor": "D"
+        }
+    },
+    {
+        "id": "Z8NOSF86",
+        "name": "マシロ（水着）",
+        "rarity": 3,
+        "weapon": {
+            "type": "SR",
+            "cover": false
+        },
+        "role": {
+            "type": "SPECIAL",
+            "class": "アタッカー",
+            "position": "BACK"
+        },
+        "school": "トリニティ総合学園",
+        "combat": {
+            "attackType": "神秘",
+            "defenseType": "軽装備"
+        },
+        "terrainAdaptation": {
+            "city": "B",
+            "outdoor": "S",
+            "indoor": "D"
+        }
+    },
+    {
+        "id": "qwmsGmbW",
+        "name": "マリー（体操服）",
+        "rarity": 3,
+        "weapon": {
+            "type": "HG",
+            "cover": true
+        },
+        "role": {
+            "type": "STRIKER",
+            "class": "ヒーラー",
+            "position": "MIDDLE"
+        },
+        "school": "トリニティ総合学園",
+        "combat": {
+            "attackType": "神秘",
+            "defenseType": "特殊装甲"
+        },
+        "terrainAdaptation": {
+            "city": "B",
+            "outdoor": "D",
+            "indoor": "S"
+        }
+    },
+    {
+        "id": "TIHIUiQJ",
+        "name": "マリー（アイドル）",
+        "rarity": 3,
+        "weapon": {
+            "type": "HG",
+            "cover": true
+        },
+        "role": {
+            "type": "STRIKER",
+            "class": "ヒーラー",
+            "position": "MIDDLE"
+        },
+        "school": "トリニティ総合学園",
+        "combat": {
+            "attackType": "爆発",
+            "defenseType": "重装甲"
+        },
+        "terrainAdaptation": {
+            "city": "D",
+            "outdoor": "S",
+            "indoor": "B"
+        }
+    },
+    {
+        "id": "5YjQzfY6",
+        "name": "マリナ",
+        "rarity": 3,
+        "weapon": {
+            "type": "SMG",
+            "cover": true
+        },
+        "role": {
+            "type": "STRIKER",
+            "class": "タンク",
+            "position": "FRONT"
+        },
+        "school": "レッドウィンター連邦学園",
+        "combat": {
+            "attackType": "貫通",
+            "defenseType": "軽装備"
+        },
+        "terrainAdaptation": {
+            "city": "D",
+            "outdoor": "B",
+            "indoor": "S"
+        }
+    },
+    {
+        "id": "pi9BIKGy",
+        "name": "マリナ（チーパオ）",
+        "rarity": 3,
+        "weapon": {
+            "type": "SMG",
+            "cover": true
+        },
+        "role": {
+            "type": "STRIKER",
+            "class": "アタッカー",
+            "position": "FRONT"
+        },
+        "school": "レッドウィンター連邦学園",
+        "combat": {
+            "attackType": "貫通",
+            "defenseType": "重装甲"
+        },
+        "terrainAdaptation": {
+            "city": "D",
+            "outdoor": "S",
+            "indoor": "B"
+        }
+    },
+    {
+        "id": "_nNm8GIY",
+        "name": "ミカ",
+        "rarity": 3,
+        "weapon": {
+            "type": "SMG",
+            "cover": true
+        },
+        "role": {
+            "type": "STRIKER",
+            "class": "アタッカー",
+            "position": "FRONT"
+        },
+        "school": "トリニティ総合学園",
+        "combat": {
+            "attackType": "貫通",
+            "defenseType": "軽装備"
+        },
+        "terrainAdaptation": {
+            "city": "D",
+            "outdoor": "A",
+            "indoor": "S"
+        }
+    },
+    {
+        "id": "f-n5aDqB",
+        "name": "ミカ（水着）",
+        "rarity": 3,
+        "weapon": {
+            "type": "SMG",
+            "cover": true
+        },
+        "role": {
+            "type": "STRIKER",
+            "class": "アタッカー",
+            "position": "FRONT"
+        },
+        "school": "トリニティ総合学園",
+        "combat": {
+            "attackType": "振動",
+            "defenseType": "特殊装甲"
+        },
+        "terrainAdaptation": {
+            "city": "S",
+            "outdoor": "A",
+            "indoor": "D"
+        }
+    },
+    {
+        "id": "bjUQDyBg",
+        "name": "ミサキ",
+        "rarity": 3,
+        "weapon": {
+            "type": "RL",
+            "cover": true
+        },
+        "role": {
+            "type": "STRIKER",
+            "class": "アタッカー",
+            "position": "BACK"
+        },
+        "school": "アリウス分校",
+        "combat": {
+            "attackType": "爆発",
+            "defenseType": "特殊装甲"
+        },
+        "terrainAdaptation": {
+            "city": "B",
+            "outdoor": "D",
+            "indoor": "S"
+        }
+    },
+    {
+        "id": "7kvn-Ukn",
+        "name": "ミドリ",
+        "rarity": 3,
+        "weapon": {
+            "type": "SR",
+            "cover": true
+        },
+        "role": {
+            "type": "STRIKER",
+            "class": "アタッカー",
+            "position": "BACK"
+        },
+        "school": "ミレニアムサイエンススクール",
+        "combat": {
+            "attackType": "貫通",
+            "defenseType": "軽装備"
+        },
+        "terrainAdaptation": {
+            "city": "B",
+            "outdoor": "S",
+            "indoor": "D"
+        }
+    },
+    {
+        "id": "6YirZ-c2",
+        "name": "ミドリ（メイド）",
+        "rarity": 3,
+        "weapon": {
+            "type": "SR",
+            "cover": true
+        },
+        "role": {
+            "type": "STRIKER",
+            "class": "アタッカー",
+            "position": "BACK"
+        },
+        "school": "ミレニアムサイエンススクール",
+        "combat": {
+            "attackType": "振動",
+            "defenseType": "軽装備"
+        },
+        "terrainAdaptation": {
+            "city": "D",
+            "outdoor": "S",
+            "indoor": "B"
+        }
+    },
+    {
+        "id": "wzcubVm8",
+        "name": "ミナ",
+        "rarity": 3,
+        "weapon": {
+            "type": "HG",
+            "cover": true
+        },
+        "role": {
+            "type": "STRIKER",
+            "class": "サポーター",
+            "position": "MIDDLE"
+        },
+        "school": "山海経高級中学校",
+        "combat": {
+            "attackType": "爆発",
+            "defenseType": "重装甲"
+        },
+        "terrainAdaptation": {
+            "city": "D",
+            "outdoor": "B",
+            "indoor": "S"
+        }
+    },
+    {
+        "id": "uGte4oVn",
+        "name": "ミネ",
+        "rarity": 3,
+        "weapon": {
+            "type": "SG",
+            "cover": false
+        },
+        "role": {
+            "type": "STRIKER",
+            "class": "タンク",
+            "position": "FRONT"
+        },
+        "school": "トリニティ総合学園",
+        "combat": {
+            "attackType": "爆発",
+            "defenseType": "軽装備"
+        },
+        "terrainAdaptation": {
+            "city": "B",
+            "outdoor": "S",
+            "indoor": "D"
+        }
+    },
+    {
+        "id": "9nGll8AL",
+        "name": "ミノリ",
+        "rarity": 3,
+        "weapon": {
+            "type": "AR",
+            "cover": false
+        },
+        "role": {
+            "type": "SPECIAL",
+            "class": "アタッカー",
+            "position": "BACK"
+        },
+        "school": "レッドウィンター連邦学園",
+        "combat": {
+            "attackType": "爆発",
+            "defenseType": "特殊装甲"
+        },
+        "terrainAdaptation": {
+            "city": "D",
+            "outdoor": "B",
+            "indoor": "S"
+        }
+    },
+    {
+        "id": "8iVZh8UP",
+        "name": "ミモリ",
+        "rarity": 3,
+        "weapon": {
+            "type": "HG",
+            "cover": true
+        },
+        "role": {
+            "type": "STRIKER",
+            "class": "サポーター",
+            "position": "MIDDLE"
+        },
+        "school": "百鬼夜行連合学院",
+        "combat": {
+            "attackType": "神秘",
+            "defenseType": "軽装備"
+        },
+        "terrainAdaptation": {
+            "city": "S",
+            "outdoor": "D",
+            "indoor": "B"
+        }
+    },
+    {
+        "id": "5uINtSx7",
+        "name": "ミモリ（水着）",
+        "rarity": 3,
+        "weapon": {
+            "type": "HG",
+            "cover": false
+        },
+        "role": {
+            "type": "SPECIAL",
+            "class": "サポーター",
+            "position": "BACK"
+        },
+        "school": "百鬼夜行連合学院",
+        "combat": {
+            "attackType": "神秘",
+            "defenseType": "特殊装甲"
+        },
+        "terrainAdaptation": {
+            "city": "B",
+            "outdoor": "D",
+            "indoor": "S"
+        }
+    },
+    {
+        "id": "lQ6hcDHQ",
+        "name": "ミヤコ",
+        "rarity": 3,
+        "weapon": {
+            "type": "SMG",
+            "cover": true
+        },
+        "role": {
+            "type": "STRIKER",
+            "class": "タンク",
+            "position": "FRONT"
+        },
+        "school": "SRT特殊学園",
+        "combat": {
+            "attackType": "貫通",
+            "defenseType": "重装甲"
+        },
+        "terrainAdaptation": {
+            "city": "S",
+            "outdoor": "D",
+            "indoor": "B"
+        }
+    },
+    {
+        "id": "UP1TMm_L",
+        "name": "ミヤコ（水着）",
+        "rarity": 3,
+        "weapon": {
+            "type": "SMG",
+            "cover": true
+        },
+        "role": {
+            "type": "STRIKER",
+            "class": "タンク",
+            "position": "FRONT"
+        },
+        "school": "SRT特殊学園",
+        "combat": {
+            "attackType": "爆発",
+            "defenseType": "重装甲"
+        },
+        "terrainAdaptation": {
+            "city": "D",
+            "outdoor": "B",
+            "indoor": "S"
+        }
+    },
+    {
+        "id": "TZlnc0GM",
+        "name": "ミユ",
+        "rarity": 3,
+        "weapon": {
+            "type": "SR",
+            "cover": true
+        },
+        "role": {
+            "type": "STRIKER",
+            "class": "サポーター",
+            "position": "BACK"
+        },
+        "school": "SRT特殊学園",
+        "combat": {
+            "attackType": "貫通",
+            "defenseType": "軽装備"
+        },
+        "terrainAdaptation": {
+            "city": "S",
+            "outdoor": "B",
+            "indoor": "D"
+        }
+    },
+    {
+        "id": "-s7-r1p9",
+        "name": "ミヨ",
+        "rarity": 3,
+        "weapon": {
+            "type": "SR",
+            "cover": true
+        },
+        "role": {
+            "type": "STRIKER",
+            "class": "サポーター",
+            "position": "BACK"
+        },
+        "school": "ワイルドハント芸術学院",
+        "combat": {
+            "attackType": "振動",
+            "defenseType": "弾力装甲"
+        },
+        "terrainAdaptation": {
+            "city": "S",
+            "outdoor": "D",
+            "indoor": "B"
+        }
+    },
+    {
+        "id": "95-e47yz",
+        "name": "ムツキ（正月）",
+        "rarity": 3,
+        "weapon": {
+            "type": "MG",
+            "cover": false
+        },
+        "role": {
+            "type": "STRIKER",
+            "class": "アタッカー",
+            "position": "BACK"
+        },
+        "school": "ゲヘナ学園",
+        "combat": {
+            "attackType": "神秘",
+            "defenseType": "重装甲"
+        },
+        "terrainAdaptation": {
+            "city": "D",
+            "outdoor": "S",
+            "indoor": "B"
+        }
+    },
+    {
+        "id": "tQbiFMvW",
+        "name": "メグ",
+        "rarity": 3,
+        "weapon": {
+            "type": "FT",
+            "cover": false
+        },
+        "role": {
+            "type": "STRIKER",
+            "class": "アタッカー",
+            "position": "FRONT"
+        },
+        "school": "ゲヘナ学園",
+        "combat": {
+            "attackType": "爆発",
+            "defenseType": "特殊装甲"
+        },
+        "terrainAdaptation": {
+            "city": "D",
+            "outdoor": "S",
+            "indoor": "B"
+        }
+    },
+    {
+        "id": "mvyFiJv6",
+        "name": "メル",
+        "rarity": 3,
+        "weapon": {
+            "type": "HG",
+            "cover": true
+        },
+        "role": {
+            "type": "STRIKER",
+            "class": "アタッカー",
+            "position": "MIDDLE"
+        },
+        "school": "レッドウィンター連邦学園",
+        "combat": {
+            "attackType": "貫通",
+            "defenseType": "軽装備"
+        },
+        "terrainAdaptation": {
+            "city": "B",
+            "outdoor": "S",
+            "indoor": "D"
+        }
+    },
+    {
+        "id": "iRM975S9",
+        "name": "モエ",
+        "rarity": 3,
+        "weapon": {
+            "type": "HG",
+            "cover": false
+        },
+        "role": {
+            "type": "SPECIAL",
+            "class": "アタッカー",
+            "position": "BACK"
+        },
+        "school": "SRT特殊学園",
+        "combat": {
+            "attackType": "貫通",
+            "defenseType": "軽装備"
+        },
+        "terrainAdaptation": {
+            "city": "D",
+            "outdoor": "B",
+            "indoor": "S"
+        }
+    },
+    {
+        "id": "8v1pUvr5",
+        "name": "モエ（水着）",
+        "rarity": 3,
+        "weapon": {
+            "type": "HG",
+            "cover": true
+        },
+        "role": {
+            "type": "STRIKER",
+            "class": "アタッカー",
+            "position": "MIDDLE"
+        },
+        "school": "SRT特殊学園",
+        "combat": {
+            "attackType": "振動",
+            "defenseType": "特殊装甲"
+        },
+        "terrainAdaptation": {
+            "city": "D",
+            "outdoor": "B",
+            "indoor": "S"
+        }
+    },
+    {
+        "id": "Ls78OgvP",
+        "name": "モモイ（メイド）",
+        "rarity": 3,
+        "weapon": {
+            "type": "AR",
+            "cover": true
+        },
+        "role": {
+            "type": "STRIKER",
+            "class": "アタッカー",
+            "position": "MIDDLE"
+        },
+        "school": "ミレニアムサイエンススクール",
+        "combat": {
+            "attackType": "振動",
+            "defenseType": "軽装備"
+        },
+        "terrainAdaptation": {
+            "city": "D",
+            "outdoor": "S",
+            "indoor": "B"
+        }
+    },
+    {
+        "id": "ptyTjz5d",
+        "name": "ユウカ（体操服）",
+        "rarity": 3,
+        "weapon": {
+            "type": "SMG",
+            "cover": true
+        },
+        "role": {
+            "type": "STRIKER",
+            "class": "タンク",
+            "position": "FRONT"
+        },
+        "school": "ミレニアムサイエンススクール",
+        "combat": {
+            "attackType": "神秘",
+            "defenseType": "特殊装甲"
+        },
+        "terrainAdaptation": {
+            "city": "B",
+            "outdoor": "D",
+            "indoor": "S"
+        }
+    },
+    {
+        "id": "mEszO1hG",
+        "name": "ユウカ（パジャマ）",
+        "rarity": 3,
+        "weapon": {
+            "type": "SMG",
+            "cover": true
+        },
+        "role": {
+            "type": "STRIKER",
+            "class": "タンク",
+            "position": "FRONT"
+        },
+        "school": "ミレニアムサイエンススクール",
+        "combat": {
+            "attackType": "爆発",
+            "defenseType": "重装甲"
+        },
+        "terrainAdaptation": {
+            "city": "D",
+            "outdoor": "S",
+            "indoor": "B"
+        }
+    },
+    {
+        "id": "nSVLDCqn",
+        "name": "ユカリ",
+        "rarity": 3,
+        "weapon": {
+            "type": "SR",
+            "cover": false
+        },
+        "role": {
+            "type": "STRIKER",
+            "class": "アタッカー",
+            "position": "BACK"
+        },
+        "school": "百鬼夜行連合学院",
+        "combat": {
+            "attackType": "振動",
+            "defenseType": "重装甲"
+        },
+        "terrainAdaptation": {
+            "city": "S",
+            "outdoor": "B",
+            "indoor": "D"
+        }
+    },
+    {
+        "id": "Kseli2ad",
+        "name": "ユカリ（水着）",
+        "rarity": 3,
+        "weapon": {
+            "type": "SR",
+            "cover": true
+        },
+        "role": {
+            "type": "STRIKER",
+            "class": "アタッカー",
+            "position": "BACK"
+        },
+        "school": "百鬼夜行連合学院",
+        "combat": {
+            "attackType": "貫通",
+            "defenseType": "軽装備"
+        },
+        "terrainAdaptation": {
+            "city": "D",
+            "outdoor": "B",
+            "indoor": "S"
+        }
+    },
+    {
+        "id": "-yQ7BQnH",
+        "name": "ユズ",
+        "rarity": 3,
+        "weapon": {
+            "type": "GL",
+            "cover": true
+        },
+        "role": {
+            "type": "STRIKER",
+            "class": "アタッカー",
+            "position": "MIDDLE"
+        },
+        "school": "ミレニアムサイエンススクール",
+        "combat": {
+            "attackType": "貫通",
+            "defenseType": "特殊装甲"
+        },
+        "terrainAdaptation": {
+            "city": "S",
+            "outdoor": "B",
+            "indoor": "D"
+        }
+    },
+    {
+        "id": "V1DkqYHx",
+        "name": "ヨシミ（バンド）",
+        "rarity": 3,
+        "weapon": {
+            "type": "AR",
+            "cover": true
+        },
+        "role": {
+            "type": "STRIKER",
+            "class": "アタッカー",
+            "position": "MIDDLE"
+        },
+        "school": "トリニティ総合学園",
+        "combat": {
+            "attackType": "爆発",
+            "defenseType": "特殊装甲"
+        },
+        "terrainAdaptation": {
+            "city": "B",
+            "outdoor": "S",
+            "indoor": "D"
+        }
+    },
+    {
+        "id": "rqWzMp_z",
+        "name": "リオ",
+        "rarity": 3,
+        "weapon": {
+            "type": "HG",
+            "cover": false
+        },
+        "role": {
+            "type": "SPECIAL",
+            "class": "サポーター",
+            "position": "BACK"
+        },
+        "school": "ミレニアムサイエンススクール",
+        "combat": {
+            "attackType": "神秘",
+            "defenseType": "弾力装甲"
+        },
+        "terrainAdaptation": {
+            "city": "A",
+            "outdoor": "D",
+            "indoor": "S"
+        }
+    },
+    {
+        "id": "195r47DW",
+        "name": "リツ",
+        "rarity": 3,
+        "weapon": {
+            "type": "SMG",
+            "cover": false
+        },
+        "role": {
+            "type": "SPECIAL",
+            "class": "サポーター",
+            "position": "BACK"
+        },
+        "school": "ワイルドハント芸術学院",
+        "combat": {
+            "attackType": "神秘",
+            "defenseType": "特殊装甲"
+        },
+        "terrainAdaptation": {
+            "city": "S",
+            "outdoor": "D",
+            "indoor": "B"
+        }
+    },
+    {
+        "id": "4ko5JdNi",
+        "name": "ルミ",
+        "rarity": 3,
+        "weapon": {
+            "type": "SMG",
+            "cover": true
+        },
+        "role": {
+            "type": "STRIKER",
+            "class": "ヒーラー",
+            "position": "FRONT"
+        },
+        "school": "山海経高級中学校",
+        "combat": {
+            "attackType": "爆発",
+            "defenseType": "重装甲"
+        },
+        "terrainAdaptation": {
+            "city": "C",
+            "outdoor": "C",
+            "indoor": "S"
+        }
+    },
+    {
+        "id": "d2o285zM",
+        "name": "レイ",
+        "rarity": 3,
+        "weapon": {
+            "type": "RL",
+            "cover": true
+        },
+        "role": {
+            "type": "STRIKER",
+            "class": "アタッカー",
+            "position": "BACK"
+        },
+        "school": "ミレニアムサイエンススクール",
+        "combat": {
+            "attackType": "振動",
+            "defenseType": "軽装備"
+        },
+        "terrainAdaptation": {
+            "city": "B",
+            "outdoor": "D",
+            "indoor": "S"
+        }
+    },
+    {
+        "id": "rDfDEU8H",
+        "name": "レイサ",
+        "rarity": 3,
+        "weapon": {
+            "type": "SG",
+            "cover": false
+        },
+        "role": {
+            "type": "STRIKER",
+            "class": "タンク",
+            "position": "FRONT"
+        },
+        "school": "トリニティ総合学園",
+        "combat": {
+            "attackType": "貫通",
+            "defenseType": "重装甲"
+        },
+        "terrainAdaptation": {
+            "city": "D",
+            "outdoor": "B",
+            "indoor": "S"
+        }
+    },
+    {
+        "id": "CQh2Jwx7",
+        "name": "レイジョ",
+        "rarity": 3,
+        "weapon": {
+            "type": "AR",
+            "cover": true
+        },
+        "role": {
+            "type": "STRIKER",
+            "class": "サポーター",
+            "position": "MIDDLE"
+        },
+        "school": "山海経高級中学校",
+        "combat": {
+            "attackType": "神秘",
+            "defenseType": "重装甲"
+        },
+        "terrainAdaptation": {
+            "city": "D",
+            "outdoor": "S",
+            "indoor": "B"
+        }
+    },
+    {
+        "id": "MK--yUdW",
+        "name": "レンゲ",
+        "rarity": 3,
+        "weapon": {
+            "type": "SR",
+            "cover": true
+        },
+        "role": {
+            "type": "STRIKER",
+            "class": "アタッカー",
+            "position": "BACK"
+        },
+        "school": "百鬼夜行連合学院",
+        "combat": {
+            "attackType": "振動",
+            "defenseType": "重装甲"
+        },
+        "terrainAdaptation": {
+            "city": "S",
+            "outdoor": "B",
+            "indoor": "D"
+        }
+    },
+    {
+        "id": "y2R25Xpn",
+        "name": "ワカモ",
+        "rarity": 3,
+        "weapon": {
+            "type": "SR",
+            "cover": true
+        },
+        "role": {
+            "type": "STRIKER",
+            "class": "アタッカー",
+            "position": "BACK"
+        },
+        "school": "百鬼夜行連合学院",
+        "combat": {
+            "attackType": "神秘",
+            "defenseType": "軽装備"
+        },
+        "terrainAdaptation": {
+            "city": "A",
+            "outdoor": "D",
+            "indoor": "S"
+        }
+    },
+    {
+        "id": "p0CeJT4-",
+        "name": "ワカモ（水着）",
+        "rarity": 3,
+        "weapon": {
+            "type": "SR",
+            "cover": true
+        },
+        "role": {
+            "type": "STRIKER",
+            "class": "アタッカー",
+            "position": "BACK"
+        },
+        "school": "百鬼夜行連合学院",
+        "combat": {
+            "attackType": "貫通",
+            "defenseType": "重装甲"
+        },
+        "terrainAdaptation": {
+            "city": "S",
+            "outdoor": "D",
+            "indoor": "B"
+        }
+    },
+    {
+        "id": "glxvYG7O",
+        "name": "御坂美琴",
+        "rarity": 3,
+        "weapon": {
+            "type": "AR",
+            "cover": true
+        },
+        "role": {
+            "type": "STRIKER",
+            "class": "アタッカー",
+            "position": "MIDDLE"
+        },
+        "school": "常盤台中学",
+        "combat": {
+            "attackType": "貫通",
+            "defenseType": "重装甲"
+        },
+        "terrainAdaptation": {
+            "city": "D",
+            "outdoor": "S",
+            "indoor": "B"
+        }
+    },
+    {
+        "id": "poXTD7Vj",
+        "name": "初音ミク",
+        "rarity": 3,
+        "weapon": {
+            "type": "GL",
+            "cover": false
+        },
+        "role": {
+            "type": "SPECIAL",
+            "class": "サポーター",
+            "position": "BACK"
+        },
+        "school": "その他",
+        "combat": {
+            "attackType": "爆発",
+            "defenseType": "軽装備"
+        },
+        "terrainAdaptation": {
+            "city": "S",
+            "outdoor": "D",
+            "indoor": "B"
+        }
+    },
+    {
+        "id": "quiGE8sJ",
+        "name": "食蜂操祈",
+        "rarity": 3,
+        "weapon": {
+            "type": "HG",
+            "cover": true
+        },
+        "role": {
+            "type": "STRIKER",
+            "class": "サポーター",
+            "position": "MIDDLE"
+        },
+        "school": "常盤台中学",
+        "combat": {
+            "attackType": "爆発",
+            "defenseType": "重装甲"
+        },
+        "terrainAdaptation": {
+            "city": "S",
+            "outdoor": "C",
+            "indoor": "C"
+        }
+    },
+    {
+        "id": "1VgJtY6W",
+        "name": "アイリ",
+        "rarity": 2,
+        "weapon": {
+            "type": "SMG",
+            "cover": false
+        },
+        "role": {
+            "type": "SPECIAL",
+            "class": "サポーター",
+            "position": "BACK"
+        },
+        "school": "トリニティ総合学園",
+        "combat": {
+            "attackType": "爆発",
+            "defenseType": "軽装備"
+        },
+        "terrainAdaptation": {
+            "city": "A",
+            "outdoor": "D",
+            "indoor": "A"
+        }
+    },
+    {
+        "id": "xNQQBhTu",
+        "name": "アカネ",
+        "rarity": 2,
+        "weapon": {
+            "type": "HG",
+            "cover": true
+        },
+        "role": {
+            "type": "STRIKER",
+            "class": "サポーター",
+            "position": "MIDDLE"
+        },
+        "school": "ミレニアムサイエンススクール",
+        "combat": {
+            "attackType": "貫通",
+            "defenseType": "軽装備"
+        },
+        "terrainAdaptation": {
+            "city": "A",
+            "outdoor": "A",
+            "indoor": "D"
+        }
+    },
+    {
+        "id": "we6-hS4D",
+        "name": "アカリ",
+        "rarity": 2,
+        "weapon": {
+            "type": "AR",
+            "cover": true
+        },
+        "role": {
+            "type": "STRIKER",
+            "class": "アタッカー",
+            "position": "MIDDLE"
+        },
+        "school": "ゲヘナ学園",
+        "combat": {
+            "attackType": "爆発",
+            "defenseType": "重装甲"
+        },
+        "terrainAdaptation": {
+            "city": "A",
+            "outdoor": "B",
+            "indoor": "B"
+        }
+    },
+    {
+        "id": "JkXBEG6W",
+        "name": "アヤネ",
+        "rarity": 2,
+        "weapon": {
+            "type": "HG",
+            "cover": false
+        },
+        "role": {
+            "type": "SPECIAL",
+            "class": "ヒーラー",
+            "position": "BACK"
+        },
+        "school": "アビドス高等学校",
+        "combat": {
+            "attackType": "貫通",
+            "defenseType": "軽装備"
+        },
+        "terrainAdaptation": {
+            "city": "D",
+            "outdoor": "A",
+            "indoor": "A"
+        }
+    },
+    {
+        "id": "oLOfsS8a",
+        "name": "ウタハ",
+        "rarity": 2,
+        "weapon": {
+            "type": "SMG",
+            "cover": false
+        },
+        "role": {
+            "type": "SPECIAL",
+            "class": "アタッカー",
+            "position": "BACK"
+        },
+        "school": "ミレニアムサイエンススクール",
+        "combat": {
+            "attackType": "貫通",
+            "defenseType": "重装甲"
+        },
+        "terrainAdaptation": {
+            "city": "A",
+            "outdoor": "D",
+            "indoor": "A"
+        }
+    },
+    {
+        "id": "bQp4RIkQ",
+        "name": "カヨコ",
+        "rarity": 2,
+        "weapon": {
+            "type": "HG",
+            "cover": true
+        },
+        "role": {
+            "type": "STRIKER",
+            "class": "サポーター",
+            "position": "MIDDLE"
+        },
+        "school": "ゲヘナ学園",
+        "combat": {
+            "attackType": "爆発",
+            "defenseType": "重装甲"
+        },
+        "terrainAdaptation": {
+            "city": "A",
+            "outdoor": "D",
+            "indoor": "A"
+        }
+    },
+    {
+        "id": "OxiSF7JJ",
+        "name": "キリノ",
+        "rarity": 2,
+        "weapon": {
+            "type": "HG",
+            "cover": true
+        },
+        "role": {
+            "type": "STRIKER",
+            "class": "サポーター",
+            "position": "MIDDLE"
+        },
+        "school": "ヴァルキューレ警察学校",
+        "combat": {
+            "attackType": "爆発",
+            "defenseType": "特殊装甲"
+        },
+        "terrainAdaptation": {
+            "city": "D",
+            "outdoor": "A",
+            "indoor": "A"
+        }
+    },
+    {
+        "id": "1BqZW06s",
+        "name": "シズコ",
+        "rarity": 2,
+        "weapon": {
+            "type": "SG",
+            "cover": false
+        },
+        "role": {
+            "type": "SPECIAL",
+            "class": "サポーター",
+            "position": "BACK"
+        },
+        "school": "百鬼夜行連合学院",
+        "combat": {
+            "attackType": "神秘",
+            "defenseType": "特殊装甲"
+        },
+        "terrainAdaptation": {
+            "city": "A",
+            "outdoor": "A",
+            "indoor": "B"
+        }
+    },
+    {
+        "id": "9krXS06H",
+        "name": "ジュンコ",
+        "rarity": 2,
+        "weapon": {
+            "type": "AR",
+            "cover": true
+        },
+        "role": {
+            "type": "STRIKER",
+            "class": "アタッカー",
+            "position": "MIDDLE"
+        },
+        "school": "ゲヘナ学園",
+        "combat": {
+            "attackType": "貫通",
+            "defenseType": "軽装備"
+        },
+        "terrainAdaptation": {
+            "city": "B",
+            "outdoor": "A",
+            "indoor": "B"
+        }
+    },
+    {
+        "id": "saNstsxM",
+        "name": "セリカ",
+        "rarity": 2,
+        "weapon": {
+            "type": "AR",
+            "cover": true
+        },
+        "role": {
+            "type": "STRIKER",
+            "class": "アタッカー",
+            "position": "MIDDLE"
+        },
+        "school": "アビドス高等学校",
+        "combat": {
+            "attackType": "爆発",
+            "defenseType": "軽装備"
+        },
+        "terrainAdaptation": {
+            "city": "A",
+            "outdoor": "D",
+            "indoor": "A"
+        }
+    },
+    {
+        "id": "-kcNIhyq",
+        "name": "チセ",
+        "rarity": 2,
+        "weapon": {
+            "type": "GL",
+            "cover": true
+        },
+        "role": {
+            "type": "STRIKER",
+            "class": "アタッカー",
+            "position": "MIDDLE"
+        },
+        "school": "百鬼夜行連合学院",
+        "combat": {
+            "attackType": "神秘",
+            "defenseType": "重装甲"
+        },
+        "terrainAdaptation": {
+            "city": "A",
+            "outdoor": "D",
+            "indoor": "A"
+        }
+    },
+    {
+        "id": "iD7077iE",
+        "name": "ツバキ",
+        "rarity": 2,
+        "weapon": {
+            "type": "SMG",
+            "cover": false
+        },
+        "role": {
+            "type": "STRIKER",
+            "class": "タンク",
+            "position": "FRONT"
+        },
+        "school": "百鬼夜行連合学院",
+        "combat": {
+            "attackType": "貫通",
+            "defenseType": "特殊装甲"
+        },
+        "terrainAdaptation": {
+            "city": "A",
+            "outdoor": "A",
+            "indoor": "D"
+        }
+    },
+    {
+        "id": "4fwqHMG8",
+        "name": "ノノミ",
+        "rarity": 2,
+        "weapon": {
+            "type": "MG",
+            "cover": false
+        },
+        "role": {
+            "type": "STRIKER",
+            "class": "アタッカー",
+            "position": "BACK"
+        },
+        "school": "アビドス高等学校",
+        "combat": {
+            "attackType": "貫通",
+            "defenseType": "軽装備"
+        },
+        "terrainAdaptation": {
+            "city": "A",
+            "outdoor": "A",
+            "indoor": "D"
+        }
+    },
+    {
+        "id": "fxSbIwqx",
+        "name": "ハスミ",
+        "rarity": 2,
+        "weapon": {
+            "type": "SR",
+            "cover": true
+        },
+        "role": {
+            "type": "STRIKER",
+            "class": "アタッカー",
+            "position": "BACK"
+        },
+        "school": "トリニティ総合学園",
+        "combat": {
+            "attackType": "貫通",
+            "defenseType": "重装甲"
+        },
+        "terrainAdaptation": {
+            "city": "B",
+            "outdoor": "A",
+            "indoor": "B"
+        }
+    },
+    {
+        "id": "WDEcJeJC",
+        "name": "ハナエ",
+        "rarity": 2,
+        "weapon": {
+            "type": "AR",
+            "cover": false
+        },
+        "role": {
+            "type": "SPECIAL",
+            "class": "ヒーラー",
+            "position": "BACK"
+        },
+        "school": "トリニティ総合学園",
+        "combat": {
+            "attackType": "爆発",
+            "defenseType": "重装甲"
+        },
+        "terrainAdaptation": {
+            "city": "A",
+            "outdoor": "D",
+            "indoor": "A"
+        }
+    },
+    {
+        "id": "xvoyfPo_",
+        "name": "ハナコ",
+        "rarity": 2,
+        "weapon": {
+            "type": "AR",
+            "cover": false
+        },
+        "role": {
+            "type": "SPECIAL",
+            "class": "ヒーラー",
+            "position": "BACK"
+        },
+        "school": "トリニティ総合学園",
+        "combat": {
+            "attackType": "貫通",
+            "defenseType": "特殊装甲"
+        },
+        "terrainAdaptation": {
+            "city": "A",
+            "outdoor": "D",
+            "indoor": "A"
+        }
+    },
+    {
+        "id": "x0Imtapp",
+        "name": "ハレ",
+        "rarity": 2,
+        "weapon": {
+            "type": "AR",
+            "cover": false
+        },
+        "role": {
+            "type": "SPECIAL",
+            "class": "サポーター",
+            "position": "BACK"
+        },
+        "school": "ミレニアムサイエンススクール",
+        "combat": {
+            "attackType": "爆発",
+            "defenseType": "軽装備"
+        },
+        "terrainAdaptation": {
+            "city": "A",
+            "outdoor": "B",
+            "indoor": "B"
+        }
+    },
+    {
+        "id": "RSPDI4Hv",
+        "name": "フウカ",
+        "rarity": 2,
+        "weapon": {
+            "type": "SMG",
+            "cover": false
+        },
+        "role": {
+            "type": "SPECIAL",
+            "class": "ヒーラー",
+            "position": "BACK"
+        },
+        "school": "ゲヘナ学園",
+        "combat": {
+            "attackType": "爆発",
+            "defenseType": "重装甲"
+        },
+        "terrainAdaptation": {
+            "city": "A",
+            "outdoor": "A",
+            "indoor": "C"
+        }
+    },
+    {
+        "id": "de128qDL",
+        "name": "マリー",
+        "rarity": 2,
+        "weapon": {
+            "type": "HG",
+            "cover": false
+        },
+        "role": {
+            "type": "SPECIAL",
+            "class": "サポーター",
+            "position": "BACK"
+        },
+        "school": "トリニティ総合学園",
+        "combat": {
+            "attackType": "神秘",
+            "defenseType": "特殊装甲"
+        },
+        "terrainAdaptation": {
+            "city": "D",
+            "outdoor": "A",
+            "indoor": "A"
+        }
+    },
+    {
+        "id": "-S8Eb5Ra",
+        "name": "ムツキ",
+        "rarity": 2,
+        "weapon": {
+            "type": "MG",
+            "cover": false
+        },
+        "role": {
+            "type": "STRIKER",
+            "class": "アタッカー",
+            "position": "BACK"
+        },
+        "school": "ゲヘナ学園",
+        "combat": {
+            "attackType": "爆発",
+            "defenseType": "軽装備"
+        },
+        "terrainAdaptation": {
+            "city": "A",
+            "outdoor": "A",
+            "indoor": "D"
+        }
+    },
+    {
+        "id": "0nhfR9JH",
+        "name": "モミジ",
+        "rarity": 2,
+        "weapon": {
+            "type": "RL",
+            "cover": true
+        },
+        "role": {
+            "type": "STRIKER",
+            "class": "アタッカー",
+            "position": "BACK"
+        },
+        "school": "レッドウィンター連邦学園",
+        "combat": {
+            "attackType": "振動",
+            "defenseType": "重装甲"
+        },
+        "terrainAdaptation": {
+            "city": "A",
+            "outdoor": "A",
+            "indoor": "D"
+        }
+    },
+    {
+        "id": "YzPRdabJ",
+        "name": "モモイ",
+        "rarity": 2,
+        "weapon": {
+            "type": "AR",
+            "cover": true
+        },
+        "role": {
+            "type": "STRIKER",
+            "class": "アタッカー",
+            "position": "MIDDLE"
+        },
+        "school": "ミレニアムサイエンススクール",
+        "combat": {
+            "attackType": "貫通",
+            "defenseType": "軽装備"
+        },
+        "terrainAdaptation": {
+            "city": "A",
+            "outdoor": "A",
+            "indoor": "D"
+        }
+    },
+    {
+        "id": "0nG8r-9I",
+        "name": "ユウカ",
+        "rarity": 2,
+        "weapon": {
+            "type": "SMG",
+            "cover": true
+        },
+        "role": {
+            "type": "STRIKER",
+            "class": "タンク",
+            "position": "FRONT"
+        },
+        "school": "ミレニアムサイエンススクール",
+        "combat": {
+            "attackType": "爆発",
+            "defenseType": "重装甲"
+        },
+        "terrainAdaptation": {
+            "city": "B",
+            "outdoor": "B",
+            "indoor": "A"
+        }
+    },
+    {
+        "id": "XBQ-Y2I7",
+        "name": "レンゲ（水着）",
+        "rarity": 2,
+        "weapon": {
+            "type": "SR",
+            "cover": true
+        },
+        "role": {
+            "type": "STRIKER",
+            "class": "アタッカー",
+            "position": "BACK"
+        },
+        "school": "百鬼夜行連合学院",
+        "combat": {
+            "attackType": "振動",
+            "defenseType": "特殊装甲"
+        },
+        "terrainAdaptation": {
+            "city": "A",
+            "outdoor": "B",
+            "indoor": "C"
+        }
+    },
+    {
+        "id": "2lgFv8tS",
+        "name": "アイリ（バンド）",
+        "rarity": 1,
+        "weapon": {
+            "type": "SMG",
+            "cover": true
+        },
+        "role": {
+            "type": "STRIKER",
+            "class": "アタッカー",
+            "position": "FRONT"
+        },
+        "school": "トリニティ総合学園",
+        "combat": {
+            "attackType": "爆発",
+            "defenseType": "特殊装甲"
+        },
+        "terrainAdaptation": {
+            "city": "B",
+            "outdoor": "A",
+            "indoor": "D"
+        }
+    },
+    {
+        "id": "Kdkb8Be4",
+        "name": "アオバ",
+        "rarity": 1,
+        "weapon": {
+            "type": "SG",
+            "cover": false
+        },
+        "role": {
+            "type": "STRIKER",
+            "class": "タンク",
+            "position": "FRONT"
+        },
+        "school": "ハイランダー鉄道学園",
+        "combat": {
+            "attackType": "振動",
+            "defenseType": "軽装備"
+        },
+        "terrainAdaptation": {
+            "city": "B",
+            "outdoor": "C",
+            "indoor": "A"
+        }
+    },
+    {
+        "id": "DxWR7pnC",
+        "name": "アスナ",
+        "rarity": 1,
+        "weapon": {
+            "type": "AR",
+            "cover": true
+        },
+        "role": {
+            "type": "STRIKER",
+            "class": "アタッカー",
+            "position": "MIDDLE"
+        },
+        "school": "ミレニアムサイエンススクール",
+        "combat": {
+            "attackType": "神秘",
+            "defenseType": "軽装備"
+        },
+        "terrainAdaptation": {
+            "city": "B",
+            "outdoor": "B",
+            "indoor": "B"
+        }
+    },
+    {
+        "id": "6gzm-yiy",
+        "name": "アツコ（水着）",
+        "rarity": 1,
+        "weapon": {
+            "type": "SMG",
+            "cover": false
+        },
+        "role": {
+            "type": "SPECIAL",
+            "class": "ヒーラー",
+            "position": "BACK"
+        },
+        "school": "アリウス分校",
+        "combat": {
+            "attackType": "振動",
+            "defenseType": "特殊装甲"
+        },
+        "terrainAdaptation": {
+            "city": "B",
+            "outdoor": "B",
+            "indoor": "B"
+        }
+    },
+    {
+        "id": "3te_5_Xw",
+        "name": "アヤネ（水着）",
+        "rarity": 1,
+        "weapon": {
+            "type": "HG",
+            "cover": false
+        },
+        "role": {
+            "type": "SPECIAL",
+            "class": "T.S",
+            "position": "BACK"
+        },
+        "school": "アビドス高等学校",
+        "combat": {
+            "attackType": "貫通",
+            "defenseType": "軽装備"
+        },
+        "terrainAdaptation": {
+            "city": "C",
+            "outdoor": "A",
+            "indoor": "B"
+        }
+    },
+    {
+        "id": "JbROdtAj",
+        "name": "イズミ（水着）",
+        "rarity": 1,
+        "weapon": {
+            "type": "MG",
+            "cover": false
+        },
+        "role": {
+            "type": "STRIKER",
+            "class": "サポーター",
+            "position": "BACK"
+        },
+        "school": "ゲヘナ学園",
+        "combat": {
+            "attackType": "爆発",
+            "defenseType": "軽装備"
+        },
+        "terrainAdaptation": {
+            "city": "B",
+            "outdoor": "A",
+            "indoor": "C"
+        }
+    },
+    {
+        "id": "EpvfF6Pa",
+        "name": "イチカ（水着）",
+        "rarity": 1,
+        "weapon": {
+            "type": "AR",
+            "cover": false
+        },
+        "role": {
+            "type": "SPECIAL",
+            "class": "サポーター",
+            "position": "BACK"
+        },
+        "school": "トリニティ総合学園",
+        "combat": {
+            "attackType": "振動",
+            "defenseType": "特殊装甲"
+        },
+        "terrainAdaptation": {
+            "city": "A",
+            "outdoor": "B",
+            "indoor": "C"
+        }
+    },
+    {
+        "id": "vQPoOnJY",
+        "name": "イブキ",
+        "rarity": 1,
+        "weapon": {
+            "type": "AR",
+            "cover": true
+        },
+        "role": {
+            "type": "STRIKER",
+            "class": "サポーター",
+            "position": "MIDDLE"
+        },
+        "school": "ゲヘナ学園",
+        "combat": {
+            "attackType": "神秘",
+            "defenseType": "重装甲"
+        },
+        "terrainAdaptation": {
+            "city": "C",
+            "outdoor": "B",
+            "indoor": "A"
+        }
+    },
+    {
+        "id": "F5zpdxGj",
+        "name": "カリン（制服）",
+        "rarity": 1,
+        "weapon": {
+            "type": "SR",
+            "cover": false
+        },
+        "role": {
+            "type": "SPECIAL",
+            "class": "アタッカー",
+            "position": "BACK"
+        },
+        "school": "ミレニアムサイエンススクール",
+        "combat": {
+            "attackType": "爆発",
+            "defenseType": "重装甲"
+        },
+        "terrainAdaptation": {
+            "city": "B",
+            "outdoor": "A",
+            "indoor": "C"
+        }
+    },
+    {
+        "id": "DzkUvlMO",
+        "name": "キリノ（水着）",
+        "rarity": 1,
+        "weapon": {
+            "type": "HG",
+            "cover": false
+        },
+        "role": {
+            "type": "SPECIAL",
+            "class": "サポーター",
+            "position": "BACK"
+        },
+        "school": "ヴァルキューレ警察学校",
+        "combat": {
+            "attackType": "神秘",
+            "defenseType": "重装甲"
+        },
+        "terrainAdaptation": {
+            "city": "B",
+            "outdoor": "B",
+            "indoor": "B"
+        }
+    },
+    {
+        "id": "Zu-LXd4C",
+        "name": "コタマ",
+        "rarity": 1,
+        "weapon": {
+            "type": "HG",
+            "cover": false
+        },
+        "role": {
+            "type": "SPECIAL",
+            "class": "サポーター",
+            "position": "BACK"
+        },
+        "school": "ミレニアムサイエンススクール",
+        "combat": {
+            "attackType": "爆発",
+            "defenseType": "軽装備"
+        },
+        "terrainAdaptation": {
+            "city": "A",
+            "outdoor": "C",
+            "indoor": "B"
+        }
+    },
+    {
+        "id": "_eJAgesU",
+        "name": "コトリ",
+        "rarity": 1,
+        "weapon": {
+            "type": "MG",
+            "cover": false
+        },
+        "role": {
+            "type": "STRIKER",
+            "class": "サポーター",
+            "position": "BACK"
+        },
+        "school": "ミレニアムサイエンススクール",
+        "combat": {
+            "attackType": "貫通",
+            "defenseType": "軽装備"
+        },
+        "terrainAdaptation": {
+            "city": "B",
+            "outdoor": "B",
+            "indoor": "B"
+        }
+    },
+    {
+        "id": "ktKGGgFz",
+        "name": "コハル（水着）",
+        "rarity": 1,
+        "weapon": {
+            "type": "SR",
+            "cover": true
+        },
+        "role": {
+            "type": "STRIKER",
+            "class": "アタッカー",
+            "position": "BACK"
+        },
+        "school": "トリニティ総合学園",
+        "combat": {
+            "attackType": "神秘",
+            "defenseType": "重装甲"
+        },
+        "terrainAdaptation": {
+            "city": "B",
+            "outdoor": "B",
+            "indoor": "B"
+        }
+    },
+    {
+        "id": "-LoPEBAy",
+        "name": "シズコ（水着）",
+        "rarity": 1,
+        "weapon": {
+            "type": "SG",
+            "cover": false
+        },
+        "role": {
+            "type": "SPECIAL",
+            "class": "サポーター",
+            "position": "BACK"
+        },
+        "school": "百鬼夜行連合学院",
+        "combat": {
+            "attackType": "神秘",
+            "defenseType": "重装甲"
+        },
+        "terrainAdaptation": {
+            "city": "B",
+            "outdoor": "B",
+            "indoor": "B"
+        }
+    },
+    {
+        "id": "C0dQffN9",
+        "name": "シミコ",
+        "rarity": 1,
+        "weapon": {
+            "type": "AR",
+            "cover": false
+        },
+        "role": {
+            "type": "SPECIAL",
+            "class": "サポーター",
+            "position": "BACK"
+        },
+        "school": "トリニティ総合学園",
+        "combat": {
+            "attackType": "爆発",
+            "defenseType": "軽装備"
+        },
+        "terrainAdaptation": {
+            "city": "C",
+            "outdoor": "A",
+            "indoor": "B"
+        }
+    },
+    {
+        "id": "VxvDDsqX",
+        "name": "ジュリ",
+        "rarity": 1,
+        "weapon": {
+            "type": "SG",
+            "cover": false
+        },
+        "role": {
+            "type": "SPECIAL",
+            "class": "サポーター",
+            "position": "BACK"
+        },
+        "school": "ゲヘナ学園",
+        "combat": {
+            "attackType": "爆発",
+            "defenseType": "軽装備"
+        },
+        "terrainAdaptation": {
+            "city": "C",
+            "outdoor": "B",
+            "indoor": "A"
+        }
+    },
+    {
+        "id": "OprD8Tip",
+        "name": "ジュンコ（正月）",
+        "rarity": 1,
+        "weapon": {
+            "type": "AR",
+            "cover": true
+        },
+        "role": {
+            "type": "STRIKER",
+            "class": "アタッカー",
+            "position": "MIDDLE"
+        },
+        "school": "ゲヘナ学園",
+        "combat": {
+            "attackType": "神秘",
+            "defenseType": "重装甲"
+        },
+        "terrainAdaptation": {
+            "city": "B",
+            "outdoor": "B",
+            "indoor": "B"
+        }
+    },
+    {
+        "id": "fAOlN9Sn",
+        "name": "スズミ",
+        "rarity": 1,
+        "weapon": {
+            "type": "AR",
+            "cover": true
+        },
+        "role": {
+            "type": "STRIKER",
+            "class": "サポーター",
+            "position": "MIDDLE"
+        },
+        "school": "トリニティ総合学園",
+        "combat": {
+            "attackType": "爆発",
+            "defenseType": "重装甲"
+        },
+        "terrainAdaptation": {
+            "city": "B",
+            "outdoor": "B",
+            "indoor": "B"
+        }
+    },
+    {
+        "id": "Kah_k6N_",
+        "name": "セリナ",
+        "rarity": 1,
+        "weapon": {
+            "type": "AR",
+            "cover": false
+        },
+        "role": {
+            "type": "SPECIAL",
+            "class": "ヒーラー",
+            "position": "BACK"
+        },
+        "school": "トリニティ総合学園",
+        "combat": {
+            "attackType": "神秘",
+            "defenseType": "軽装備"
+        },
+        "terrainAdaptation": {
+            "city": "A",
+            "outdoor": "C",
+            "indoor": "B"
+        }
+    },
+    {
+        "id": "oJ7fw8zj",
+        "name": "チナツ",
+        "rarity": 1,
+        "weapon": {
+            "type": "HG",
+            "cover": false
+        },
+        "role": {
+            "type": "SPECIAL",
+            "class": "ヒーラー",
+            "position": "BACK"
+        },
+        "school": "ゲヘナ学園",
+        "combat": {
+            "attackType": "貫通",
+            "defenseType": "軽装備"
+        },
+        "terrainAdaptation": {
+            "city": "B",
+            "outdoor": "B",
+            "indoor": "B"
+        }
+    },
+    {
+        "id": "B_RbIPJD",
+        "name": "ツルギ（水着）",
+        "rarity": 1,
+        "weapon": {
+            "type": "SG",
+            "cover": false
+        },
+        "role": {
+            "type": "STRIKER",
+            "class": "アタッカー",
+            "position": "FRONT"
+        },
+        "school": "トリニティ総合学園",
+        "combat": {
+            "attackType": "神秘",
+            "defenseType": "特殊装甲"
+        },
+        "terrainAdaptation": {
+            "city": "B",
+            "outdoor": "C",
+            "indoor": "A"
+        }
+    },
+    {
+        "id": "Xl-leg5J",
+        "name": "トモエ",
+        "rarity": 1,
+        "weapon": {
+            "type": "SR",
+            "cover": true
+        },
+        "role": {
+            "type": "STRIKER",
+            "class": "サポーター",
+            "position": "BACK"
+        },
+        "school": "レッドウィンター連邦学園",
+        "combat": {
+            "attackType": "貫通",
+            "defenseType": "特殊装甲"
+        },
+        "terrainAdaptation": {
+            "city": "C",
+            "outdoor": "B",
+            "indoor": "A"
+        }
+    },
+    {
+        "id": "LfNhjh0T",
+        "name": "ノドカ",
+        "rarity": 1,
+        "weapon": {
+            "type": "SMG",
+            "cover": false
+        },
+        "role": {
+            "type": "SPECIAL",
+            "class": "サポーター",
+            "position": "BACK"
+        },
+        "school": "レッドウィンター連邦学園",
+        "combat": {
+            "attackType": "爆発",
+            "defenseType": "重装甲"
+        },
+        "terrainAdaptation": {
+            "city": "B",
+            "outdoor": "B",
+            "indoor": "B"
+        }
+    },
+    {
+        "id": "Voe82AsV",
+        "name": "ハスミ（体操服）",
+        "rarity": 1,
+        "weapon": {
+            "type": "SR",
+            "cover": true
+        },
+        "role": {
+            "type": "STRIKER",
+            "class": "アタッカー",
+            "position": "BACK"
+        },
+        "school": "トリニティ総合学園",
+        "combat": {
+            "attackType": "神秘",
+            "defenseType": "特殊装甲"
+        },
+        "terrainAdaptation": {
+            "city": "B",
+            "outdoor": "C",
+            "indoor": "A"
+        }
+    },
+    {
+        "id": "bWdz9r5L",
+        "name": "ハルカ",
+        "rarity": 1,
+        "weapon": {
+            "type": "SG",
+            "cover": false
+        },
+        "role": {
+            "type": "STRIKER",
+            "class": "タンク",
+            "position": "FRONT"
+        },
+        "school": "ゲヘナ学園",
+        "combat": {
+            "attackType": "爆発",
+            "defenseType": "軽装備"
+        },
+        "terrainAdaptation": {
+            "city": "C",
+            "outdoor": "B",
+            "indoor": "A"
+        }
+    },
+    {
+        "id": "smWsUtpl",
+        "name": "ヒビキ（応援団）",
+        "rarity": 1,
+        "weapon": {
+            "type": "MT",
+            "cover": false
+        },
+        "role": {
+            "type": "STRIKER",
+            "class": "アタッカー",
+            "position": "BACK"
+        },
+        "school": "ミレニアムサイエンススクール",
+        "combat": {
+            "attackType": "爆発",
+            "defenseType": "軽装備"
+        },
+        "terrainAdaptation": {
+            "city": "B",
+            "outdoor": "C",
+            "indoor": "A"
+        }
+    },
+    {
+        "id": "7ev-oDW0",
+        "name": "フィーナ",
+        "rarity": 1,
+        "weapon": {
+            "type": "MG",
+            "cover": false
+        },
+        "role": {
+            "type": "STRIKER",
+            "class": "アタッカー",
+            "position": "BACK"
+        },
+        "school": "百鬼夜行連合学院",
+        "combat": {
+            "attackType": "貫通",
+            "defenseType": "軽装備"
+        },
+        "terrainAdaptation": {
+            "city": "A",
+            "outdoor": "B",
+            "indoor": "C"
+        }
+    },
+    {
+        "id": "aJ8s0JHb",
+        "name": "フブキ",
+        "rarity": 1,
+        "weapon": {
+            "type": "SR",
+            "cover": true
+        },
+        "role": {
+            "type": "STRIKER",
+            "class": "アタッカー",
+            "position": "BACK"
+        },
+        "school": "ヴァルキューレ警察学校",
+        "combat": {
+            "attackType": "貫通",
+            "defenseType": "重装甲"
+        },
+        "terrainAdaptation": {
+            "city": "A",
+            "outdoor": "B",
+            "indoor": "C"
+        }
+    },
+    {
+        "id": "v3C1Mr3f",
+        "name": "ミチル",
+        "rarity": 1,
+        "weapon": {
+            "type": "SG",
+            "cover": false
+        },
+        "role": {
+            "type": "STRIKER",
+            "class": "アタッカー",
+            "position": "FRONT"
+        },
+        "school": "百鬼夜行連合学院",
+        "combat": {
+            "attackType": "神秘",
+            "defenseType": "軽装備"
+        },
+        "terrainAdaptation": {
+            "city": "B",
+            "outdoor": "B",
+            "indoor": "B"
+        }
+    },
+    {
+        "id": "V-L0obA5",
+        "name": "ミネ（アイドル）",
+        "rarity": 1,
+        "weapon": {
+            "type": "SG",
+            "cover": false
+        },
+        "role": {
+            "type": "STRIKER",
+            "class": "タンク",
+            "position": "FRONT"
+        },
+        "school": "トリニティ総合学園",
+        "combat": {
+            "attackType": "爆発",
+            "defenseType": "重装甲"
+        },
+        "terrainAdaptation": {
+            "city": "B",
+            "outdoor": "B",
+            "indoor": "B"
+        }
+    },
+    {
+        "id": "LqWno_JA",
+        "name": "ミユ（水着）",
+        "rarity": 1,
+        "weapon": {
+            "type": "SR",
+            "cover": false
+        },
+        "role": {
+            "type": "SPECIAL",
+            "class": "アタッカー",
+            "position": "BACK"
+        },
+        "school": "SRT特殊学園",
+        "combat": {
+            "attackType": "爆発",
+            "defenseType": "軽装備"
+        },
+        "terrainAdaptation": {
+            "city": "C",
+            "outdoor": "B",
+            "indoor": "A"
+        }
+    },
+    {
+        "id": "zvL4GA94",
+        "name": "ユズ（メイド）",
+        "rarity": 1,
+        "weapon": {
+            "type": "GL",
+            "cover": false
+        },
+        "role": {
+            "type": "SPECIAL",
+            "class": "アタッカー",
+            "position": "BACK"
+        },
+        "school": "ミレニアムサイエンススクール",
+        "combat": {
+            "attackType": "爆発",
+            "defenseType": "弾力装甲"
+        },
+        "terrainAdaptation": {
+            "city": "B",
+            "outdoor": "C",
+            "indoor": "A"
+        }
+    },
+    {
+        "id": "Tft1k3wn",
+        "name": "ヨシミ",
+        "rarity": 1,
+        "weapon": {
+            "type": "AR",
+            "cover": false
+        },
+        "role": {
+            "type": "SPECIAL",
+            "class": "アタッカー",
+            "position": "BACK"
+        },
+        "school": "トリニティ総合学園",
+        "combat": {
+            "attackType": "貫通",
+            "defenseType": "重装甲"
+        },
+        "terrainAdaptation": {
+            "city": "B",
+            "outdoor": "B",
+            "indoor": "B"
+        }
+    },
+    {
+        "id": "qlexsCzv",
+        "name": "佐天涙子",
+        "rarity": 1,
+        "weapon": {
+            "type": "SMG",
+            "cover": false
+        },
+        "role": {
+            "type": "SPECIAL",
+            "class": "アタッカー",
+            "position": "BACK"
+        },
+        "school": "柵川中学",
+        "combat": {
+            "attackType": "貫通",
+            "defenseType": "特殊装甲"
+        },
+        "terrainAdaptation": {
+            "city": "C",
+            "outdoor": "A",
+            "indoor": "B"
+        }
+    }
+]
