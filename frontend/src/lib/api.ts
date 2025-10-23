@@ -8,11 +8,20 @@ const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || '/api';
  */
 export async function fetchStudents(): Promise<Student[]> {
   try {
-    const response = await fetch(`${API_BASE_URL}/students`, {
+    // 明示的に大量取得とキャッシュ無効化を行う
+    const url = new URL(`${API_BASE_URL}/students`, typeof window === 'undefined' ? 'http://localhost' : window.location.href);
+    // 開発時やクライアントでのフィルターで取りこぼしが起きないよう、デフォルトで大きめの limit を指定
+    if (!url.searchParams.has('limit')) {
+      url.searchParams.set('limit', '1000');
+    }
+
+    const response = await fetch(url.toString(), {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
       },
+      // キャッシュを無効化して常に最新データを取得する（クライアント側）
+      cache: 'no-store',
     });
 
     if (!response.ok) {
