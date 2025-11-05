@@ -13,7 +13,9 @@ ENV NODE_ENV=production \
 # ==========================================================
 FROM base AS deps
 WORKDIR /app
-COPY frontend/package.json frontend/package-lock.json ./
+# package-lock.json may not exist in this repo; copy only package.json
+COPY frontend/package.json ./
+# Use Bun to install dependencies from package.json
 RUN bun install
 
 # ==========================================================
