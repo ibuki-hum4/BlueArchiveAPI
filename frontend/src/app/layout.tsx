@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import Script from 'next/script';
+import Analytics from '@/components/Analytics';
 import "./globals.css";
 
 const geistSans = Geist({
@@ -94,6 +95,8 @@ export default function RootLayout({
         <a href="#main-content" className="skip-link">
           コンテンツへスキップ
         </a>
+        {/* Client-side analytics that records page views on route change */}
+        <Analytics />
         {children}
       </body>
     </html>

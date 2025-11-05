@@ -41,6 +41,7 @@ spec:
       containers:
         - name: bluearchive-api
           image: docker.io/kemar1/bluearchive-api:1.2.0
+          command: [bun, run, start]
           imagePullPolicy: Always
           securityContext:
             runAsUser: 1000
@@ -70,7 +71,7 @@ spec:
               cpu: 100m
               memory: 256Mi
             limits:
-              cpu: 500m
+              cpu: 750m
               memory: 512Mi
           volumeMounts:
             - name: students-data

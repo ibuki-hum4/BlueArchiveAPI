@@ -1,28 +1,37 @@
 # syntax=docker/dockerfile:1.7
 
-## ベースイメージはDebianベースの node:22-slim を利用（Next.jsのバイナリ互換性を確保）
-FROM node:22-slim AS base
+# ==========================================================
+# 🧱 Base: Bun 環境
+# ==========================================================
+FROM oven/bun:latest AS base
 WORKDIR /app
 ENV NODE_ENV=production \
     NEXT_TELEMETRY_DISABLED=1
 
-## 依存関係インストール用ステージ
+# ==========================================================
+# 📦 Dependencies: パッケージインストール専用
+# ==========================================================
 FROM base AS deps
 WORKDIR /app
 COPY frontend/package.json frontend/package-lock.json ./
-RUN npm ci
+RUN bun install
 
-## ビルドステージ
-FROM base AS builder
+# ==========================================================
+# 🏗️ Build: Next.js プロジェクトをビルド
+# ==========================================================
+FROM deps AS builder
 WORKDIR /app
 ENV NODE_ENV=production
-COPY --from=deps /app/node_modules ./node_modules
-COPY frontend/ .
-COPY data ./data
-RUN npm run build \
-    && npm prune --omit=dev
 
-## ランタイムステージ
+COPY frontend/ ./
+COPY data ./data
+
+# Next.js ビルド
+RUN bun run build && bun prune --omit=dev
+
+# ==========================================================
+# 🚀 Runtime: 実行ステージ（最小構成）
+# ==========================================================
 FROM base AS runner
 WORKDIR /app
 ENV NODE_ENV=production \
@@ -33,10 +42,8 @@ COPY --from=builder /app/public ./public
 COPY --from=builder /app/.next ./.next
 COPY --from=builder /app/package.json ./package.json
 COPY --from=builder /app/node_modules ./node_modules
-
-# APIで使用するデータファイルを含める
-COPY data ./data
+COPY --from=builder /app/data ./data
 
 EXPOSE 3000
 
-CMD ["npm", "run", "start"]
+CMD ["bun", "run", "start"]
