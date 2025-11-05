@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import Script from 'next/script';
+import { Suspense } from 'react';
 import Analytics from '@/components/Analytics';
 import "./globals.css";
 
@@ -96,7 +97,9 @@ export default function RootLayout({
           コンテンツへスキップ
         </a>
         {/* Client-side analytics that records page views on route change */}
-        <Analytics />
+        <Suspense fallback={null}>
+          <Analytics />
+        </Suspense>
         {children}
       </body>
     </html>
