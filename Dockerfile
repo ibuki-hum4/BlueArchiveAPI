@@ -29,7 +29,8 @@ COPY frontend/ ./
 COPY data ./data
 
 # Next.js ビルド
-RUN bun run build && bun prune --omit=dev
+# bun prune is not supported in current Bun; run the build only. Dependencies are installed in deps stage
+RUN bun run build
 
 # ==========================================================
 # 🚀 Runtime: 実行ステージ（最小構成）
