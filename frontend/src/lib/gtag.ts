@@ -1,17 +1,16 @@
 // Google Analytics helper (gtag)
 export const GA_ID = process.env.NEXT_PUBLIC_GA_ID ?? 'G-Q5HTRSYCMN';
 
-type GTagEventParams = Record<string, any>;
+type GTagEventParams = Record<string, unknown>;
 
-function safeGtag(...args: any[]) {
+function safeGtag(...args: unknown[]): void {
   if (typeof window === 'undefined') return;
-  const w = window as any;
+  const w = window as unknown as { gtag?: (...a: unknown[]) => void };
   if (typeof w.gtag !== 'function') return;
   try {
     w.gtag(...args);
-  } catch (e) {
+  } catch {
     // swallow errors in analytics calls
-    // console.debug('gtag call failed', e);
   }
 }
 
@@ -23,8 +22,10 @@ export function event(action: string, params: GTagEventParams = {}) {
   safeGtag('event', action, params);
 }
 
-export default {
+const gtag = {
   GA_ID,
   pageview,
   event,
 };
+
+export default gtag;
