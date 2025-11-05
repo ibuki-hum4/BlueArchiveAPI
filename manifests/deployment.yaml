@@ -40,7 +40,7 @@ spec:
               readOnly: true
       containers:
         - name: bluearchive-api
-          image: docker.io/kemar1/bluearchive-api:1.2.0
+          image: docker.io/kemar1/bluearchive-api:2.0.0
           command: [bun, run, start]
           imagePullPolicy: Always
           securityContext:
