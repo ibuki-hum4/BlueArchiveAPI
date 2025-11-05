@@ -72,7 +72,17 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        {/* Google Analytics (gtag.js) */}
+        {/* Cookie consent (Cookiebot) - runs before interactive so it can block other scripts until consent */}
+        <Script
+          id="Cookiebot"
+          src={`https://consent.cookiebot.com/uc.js`}
+          data-cbid={process.env.NEXT_PUBLIC_COOKIEBOT_ID ?? '9d73c5cf-986b-4c4f-8d96-a30e00df8f4f'}
+          type="text/javascript"
+          async
+          strategy="beforeInteractive"
+        />
+
+        {/* Google Analytics (gtag.js) - loaded after interactive; Cookiebot can block it if needed */}
         <Script
           async
           src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GA_ID ?? 'G-Q5HTRSYCMN'}`}
