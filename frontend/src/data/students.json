@@ -1656,6 +1656,30 @@
         }
     },
     {
+        "id": "OqGs9zbz",
+        "name": "スズミ（マジカル）",
+        "rarity": 3,
+        "weapon": {
+            "type": "AR",
+            "cover": true
+        },
+        "role": {
+            "type": "STRIKER",
+            "class": "サポーター",
+            "position": "MIDDLE"
+        },
+        "school": "トリニティ総合学園",
+        "combat": {
+            "attackType": "振動",
+            "defenseType": "特殊装甲"
+        },
+        "terrainAdaptation": {
+            "city": "S",
+            "outdoor": "D",
+            "indoor": "B"
+        }
+    },
+    {
         "id": "gsu1P3uQ",
         "name": "スミレ",
         "rarity": 3,
@@ -4125,6 +4149,30 @@
             "city": "D",
             "outdoor": "B",
             "indoor": "S"
+        }
+    },
+    {
+        "id": "rDfDEU8H",
+        "name": "レイサ（マジカル）",
+        "rarity": 3,
+        "weapon": {
+            "type": "SG",
+            "cover": false
+        },
+        "role": {
+            "type": "SPECIAL",
+            "class": "ヒーラー",
+            "position": "BACK"
+        },
+        "school": "トリニティ総合学園",
+        "combat": {
+            "attackType": "振動",
+            "defenseType": "特殊装甲"
+        },
+        "terrainAdaptation": {
+            "city": "S",
+            "outdoor": "D",
+            "indoor": "B"
         }
     },
     {
