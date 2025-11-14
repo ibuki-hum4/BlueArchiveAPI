@@ -1680,6 +1680,30 @@
         }
     },
     {
+        "id": "KhyfzcEq",
+        "name": "スバル",
+        "rarity": 3,
+        "weapon": {
+            "type": "AR",
+            "cover": true
+        },
+        "role": {
+            "type": "STRIKER",
+            "class": "アタッカー",
+            "position": "MIDDLE"
+        },
+        "school": "アリウス分校",
+        "combat": {
+            "attackType": "神秘",
+            "defenseType": "特殊装甲"
+        },
+        "terrainAdaptation": {
+            "city": "S",
+            "outdoor": "D",
+            "indoor": "B"
+        }
+    },
+    {
         "id": "gsu1P3uQ",
         "name": "スミレ",
         "rarity": 3,
@@ -4152,7 +4176,7 @@
         }
     },
     {
-        "id": "rDfDEU8H",
+        "id": "uUviXYY5",
         "name": "レイサ（マジカル）",
         "rarity": 3,
         "weapon": {
@@ -5709,6 +5733,30 @@
             "city": "B",
             "outdoor": "B",
             "indoor": "B"
+        }
+    },
+    {
+        "id": "e9NH_-U2",
+        "name": "ラブ",
+        "rarity": 1,
+        "weapon": {
+            "type": "SG",
+            "cover": false
+        },
+        "role": {
+            "type": "STRIKER",
+            "class": "アタッカー",
+            "position": "FRONT"
+        },
+        "school": "トリニティ総合学園",
+        "combat": {
+            "attackType": "振動",
+            "defenseType": "特殊装甲"
+        },
+        "terrainAdaptation": {
+            "city": "A",
+            "outdoor": "B",
+            "indoor": "C"
         }
     },
     {
