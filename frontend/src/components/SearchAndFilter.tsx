@@ -1,6 +1,6 @@
-'use client';
+ 'use client';
 
-import { useId, useState } from 'react';
+import { useId, useState, useEffect } from 'react';
 import { StudentFilter, SortOptions, SortField, SortOrder } from '@/types/student';
 
 interface SearchAndFilterProps {
@@ -49,6 +49,12 @@ export default function SearchAndFilter({ onFilterChange, onSortChange, totalCou
   const attackTypes = ['神秘', '爆発', '貫通', '振動'];
   const defenseTypes = ['重装甲', '軽装備', '特殊装甲', '弾力装甲'];
   const positions = ['FRONT', 'MIDDLE', 'BACK'];
+
+  // Debug: log incoming totalCount when it changes
+  // eslint-disable-next-line no-console
+  useEffect(() => {
+    console.debug('[SearchAndFilter] prop totalCount:', totalCount);
+  }, [totalCount]);
 
   return (
     <form

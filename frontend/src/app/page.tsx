@@ -17,6 +17,10 @@ export default function Home() {
     handleSortChange,
   } = useStudents();
 
+  // Debug: log totalCount and visible students length on each render
+  // eslint-disable-next-line no-console
+  console.debug('[Home] totalCount:', totalCount, 'students.length:', students.length);
+
   if (error) {
     return (
       <div className="min-h-screen bg-gray-50">

@@ -14,13 +14,10 @@ export const metadata: Metadata = {
     'Blue Archive Databaseの理念と特徴、APIおよびデータ検索機能の活用方法を紹介する概要ページです。',
 };
 
-const formatNumber = (value: number) => value.toLocaleString('ja-JP');
+// formatNumber removed because unused in the overview page
 
 export default async function OverviewPage() {
   const students = await readStudentsData();
-  const totalStudents = students.length;
-  const uniqueSchools = new Set(students.map((student) => student.school));
-  const uniqueWeaponTypes = new Set(students.map((student) => student.weapon.type));
 
   return (
     <div className="min-h-screen bg-slate-50 text-slate-800">

@@ -21,7 +21,19 @@ const buildOgImageUrl = (title: string, subtitle?: string) => {
   return `/og?${params.toString()}`;
 };
 
-export async function generateMetadata({ params }: MetadataProps): Promise<Metadata> {
+export async function generateMetadata(props: MetadataProps | Promise<MetadataProps>): Promise<Metadata> {
+  // props or props.params may be Promises depending on Next internals — resolve both safely
+  const resolved = (await props) as MetadataProps;
+
+  // `resolved.params` may be a plain object or a promise-like object depending on Next internals.
+  // Narrow it safely without using `any` so ESLint/TS don't complain.
+  type ParamsType = MetadataProps['params'];
+  let paramsCandidate: ParamsType | Promise<ParamsType> = resolved.params as ParamsType | Promise<ParamsType>;
+  if (paramsCandidate && typeof (paramsCandidate as { then?: unknown }).then === 'function') {
+    paramsCandidate = await (paramsCandidate as Promise<ParamsType>);
+  }
+  const params: ParamsType = paramsCandidate as ParamsType;
+
   const students = await readStudentsData();
   const student = students.find((item) => item.id === params.id);
   const canonicalPath = `/${params.id}`;
