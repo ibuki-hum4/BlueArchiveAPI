@@ -1,4 +1,10 @@
 {
+  "name": "bluearchive-api",
+  "version": "2.1.0",
+  "private": true,
+  "workspaces": [
+    "frontend"
+  ],
   "dependencies": {
     "lint": "^0.8.19"
   }

@@ -5,6 +5,8 @@
 ![Next.js](https://img.shields.io/badge/Next.js-15-black?style=for-the-badge&logo=next.js)
 ![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white)
 ![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)
+![Website](https://img.shields.io/website?url=https%3A%2F%2Fbluearchive-api.skyia.jp%2F)
+
 
 **ブルーアーカイブの生徒データAPI & フロントエンドアプリケーション**
 
@@ -178,7 +180,14 @@ docker push kemar1/bluearchive-api:latest
 
 ## 📄 ライセンス
 
-このプロジェクトは MIT ライセンスの下で公開されています。詳細は [LICENSE](LICENSE) ファイルをご確認ください。
+本プロジェクトで使用されているデータおよびアセットは、ブルーアーカイブの著作権者に帰属します。
+本プロジェクトは非営利目的での使用を想定しており、商用利用は禁止されています。
+詳細は [利用規約](https://bluearchive-api.skyia.jp/terms) をご覧ください。
+
+コード部分の著作権は ibuki-hum4 に帰属します。
+コードの使用・改変・再配布は非営利目的に限り許可されます。
+商用利用や再配布は禁止です。
+コントリビューション（Pull Request、Issue など）は歓迎します。
 
 ## 🙏 謝辞
 
