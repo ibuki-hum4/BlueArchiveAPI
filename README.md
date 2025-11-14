@@ -5,8 +5,11 @@
 ![Next.js](https://img.shields.io/badge/Next.js-15-black?style=for-the-badge&logo=next.js)
 ![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white)
 ![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)
-![Website](https://img.shields.io/website?url=https%3A%2F%2Fbluearchive-api.skyia.jp%2F)
 
+![Website](https://img.shields.io/website?url=https%3A%2F%2Fbluearchive-api.skyia.jp%2F)
+![GitHub package.json version](https://img.shields.io/github/package-json/v/ibuki-hum4/bluearchiveapi)
+![Docker Image Version](https://img.shields.io/docker/v/kemar1/bluearchive-api)
+![GitHub Release](https://img.shields.io/github/v/release/ibuki-hum4/bluearchiveapi)
 
 **ブルーアーカイブの生徒データAPI & フロントエンドアプリケーション**
 
