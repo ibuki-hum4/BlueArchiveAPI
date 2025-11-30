@@ -6,6 +6,7 @@
     "frontend"
   ],
   "dependencies": {
-    "lint": "^0.8.19"
+    "lint": "^0.8.19",
+    "nanoid": "^5.1.6"
   }
 }

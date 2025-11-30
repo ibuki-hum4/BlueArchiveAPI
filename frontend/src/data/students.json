@@ -1920,6 +1920,30 @@
         }
     },
     {
+        "id": "F8qN54RP",
+        "name": "タカネ",
+        "rarity": 3,
+        "weapon": {
+            "type": "AR",
+            "cover": true
+        },
+        "role": {
+            "type": "STRIKER",
+            "class": "ヒーラー",
+            "position": "MIDDLE"
+        },
+        "school": "レッドウィンター連邦学園",
+        "combat": {
+            "attackType": "神秘",
+            "defenseType": "軽装備"
+        },
+        "terrainAdaptation": {
+            "city": "B",
+            "outdoor": "D",
+            "indoor": "S"
+        }
+    },
+    {
         "id": "DJHhJdcw",
         "name": "チアキ",
         "rarity": 3,
@@ -3909,6 +3933,30 @@
             "city": "D",
             "outdoor": "S",
             "indoor": "B"
+        }
+    },
+    {
+        "id": "PcNMk7wl",
+        "name": "ヤクモ",
+        "rarity": 3,
+        "weapon": {
+            "type": "HG",
+            "cover": false
+        },
+        "role": {
+            "type": "SPECIAL",
+            "class": "サポーター",
+            "position": "BACK"
+        },
+        "school": "レッドウィンター連邦学園",
+        "combat": {
+            "attackType": "爆発",
+            "defenseType": "軽装備"
+        },
+        "terrainAdaptation": {
+            "city": "S",
+            "outdoor": "B",
+            "indoor": "D"
         }
     },
     {
