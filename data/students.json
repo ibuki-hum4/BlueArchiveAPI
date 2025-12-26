@@ -2112,6 +2112,30 @@
         }
     },
     {
+        "id": "aisbG11d",
+        "name": "ツクヨ",
+        "rarity": 3,
+        "weapon": {
+            "type": "SMG",
+            "cover": false
+        },
+        "role": {
+            "type": "STRIKER",
+            "class": "タンク",
+            "position": "FRONT"
+        },
+        "school": "百鬼夜行連合学院",
+        "combat": {
+            "attackType": "貫通",
+            "defenseType": "軽装備"
+        },
+        "terrainAdaptation": {
+            "city": "D",
+            "outdoor": "S",
+            "indoor": "B"
+        }
+    },
+    {
         "id": "CynBq_iI",
         "name": "ツバキ（ガイド）",
         "rarity": 3,
@@ -3524,6 +3548,54 @@
         "terrainAdaptation": {
             "city": "B",
             "outdoor": "D",
+            "indoor": "S"
+        }
+    },
+    {
+        "id": "pCC2Uo72",
+        "name": "ミサキ（水着）",
+        "rarity": 3,
+        "weapon": {
+            "type": "RL",
+            "cover": false
+        },
+        "role": {
+            "type": "SPECIAL",
+            "class": "アタッカー",
+            "position": "BACK"
+        },
+        "school": "アリウス分校",
+        "combat": {
+            "attackType": "爆発",
+            "defenseType": "特殊装甲"
+        },
+        "terrainAdaptation": {
+            "city": "D",
+            "outdoor": "B",
+            "indoor": "S"
+        }
+    },
+    {
+        "id": "SWDFag8D",
+        "name": "ミチル（ドレス）",
+        "rarity": 3,
+        "weapon": {
+            "type": "SG",
+            "cover": false
+        },
+        "role": {
+            "type": "SPECIAL",
+            "class": "ヒーラー",
+            "position": "BACK"
+        },
+        "school": "百鬼夜行連合学院",
+        "combat": {
+            "attackType": "爆発",
+            "defenseType": "軽装備"
+        },
+        "terrainAdaptation": {
+            "city": "D",
+            "outdoor": "B",
             "indoor": "S"
         }
     },
