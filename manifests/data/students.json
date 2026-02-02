@@ -264,6 +264,30 @@
         }
     },
     {
+        "id": "qMwuskTk",
+        "name": "アリス（臨戦）",
+        "rarity": 3,
+        "weapon": {
+            "type": "AR",
+            "cover": false
+        },
+        "role": {
+            "type": "STRIKER",
+            "class": "アタッカー",
+            "position": "MIDDLE"
+        },
+        "school": "ミレニアムサイエンススクール",
+        "combat": {
+            "attackType": "神秘",
+            "defenseType": "複合装甲"
+        },
+        "terrainAdaptation": {
+            "city": "S",
+            "outdoor": "D",
+            "indoor": "A"
+        }
+    },
+    {
         "id": "9jCbYfZC",
         "name": "アル",
         "rarity": 3,
@@ -1077,6 +1101,30 @@
             "city": "S",
             "outdoor": "B",
             "indoor": "D"
+        }
+    },
+    {
+        "id": "oM1r4zNr",
+        "name": "ケイ",
+        "rarity": 3,
+        "weapon": {
+            "type": "RG",
+            "cover": false
+        },
+        "role": {
+            "type": "STRIKER",
+            "class": "サポーター",
+            "position": "BACK"
+        },
+        "school": "ミレニアムサイエンススクール",
+        "combat": {
+            "attackType": "神秘",
+            "defenseType": "複合装甲"
+        },
+        "terrainAdaptation": {
+            "city": "S",
+            "outdoor": "D",
+            "indoor": "A"
         }
     },
     {
@@ -2184,7 +2232,7 @@
         }
     },
     {
-        "id": "DG7F3lVl",
+        "id": "FDhP9xFn",
         "name": "トキ",
         "rarity": 3,
         "weapon": {
@@ -3016,6 +3064,30 @@
         "combat": {
             "attackType": "貫通",
             "defenseType": "軽装備"
+        },
+        "terrainAdaptation": {
+            "city": "S",
+            "outdoor": "B",
+            "indoor": "D"
+        }
+    },
+    {
+        "id": "ENowGX9H",
+        "name": "ヒマリ（臨戦）",
+        "rarity": 3,
+        "weapon": {
+            "type": "HG",
+            "cover": false
+        },
+        "role": {
+            "type": "SPECIAL",
+            "class": "T.S",
+            "position": "BACK"
+        },
+        "school": "ミレニアムサイエンススクール",
+        "combat": {
+            "attackType": "貫通",
+            "defenseType": "弾力装甲"
         },
         "terrainAdaptation": {
             "city": "S",
@@ -4197,6 +4269,30 @@
             "city": "A",
             "outdoor": "D",
             "indoor": "S"
+        }
+    },
+    {
+        "id": "J8kowwdQ",
+        "name": "リオ（臨戦）",
+        "rarity": 3,
+        "weapon": {
+            "type": "HG",
+            "cover": true
+        },
+        "role": {
+            "type": "STRIKER",
+            "class": "アタッカー",
+            "position": "MIDDLE"
+        },
+        "school": "ミレニアムサイエンススクール",
+        "combat": {
+            "attackType": "爆発",
+            "defenseType": "特殊装甲"
+        },
+        "terrainAdaptation": {
+            "city": "S",
+            "outdoor": "B",
+            "indoor": "D"
         }
     },
     {
@@ -5565,6 +5661,30 @@
             "city": "B",
             "outdoor": "C",
             "indoor": "A"
+        }
+    },
+    {
+        "id": "B_RbIPJD",
+        "name": "ツルギ（水着）",
+        "rarity": 1,
+        "weapon": {
+            "type": "HG",
+            "cover": true
+        },
+        "role": {
+            "type": "STRIKER",
+            "class": "サポーター",
+            "position": "MIDDLE"
+        },
+        "school": "ミレニアムサイエンススクール",
+        "combat": {
+            "attackType": "貫通",
+            "defenseType": "軽装備"
+        },
+        "terrainAdaptation": {
+            "city": "A",
+            "outdoor": "B",
+            "indoor": "C"
         }
     },
     {

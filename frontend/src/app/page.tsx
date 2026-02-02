@@ -46,13 +46,13 @@ export default function Home() {
         <section id="explore" className="space-y-8">
           <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
             <div>
-              <h2 className="text-2xl font-semibold text-slate-900">生徒を素早く探す</h2>
+              <h2 className="text-2xl font-semibold text-slate-900">おかえりなさい、先生！</h2>
               <p className="text-sm text-slate-500">
-                豊富なフィルターと並べ替え機能で目的の生徒をすぐに見つけられます。
+                豊富なフィルターと並べ替え機能で目的の生徒さんをすぐに見つけられます。
               </p>
             </div>
             <div className="text-sm text-slate-500" role="status" aria-live="polite">
-              現在 {totalCount} 件の生徒が条件に一致しています
+              現在 {totalCount} 件の生徒さんが条件に一致しています
             </div>
           </div>
 
@@ -86,7 +86,7 @@ export default function Home() {
           {/* 結果なし */}
           {!loading && students.length === 0 && (
             <div className="rounded-2xl border border-slate-200 bg-white py-16 text-center">
-              <p className="text-sm text-slate-500">条件に一致する生徒が見つかりませんでした。フィルターを調整して再度お試しください。</p>
+              <p className="text-sm text-slate-500">条件に一致する生徒さんが見つかりませんでした。フィルターを調整して再度お試しください。</p>
             </div>
           )}
         </section>

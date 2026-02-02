@@ -32,6 +32,7 @@ export default function StudentCard({ student }: StudentCardProps) {
       case '神秘': return 'text-blue-600';
       case '爆発': return 'text-red-600';
       case '貫通': return 'text-yellow-600';
+      case '分解': return 'text-teal-600';
       default: return 'text-gray-600';
     }
   };

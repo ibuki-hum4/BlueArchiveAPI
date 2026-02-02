@@ -46,8 +46,8 @@ export default function SearchAndFilter({ onFilterChange, onSortChange, totalCou
   // デフォルトの武器タイプ（propsで提供されない場合のフォールバック）
   const defaultWeaponTypes = ['HG', 'AR', 'SMG', 'SR', 'SG', 'GL', 'RL', 'RG', 'MG', 'MT', 'FT'];
   const displayWeaponTypes = weaponTypes.length > 0 ? weaponTypes : defaultWeaponTypes;
-  const attackTypes = ['神秘', '爆発', '貫通', '振動'];
-  const defenseTypes = ['重装甲', '軽装備', '特殊装甲', '弾力装甲'];
+  const attackTypes = ['神秘', '爆発', '貫通', '振動', '分解'];
+  const defenseTypes = ['重装甲', '軽装備', '特殊装甲', '弾力装甲', '複合装甲'];
   const positions = ['FRONT', 'MIDDLE', 'BACK'];
 
   // Debug: log incoming totalCount when it changes

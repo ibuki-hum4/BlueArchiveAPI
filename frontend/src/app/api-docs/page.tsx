@@ -444,6 +444,7 @@ Authorization: Bearer YOUR_API_KEY`}
                         <span className="bg-red-100 text-red-800 px-2 py-1 rounded text-sm">爆発</span>
                         <span className="bg-yellow-100 text-yellow-800 px-2 py-1 rounded text-sm">貫通</span>
                         <span className="bg-purple-100 text-purple-800 px-2 py-1 rounded text-sm">振動</span>
+                        <span className="bg-teal-100 text-teal-800 px-2 py-1 rounded text-sm">分解</span>
                       </div>
                     </div>
                     <div>
@@ -453,6 +454,7 @@ Authorization: Bearer YOUR_API_KEY`}
                         <span className="bg-green-100 text-green-800 px-2 py-1 rounded text-sm">軽装備</span>
                         <span className="bg-indigo-100 text-indigo-800 px-2 py-1 rounded text-sm">特殊装甲</span>
                         <span className="bg-pink-100 text-pink-800 px-2 py-1 rounded text-sm">弾力装甲</span>
+                        <span className="bg-slate-100 text-slate-800 px-2 py-1 rounded text-sm">複合装甲</span>
                       </div>
                     </div>
                   </div>
