@@ -21,7 +21,7 @@ spec:
         fsGroupChangePolicy: OnRootMismatch
       initContainers:
         - name: seed-students-data
-          image: docker.io/kemar1/bluearchive-api:2.2.1
+          image: docker.io/kemar1/bluearchive-api:2.3.0
           imagePullPolicy: Always
           command:
             - /bin/sh
