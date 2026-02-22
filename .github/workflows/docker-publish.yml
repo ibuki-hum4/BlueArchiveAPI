@@ -70,7 +70,13 @@ jobs:
 
       - name: Normalize tag
         id: tag
-        run: echo "clean=${GITHUB_REF_NAME/v./v}" >> "$GITHUB_OUTPUT"
+        shell: bash
+        run: |
+          raw="${GITHUB_REF_NAME}"
+          clean="${raw/v./v}"
+          nov="${clean#v}"
+          echo "clean=${clean}" >> "$GITHUB_OUTPUT"
+          echo "nov=${nov}" >> "$GITHUB_OUTPUT"
 
       - name: Extract Docker metadata
         id: meta
@@ -79,6 +85,7 @@ jobs:
           images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
           tags: |
             type=raw,value=${{ steps.tag.outputs.clean }}
+            type=raw,value=${{ steps.tag.outputs.nov }}
 
       - name: Build and push
         id: build
