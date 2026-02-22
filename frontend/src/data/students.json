@@ -696,6 +696,30 @@
         }
     },
     {
+        "id": "XrZDXp6j",
+        "name": "エイミ（臨戦）",
+        "rarity": 3,
+        "weapon": {
+            "type": "SR",
+            "cover": false
+        },
+        "role": {
+            "type": "STRIKER",
+            "class": "アタッカー",
+            "position": "BACK"
+        },
+        "school": "ミレニアムサイエンススクール",
+        "combat": {
+            "attackType": "爆発",
+            "defenseType": "軽装備"
+        },
+        "terrainAdaptation": {
+            "city": "S",
+            "outdoor": "B",
+            "indoor": "D"
+        }
+    },
+    {
         "id": "k7RAzJ73",
         "name": "エリ",
         "rarity": 3,
@@ -4221,6 +4245,30 @@
             "city": "S",
             "outdoor": "B",
             "indoor": "D"
+        }
+    },
+    {
+        "id": "lffB6S1l",
+        "name": "ユズ（臨戦）",
+        "rarity": 3,
+        "weapon": {
+            "type": "GL",
+            "cover": false
+        },
+        "role": {
+            "type": "SPECIAL",
+            "class": "サポーター",
+            "position": "BACK"
+        },
+        "school": "ミレニアムサイエンススクール",
+        "combat": {
+            "attackType": "神秘",
+            "defenseType": "特殊装甲"
+        },
+        "terrainAdaptation": {
+            "city": "S",
+            "outdoor": "D",
+            "indoor": "B"
         }
     },
     {
