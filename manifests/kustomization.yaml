@@ -7,6 +7,10 @@ resources:
   - pvc.yaml
   - ingress.yaml
 
+images:
+  - name: docker.io/kemar1/bluearchive-api
+    newTag: v2.5.0
+
 configMapGenerator:
   - name: students-config
     files:

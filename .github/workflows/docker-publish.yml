@@ -68,13 +68,17 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
+      - name: Normalize tag
+        id: tag
+        run: echo "clean=${GITHUB_REF_NAME/v./v}" >> "$GITHUB_OUTPUT"
+
       - name: Extract Docker metadata
         id: meta
         uses: docker/metadata-action@v5
         with:
           images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
           tags: |
-            type=ref,event=tag
+            type=raw,value=${{ steps.tag.outputs.clean }}
             type=sha
 
       - name: Build and push
