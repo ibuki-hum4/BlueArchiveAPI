@@ -79,7 +79,6 @@ jobs:
           images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
           tags: |
             type=raw,value=${{ steps.tag.outputs.clean }}
-            type=sha
 
       - name: Build and push
         id: build
