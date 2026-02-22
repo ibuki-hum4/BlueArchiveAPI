@@ -8,7 +8,7 @@
 
 ![Website](https://img.shields.io/website?url=https%3A%2F%2Fbluearchive-api.skyia.jp%2F)
 ![GitHub package.json version](https://img.shields.io/github/package-json/v/ibuki-hum4/bluearchiveapi)
-![Docker Image Version](https://img.shields.io/docker/v/kemar1/bluearchive-api)
+![Docker Image Version](https://img.shields.io/docker/v/kemar1/bluearchive-api?sort=semver)
 ![GitHub Release](https://img.shields.io/github/v/release/ibuki-hum4/bluearchiveapi)
 
 **ブルーアーカイブの生徒データAPI & フロントエンドアプリケーション**
