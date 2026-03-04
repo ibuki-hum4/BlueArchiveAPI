@@ -1272,6 +1272,30 @@
         }
     },
     {
+        "id": "Qy6-VQVR",
+        "name": "コユキ（パジャマ）",
+        "rarity": 3,
+        "weapon": {
+            "type": "MG",
+            "cover": false
+        },
+        "role": {
+            "type": "SPECIAL",
+            "class": "サポーター",
+            "position": "BACK"
+        },
+        "school": "ミレニアムサイエンススクール",
+        "combat": {
+            "attackType": "神秘",
+            "defenseType": "軽装備"
+        },
+        "terrainAdaptation": {
+            "city": "S",
+            "outdoor": "D",
+            "indoor": "B"
+        }
+    },
+    {
         "id": "zCBoTwc0",
         "name": "サオリ",
         "rarity": 3,
