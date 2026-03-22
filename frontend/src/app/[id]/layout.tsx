@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { readStudentsData } from "@/lib/students/storage";
 
 const siteName = "Blue Archive API";
+const ogVersion = "20260322a";
 
 type LayoutProps = {
   children: React.ReactNode;
@@ -18,6 +19,7 @@ const buildOgImageUrl = (title: string, subtitle?: string) => {
   if (subtitle) {
     params.set("subtitle", subtitle);
   }
+  params.set("v", ogVersion);
   return `/api/og?${params.toString()}`;
 };
 

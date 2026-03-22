@@ -18,6 +18,7 @@ const geistMono = Geist_Mono({
 const siteName = "Blue Archive API";
 const siteDescription = "ブルーアーカイブの生徒データを検索・閲覧できる非公式データベース";
 const siteUrl = "https://bluearchive-api.skyia.jp";
+const ogVersion = "20260322a";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
@@ -45,7 +46,7 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: "/api/og",
+        url: `/api/og?v=${ogVersion}`,
         width: 1200,
         height: 630,
         alt: `${siteName}のOGP画像`,
@@ -56,7 +57,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: siteName,
     description: siteDescription,
-    images: ["/api/og"],
+    images: [`/api/og?v=${ogVersion}`],
   },
   icons: {
     icon: "/favicon.ico",
