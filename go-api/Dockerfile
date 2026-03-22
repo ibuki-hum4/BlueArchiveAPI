@@ -1,7 +1,7 @@
 FROM golang:1.22-alpine AS builder
 WORKDIR /src
 
-COPY go.mod ./
+COPY go.mod go.sum ./
 COPY main.go ./
 COPY internal ./internal
 
