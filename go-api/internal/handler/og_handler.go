@@ -49,21 +49,38 @@ func (h *OGHandler) OG(w http.ResponseWriter, r *http.Request) {
 	}
 
 	dc := gg.NewContext(ogWidth, ogHeight)
-	gradient := gg.NewLinearGradient(0, 0, ogWidth, ogHeight)
-	gradient.AddColorStop(0.0, mustHexColor("#2563EB"))
-	gradient.AddColorStop(0.6, mustHexColor("#7C3AED"))
-	gradient.AddColorStop(1.0, mustHexColor("#F43F5E"))
-	dc.SetFillStyle(gradient)
+
+	// Outer background (Light grayish blue)
+	dc.SetColor(mustHexColor("#F8FAFC"))
 	dc.DrawRectangle(0, 0, ogWidth, ogHeight)
 	dc.Fill()
 
-	dc.SetRGBA(1, 1, 1, 0.85)
-	dc.SetFontFace(subtitleFace)
-	dc.DrawStringAnchored(subtitle, 80, 135, 0, 0.5)
+	// Inner card mimicking the UI component
+	margin := 48.0
+	cardW := float64(ogWidth) - margin*2
+	cardH := float64(ogHeight) - margin*2
+	radius := 24.0
 
-	dc.SetRGB(1, 1, 1)
+	// Card body (White)
+	dc.DrawRoundedRectangle(margin, margin, cardW, cardH, radius)
+	dc.SetColor(mustHexColor("#FFFFFF"))
+	dc.Fill()
+
+	// Card border
+	dc.DrawRoundedRectangle(margin, margin, cardW, cardH, radius)
+	dc.SetColor(mustHexColor("#E2E8F0"))
+	dc.SetLineWidth(2)
+	dc.Stroke()
+
+	// Title (e.g., Student Name or App Title)
+	dc.SetColor(mustHexColor("#0F172A"))
 	dc.SetFontFace(titleFace)
-	dc.DrawStringWrapped(title, 80, 260, 0, 0, 1040, 1.1, gg.AlignLeft)
+	dc.DrawStringWrapped(title, margin+56, margin+140, 0, 0, cardW-112, 1.1, gg.AlignLeft)
+
+	// Subtitle (e.g., School Name)
+	dc.SetColor(mustHexColor("#64748B"))
+	dc.SetFontFace(subtitleFace)
+	dc.DrawStringAnchored(subtitle, margin+56, margin+280, 0, 0)
 
 	drawFooter(dc)
 
@@ -74,25 +91,25 @@ func (h *OGHandler) OG(w http.ResponseWriter, r *http.Request) {
 
 func drawFooter(dc *gg.Context) {
 	const (
-		circleX = 104.0
-		circleY = 560.0
+		circleX = 132.0 // position relative to margin+56
+		circleY = 512.0 // place at the bottom area inside the card
 		radius  = 24.0
 	)
 
-	dc.SetRGBA(1, 1, 1, 0.16)
+	dc.SetColor(mustHexColor("#F1F5F9"))
 	dc.DrawCircle(circleX, circleY, radius)
 	dc.Fill()
 
-	dc.SetRGBA(1, 1, 1, 0.95)
+	dc.SetColor(mustHexColor("#3B82F6")) // Vivid blue matching the button accents in the UI
 	dc.SetLineWidth(3)
 	dc.DrawCircle(circleX-2, circleY-2, 10)
 	dc.Stroke()
 	dc.DrawLine(circleX+6, circleY+6, circleX+14, circleY+14)
 	dc.Stroke()
 
-	dc.SetRGBA(1, 1, 1, 0.9)
+	dc.SetColor(mustHexColor("#64748B"))
 	dc.SetFontFace(footerFace)
-	dc.DrawStringAnchored("bluearchive-api.skyia.jp", 140, 568, 0, 0.5)
+	dc.DrawStringAnchored("bluearchive-api.skyia.jp", circleX+40, circleY, 0, 0.5)
 }
 
 func limitRunes(s string, max int) string {
