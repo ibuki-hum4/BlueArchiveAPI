@@ -1,7 +1,17 @@
 import type { NextConfig } from "next";
 
+const goApiOrigin = process.env.GO_API_ORIGIN || 'http://localhost:8080';
+
 const nextConfig: NextConfig = {
   /* config options here */
+  async rewrites() {
+    return [
+      {
+        source: '/api/:path*',
+        destination: `${goApiOrigin}/api/:path*`
+      }
+    ];
+  },
   async headers() {
     return [
       {

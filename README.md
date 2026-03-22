@@ -33,7 +33,7 @@
 
 ### 前提条件
 - Node.js 18+ 
-- npm または yarn
+- Bun
 
 ### セットアップ
 
@@ -46,13 +46,35 @@ cd BlueArchiveAPI
 cd frontend
 
 # 依存関係をインストール
-npm install
+bun install
 
 # 開発サーバーを起動
-npm run dev
+bun run dev
 ```
 
 アプリケーションは http://localhost:3000 で起動します。
+
+### Go API版を起動する
+
+既存の Next.js API を変更せず、互換APIを `go-api` に追加しています。
+
+```bash
+# Go API ディレクトリに移動
+cd go-api
+
+# サーバー起動（既定: 8080）
+go run .
+```
+
+Go API は `http://localhost:8080` で起動し、次のエンドポイントを提供します。
+
+- `GET /api`
+- `GET /api/health`
+- `GET /api/students`
+- `GET /api/students/:id`
+- `POST /api/students`
+
+必要に応じて、フロントエンドの `NEXT_PUBLIC_API_BASE_URL` を `http://localhost:8080/api` に設定して接続先を切り替えられます。
 
 ## 📂 プロジェクト構造
 
@@ -106,19 +128,16 @@ const student = await fetch('/api/students/B5F50C9O');
 
 ```bash
 # 開発サーバー起動
-npm run dev
+bun run dev
 
 # プロダクションビルド
-npm run build
+bun run build
 
 # プロダクションサーバー起動
-npm start
+bun run start
 
 # リンター実行
-npm run lint
-
-# 型チェック
-npm run type-check
+bun run lint
 ```
 
 ### 環境変数

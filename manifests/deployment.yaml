@@ -1,35 +1,119 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: bluearchive-api
+  name: bluearchive-frontend
   labels:
-    app: bluearchive-api
+    app: bluearchive-frontend
+spec:
+  replicas: 2
+  revisionHistoryLimit: 3
+  minReadySeconds: 5
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 0
+      maxSurge: 1
+  selector:
+    matchLabels:
+      app: bluearchive-frontend
+  template:
+    metadata:
+      labels:
+        app: bluearchive-frontend
+    spec:
+      terminationGracePeriodSeconds: 30
+      securityContext:
+        runAsNonRoot: true
+        seccompProfile:
+          type: RuntimeDefault
+      containers:
+        - name: bluearchive-frontend
+          image: docker.io/kemar1/bluearchive-api
+          command: [bun, run, start]
+          imagePullPolicy: IfNotPresent
+          securityContext:
+            runAsNonRoot: true
+            runAsUser: 1000
+            runAsGroup: 1000
+            allowPrivilegeEscalation: false
+            readOnlyRootFilesystem: false
+            capabilities:
+              drop: ["ALL"]
+          env:
+            - name: PORT
+              value: "3000"
+            - name: NEXT_PUBLIC_API_BASE_URL
+              value: "/api"
+          ports:
+            - containerPort: 3000
+              name: http
+          readinessProbe:
+            httpGet:
+              path: /
+              port: http
+            initialDelaySeconds: 10
+            periodSeconds: 10
+            timeoutSeconds: 2
+            failureThreshold: 3
+          livenessProbe:
+            httpGet:
+              path: /
+              port: http
+            initialDelaySeconds: 30
+            periodSeconds: 20
+            timeoutSeconds: 2
+            failureThreshold: 3
+          startupProbe:
+            httpGet:
+              path: /
+              port: http
+            periodSeconds: 5
+            failureThreshold: 24
+          resources:
+            requests:
+              cpu: 100m
+              memory: 256Mi
+            limits:
+              cpu: 750m
+              memory: 512Mi
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: bluearchive-go-api
+  labels:
+    app: bluearchive-go-api
 spec:
   replicas: 1
+  revisionHistoryLimit: 3
+  minReadySeconds: 5
   strategy:
     type: Recreate
   selector:
     matchLabels:
-      app: bluearchive-api
+      app: bluearchive-go-api
   template:
     metadata:
       labels:
-        app: bluearchive-api
+        app: bluearchive-go-api
     spec:
+      terminationGracePeriodSeconds: 30
       securityContext:
+        runAsNonRoot: true
         fsGroup: 1000
         fsGroupChangePolicy: OnRootMismatch
+        seccompProfile:
+          type: RuntimeDefault
       initContainers:
         - name: seed-students-data
-          image: docker.io/kemar1/bluearchive-api
-          imagePullPolicy: Always
+          image: busybox:1.36
+          imagePullPolicy: IfNotPresent
           command:
             - /bin/sh
             - -c
           args:
             - |
               set -e
-              # Git（ConfigMap）の内容で毎回上書きして Git 優先を担保
               cp -f /seed/students.json /students-data/students.json
               chown -R 1000:1000 /students-data
           volumeMounts:
@@ -39,40 +123,54 @@ spec:
               mountPath: /seed
               readOnly: true
       containers:
-        - name: bluearchive-api
-          image: docker.io/kemar1/bluearchive-api
-          command: [bun, run, start]
-          imagePullPolicy: Always
+        - name: bluearchive-go-api
+          image: docker.io/kemar1/bluearchive-api-go
+          imagePullPolicy: IfNotPresent
           securityContext:
+            runAsNonRoot: true
             runAsUser: 1000
             runAsGroup: 1000
             allowPrivilegeEscalation: false
             readOnlyRootFilesystem: false
+            capabilities:
+              drop: ["ALL"]
           env:
             - name: PORT
-              value: "3000"
+              value: "8080"
+            - name: STUDENTS_DATA_PATH
+              value: "/app/data/students.json"
           ports:
-            - containerPort: 3000
+            - containerPort: 8080
               name: http
           readinessProbe:
             httpGet:
-              path: /api
+              path: /api/health
               port: http
-            initialDelaySeconds: 10
+            initialDelaySeconds: 5
             periodSeconds: 10
+            timeoutSeconds: 2
+            failureThreshold: 3
           livenessProbe:
             httpGet:
-              path: /api
+              path: /api/health
               port: http
-            initialDelaySeconds: 30
+            initialDelaySeconds: 20
             periodSeconds: 20
+            timeoutSeconds: 2
+            failureThreshold: 3
+          startupProbe:
+            httpGet:
+              path: /api/health
+              port: http
+            periodSeconds: 5
+            failureThreshold: 24
           resources:
             requests:
-              cpu: 100m
-              memory: 256Mi
+              cpu: 50m
+              memory: 128Mi
             limits:
-              cpu: 750m
-              memory: 512Mi
+              cpu: 500m
+              memory: 256Mi
           volumeMounts:
             - name: students-data
               mountPath: /app/data

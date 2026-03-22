@@ -11,7 +11,8 @@ permissions:
 
 env:
   REGISTRY: docker.io
-  IMAGE_NAME: ${{ secrets.DOCKERHUB_USERNAME }}/bluearchive-api
+  FRONTEND_IMAGE_NAME: ${{ secrets.DOCKERHUB_USERNAME }}/bluearchive-api
+  GO_API_IMAGE_NAME: ${{ secrets.DOCKERHUB_USERNAME }}/bluearchive-api-go
 
 concurrency:
   group: docker-publish-${{ github.ref }}
@@ -61,7 +62,7 @@ jobs:
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
 
-      - name: Log in to GHCR
+      - name: Log in to Docker Hub
         uses: docker/login-action@v3
         with:
           registry: ${{ env.REGISTRY }}
@@ -78,31 +79,59 @@ jobs:
           echo "clean=${clean}" >> "$GITHUB_OUTPUT"
           echo "nov=${nov}" >> "$GITHUB_OUTPUT"
 
-      - name: Extract Docker metadata
-        id: meta
+      - name: Extract Docker metadata for frontend image
+        id: frontend_meta
         uses: docker/metadata-action@v5
         with:
-          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+          images: ${{ env.REGISTRY }}/${{ env.FRONTEND_IMAGE_NAME }}
           tags: |
             type=raw,value=${{ steps.tag.outputs.clean }}
             type=raw,value=${{ steps.tag.outputs.nov }}
+            type=raw,value=latest
 
-      - name: Build and push
-        id: build
+      - name: Build and push frontend image
+        id: frontend_build
         uses: docker/build-push-action@v6
         with:
           context: .
           file: ./Dockerfile
           push: true
-          tags: ${{ steps.meta.outputs.tags }}
-          labels: ${{ steps.meta.outputs.labels }}
+          tags: ${{ steps.frontend_meta.outputs.tags }}
+          labels: ${{ steps.frontend_meta.outputs.labels }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+
+      - name: Extract Docker metadata for go-api image
+        id: go_api_meta
+        uses: docker/metadata-action@v5
+        with:
+          images: ${{ env.REGISTRY }}/${{ env.GO_API_IMAGE_NAME }}
+          tags: |
+            type=raw,value=${{ steps.tag.outputs.clean }}
+            type=raw,value=${{ steps.tag.outputs.nov }}
+            type=raw,value=latest
+
+      - name: Build and push go-api image
+        id: go_api_build
+        uses: docker/build-push-action@v6
+        with:
+          context: ./go-api
+          file: ./go-api/Dockerfile
+          push: true
+          tags: ${{ steps.go_api_meta.outputs.tags }}
+          labels: ${{ steps.go_api_meta.outputs.labels }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
 
       - name: Install Cosign
         uses: sigstore/cosign-installer@v3
 
-      - name: Sign image
+      - name: Sign frontend image
         env:
           COSIGN_YES: "true"
-        run: cosign sign ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}@${{ steps.build.outputs.digest }}
+        run: cosign sign ${{ env.REGISTRY }}/${{ env.FRONTEND_IMAGE_NAME }}@${{ steps.frontend_build.outputs.digest }}
+
+      - name: Sign go-api image
+        env:
+          COSIGN_YES: "true"
+        run: cosign sign ${{ env.REGISTRY }}/${{ env.GO_API_IMAGE_NAME }}@${{ steps.go_api_build.outputs.digest }}

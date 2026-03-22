@@ -5,36 +5,36 @@ import Link from 'next/link';
 
 export default function ApiDocumentationPage() {
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-slate-50">
       <Navigation />
       
       <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <div className="bg-white rounded-lg shadow-md p-8">
+        <div className="bg-white rounded-xl border border-slate-200 shadow-sm p-8">
           <div className="flex items-center justify-between mb-8">
-            <h1 className="text-4xl font-bold text-gray-900">Blue Archive API ドキュメント</h1>
-            <div className="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm font-medium">
+            <h1 className="text-4xl font-bold text-slate-900">Blue Archive API ドキュメント</h1>
+            <div className="bg-blue-100 text-blue-800 px-3 py-1 rounded-lg text-sm font-medium">
               v1.0
             </div>
           </div>
 
           {/* クイックスタート */}
           <section className="mb-12">
-            <h2 className="text-3xl font-semibold text-gray-800 mb-6 border-b-2 border-blue-200 pb-2">🚀 クイックスタート</h2>
+            <h2 className="text-3xl font-semibold text-slate-800 mb-6 border-b border-slate-200 pb-2">🚀 クイックスタート</h2>
             <div className="grid md:grid-cols-2 gap-6">
-              <div className="bg-gradient-to-r from-blue-50 to-indigo-50 border border-blue-200 rounded-xl p-6">
+              <div className="bg-blue-50 border border-blue-200 rounded-lg p-6">
                 <h3 className="text-lg font-semibold text-blue-900 mb-3">📡 ベースURL</h3>
-                <code className="bg-white border border-blue-300 px-3 py-2 rounded text-blue-800 font-mono text-sm block">
+                <code className="bg-white border border-blue-300 px-3 py-2 rounded-md text-blue-800 font-mono text-sm block">
                   https://bluearchive-api.skyia.jp
                 </code>
               </div>
-              <div className="bg-gradient-to-r from-green-50 to-emerald-50 border border-green-200 rounded-xl p-6">
+              <div className="bg-green-50 border border-green-200 rounded-lg p-6">
                 <h3 className="text-lg font-semibold text-green-900 mb-3">⚡ 簡単な例</h3>
-                <code className="bg-white border border-green-300 px-3 py-2 rounded text-green-800 font-mono text-sm block">
+                <code className="bg-white border border-green-300 px-3 py-2 rounded-md text-green-800 font-mono text-sm block">
                   GET /api/students
                 </code>
               </div>
             </div>
-            <div className="mt-6 bg-yellow-50 border border-yellow-200 rounded-xl p-6">
+            <div className="mt-6 bg-yellow-50 border border-yellow-200 rounded-lg p-6">
               <h3 className="text-lg font-semibold text-yellow-900 mb-3">📋 概要</h3>
               <p className="text-gray-700 leading-relaxed">
                 Blue Archive API は、ブルーアーカイブの生徒データにアクセスするための RESTful API です。
@@ -45,11 +45,11 @@ export default function ApiDocumentationPage() {
 
           {/* エンドポイント */}
           <section className="mb-12">
-            <h2 className="text-3xl font-semibold text-gray-800 mb-6 border-b-2 border-blue-200 pb-2">🌐 エンドポイント</h2>
+            <h2 className="text-3xl font-semibold text-slate-800 mb-6 border-b border-slate-200 pb-2">🌐 エンドポイント</h2>
             
             {/* GET /api/students */}
-            <div className="bg-white border border-gray-200 rounded-xl shadow-sm mb-8">
-              <div className="bg-gradient-to-r from-green-50 to-emerald-50 px-6 py-4 border-b border-gray-200">
+            <div className="bg-white border border-gray-200 rounded-lg shadow-sm mb-8">
+              <div className="bg-green-50 px-6 py-4 border-b border-gray-200">
                 <h3 className="text-xl font-semibold text-gray-800 flex items-center">
                   <span className="bg-green-500 text-white px-3 py-1 rounded-md text-sm font-mono mr-3">GET</span>
                   <code className="text-green-700">/api/students</code>
@@ -102,7 +102,7 @@ export default function ApiDocumentationPage() {
                   <h4 className="font-semibold text-gray-800 mb-3 flex items-center">
                     <span className="text-green-600 mr-2">✅</span>成功レスポンス (200 OK)
                   </h4>
-                  <div className="bg-gray-900 rounded-lg p-4 overflow-x-auto">
+                  <div className="bg-gray-900 rounded-md p-4 overflow-x-auto">
                     <pre className="text-green-400 text-sm">
 {`{
   "message": "success",
@@ -146,15 +146,15 @@ export default function ApiDocumentationPage() {
                     <span className="text-red-600 mr-2">❌</span>エラーレスポンス
                   </h4>
                   <div className="space-y-3">
-                    <div className="bg-red-50 border border-red-200 rounded-lg p-3">
+                    <div className="bg-red-50 border border-red-200 rounded-md p-3">
                       <div className="text-red-800 font-medium mb-1">429 Too Many Requests</div>
-                      <div className="bg-gray-900 rounded p-2">
+                      <div className="bg-gray-900 rounded-md p-2">
                         <pre className="text-red-400 text-xs">{"{ \"error\": \"Rate limit exceeded\", \"retryAfter\": 60 }"}</pre>
                       </div>
                     </div>
-                    <div className="bg-red-50 border border-red-200 rounded-lg p-3">
+                    <div className="bg-red-50 border border-red-200 rounded-md p-3">
                       <div className="text-red-800 font-medium mb-1">500 Internal Server Error</div>
-                      <div className="bg-gray-900 rounded p-2">
+                      <div className="bg-gray-900 rounded-md p-2">
                         <pre className="text-red-400 text-xs">{"{ \"error\": \"Internal server error\" }"}</pre>
                       </div>
                     </div>

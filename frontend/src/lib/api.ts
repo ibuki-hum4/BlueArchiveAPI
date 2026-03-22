@@ -46,8 +46,28 @@ export async function fetchStudents(): Promise<Student[]> {
  */
 export async function fetchStudentById(id: string): Promise<Student | null> {
   try {
-    const students = await fetchStudents();
-    return students.find(student => student.id === id) || null;
+    const response = await fetch(`${API_BASE_URL}/students/${id}`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      cache: 'no-store',
+    });
+
+    if (response.status === 404) {
+      return null;
+    }
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
+    const result = await response.json();
+    if (result.message !== 'success') {
+      throw new Error(result.error || 'Failed to fetch student');
+    }
+
+    return result.data as Student;
   } catch (error) {
     console.error(`Error fetching student with id ${id}:`, error);
     throw error;

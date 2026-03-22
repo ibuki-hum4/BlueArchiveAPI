@@ -13,7 +13,6 @@ export function useStudents() {
     field: 'name',
     order: 'asc'
   });
-  const [totalCountState, setTotalCountState] = useState<number>(0);
 
   // 生徒データの取得
   useEffect(() => {
@@ -35,7 +34,7 @@ export function useStudents() {
 
   // フィルターとソートの適用
   const filteredAndSortedStudents = useMemo(() => {
-    let result = students;
+    let result = [...students];
 
     // フィルター適用
     if (filter.name) {
@@ -101,15 +100,6 @@ export function useStudents() {
     return result;
   }, [students, filter, sortOptions]);
 
-  // Sync an explicit totalCount state and log for debugging filter changes
-  useEffect(() => {
-    const count = filteredAndSortedStudents.length;
-    setTotalCountState(count);
-    // Debug log to help diagnose stale UI issues
-    // eslint-disable-next-line no-console
-    console.debug('[useStudents] filter:', filter, 'sort:', sortOptions, 'visibleCount:', count);
-  }, [filteredAndSortedStudents, filter, sortOptions]);
-
   const handleFilterChange = (newFilter: StudentFilter) => {
     setFilter(newFilter);
   };
@@ -132,7 +122,7 @@ export function useStudents() {
 
   return {
     students: filteredAndSortedStudents,
-    totalCount: totalCountState,
+    totalCount: filteredAndSortedStudents.length,
     allStudents: students,
     uniqueSchools,
     uniqueWeaponTypes,

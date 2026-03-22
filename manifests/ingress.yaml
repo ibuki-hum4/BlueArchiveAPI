@@ -1,9 +1,9 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: bluearchive-api
+  name: bluearchive
   labels:
-    name: bluearchive-api
+    name: bluearchive
 spec:
   ingressClassName: traefik
   rules:
@@ -11,9 +11,16 @@ spec:
       http:
         paths:
           - pathType: Prefix
+            path: "/api"
+            backend:
+              service:
+                name: bluearchive-go-api
+                port:
+                  number: 80
+          - pathType: Prefix
             path: "/"
             backend:
               service:
-                name: bluearchive-api
+                name: bluearchive-frontend
                 port:
                   number: 80

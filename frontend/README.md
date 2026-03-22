@@ -1,6 +1,6 @@
-# BlueArchive Database - Next.js フルスタック版
+# BlueArchive Database - Next.js Frontend
 
-ブルーアーカイブの生徒データベース（フロントエンド + API統合版）
+ブルーアーカイブの生徒データベース（フロントエンド + Go API連携版）
 
 ## 🚀 機能
 
@@ -11,12 +11,9 @@
 - API使用方法ドキュメント
 - 利用規約ページ
 
-### API（統合版）
-- `/api/students` - 生徒データの取得・投稿
-- `/api` - APIサーバーステータス
-- レート制限（1分間に100リクエスト）
-- セキュリティヘッダー
-- CORS対応
+### API（Go版）
+- `/api/*` は Next.js の rewrite で Go API にプロキシされます
+- フロント側では `frontend/src/app/api` を使用しません
 
 ## 📁 プロジェクト構造
 
@@ -24,10 +21,6 @@
 frontend/
 ├── src/
 │   ├── app/
-│   │   ├── api/                 # Next.js API Routes
-│   │   │   ├── route.ts         # API サーバーステータス
-│   │   │   └── students/
-│   │   │       └── route.ts     # 生徒データAPI
 │   │   ├── [id]/               # 生徒詳細ページ
 │   │   ├── api-docs/           # API使用方法
 │   │   ├── terms/              # 利用規約
@@ -44,25 +37,30 @@ frontend/
 ## 🛠️ 開発環境
 
 ### 前提条件
-- Node.js 18.17+
-- npm
+- Bun
 
 ### セットアップ
 
 1. 依存関係のインストール:
 ```bash
-npm install
+bun install
 ```
 
-2. 開発サーバーの起動:
+2. Go APIの起動（別ターミナル）:
 ```bash
-npm run dev
+cd ../go-api
+go run .
 ```
 
-3. ビルド（本番用）:
+3. 開発サーバーの起動:
 ```bash
-npm run build
-npm start
+bun run dev
+```
+
+4. ビルド（本番用）:
+```bash
+bun run build
+bun run start
 ```
 
 ## 🌐 デプロイ
@@ -76,20 +74,20 @@ npm start
 
 1. プロジェクトをビルド:
 ```bash
-npm run build
+bun run build
 ```
 
 2. 生成された`.next`フォルダとその他必要ファイルをサーバーにアップロード
 
 ## 🔧 環境変数
 
-デフォルトでは `.env` ファイルを用意しなくても動作します。Next.js 内部の API を利用する場合は設定不要です。
+デフォルトでは `.env` ファイルを用意しなくても動作します。`/api/*` は rewrite で `http://localhost:8080` の Go API に転送されます。
 
-外部 API を呼び出したい場合のみ、以下のような環境変数を任意に設定してください。
+Go API の向き先を変えたい場合は、以下を設定してください。
 
 ```env
 # .env.local（任意）
-NEXT_PUBLIC_API_BASE_URL=https://example.com/api
+GO_API_ORIGIN=https://example.com
 ```
 
 ## 📝 API仕様

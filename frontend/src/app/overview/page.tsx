@@ -1,7 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import Navigation from '@/components/Navigation';
-import { readStudentsData } from '@/lib/students/storage';
 
 // 追加: 動的化 + キャッシュ無効化 + Nodeランタイム
 export const dynamic = 'force-dynamic';
@@ -17,8 +16,6 @@ export const metadata: Metadata = {
 // formatNumber removed because unused in the overview page
 
 export default async function OverviewPage() {
-  const students = await readStudentsData();
-
   return (
     <div className="min-h-screen bg-slate-50 text-slate-800">
       <Navigation />

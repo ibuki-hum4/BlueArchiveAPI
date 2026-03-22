@@ -1,6 +1,6 @@
- 'use client';
+'use client';
 
-import { useId, useState, useEffect } from 'react';
+import { memo, useId, useState } from 'react';
 import { StudentFilter, SortOptions, SortField, SortOrder } from '@/types/student';
 
 interface SearchAndFilterProps {
@@ -11,7 +11,7 @@ interface SearchAndFilterProps {
   weaponTypes?: string[];
 }
 
-export default function SearchAndFilter({ onFilterChange, onSortChange, totalCount, schools = [], weaponTypes = [] }: SearchAndFilterProps) {
+function SearchAndFilter({ onFilterChange, onSortChange, totalCount, schools = [], weaponTypes = [] }: SearchAndFilterProps) {
   const [filter, setFilter] = useState<StudentFilter>({});
   const [sortField, setSortField] = useState<SortField>('name');
   const [sortOrder, setSortOrder] = useState<SortOrder>('asc');
@@ -50,21 +50,15 @@ export default function SearchAndFilter({ onFilterChange, onSortChange, totalCou
   const defenseTypes = ['重装甲', '軽装備', '特殊装甲', '弾力装甲', '複合装甲'];
   const positions = ['FRONT', 'MIDDLE', 'BACK'];
 
-  // Debug: log incoming totalCount when it changes
-  // eslint-disable-next-line no-console
-  useEffect(() => {
-    console.debug('[SearchAndFilter] prop totalCount:', totalCount);
-  }, [totalCount]);
-
   return (
     <form
-      className="rounded-3xl border border-slate-200 bg-white p-6 shadow-md space-y-6"
+      className="rounded-lg border border-slate-300 bg-[#fcfcfc] p-6 space-y-6"
       role="search"
       aria-labelledby={`${formId}-title`}
       aria-describedby={`${formId}-summary`}
       onSubmit={(event) => event.preventDefault()}
     >
-      <div className="flex items-center justify-between gap-2">
+      <div className="flex items-center justify-between gap-2 border-b border-slate-200 pb-3">
         <h3 id={`${formId}-title`} className="text-base font-semibold text-slate-900">
           検索とフィルター
         </h3>
@@ -82,7 +76,7 @@ export default function SearchAndFilter({ onFilterChange, onSortChange, totalCou
           <input
             type="text"
             id={nameId}
-            className="w-full rounded-xl border border-slate-200 bg-white px-3 py-2 text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-400/60"
+            className="w-full rounded-md border border-slate-300 bg-white px-3 py-2 text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-sky-300/60"
             placeholder="生徒名を入力..."
             value={filter.name || ''}
             onChange={(e) => handleFilterChange({ name: e.target.value })}
@@ -95,7 +89,7 @@ export default function SearchAndFilter({ onFilterChange, onSortChange, totalCou
           </label>
           <select
             id={schoolId}
-            className="w-full rounded-xl border border-slate-200 bg-white px-3 py-2 text-slate-900 focus:outline-none focus:ring-2 focus:ring-blue-400/60"
+            className="w-full rounded-md border border-slate-300 bg-white px-3 py-2 text-slate-900 focus:outline-none focus:ring-2 focus:ring-sky-300/60"
             value={filter.school || ''}
             onChange={(e) => handleFilterChange({ school: e.target.value || undefined })}
           >
@@ -119,7 +113,7 @@ export default function SearchAndFilter({ onFilterChange, onSortChange, totalCou
             </label>
             <select
               id={rarityId}
-              className="w-full rounded-xl border border-slate-200 bg-white px-3 py-2 text-slate-900 focus:outline-none focus:ring-2 focus:ring-blue-400/60"
+              className="w-full rounded-md border border-slate-300 bg-white px-3 py-2 text-slate-900 focus:outline-none focus:ring-2 focus:ring-sky-300/60"
               value={filter.rarity || ''}
               onChange={(e) => handleFilterChange({ rarity: e.target.value ? Number(e.target.value) : undefined })}
             >
@@ -136,7 +130,7 @@ export default function SearchAndFilter({ onFilterChange, onSortChange, totalCou
             </label>
             <select
               id={weaponId}
-              className="w-full rounded-xl border border-slate-200 bg-white px-3 py-2 text-slate-900 focus:outline-none focus:ring-2 focus:ring-blue-400/60"
+              className="w-full rounded-md border border-slate-300 bg-white px-3 py-2 text-slate-900 focus:outline-none focus:ring-2 focus:ring-sky-300/60"
               value={filter.weaponType || ''}
               onChange={(e) => handleFilterChange({ weaponType: e.target.value || undefined })}
             >
@@ -155,7 +149,7 @@ export default function SearchAndFilter({ onFilterChange, onSortChange, totalCou
             </label>
             <select
               id={attackId}
-              className="w-full rounded-xl border border-slate-200 bg-white px-3 py-2 text-slate-900 focus:outline-none focus:ring-2 focus:ring-blue-400/60"
+              className="w-full rounded-md border border-slate-300 bg-white px-3 py-2 text-slate-900 focus:outline-none focus:ring-2 focus:ring-sky-300/60"
               value={filter.attackType || ''}
               onChange={(e) => handleFilterChange({ attackType: e.target.value || undefined })}
             >
@@ -174,7 +168,7 @@ export default function SearchAndFilter({ onFilterChange, onSortChange, totalCou
             </label>
             <select
               id={defenseId}
-              className="w-full rounded-xl border border-slate-200 bg-white px-3 py-2 text-slate-900 focus:outline-none focus:ring-2 focus:ring-blue-400/60"
+              className="w-full rounded-md border border-slate-300 bg-white px-3 py-2 text-slate-900 focus:outline-none focus:ring-2 focus:ring-sky-300/60"
               value={filter.defenseType || ''}
               onChange={(e) => handleFilterChange({ defenseType: e.target.value || undefined })}
             >
@@ -193,7 +187,7 @@ export default function SearchAndFilter({ onFilterChange, onSortChange, totalCou
             </label>
             <select
               id={positionId}
-              className="w-full rounded-xl border border-slate-200 bg-white px-3 py-2 text-slate-900 focus:outline-none focus:ring-2 focus:ring-blue-400/60"
+              className="w-full rounded-md border border-slate-300 bg-white px-3 py-2 text-slate-900 focus:outline-none focus:ring-2 focus:ring-sky-300/60"
               value={filter.position || ''}
               onChange={(e) => handleFilterChange({ position: e.target.value || undefined })}
             >
@@ -215,7 +209,7 @@ export default function SearchAndFilter({ onFilterChange, onSortChange, totalCou
             <label htmlFor={sortFieldId} className="text-sm font-semibold text-slate-700">並び替え:</label>
             <select
               id={sortFieldId}
-              className="rounded-lg border border-slate-200 bg-white px-3 py-1 text-sm text-slate-900 focus:outline-none focus:ring-2 focus:ring-blue-400/60"
+              className="rounded-sm border border-slate-300 bg-white px-3 py-1 text-sm text-slate-900 focus:outline-none focus:ring-2 focus:ring-sky-300/60"
               value={sortField}
               onChange={(e) => handleSortChange(e.target.value as SortField, sortOrder)}
             >
@@ -227,7 +221,7 @@ export default function SearchAndFilter({ onFilterChange, onSortChange, totalCou
             </select>
             <button
               type="button"
-              className="rounded-lg border border-slate-200 px-3 py-1 text-sm text-slate-700 transition hover:bg-slate-100 focus:outline-none focus:ring-2 focus:ring-blue-400/60"
+              className="rounded-sm border border-slate-300 px-3 py-1 text-sm text-slate-700 transition hover:bg-slate-100 focus:outline-none focus:ring-2 focus:ring-sky-300/60"
               aria-label={`並び順を${sortOrder === 'asc' ? '降順' : '昇順'}に変更`}
               onClick={() => handleSortChange(sortField, sortOrder === 'asc' ? 'desc' : 'asc')}
             >
@@ -236,7 +230,7 @@ export default function SearchAndFilter({ onFilterChange, onSortChange, totalCou
           </div>
           <button
             type="button"
-            className="rounded-lg px-4 py-1 text-sm font-semibold text-blue-600 transition hover:text-blue-800"
+            className="rounded-sm border border-transparent px-4 py-1 text-sm font-semibold text-slate-700 transition hover:border-slate-300 hover:bg-white"
             onClick={clearFilters}
           >
             フィルターをクリア
@@ -249,3 +243,5 @@ export default function SearchAndFilter({ onFilterChange, onSortChange, totalCou
     </form>
   );
 }
+
+export default memo(SearchAndFilter);
