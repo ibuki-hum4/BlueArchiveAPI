@@ -21,19 +21,59 @@ import (
 const (
 	ogWidth  = 1200
 	ogHeight = 630
+
+	outerMargin       = 40.0
+	cardCornerRadius  = 26.0
+	contentPadX       = 64.0
+	contentPadY       = 44.0
+	sectionGapY       = 24.0
+	headerHeight      = 52.0
+	footerHeight      = 112.0
+	chipWidth         = 96.0
+	chipHeight        = 48.0
+	statCardWidth     = 190.0
+	statCardHeight    = 88.0
+	statCardGap       = 18.0
+	footerRightGap    = 28.0
+	minFooterURLWidth = 120.0
 )
 
 var (
-	subtitleFace  = loadPreferredFontFace(36, false)
-	titleFace     = loadPreferredFontFace(72, true)
-	footerFace    = loadPreferredFontFace(28, false)
-	chipFace      = loadPreferredFontFace(24, true)
-	pillFace      = loadPreferredFontFace(34, true)
-	pillLabelFace = loadPreferredFontFace(22, false)
+	subtitleFace   = loadPreferredFontFace(36, false)
+	subtitleFaceSm = loadPreferredFontFace(32, false)
+	titleFace      = loadPreferredFontFace(72, true)
+	footerFace     = loadPreferredFontFace(24, false)
+	chipFace       = loadPreferredFontFace(24, true)
+	pillFace       = loadPreferredFontFace(34, true)
+	pillLabelFace  = loadPreferredFontFace(22, false)
 )
 
 type OGHandler struct {
 	service *service.StudentsService
+}
+
+type Box struct {
+	X      float64
+	Y      float64
+	Width  float64
+	Height float64
+}
+
+func (b Box) Inset(px, py float64) Box {
+	return Box{
+		X:      b.X + px,
+		Y:      b.Y + py,
+		Width:  maxFloat(0, b.Width-px*2),
+		Height: maxFloat(0, b.Height-py*2),
+	}
+}
+
+func (b Box) Right() float64 {
+	return b.X + b.Width
+}
+
+func (b Box) Bottom() float64 {
+	return b.Y + b.Height
 }
 
 func NewOGHandler(svc *service.StudentsService) *OGHandler {
@@ -46,8 +86,8 @@ func (h *OGHandler) OG(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	title := limitRunes(strings.TrimSpace(r.URL.Query().Get("title")), 42)
-	subtitle := limitRunes(strings.TrimSpace(r.URL.Query().Get("subtitle")), 72)
+	title := limitRunes(strings.TrimSpace(r.URL.Query().Get("title")), 72)
+	subtitle := limitRunes(strings.TrimSpace(r.URL.Query().Get("subtitle")), 120)
 	studentID := strings.TrimSpace(r.URL.Query().Get("id"))
 
 	rarityLabel := "★?"
@@ -78,6 +118,8 @@ func (h *OGHandler) OG(w http.ResponseWriter, r *http.Request) {
 	if subtitle == "" {
 		subtitle = "ブルーアーカイブの生徒データベース"
 	}
+	title = strings.TrimSpace(title)
+	subtitle = strings.TrimSpace(subtitle)
 
 	dc := gg.NewContext(ogWidth, ogHeight)
 
@@ -86,80 +128,25 @@ func (h *OGHandler) OG(w http.ResponseWriter, r *http.Request) {
 	dc.DrawRectangle(0, 0, ogWidth, ogHeight)
 	dc.Fill()
 
-	margin := 40.0
-	cardW := float64(ogWidth) - margin*2
-	cardH := float64(ogHeight) - margin*2
-	radius := 26.0
+	root := Box{X: 0, Y: 0, Width: ogWidth, Height: ogHeight}
+	card := root.Inset(outerMargin, outerMargin)
+	content := card.Inset(contentPadX, contentPadY)
 
 	// Main card
-	dc.DrawRoundedRectangle(margin, margin, cardW, cardH, radius)
+	dc.DrawRoundedRectangle(card.X, card.Y, card.Width, card.Height, cardCornerRadius)
 	dc.SetColor(mustHexColor("#FFFFFF"))
 	dc.Fill()
-	dc.DrawRoundedRectangle(margin, margin, cardW, cardH, radius)
+	dc.DrawRoundedRectangle(card.X, card.Y, card.Width, card.Height, cardCornerRadius)
 	dc.SetColor(mustHexColor("#CBD5E1"))
 	dc.SetLineWidth(2)
 	dc.Stroke()
 
-	// 3-block layout (header / center / footer), equivalent to column flex + space-between.
-	padX := 56.0
-	padY := 34.0
-	innerX := margin + padX
-	innerY := margin + padY
-	innerW := cardW - padX*2
-	innerH := cardH - padY*2
+	centerHeight := maxFloat(120, content.Height-headerHeight-footerHeight-sectionGapY*2)
+	sections := columnLayout(content, sectionGapY, []float64{headerHeight, centerHeight, footerHeight})
 
-	headerH := 48.0
-	footerH := 104.0
-	centerTop := innerY + headerH + 26
-	footerY := innerY + innerH - footerH
-	centerH := footerY - centerTop - 16
-	if centerH < 120 {
-		centerH = 120
-	}
-
-	// Header row
-	drawChip(dc, innerX, innerY, rarityLabel, "#A855F7", "#FFFFFF")
-	weaponChipW := 96.0
-	drawChip(dc, innerX+innerW-weaponChipW, innerY, weaponType, "#E2E8F0", "#475569")
-
-	// Center row
-	titleMaxW := innerW * 0.78
-	titleX := innerX
-	titleY := centerTop
-
-	dc.SetColor(mustHexColor("#0F172A"))
-	dc.SetFontFace(titleFace)
-	titleLines := wrapTextLines(dc, title, titleMaxW, 2)
-	lineH := 74.0
-	for i, line := range titleLines {
-		dc.DrawStringAnchored(line, titleX, titleY+float64(i)*lineH, 0, 0)
-	}
-
-	subY := titleY + lineH*float64(len(titleLines)) + 14
-	if subY > centerTop+centerH-34 {
-		subY = centerTop + centerH - 34
-	}
-	dc.SetColor(mustHexColor("#64748B"))
-	dc.SetFontFace(loadPreferredFontFace(32, false))
-	subLine := ellipsizeToWidth(dc, subtitle, titleMaxW)
-	dc.DrawStringAnchored(subLine, titleX, subY, 0, 0)
-
-	// Footer row
-	cardY := footerY + 8
-	statW := 190.0
-	gap := 18.0
-	drawStatPill(dc, innerX, cardY, statW, 88, "市街地", city, terrainAccent(city))
-	drawStatPill(dc, innerX+statW+gap, cardY, statW, 88, "屋外", outdoor, terrainAccent(outdoor))
-	drawStatPill(dc, innerX+(statW+gap)*2, cardY, statW, 88, "屋内", indoor, terrainAccent(indoor))
-
-	urlAreaX := innerX + (statW+gap)*3 + 28
-	urlAreaW := innerX + innerW - urlAreaX
-	if urlAreaW > 80 {
-		dc.SetColor(mustHexColor("#64748B"))
-		dc.SetFontFace(footerFace)
-		urlText := ellipsizeToWidth(dc, "bluearchive-api.skyia.jp", urlAreaW)
-		dc.DrawStringAnchored(urlText, urlAreaX, footerY+footerH/2+8, 0, 0.5)
-	}
+	drawHeaderRow(dc, sections[0], rarityLabel, weaponType)
+	drawCenterRow(dc, sections[1], title, subtitle)
+	drawFooterRow(dc, sections[2], city, outdoor, indoor)
 
 	w.Header().Set("Cache-Control", "no-store, no-cache, must-revalidate, proxy-revalidate, max-age=0")
 	w.Header().Set("Pragma", "no-cache")
@@ -168,6 +155,80 @@ func (h *OGHandler) OG(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "image/png")
 	w.WriteHeader(http.StatusOK)
 	_ = png.Encode(w, dc.Image())
+}
+
+func drawHeaderRow(dc *gg.Context, box Box, rarityLabel, weaponType string) {
+	gap := maxFloat(0, box.Width-chipWidth*2)
+	chips := rowLayout(box, gap, []float64{chipWidth, chipWidth})
+	left := alignMiddle(chips[0], chipHeight)
+	right := alignMiddle(chips[1], chipHeight)
+
+	drawChip(dc, left, rarityLabel, "#A855F7", "#FFFFFF")
+	drawChip(dc, right, weaponType, "#E2E8F0", "#475569")
+}
+
+func drawCenterRow(dc *gg.Context, box Box, title, subtitle string) {
+	if box.Height <= 0 || box.Width <= 0 {
+		return
+	}
+
+	// Clip center block to guarantee no overflow regardless of content length.
+	dc.Push()
+	dc.DrawRectangle(box.X, box.Y, box.Width, box.Height)
+	dc.Clip()
+
+	titleMaxW := box.Width * 0.75
+	titleBlockH := 74.0 * 2
+	subtitleBlockH := 44.0
+	stackGap := 20.0
+	stackH := titleBlockH + stackGap + subtitleBlockH
+	stackTop := box.Y + maxFloat(0, (box.Height-stackH)/2) + 4
+	if stackTop+stackH > box.Bottom() {
+		stackTop = box.Bottom() - stackH
+	}
+	titleBox := Box{X: box.X, Y: stackTop, Width: titleMaxW, Height: titleBlockH}
+	subtitleBox := Box{X: box.X, Y: titleBox.Bottom() + stackGap, Width: titleMaxW, Height: subtitleBlockH}
+
+	dc.SetColor(mustHexColor("#0F172A"))
+	dc.SetFontFace(titleFace)
+	titleLines := wrapTextLines(dc, title, titleBox.Width, 2)
+	lineH := 80.0
+	for i, line := range titleLines {
+		lineBox := Box{X: titleBox.X, Y: titleBox.Y + float64(i)*lineH, Width: titleBox.Width, Height: lineH}
+		DrawCenteredText(dc, lineBox, line, titleFace, mustHexColor("#0F172A"))
+	}
+
+	subLine := ellipsizeToWidth(dc, subtitle, subtitleBox.Width)
+	if subtitleBox.Bottom() <= box.Bottom() {
+		DrawCenteredText(dc, subtitleBox, subLine, subtitleFaceSm, mustHexColor("#6B7280"))
+	}
+
+	dc.Pop()
+}
+
+func drawFooterRow(dc *gg.Context, box Box, city, outdoor, indoor string) {
+	if box.Height <= 0 || box.Width <= 0 {
+		return
+	}
+
+	cardsWidth := statCardWidth*3 + statCardGap*2
+	footerCols := rowLayout(box, footerRightGap, []float64{cardsWidth, maxFloat(0, box.Width-cardsWidth-footerRightGap)})
+
+	cardBoxes := rowLayout(footerCols[0], statCardGap, []float64{statCardWidth, statCardWidth, statCardWidth})
+	for i := range cardBoxes {
+		cardBoxes[i] = alignBottom(cardBoxes[i], statCardHeight)
+	}
+
+	drawStatPill(dc, cardBoxes[0], "市街地", city, terrainAccent(city))
+	drawStatPill(dc, cardBoxes[1], "屋外", outdoor, terrainAccent(outdoor))
+	drawStatPill(dc, cardBoxes[2], "屋内", indoor, terrainAccent(indoor))
+
+	if footerCols[1].Width < minFooterURLWidth {
+		return
+	}
+
+	urlText := ellipsizeToWidth(dc, "bluearchive-api.skyia.jp", footerCols[1].Width)
+	DrawRightText(dc, alignBottom(footerCols[1], statCardHeight), urlText, footerFace, mustHexColor("#94A3B8"), 4)
 }
 
 func normalizeGrade(v string) string {
@@ -195,35 +256,96 @@ func terrainAccent(grade string) string {
 	}
 }
 
-func drawChip(dc *gg.Context, x, y float64, text, bg, fg string) {
-	dc.DrawRoundedRectangle(x, y, 96, 48, 12)
+func drawChip(dc *gg.Context, box Box, text, bg, fg string) {
+	dc.DrawRoundedRectangle(box.X, box.Y, box.Width, box.Height, 12)
 	dc.SetColor(mustHexColor(bg))
 	dc.Fill()
-	dc.SetColor(mustHexColor(fg))
-	dc.SetFontFace(chipFace)
-	dc.DrawStringAnchored(ellipsizeToWidth(dc, text, 78), x+48, y+25, 0.5, 0.5)
+	DrawCenteredText(dc, box, ellipsizeToWidth(dc, text, box.Width-18), chipFace, mustHexColor(fg))
 }
 
-func drawStatPill(dc *gg.Context, x, y, w, h float64, label, value, accent string) {
-	dc.DrawRoundedRectangle(x, y, w, h, 12)
+func drawStatPill(dc *gg.Context, box Box, label, value, accent string) {
+	dc.DrawRoundedRectangle(box.X, box.Y, box.Width, box.Height, 12)
 	dc.SetColor(mustHexColor("#F1F5F9"))
 	dc.Fill()
-	dc.DrawRoundedRectangle(x, y, w, h, 12)
+	dc.DrawRoundedRectangle(box.X, box.Y, box.Width, box.Height, 12)
 	dc.SetColor(mustHexColor("#CBD5E1"))
 	dc.SetLineWidth(1.5)
 	dc.Stroke()
 
-	dc.SetColor(mustHexColor("#64748B"))
-	dc.SetFontFace(pillLabelFace)
-	dc.DrawStringAnchored(label, x+w/2, y+25, 0.5, 0.5)
+	labelBox := Box{X: box.X, Y: box.Y + 4, Width: box.Width, Height: 28}
+	DrawCenteredText(dc, labelBox, label, pillLabelFace, mustHexColor("#64748B"))
 
-	dc.DrawRoundedRectangle(x+w/2-26, y+40, 52, 38, 10)
+	vW := 52.0
+	vH := 38.0
+	vBox := Box{X: box.X + (box.Width-vW)/2, Y: box.Y + 40, Width: vW, Height: vH}
+	dc.DrawRoundedRectangle(vBox.X, vBox.Y, vBox.Width, vBox.Height, 10)
 	dc.SetColor(mustHexColor(accent))
 	dc.Fill()
 
-	dc.SetColor(mustHexColor("#FFFFFF"))
-	dc.SetFontFace(pillFace)
-	dc.DrawStringAnchored(value, x+w/2, y+60, 0.5, 0.5)
+	DrawCenteredText(dc, vBox, value, pillFace, mustHexColor("#FFFFFF"))
+}
+
+func columnLayout(parent Box, gap float64, heights []float64) []Box {
+	boxes := make([]Box, len(heights))
+	y := parent.Y
+	for i, h := range heights {
+		hh := maxFloat(0, h)
+		boxes[i] = Box{X: parent.X, Y: y, Width: maxFloat(0, parent.Width), Height: hh}
+		y += hh + gap
+	}
+	return boxes
+}
+
+func rowLayout(parent Box, gap float64, widths []float64) []Box {
+	boxes := make([]Box, len(widths))
+	x := parent.X
+	for i, w := range widths {
+		ww := maxFloat(0, w)
+		boxes[i] = Box{X: x, Y: parent.Y, Width: ww, Height: maxFloat(0, parent.Height)}
+		x += ww + gap
+	}
+	return boxes
+}
+
+func alignBottom(box Box, h float64) Box {
+	hh := maxFloat(0, h)
+	if hh > box.Height {
+		hh = box.Height
+	}
+	return Box{X: box.X, Y: box.Bottom() - hh, Width: box.Width, Height: hh}
+}
+
+func alignMiddle(box Box, h float64) Box {
+	hh := maxFloat(0, h)
+	if hh > box.Height {
+		hh = box.Height
+	}
+	return Box{X: box.X, Y: box.Y + (box.Height-hh)/2, Width: box.Width, Height: hh}
+}
+
+func DrawCenteredText(dc *gg.Context, box Box, text string, face font.Face, clr color.Color) {
+	dc.SetColor(clr)
+	dc.SetFontFace(face)
+	dc.DrawStringAnchored(text, box.X+box.Width/2, box.Y+box.Height/2, 0.5, 0.5)
+}
+
+func DrawLeftText(dc *gg.Context, box Box, text string, face font.Face, clr color.Color, padding float64) {
+	dc.SetColor(clr)
+	dc.SetFontFace(face)
+	dc.DrawStringAnchored(text, box.X+padding, box.Y+box.Height/2, 0, 0.5)
+}
+
+func DrawRightText(dc *gg.Context, box Box, text string, face font.Face, clr color.Color, padding float64) {
+	dc.SetColor(clr)
+	dc.SetFontFace(face)
+	dc.DrawStringAnchored(text, box.Right()-padding, box.Y+box.Height/2, 1, 0.5)
+}
+
+func maxFloat(a, b float64) float64 {
+	if a > b {
+		return a
+	}
+	return b
 }
 
 func wrapTextLines(dc *gg.Context, text string, maxWidth float64, maxLines int) []string {
