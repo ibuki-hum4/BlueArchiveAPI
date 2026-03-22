@@ -10,8 +10,15 @@ spec:
     - host: bluearchive-api.skyia.jp
       http:
         paths:
-          - pathType: Prefix
+          - pathType: Exact
             path: "/api"
+            backend:
+              service:
+                name: bluearchive-go-api
+                port:
+                  number: 80
+          - pathType: Prefix
+            path: "/api/"
             backend:
               service:
                 name: bluearchive-go-api
