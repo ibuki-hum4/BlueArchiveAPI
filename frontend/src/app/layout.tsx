@@ -45,7 +45,7 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: "/og",
+        url: "/api/og",
         width: 1200,
         height: 630,
         alt: `${siteName}のOGP画像`,
@@ -56,7 +56,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: siteName,
     description: siteDescription,
-    images: ["/og"],
+    images: ["/api/og"],
   },
   icons: {
     icon: "/favicon.ico",

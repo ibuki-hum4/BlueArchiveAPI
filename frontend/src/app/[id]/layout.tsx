@@ -18,7 +18,7 @@ const buildOgImageUrl = (title: string, subtitle?: string) => {
   if (subtitle) {
     params.set("subtitle", subtitle);
   }
-  return `/og?${params.toString()}`;
+  return `/api/og?${params.toString()}`;
 };
 
 export async function generateMetadata(props: MetadataProps | Promise<MetadataProps>): Promise<Metadata> {
