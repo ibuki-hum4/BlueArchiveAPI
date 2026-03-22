@@ -9,6 +9,8 @@ import (
 	"strconv"
 	"strings"
 
+	"bluearchiveapi/go-api/internal/service"
+
 	"github.com/fogleman/gg"
 	"golang.org/x/image/font"
 	"golang.org/x/image/font/gofont/gobold"
@@ -23,17 +25,19 @@ const (
 
 var (
 	subtitleFace  = loadPreferredFontFace(36, false)
-	titleFace     = loadPreferredFontFace(88, true)
+	titleFace     = loadPreferredFontFace(72, true)
 	footerFace    = loadPreferredFontFace(28, false)
 	chipFace      = loadPreferredFontFace(24, true)
 	pillFace      = loadPreferredFontFace(34, true)
 	pillLabelFace = loadPreferredFontFace(22, false)
 )
 
-type OGHandler struct{}
+type OGHandler struct {
+	service *service.StudentsService
+}
 
-func NewOGHandler() *OGHandler {
-	return &OGHandler{}
+func NewOGHandler(svc *service.StudentsService) *OGHandler {
+	return &OGHandler{service: svc}
 }
 
 func (h *OGHandler) OG(w http.ResponseWriter, r *http.Request) {
@@ -42,8 +46,31 @@ func (h *OGHandler) OG(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	title := limitRunes(strings.TrimSpace(r.URL.Query().Get("title")), 60)
-	subtitle := limitRunes(strings.TrimSpace(r.URL.Query().Get("subtitle")), 120)
+	title := limitRunes(strings.TrimSpace(r.URL.Query().Get("title")), 42)
+	subtitle := limitRunes(strings.TrimSpace(r.URL.Query().Get("subtitle")), 72)
+	studentID := strings.TrimSpace(r.URL.Query().Get("id"))
+
+	rarityLabel := "★?"
+	weaponType := "-"
+	city := "-"
+	outdoor := "-"
+	indoor := "-"
+
+	if studentID != "" && h.service != nil {
+		if st, err := h.service.GetByID(studentID); err == nil && st != nil {
+			if title == "" {
+				title = limitRunes(strings.TrimSpace(st.Name), 42)
+			}
+			if subtitle == "" {
+				subtitle = limitRunes(strings.TrimSpace(st.School), 72)
+			}
+			rarityLabel = fmt.Sprintf("★%d", st.Rarity)
+			weaponType = limitRunes(strings.TrimSpace(st.Weapon.Type), 8)
+			city = normalizeGrade(st.TerrainAdaptation.City)
+			outdoor = normalizeGrade(st.TerrainAdaptation.Outdoor)
+			indoor = normalizeGrade(st.TerrainAdaptation.Indoor)
+		}
+	}
 
 	if title == "" {
 		title = "Blue Archive API"
@@ -76,23 +103,23 @@ func (h *OGHandler) OG(w http.ResponseWriter, r *http.Request) {
 	contentX := margin + 56
 
 	// Header chips inspired by in-app student card visual language
-	drawChip(dc, contentX, margin+34, "★2", "#A855F7", "#FFFFFF")
-	drawChip(dc, contentX+760, margin+34, "SMG", "#E2E8F0", "#475569")
+	drawChip(dc, contentX, margin+34, rarityLabel, "#A855F7", "#FFFFFF")
+	drawChip(dc, contentX+760, margin+34, weaponType, "#E2E8F0", "#475569")
 
 	// Main title and subtitle
 	dc.SetColor(mustHexColor("#0F172A"))
 	dc.SetFontFace(titleFace)
-	dc.DrawStringWrapped(title, contentX, margin+125, 0, 0, cardW-112, 1.12, gg.AlignLeft)
+	dc.DrawStringWrapped(title, contentX, margin+125, 0, 0, cardW-112, 1.18, gg.AlignLeft)
 
 	dc.SetColor(mustHexColor("#64748B"))
 	dc.SetFontFace(subtitleFace)
-	dc.DrawStringWrapped(subtitle, contentX, margin+235, 0, 0, cardW-112, 1.2, gg.AlignLeft)
+	dc.DrawStringWrapped(subtitle, contentX, margin+245, 0, 0, cardW-112, 1.25, gg.AlignLeft)
 
 	// Bottom stat pills for clear visual change
 	pillY := margin + cardH - 122
-	drawStatPill(dc, contentX, pillY, 190, 88, "市街地", "A", "#3B82F6")
-	drawStatPill(dc, contentX+220, pillY, 190, 88, "屋外", "D", "#EF4444")
-	drawStatPill(dc, contentX+440, pillY, 190, 88, "屋内", "A", "#3B82F6")
+	drawStatPill(dc, contentX, pillY, 190, 88, "市街地", city, terrainAccent(city))
+	drawStatPill(dc, contentX+220, pillY, 190, 88, "屋外", outdoor, terrainAccent(outdoor))
+	drawStatPill(dc, contentX+440, pillY, 190, 88, "屋内", indoor, terrainAccent(indoor))
 
 	drawFooter(dc)
 
@@ -103,6 +130,31 @@ func (h *OGHandler) OG(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "image/png")
 	w.WriteHeader(http.StatusOK)
 	_ = png.Encode(w, dc.Image())
+}
+
+func normalizeGrade(v string) string {
+	v = strings.ToUpper(strings.TrimSpace(v))
+	if v == "" {
+		return "-"
+	}
+	return v
+}
+
+func terrainAccent(grade string) string {
+	switch strings.ToUpper(strings.TrimSpace(grade)) {
+	case "S":
+		return "#10B981"
+	case "A":
+		return "#3B82F6"
+	case "B":
+		return "#F59E0B"
+	case "C":
+		return "#F97316"
+	case "D":
+		return "#EF4444"
+	default:
+		return "#94A3B8"
+	}
 }
 
 func drawFooter(dc *gg.Context) {

@@ -13,7 +13,7 @@ func NewRouter() http.Handler {
 	svc := service.NewStudentsService(repo)
 
 	metaHandler := handler.NewMetaHandler()
-	ogHandler := handler.NewOGHandler()
+	ogHandler := handler.NewOGHandler(svc)
 	studentsHandler := handler.NewStudentsHandler(svc)
 
 	mux := http.NewServeMux()

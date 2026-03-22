@@ -14,8 +14,9 @@ type MetadataProps = {
   };
 };
 
-const buildOgImageUrl = (title: string, subtitle?: string) => {
+const buildOgImageUrl = (id: string, title: string, subtitle?: string) => {
   const params = new URLSearchParams({ title });
+  params.set("id", id);
   if (subtitle) {
     params.set("subtitle", subtitle);
   }
@@ -43,7 +44,7 @@ export async function generateMetadata(props: MetadataProps | Promise<MetadataPr
   if (!student) {
     const title = `生徒が見つかりません | ${siteName}`;
     const description = "指定された生徒が存在しないか、データが読み込めませんでした。";
-    const image = buildOgImageUrl("生徒が見つかりません", `ID: ${params.id}`);
+    const image = buildOgImageUrl(params.id, "生徒が見つかりません", `ID: ${params.id}`);
 
     return {
       title,
@@ -77,7 +78,7 @@ export async function generateMetadata(props: MetadataProps | Promise<MetadataPr
   const title = `${student.name} | ${siteName}`;
   const description = `${student.school}所属の${student.name}の詳細情報。レア度★${student.rarity}、攻撃タイプ${student.combat.attackType}などを掲載。`;
   const subtitle = `${student.school} / レア度★${student.rarity}`;
-  const image = buildOgImageUrl(student.name, subtitle);
+  const image = buildOgImageUrl(student.id, student.name, subtitle);
 
   return {
     title,
