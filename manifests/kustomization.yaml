@@ -13,9 +13,9 @@ resources:
 
 images:
   - name: docker.io/kemar1/bluearchive-api
-    newTag: v2.9.1
+    newTag: v2.9.2
   - name: docker.io/kemar1/bluearchive-api-go
-    newTag: v2.9.1
+    newTag: v2.9.2
 
 configMapGenerator:
   - name: students-config
