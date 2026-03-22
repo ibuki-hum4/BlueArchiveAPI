@@ -10,6 +10,8 @@ RUN go mod download && go build -o /out/go-api ./main.go
 FROM alpine:3.20
 WORKDIR /app
 
+RUN apk add --no-cache font-noto-cjk
+
 ENV PORT=8080
 ENV STUDENTS_DATA_PATH=/app/data/students.json
 

@@ -5,6 +5,7 @@ import (
 	"image/color"
 	"image/png"
 	"net/http"
+	"os"
 	"strconv"
 	"strings"
 
@@ -21,12 +22,12 @@ const (
 )
 
 var (
-	subtitleFace = mustLoadFontFace(goregular.TTF, 36)
-	titleFace    = mustLoadFontFace(gobold.TTF, 88)
-	footerFace   = mustLoadFontFace(goregular.TTF, 28)
-	chipFace     = mustLoadFontFace(gobold.TTF, 24)
-	pillFace     = mustLoadFontFace(gobold.TTF, 34)
-	pillLabelFace = mustLoadFontFace(goregular.TTF, 22)
+	subtitleFace  = loadPreferredFontFace(36, false)
+	titleFace     = loadPreferredFontFace(88, true)
+	footerFace    = loadPreferredFontFace(28, false)
+	chipFace      = loadPreferredFontFace(24, true)
+	pillFace      = loadPreferredFontFace(34, true)
+	pillLabelFace = loadPreferredFontFace(22, false)
 )
 
 type OGHandler struct{}
@@ -183,6 +184,56 @@ func mustLoadFontFace(ttf []byte, size float64) font.Face {
 		panic(err)
 	}
 	return face
+}
+
+func loadPreferredFontFace(size float64, bold bool) font.Face {
+	regularCandidates := []string{
+		"/usr/share/fonts/noto/NotoSansJP-Regular.ttf",
+		"/usr/share/fonts/noto/NotoSansCJK-Regular.ttc",
+		"/usr/share/fonts/truetype/noto/NotoSansJP-Regular.ttf",
+		"/usr/share/fonts/truetype/noto/NotoSansCJK-Regular.ttc",
+		"/usr/share/fonts/opentype/noto/NotoSansCJK-Regular.ttc",
+	}
+	boldCandidates := []string{
+		"/usr/share/fonts/noto/NotoSansJP-Bold.ttf",
+		"/usr/share/fonts/noto/NotoSansCJK-Bold.ttc",
+		"/usr/share/fonts/truetype/noto/NotoSansJP-Bold.ttf",
+		"/usr/share/fonts/truetype/noto/NotoSansCJK-Bold.ttc",
+		"/usr/share/fonts/opentype/noto/NotoSansCJK-Bold.ttc",
+	}
+
+	candidates := regularCandidates
+	if bold {
+		candidates = boldCandidates
+	}
+
+	for _, path := range candidates {
+		face, err := loadFontFaceFromFile(path, size)
+		if err == nil {
+			return face
+		}
+	}
+
+	if bold {
+		return mustLoadFontFace(gobold.TTF, size)
+	}
+	return mustLoadFontFace(goregular.TTF, size)
+}
+
+func loadFontFaceFromFile(path string, size float64) (font.Face, error) {
+	b, err := os.ReadFile(path)
+	if err != nil {
+		return nil, err
+	}
+	parsed, err := opentype.Parse(b)
+	if err != nil {
+		return nil, err
+	}
+	return opentype.NewFace(parsed, &opentype.FaceOptions{
+		Size:    size,
+		DPI:     72,
+		Hinting: font.HintingFull,
+	})
 }
 
 func mustHexColor(hex string) color.Color {
