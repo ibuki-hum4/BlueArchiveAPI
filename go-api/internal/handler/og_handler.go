@@ -100,28 +100,66 @@ func (h *OGHandler) OG(w http.ResponseWriter, r *http.Request) {
 	dc.SetLineWidth(2)
 	dc.Stroke()
 
-	contentX := margin + 56
+	// 3-block layout (header / center / footer), equivalent to column flex + space-between.
+	padX := 56.0
+	padY := 34.0
+	innerX := margin + padX
+	innerY := margin + padY
+	innerW := cardW - padX*2
+	innerH := cardH - padY*2
 
-	// Header chips inspired by in-app student card visual language
-	drawChip(dc, contentX, margin+34, rarityLabel, "#A855F7", "#FFFFFF")
-	drawChip(dc, contentX+760, margin+34, weaponType, "#E2E8F0", "#475569")
+	headerH := 48.0
+	footerH := 104.0
+	centerTop := innerY + headerH + 26
+	footerY := innerY + innerH - footerH
+	centerH := footerY - centerTop - 16
+	if centerH < 120 {
+		centerH = 120
+	}
 
-	// Main title and subtitle
+	// Header row
+	drawChip(dc, innerX, innerY, rarityLabel, "#A855F7", "#FFFFFF")
+	weaponChipW := 96.0
+	drawChip(dc, innerX+innerW-weaponChipW, innerY, weaponType, "#E2E8F0", "#475569")
+
+	// Center row
+	titleMaxW := innerW * 0.78
+	titleX := innerX
+	titleY := centerTop
+
 	dc.SetColor(mustHexColor("#0F172A"))
 	dc.SetFontFace(titleFace)
-	dc.DrawStringWrapped(title, contentX, margin+125, 0, 0, cardW-112, 1.18, gg.AlignLeft)
+	titleLines := wrapTextLines(dc, title, titleMaxW, 2)
+	lineH := 74.0
+	for i, line := range titleLines {
+		dc.DrawStringAnchored(line, titleX, titleY+float64(i)*lineH, 0, 0)
+	}
 
+	subY := titleY + lineH*float64(len(titleLines)) + 14
+	if subY > centerTop+centerH-34 {
+		subY = centerTop + centerH - 34
+	}
 	dc.SetColor(mustHexColor("#64748B"))
-	dc.SetFontFace(subtitleFace)
-	dc.DrawStringWrapped(subtitle, contentX, margin+245, 0, 0, cardW-112, 1.25, gg.AlignLeft)
+	dc.SetFontFace(loadPreferredFontFace(32, false))
+	subLine := ellipsizeToWidth(dc, subtitle, titleMaxW)
+	dc.DrawStringAnchored(subLine, titleX, subY, 0, 0)
 
-	// Bottom stat pills for clear visual change
-	pillY := margin + cardH - 122
-	drawStatPill(dc, contentX, pillY, 190, 88, "市街地", city, terrainAccent(city))
-	drawStatPill(dc, contentX+220, pillY, 190, 88, "屋外", outdoor, terrainAccent(outdoor))
-	drawStatPill(dc, contentX+440, pillY, 190, 88, "屋内", indoor, terrainAccent(indoor))
+	// Footer row
+	cardY := footerY + 8
+	statW := 190.0
+	gap := 18.0
+	drawStatPill(dc, innerX, cardY, statW, 88, "市街地", city, terrainAccent(city))
+	drawStatPill(dc, innerX+statW+gap, cardY, statW, 88, "屋外", outdoor, terrainAccent(outdoor))
+	drawStatPill(dc, innerX+(statW+gap)*2, cardY, statW, 88, "屋内", indoor, terrainAccent(indoor))
 
-	drawFooter(dc)
+	urlAreaX := innerX + (statW+gap)*3 + 28
+	urlAreaW := innerX + innerW - urlAreaX
+	if urlAreaW > 80 {
+		dc.SetColor(mustHexColor("#64748B"))
+		dc.SetFontFace(footerFace)
+		urlText := ellipsizeToWidth(dc, "bluearchive-api.skyia.jp", urlAreaW)
+		dc.DrawStringAnchored(urlText, urlAreaX, footerY+footerH/2+8, 0, 0.5)
+	}
 
 	w.Header().Set("Cache-Control", "no-store, no-cache, must-revalidate, proxy-revalidate, max-age=0")
 	w.Header().Set("Pragma", "no-cache")
@@ -157,36 +195,13 @@ func terrainAccent(grade string) string {
 	}
 }
 
-func drawFooter(dc *gg.Context) {
-	const (
-		circleX = 110.0
-		circleY = 560.0
-		radius  = 24.0
-	)
-
-	dc.SetColor(mustHexColor("#F1F5F9"))
-	dc.DrawCircle(circleX, circleY, radius)
-	dc.Fill()
-
-	dc.SetColor(mustHexColor("#3B82F6")) // Vivid blue matching the button accents in the UI
-	dc.SetLineWidth(3)
-	dc.DrawCircle(circleX-2, circleY-2, 10)
-	dc.Stroke()
-	dc.DrawLine(circleX+6, circleY+6, circleX+14, circleY+14)
-	dc.Stroke()
-
-	dc.SetColor(mustHexColor("#64748B"))
-	dc.SetFontFace(footerFace)
-	dc.DrawStringAnchored("bluearchive-api.skyia.jp", circleX+40, circleY, 0, 0.5)
-}
-
 func drawChip(dc *gg.Context, x, y float64, text, bg, fg string) {
 	dc.DrawRoundedRectangle(x, y, 96, 48, 12)
 	dc.SetColor(mustHexColor(bg))
 	dc.Fill()
 	dc.SetColor(mustHexColor(fg))
 	dc.SetFontFace(chipFace)
-	dc.DrawStringAnchored(text, x+48, y+25, 0.5, 0.5)
+	dc.DrawStringAnchored(ellipsizeToWidth(dc, text, 78), x+48, y+25, 0.5, 0.5)
 }
 
 func drawStatPill(dc *gg.Context, x, y, w, h float64, label, value, accent string) {
@@ -209,6 +224,72 @@ func drawStatPill(dc *gg.Context, x, y, w, h float64, label, value, accent strin
 	dc.SetColor(mustHexColor("#FFFFFF"))
 	dc.SetFontFace(pillFace)
 	dc.DrawStringAnchored(value, x+w/2, y+60, 0.5, 0.5)
+}
+
+func wrapTextLines(dc *gg.Context, text string, maxWidth float64, maxLines int) []string {
+	if maxLines <= 0 {
+		return []string{}
+	}
+	runes := []rune(strings.TrimSpace(text))
+	if len(runes) == 0 {
+		return []string{""}
+	}
+
+	lines := make([]string, 0, maxLines)
+	current := make([]rune, 0, len(runes))
+
+	for _, r := range runes {
+		if r == '\n' {
+			if len(current) == 0 {
+				continue
+			}
+			lines = append(lines, string(current))
+			current = current[:0]
+			continue
+		}
+
+		candidate := append(current, r)
+		w, _ := dc.MeasureString(string(candidate))
+		if w <= maxWidth || len(current) == 0 {
+			current = candidate
+			continue
+		}
+
+		lines = append(lines, string(current))
+		current = []rune{r}
+	}
+
+	if len(current) > 0 {
+		lines = append(lines, string(current))
+	}
+
+	if len(lines) <= maxLines {
+		return lines
+	}
+
+	trimmed := make([]string, 0, maxLines)
+	trimmed = append(trimmed, lines[:maxLines]...)
+	trimmed[maxLines-1] = ellipsizeToWidth(dc, trimmed[maxLines-1], maxWidth)
+	return trimmed
+}
+
+func ellipsizeToWidth(dc *gg.Context, text string, maxWidth float64) string {
+	t := strings.TrimSpace(text)
+	if t == "" {
+		return ""
+	}
+	if w, _ := dc.MeasureString(t); w <= maxWidth {
+		return t
+	}
+	base := []rune(t)
+	for len(base) > 0 {
+		base = base[:len(base)-1]
+		candidate := strings.TrimSpace(string(base)) + "…"
+		if w, _ := dc.MeasureString(candidate); w <= maxWidth {
+			return candidate
+		}
+	}
+	return "…"
 }
 
 func limitRunes(s string, max int) string {
