@@ -2,13 +2,16 @@ name: CI
 
 on:
   push:
-    tags:
-      - "v*.*.*"
+    branches:
+      - "main"
+  pull_request:
+    branches:
+      - "main"
 
 permissions: {}
 
 concurrency:
-  group: ci-${{ github.ref }}
+  group: ci-${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:
@@ -41,7 +44,7 @@ jobs:
 
       - name: Install frontend dependencies
         working-directory: frontend
-        run: bun install --no-save
+        run: bun install --frozen-lockfile
 
       - name: Lint frontend
         working-directory: frontend
