@@ -38,7 +38,7 @@ export default function ApiDocumentationPage() {
               <h3 className="text-lg font-semibold text-yellow-900 mb-3">📋 概要</h3>
               <p className="text-gray-700 leading-relaxed">
                 Blue Archive API は、ブルーアーカイブの生徒データにアクセスするための RESTful API です。
-                生徒の基本情報、戦闘データ、地形適応度、武器情報などを簡単に取得・操作できます。
+                生徒の基本情報、戦闘データ、地形適応度、武器情報などを簡単に取得できます。
               </p>
             </div>
           </section>
@@ -162,114 +162,6 @@ export default function ApiDocumentationPage() {
                 </div>
               </div>
             </div>
-
-            {/* POST /api/students */}
-            <div className="bg-white border border-gray-200 rounded-xl shadow-sm mb-8">
-              <div className="bg-gradient-to-r from-yellow-50 to-orange-50 px-6 py-4 border-b border-gray-200">
-                <h3 className="text-xl font-semibold text-gray-800 flex items-center">
-                  <span className="bg-yellow-500 text-white px-3 py-1 rounded-md text-sm font-mono mr-3">POST</span>
-                  <code className="text-yellow-700">/api/students</code>
-                </h3>
-                <p className="text-gray-600 mt-2">新しい生徒データを追加します（管理者権限が必要）</p>
-              </div>
-              
-              <div className="p-6 space-y-6">
-                {/* 認証 */}
-                <div className="bg-amber-50 border border-amber-200 rounded-lg p-4">
-                  <h4 className="font-semibold text-amber-800 mb-2 flex items-center">
-                    <span className="text-amber-600 mr-2">🔐</span>認証が必要
-                  </h4>
-                  <p className="text-amber-700 text-sm">このエンドポイントは管理者権限が必要です。適切なAPIキーをヘッダーに含めてください。</p>
-                </div>
-
-                {/* リクエストヘッダー */}
-                <div>
-                  <h4 className="font-semibold text-gray-800 mb-3 flex items-center">
-                    <span className="text-blue-600 mr-2">📋</span>リクエストヘッダー
-                  </h4>
-                  <div className="bg-gray-900 rounded-lg p-3">
-                    <pre className="text-blue-400 text-sm">
-{`Content-Type: application/json
-Authorization: Bearer YOUR_API_KEY`}
-                    </pre>
-                  </div>
-                </div>
-
-                {/* リクエストボディ */}
-                <div>
-                  <h4 className="font-semibold text-gray-800 mb-3 flex items-center">
-                    <span className="text-purple-600 mr-2">📤</span>リクエストボディ
-                  </h4>
-                  <div className="bg-gray-900 rounded-lg p-4 overflow-x-auto">
-                    <pre className="text-purple-400 text-sm">
-{`{
-  "name": "新しい生徒",        // 必須: 生徒名
-  "rarity": 3,                 // 必須: レア度 (1-3)
-  "weapon": {
-    "type": "AR",              // 必須: 武器タイプ
-    "cover": true              // 必須: カバー可否
-  },
-  "role": {
-    "type": "STRIKER",         // 必須: STRIKER or SPECIAL
-    "class": "アタッカー",      // 必須: 役割クラス
-    "position": "FRONT"        // 必須: FRONT, MIDDLE, BACK
-  },
-  "school": "ゲヘナ学園",       // 必須: 所属学校
-  "combat": {
-    "attackType": "爆発",       // 必須: 攻撃タイプ
-    "defenseType": "軽装備"     // 必須: 防御タイプ
-  },
-  "terrainAdaptation": {
-    "city": "A",               // 必須: 市街地適応 (S/A/B/C/D)
-    "outdoor": "B",            // 必須: 屋外適応
-    "indoor": "S"              // 必須: 屋内適応
-  }
-}`}
-                    </pre>
-                  </div>
-                </div>
-
-                {/* 成功レスポンス */}
-                <div>
-                  <h4 className="font-semibold text-gray-800 mb-3 flex items-center">
-                    <span className="text-green-600 mr-2">✅</span>成功レスポンス (201 Created)
-                  </h4>
-                  <div className="bg-gray-900 rounded-lg p-4">
-                    <pre className="text-green-400 text-sm">
-{`{
-  "status": "success",
-  "message": "生徒データを保存しました",
-  "id": "ABC123XY",
-  "data": {
-    // 作成された生徒データ全体
-  }
-}`}
-                    </pre>
-                  </div>
-                </div>
-
-                {/* バリデーションエラー */}
-                <div>
-                  <h4 className="font-semibold text-gray-800 mb-3 flex items-center">
-                    <span className="text-red-600 mr-2">❌</span>バリデーションエラー (400 Bad Request)
-                  </h4>
-                  <div className="bg-red-50 border border-red-200 rounded-lg p-3">
-                    <div className="bg-gray-900 rounded p-2">
-                      <pre className="text-red-400 text-xs">
-{`{
-  "error": "Validation failed",
-  "details": [
-    "name is required",
-    "rarity must be between 1 and 3"
-  ]
-}`}
-                      </pre>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
             {/* GET /api/students/[id] */}
             <div className="bg-white border border-gray-200 rounded-xl shadow-sm mb-8">
               <div className="bg-gradient-to-r from-blue-50 to-cyan-50 px-6 py-4 border-b border-gray-200">
@@ -379,14 +271,6 @@ Authorization: Bearer YOUR_API_KEY`}
 {
   "message": string,         // ステータスメッセージ
   "data": Student            // 単一生徒データ
-}
-
-// POST /api/students
-{
-  "status": string,          // 処理結果
-  "message": string,         // メッセージ
-  "id": string,              // 作成された生徒ID
-  "data": Student            // 作成されたデータ
 }`}
                   </pre>
                 </div>
@@ -654,7 +538,7 @@ curl -X GET "https://bluearchive-api.skyia.jp/api/students?rarity=3&limit=10" \\
                   </div>
 
                   <div>
-                    <h4 className="font-medium text-gray-700 mb-2">データ投稿（管理者用）</h4>
+                    <h4 className="font-medium text-gray-700 mb-2">JavaScript 実装例</h4>
                     <div className="bg-gray-900 rounded-lg p-4 overflow-x-auto">
                       <pre className="text-green-400 text-sm">
 {`// 全生徒データを取得（ページネーション対応）
@@ -693,7 +577,6 @@ const getStudentsBySchool = async (school, page = 1, limit = 20) => {
                     <div className="font-semibold text-yellow-800 mb-2">制限内容</div>
                     <ul className="text-yellow-700 text-sm space-y-1">
                       <li>• <strong>GET リクエスト:</strong> 1分間に100リクエスト</li>
-                      <li>• <strong>POST リクエスト:</strong> 1分間に10リクエスト</li>
                       <li>• <strong>同一IP:</strong> 1時間に1000リクエスト</li>
                     </ul>
                   </div>
@@ -720,9 +603,8 @@ const getStudentsBySchool = async (school, page = 1, limit = 20) => {
                     </ul>
                   </div>
                   <div className="bg-amber-50 border border-amber-200 rounded-lg p-4">
-                    <div className="font-semibold text-amber-800 mb-2">管理者権限が必要</div>
+                    <div className="font-semibold text-amber-800 mb-2">管理者系エンドポイント</div>
                     <ul className="text-amber-700 text-sm space-y-1">
-                      <li>• POST /api/students - APIキー必須</li>
                       <li>• PUT /api/students/[id] - APIキー必須</li>
                       <li>• DELETE /api/students/[id] - APIキー必須</li>
                     </ul>

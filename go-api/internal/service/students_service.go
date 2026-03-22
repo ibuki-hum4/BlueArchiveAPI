@@ -1,14 +1,11 @@
 package service
 
 import (
-	"fmt"
-	"strings"
 	"sync"
 	"time"
 
 	"bluearchiveapi/go-api/internal/domain"
 	"bluearchiveapi/go-api/internal/storage"
-	"bluearchiveapi/go-api/internal/util"
 )
 
 const (
@@ -98,27 +95,6 @@ func (s *StudentsService) GetByID(id string) (*domain.Student, error) {
 		return &copySt, nil
 	}
 	return nil, nil
-}
-
-func (s *StudentsService) Create(input domain.Student) (string, error) {
-	student := input
-	student.Name = strings.TrimSpace(student.Name)
-	student.School = strings.TrimSpace(student.School)
-	student.ID = util.GenerateID(8)
-
-	if err := s.repo.Append(student); err != nil {
-		return "", err
-	}
-
-	s.invalidateCache()
-	return student.ID, nil
-}
-
-func (s *StudentsService) ValidateCreateInput(input domain.Student) error {
-	if strings.TrimSpace(input.Name) == "" || strings.TrimSpace(input.School) == "" {
-		return fmt.Errorf("required fields are missing")
-	}
-	return nil
 }
 
 func (s *StudentsService) getCachedStudents() ([]domain.Student, error) {

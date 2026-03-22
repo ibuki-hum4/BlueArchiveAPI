@@ -1,7 +1,6 @@
 package handler
 
 import (
-	"encoding/json"
 	"fmt"
 	"net/http"
 	"strconv"
@@ -35,27 +34,16 @@ func NewStudentsHandler(svc *service.StudentsService) *StudentsHandler {
 func (h *StudentsHandler) Students(w http.ResponseWriter, r *http.Request) {
 	ip := middleware.ClientIP(r)
 	if !h.limiter.Allow(ip) {
-		if r.Method == http.MethodGet {
-			httpx.JSON(w, http.StatusTooManyRequests, map[string]string{
-				"message": "error",
-				"error":   "Too Many Requests",
-			}, nil)
-			return
-		}
-		if r.Method == http.MethodPost {
-			httpx.JSON(w, http.StatusTooManyRequests, map[string]string{
-				"status":  "error",
-				"message": "Too Many Requests",
-			}, nil)
-			return
-		}
+		httpx.JSON(w, http.StatusTooManyRequests, map[string]string{
+			"message": "error",
+			"error":   "Too Many Requests",
+		}, nil)
+		return
 	}
 
 	switch r.Method {
 	case http.MethodGet:
 		h.getStudents(w, r)
-	case http.MethodPost:
-		h.postStudent(w, r)
 	default:
 		httpx.JSON(w, http.StatusMethodNotAllowed, map[string]string{
 			"message": "error",
@@ -160,55 +148,6 @@ func (h *StudentsHandler) getStudents(w http.ResponseWriter, r *http.Request) {
 		"Cache-Control": fmt.Sprintf("public, max-age=%d", 60),
 	})
 }
-
-func (h *StudentsHandler) postStudent(w http.ResponseWriter, r *http.Request) {
-	defer r.Body.Close()
-
-	var input domain.Student
-	if err := json.NewDecoder(r.Body).Decode(&input); err != nil {
-		httpx.JSON(w, http.StatusBadRequest, map[string]string{
-			"status":  "error",
-			"message": "不正なJSON形式です",
-		}, nil)
-		return
-	}
-
-	if err := h.service.ValidateCreateInput(input); err != nil {
-		httpx.Error(w, apperror.APIError{
-			Status: http.StatusBadRequest,
-			Body: map[string]any{
-				"status":  "error",
-				"message": "必須フィールドが不足しています",
-			},
-		}, map[string]any{
-			"status":  "error",
-			"message": "必須フィールドが不足しています",
-		})
-		return
-	}
-
-	id, err := h.service.Create(input)
-	if err != nil {
-		httpx.Error(w, apperror.APIError{
-			Status: http.StatusInternalServerError,
-			Body: map[string]any{
-				"status":  "error",
-				"message": "生徒データの保存に失敗しました",
-			},
-		}, map[string]any{
-			"status":  "error",
-			"message": "生徒データの保存に失敗しました",
-		})
-		return
-	}
-
-	httpx.JSON(w, http.StatusOK, map[string]string{
-		"status":  "success",
-		"message": "生徒データを保存しました",
-		"id":      id,
-	}, nil)
-}
-
 func parseInt(raw string, fallback int) int {
 	if raw == "" {
 		return fallback
