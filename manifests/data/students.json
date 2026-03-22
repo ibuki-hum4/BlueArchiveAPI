@@ -1224,6 +1224,30 @@
         }
     },
     {
+        "id": "iFz1RXt9",
+        "name": "コノカ",
+        "rarity": 3,
+        "weapon": {
+            "type": "SG",
+            "cover": false
+        },
+        "role": {
+            "type": "STRIKER",
+            "class": "タンク",
+            "position": "FRONT"
+        },
+        "school": "ヴァルキューレ警察学校",
+        "combat": {
+            "attackType": "神秘",
+            "defenseType": "軽装備"
+        },
+        "terrainAdaptation": {
+            "city": "S",
+            "outdoor": "B",
+            "indoor": "D"
+        }
+    },
+    {
         "id": "RWLYIIOu",
         "name": "コハル",
         "rarity": 3,
@@ -4509,6 +4533,30 @@
             "city": "D",
             "outdoor": "S",
             "indoor": "B"
+        }
+    },
+    {
+        "id": "Ub8W1OKw",
+        "name": "レナ",
+        "rarity": 3,
+        "weapon": {
+            "type": "HG",
+            "cover": true
+        },
+        "role": {
+            "type": "STRIKER",
+            "class": "サポーター",
+            "position": "MIDDLE"
+        },
+        "school": "ワイルドハント芸術学院",
+        "combat": {
+            "attackType": "爆発",
+            "defenseType": "軽装備"
+        },
+        "terrainAdaptation": {
+            "city": "B",
+            "outdoor": "D",
+            "indoor": "S"
         }
     },
     {
