@@ -108,6 +108,14 @@ spec:
         - name: seed-students-data
           image: busybox:1.36
           imagePullPolicy: IfNotPresent
+          securityContext:
+            runAsNonRoot: true
+            runAsUser: 1000
+            runAsGroup: 1000
+            allowPrivilegeEscalation: false
+            readOnlyRootFilesystem: true
+            capabilities:
+              drop: ["ALL"]
           command:
             - /bin/sh
             - -c
@@ -115,7 +123,6 @@ spec:
             - |
               set -e
               cp -f /seed/students.json /students-data/students.json
-              chown -R 1000:1000 /students-data
           volumeMounts:
             - name: students-data
               mountPath: /students-data
