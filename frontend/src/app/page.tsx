@@ -50,14 +50,7 @@ export default function Home() {
   }
 
   return (
-    <div
-      className="min-h-screen text-slate-800"
-      style={{
-        backgroundImage: "linear-gradient(180deg, rgba(246, 248, 251, 0.84) 0%, rgba(244, 245, 247, 0.9) 100%), url('/1772253665-ty5jnzRIeK01WoZx9qS4NMP7.webp')",
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-      }}
-    >
+    <div className="min-h-screen bg-slate-50 text-slate-800">
       <Navigation />
 
       <main

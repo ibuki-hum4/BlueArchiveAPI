@@ -50,7 +50,7 @@ export default function Navigation() {
 
   return (
     <nav
-      className="sticky top-0 z-40 border-b border-slate-300 bg-[#fdfdfd]/95 text-slate-800 backdrop-blur supports-[backdrop-filter]:bg-[#fdfdfd]/85"
+      className="sticky top-0 z-40 border-b border-slate-300 bg-[#fdfdfd] text-slate-800"
       aria-label="メインナビゲーション"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
