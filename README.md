@@ -65,6 +65,55 @@ cd go-api
 go run .
 ```
 
+### OGP レンダラー (Bun + TSX) を起動する
+
+Go API の `/api/og` は、`og-renderer` マイクロサービスの `POST /render` を呼び出して PNG を返します。
+
+```bash
+cd og-renderer
+bun install
+bun run start
+```
+
+既定では `http://localhost:8787/render` を使用します。別URLを使う場合は、Go API 起動時に以下を指定してください。
+
+```bash
+OGP_RENDERER_URL=http://localhost:8787/render go run ./go-api
+```
+
+### Go API + OGP レンダラーを Docker で起動する
+
+```powershell
+# 1) OGP renderer イメージをビルド
+docker build -t kemar1/bluearchive-og-renderer:0.1.0 ./og-renderer
+
+# 2) Go API イメージをビルド
+docker build -t kemar1/bluearchive-api-go:0.1.0 ./go-api
+
+# 3) 同一ネットワークを作成
+docker network create bluearchive-net
+
+# 4) OGP renderer を起動（フォントをマウント）
+docker run -d --name bluearchive-og-renderer --network bluearchive-net -p 8787:8787 `
+	-e OGP_FONT_REGULAR_PATH=/app/fonts/BIZUDPGothic-Regular.ttf `
+	-e OGP_FONT_BOLD_PATH=/app/fonts/BIZUDPGothic-Bold.ttf `
+	-v "${PWD}/og-renderer/fonts:/app/fonts:ro" `
+	kemar1/bluearchive-og-renderer:0.1.0
+
+# 5) Go API を起動（renderer URL を内部DNSへ向ける）
+docker run -d --name bluearchive-go-api --network bluearchive-net -p 8080:8080 `
+	-e OGP_RENDERER_URL=http://bluearchive-og-renderer:8787/render `
+	-e STUDENTS_DATA_PATH=/app/data/students.json `
+	-v "${PWD}/data:/app/data:ro" `
+	kemar1/bluearchive-api-go:0.1.0
+```
+
+動作確認:
+
+```powershell
+curl "http://localhost:8080/api/og?id=10000" --output ogp.png
+```
+
 Go API は `http://localhost:8080` で起動し、次のエンドポイントを提供します。
 
 - `GET /api`

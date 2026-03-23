@@ -13,6 +13,7 @@ env:
   REGISTRY: docker.io
   FRONTEND_IMAGE_NAME: ${{ secrets.DOCKERHUB_USERNAME }}/bluearchive-api
   GO_API_IMAGE_NAME: ${{ secrets.DOCKERHUB_USERNAME }}/bluearchive-api-go
+  OGP_RENDERER_IMAGE_NAME: ${{ secrets.DOCKERHUB_USERNAME }}/bluearchive-og-renderer
 
 concurrency:
   group: docker-publish-${{ github.ref }}
@@ -96,6 +97,28 @@ jobs:
           cache-from: type=gha
           cache-to: type=gha,mode=max
 
+      - name: Extract Docker metadata for og-renderer image
+        id: og_renderer_meta
+        uses: docker/metadata-action@v5
+        with:
+          images: ${{ env.REGISTRY }}/${{ env.OGP_RENDERER_IMAGE_NAME }}
+          tags: |
+            type=raw,value=${{ steps.tag.outputs.clean }}
+            type=raw,value=${{ steps.tag.outputs.nov }}
+            type=raw,value=latest
+
+      - name: Build and push og-renderer image
+        id: og_renderer_build
+        uses: docker/build-push-action@v6
+        with:
+          context: ./og-renderer
+          file: ./og-renderer/Dockerfile
+          push: true
+          tags: ${{ steps.og_renderer_meta.outputs.tags }}
+          labels: ${{ steps.og_renderer_meta.outputs.labels }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+
       - name: Install Cosign
         uses: sigstore/cosign-installer@v3
 
@@ -108,3 +131,8 @@ jobs:
         env:
           COSIGN_YES: "true"
         run: cosign sign ${{ env.REGISTRY }}/${{ env.GO_API_IMAGE_NAME }}@${{ steps.go_api_build.outputs.digest }}
+
+      - name: Sign og-renderer image
+        env:
+          COSIGN_YES: "true"
+        run: cosign sign ${{ env.REGISTRY }}/${{ env.OGP_RENDERER_IMAGE_NAME }}@${{ steps.og_renderer_build.outputs.digest }}

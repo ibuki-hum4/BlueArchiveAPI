@@ -53,3 +53,73 @@ jobs:
       - name: Build frontend
         working-directory: frontend
         run: bun run build
+
+  go-api:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    timeout-minutes: 15
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+          persist-credentials: false
+
+      - name: Set up Go
+        uses: actions/setup-go@v5
+        with:
+          go-version-file: go-api/go.mod
+          cache-dependency-path: go-api/go.sum
+
+      - name: Test go-api
+        working-directory: go-api
+        run: go test ./...
+
+  og-renderer:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    timeout-minutes: 20
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+          persist-credentials: false
+
+      - name: Set up Bun
+        uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: "latest"
+
+      - name: Cache Bun
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.bun/install/cache
+            og-renderer/node_modules
+          key: ${{ runner.os }}-bun-og-renderer-${{ hashFiles('og-renderer/package.json', 'og-renderer/bun.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-bun-og-renderer-
+
+      - name: Install og-renderer dependencies
+        working-directory: og-renderer
+        run: bun install --frozen-lockfile
+
+      - name: Typecheck og-renderer
+        working-directory: og-renderer
+        run: bun run typecheck
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Build og-renderer image (no push)
+        uses: docker/build-push-action@v6
+        with:
+          context: ./og-renderer
+          file: ./og-renderer/Dockerfile
+          push: false
+          tags: bluearchive-og-renderer:ci
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
