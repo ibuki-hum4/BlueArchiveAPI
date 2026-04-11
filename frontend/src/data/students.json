@@ -24,6 +24,30 @@
         }
     },
     {
+        "id": "YVJe21dg",
+        "name": "アカネ（制服）",
+        "rarity": 3,
+        "weapon": {
+            "type": "HG",
+            "cover": false
+        },
+        "role": {
+            "type": "SPECIAL",
+            "class": "アタッカー",
+            "position": "BACK"
+        },
+        "school": "ミレニアムサイエンススクール",
+        "combat": {
+            "attackType": "爆発",
+            "defenseType": "軽装備"
+        },
+        "terrainAdaptation": {
+            "city": "S",
+            "outdoor": "B",
+            "indoor": "D"
+        }
+    },
+    {
         "id": "027EnJyt",
         "name": "アカリ（正月）",
         "rarity": 3,

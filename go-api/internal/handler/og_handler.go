@@ -21,9 +21,9 @@ const (
 )
 
 type OGHandler struct {
-	service      *service.StudentsService
-	httpClient   *http.Client
-	rendererURL  string
+	service     *service.StudentsService
+	httpClient  *http.Client
+	rendererURL string
 }
 
 type ogRenderRequest struct {
