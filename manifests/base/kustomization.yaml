@@ -1,0 +1,28 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+namespace: ibuki-bluearchive-api
+
+resources:
+  - postgres-statefulset.yaml
+  - postgres-service.yaml
+  - deployment.yaml
+  - service.yaml
+  - ingress.yaml
+  - pdb.yaml
+
+images:
+  - name: docker.io/kemar1/bluearchive-api
+    newTag: v2.12.0
+  - name: docker.io/kemar1/bluearchive-api-go
+    newTag: v2.12.0
+  - name: docker.io/kemar1/bluearchive-og-renderer
+    newTag: v2.12.0
+
+configMapGenerator:
+  - name: students-config
+    files:
+      - students.json=data/students.json
+
+generatorOptions:
+  disableNameSuffixHash: false

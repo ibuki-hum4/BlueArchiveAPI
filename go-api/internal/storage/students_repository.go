@@ -2,6 +2,8 @@ package storage
 
 import (
 	"bytes"
+	"crypto/sha256"
+	"encoding/hex"
 	"encoding/json"
 	"os"
 	"path/filepath"
@@ -20,24 +22,29 @@ func NewStudentsRepository() *StudentsRepository {
 }
 
 func (r *StudentsRepository) ReadAll() ([]domain.Student, error) {
+	students, _, err := r.ReadSnapshot()
+	return students, err
+}
+
+func (r *StudentsRepository) ReadSnapshot() ([]domain.Student, string, error) {
 	path, err := resolveStudentsFilePath(false)
 	if err != nil {
-		return nil, err
+		return nil, "", err
 	}
 
 	b, err := os.ReadFile(path)
 	if err != nil {
-		return []domain.Student{}, nil
+		return []domain.Student{}, "", nil
 	}
 	if len(bytes.TrimSpace(b)) == 0 {
-		return []domain.Student{}, nil
+		return []domain.Student{}, fingerprintBytes(b), nil
 	}
 
 	var students []domain.Student
 	if err := json.Unmarshal(b, &students); err != nil {
-		return nil, err
+		return nil, "", err
 	}
-	return students, nil
+	return students, fingerprintBytes(b), nil
 }
 
 func (r *StudentsRepository) Append(student domain.Student) error {
@@ -111,6 +118,11 @@ func fileExists(path string) bool {
 		return false
 	}
 	return !info.IsDir()
+}
+
+func fingerprintBytes(b []byte) string {
+	sum := sha256.Sum256(b)
+	return hex.EncodeToString(sum[:])
 }
 
 func dirExists(path string) bool {

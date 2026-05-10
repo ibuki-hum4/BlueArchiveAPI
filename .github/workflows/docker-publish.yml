@@ -67,8 +67,8 @@ jobs:
         id: frontend_build
         uses: docker/build-push-action@v6
         with:
-          context: .
-          file: ./Dockerfile
+          context: ./frontend
+          file: ./frontend/Dockerfile
           push: true
           tags: ${{ steps.frontend_meta.outputs.tags }}
           labels: ${{ steps.frontend_meta.outputs.labels }}

@@ -2,14 +2,9 @@ package service
 
 import (
 	"sync"
-	"time"
 
 	"bluearchiveapi/go-api/internal/domain"
 	"bluearchiveapi/go-api/internal/storage"
-)
-
-const (
-	cacheTTL = 60 * time.Second
 )
 
 type StudentsQuery struct {
@@ -29,7 +24,7 @@ type StudentsService struct {
 	repo *storage.StudentsRepository
 
 	cacheMu sync.RWMutex
-	cacheTS time.Time
+	cacheFP string
 	cache   []domain.Student
 	cacheID map[string]domain.Student
 }
@@ -70,10 +65,8 @@ func (s *StudentsService) List(query StudentsQuery) (StudentsPage, error) {
 }
 
 func (s *StudentsService) GetByID(id string) (*domain.Student, error) {
-	now := time.Now()
-
 	s.cacheMu.RLock()
-	if len(s.cache) > 0 && now.Sub(s.cacheTS) < cacheTTL {
+	if len(s.cache) > 0 {
 		if st, ok := s.cacheID[id]; ok {
 			copySt := st
 			s.cacheMu.RUnlock()
@@ -98,20 +91,18 @@ func (s *StudentsService) GetByID(id string) (*domain.Student, error) {
 }
 
 func (s *StudentsService) getCachedStudents() ([]domain.Student, error) {
-	now := time.Now()
+	students, fingerprint, err := s.repo.ReadSnapshot()
+	if err != nil {
+		return nil, err
+	}
 
 	s.cacheMu.RLock()
-	if len(s.cache) > 0 && now.Sub(s.cacheTS) < cacheTTL {
+	if fingerprint == s.cacheFP && len(s.cache) > 0 {
 		cached := s.cache
 		s.cacheMu.RUnlock()
 		return cached, nil
 	}
 	s.cacheMu.RUnlock()
-
-	students, err := s.repo.ReadAll()
-	if err != nil {
-		return nil, err
-	}
 
 	indexByID := make(map[string]domain.Student, len(students))
 	for _, st := range students {
@@ -121,7 +112,7 @@ func (s *StudentsService) getCachedStudents() ([]domain.Student, error) {
 	s.cacheMu.Lock()
 	s.cache = students
 	s.cacheID = indexByID
-	s.cacheTS = now
+	s.cacheFP = fingerprint
 	s.cacheMu.Unlock()
 
 	return students, nil
@@ -131,6 +122,6 @@ func (s *StudentsService) invalidateCache() {
 	s.cacheMu.Lock()
 	s.cache = nil
 	s.cacheID = nil
-	s.cacheTS = time.Time{}
+	s.cacheFP = ""
 	s.cacheMu.Unlock()
 }

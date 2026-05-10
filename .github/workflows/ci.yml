@@ -38,7 +38,7 @@ jobs:
           path: |
             ~/.bun/install/cache
             frontend/node_modules
-          key: ${{ runner.os }}-bun-${{ hashFiles('frontend/package.json') }}
+          key: ${{ runner.os }}-bun-${{ hashFiles('frontend/package.json', 'frontend/bun.lock') }}
           restore-keys: |
             ${{ runner.os }}-bun-
 

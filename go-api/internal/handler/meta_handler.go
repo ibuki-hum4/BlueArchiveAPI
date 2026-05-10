@@ -26,7 +26,7 @@ func (h *MetaHandler) API(w http.ResponseWriter, r *http.Request) {
 		"status":    "success",
 		"message":   "ブルーアーカイブAPIサーバー稼働中（Go版）",
 		"timestamp": time.Now().UTC().Format(time.RFC3339),
-		"endpoints": map[string]string{"students": "/api/students"},
+		"endpoints": map[string]string{"students": "/api/students", "rss": "/rss.xml"},
 	}, nil)
 }
 

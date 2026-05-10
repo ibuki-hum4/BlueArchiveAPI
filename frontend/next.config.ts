@@ -1,7 +1,7 @@
 import type { NextConfig } from "next";
 
 const goApiOrigin = process.env.GO_API_ORIGIN || (process.env.NODE_ENV === 'production'
-  ? 'http://bluearchive-go-api'
+  ? 'http://go-api:8080'
   : 'http://localhost:8080');
 
 const nextConfig: NextConfig = {
