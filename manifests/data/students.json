@@ -1152,6 +1152,30 @@
         }
     },
     {
+        "id": "JpoRKfL8",
+        "name": "クルミ",
+        "rarity": 3,
+        "weapon": {
+            "type": "SMG",
+            "cover": false
+        },
+        "role": {
+            "type": "STRIKER",
+            "class": "タンク",
+            "position": "FRONT"
+        },
+        "school": "SRT特殊学園",
+        "combat": {
+            "attackType": "爆発",
+            "defenseType": "軽装備"
+        },
+        "terrainAdaptation": {
+            "city": "S",
+            "outdoor": "B",
+            "indoor": "D"
+        }
+    },
+    {
         "id": "oM1r4zNr",
         "name": "ケイ",
         "rarity": 3,
@@ -2517,6 +2541,30 @@
             "city": "B",
             "outdoor": "S",
             "indoor": "D"
+        }
+    },
+    {
+        "id": "ThfzR9kI",
+        "name": "ニコ",
+        "rarity": 3,
+        "weapon": {
+            "type": "SG",
+            "cover": false
+        },
+        "role": {
+            "type": "STRIKER",
+            "class": "サポーター",
+            "position": "FRONT"
+        },
+        "school": "SRT特殊学園",
+        "combat": {
+            "attackType": "爆発",
+            "defenseType": "弾力装甲"
+        },
+        "terrainAdaptation": {
+            "city": "S",
+            "outdoor": "D",
+            "indoor": "B"
         }
     },
     {
@@ -5493,6 +5541,30 @@
             "city": "C",
             "outdoor": "B",
             "indoor": "A"
+        }
+    },
+    {
+        "id": "TVdOoAFX",
+        "name": "オトギ",
+        "rarity": 1,
+        "weapon": {
+            "type": "SR",
+            "cover": true
+        },
+        "role": {
+            "type": "STRIKER",
+            "class": "アタッカー",
+            "position": "BACK"
+        },
+        "school": "SRT特殊学園",
+        "combat": {
+            "attackType": "爆発",
+            "defenseType": "特殊装甲"
+        },
+        "terrainAdaptation": {
+            "city": "B",
+            "outdoor": "B",
+            "indoor": "B"
         }
     },
     {

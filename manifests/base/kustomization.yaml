@@ -4,6 +4,7 @@ kind: Kustomization
 namespace: ibuki-bluearchive-api
 
 resources:
+  - rss-state-pvc.yaml
   - postgres-statefulset.yaml
   - postgres-service.yaml
   - deployment.yaml

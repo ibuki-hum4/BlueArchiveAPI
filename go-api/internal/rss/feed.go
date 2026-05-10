@@ -4,10 +4,12 @@ import (
 	"context"
 	"crypto/sha256"
 	"encoding/hex"
+	"encoding/json"
 	"encoding/xml"
 	"fmt"
 	"net/url"
 	"os"
+	"path/filepath"
 	"sort"
 	"strings"
 	"sync"
@@ -27,6 +29,7 @@ type FeedService struct {
 
 	refreshEvery time.Duration
 	siteOrigin   string
+	statePath    string
 
 	mu          sync.RWMutex
 	fingerprint string
@@ -53,6 +56,10 @@ type itemSnapshot struct {
 	publishedAt time.Time
 }
 
+type feedState struct {
+	SeenIDs []string `json:"seen_ids"`
+}
+
 func NewFeedService(repo *storage.StudentsRepository) *FeedService {
 	refreshEvery := defaultRefreshEvery
 	if raw := strings.TrimSpace(os.Getenv("RSS_REFRESH_INTERVAL")); raw != "" {
@@ -66,11 +73,22 @@ func NewFeedService(repo *storage.StudentsRepository) *FeedService {
 		siteOrigin = defaultSiteOrigin
 	}
 
+	statePath := strings.TrimSpace(os.Getenv("RSS_STATE_PATH"))
+	if statePath == "" {
+		statePath = filepath.Join(os.TempDir(), "bluearchive-rss-seen-ids.json")
+	}
+
+	seenIDs := map[string]struct{}{}
+	if loaded, err := loadSeenIDs(statePath); err == nil {
+		seenIDs = loaded
+	}
+
 	return &FeedService{
 		repo:         repo,
 		refreshEvery: refreshEvery,
 		siteOrigin:   strings.TrimRight(siteOrigin, "/"),
-		seenIDs:      map[string]struct{}{},
+		statePath:    statePath,
+		seenIDs:      seenIDs,
 	}
 }
 
@@ -131,6 +149,8 @@ func (s *FeedService) Refresh() ([]byte, error) {
 		s.updatedAt = now
 		s.mu.Unlock()
 
+		_ = saveSeenIDs(s.statePath, nextSeen)
+
 		return append([]byte(nil), rssBytes...), nil
 	}
 
@@ -164,6 +184,8 @@ func (s *FeedService) Refresh() ([]byte, error) {
 	s.updatedAt = now
 	s.mu.Unlock()
 
+	_ = saveSeenIDs(s.statePath, nextSeen)
+
 	return append([]byte(nil), rssBytes...), nil
 }
 
@@ -188,6 +210,52 @@ func cloneSeenIDs(src map[string]struct{}) map[string]struct{} {
 		dup[k] = v
 	}
 	return dup
+}
+
+func loadSeenIDs(path string) (map[string]struct{}, error) {
+	b, err := os.ReadFile(path)
+	if err != nil {
+		return map[string]struct{}{}, err
+	}
+
+	var state feedState
+	if err := json.Unmarshal(b, &state); err != nil {
+		return map[string]struct{}{}, err
+	}
+
+	seen := make(map[string]struct{}, len(state.SeenIDs))
+	for _, id := range state.SeenIDs {
+		if strings.TrimSpace(id) == "" {
+			continue
+		}
+		seen[id] = struct{}{}
+	}
+
+	return seen, nil
+}
+
+func saveSeenIDs(path string, seen map[string]struct{}) error {
+	if strings.TrimSpace(path) == "" {
+		return nil
+	}
+
+	ids := make([]string, 0, len(seen))
+	for id := range seen {
+		ids = append(ids, id)
+	}
+	sort.Strings(ids)
+
+	state := feedState{SeenIDs: ids}
+	b, err := json.Marshal(state)
+	if err != nil {
+		return err
+	}
+
+	if err := os.MkdirAll(filepath.Dir(path), 0o755); err != nil {
+		return err
+	}
+
+	return os.WriteFile(path, b, 0o644)
 }
 
 func buildRSS(snapshots []itemSnapshot, siteOrigin string, updatedAt time.Time) ([]byte, error) {

@@ -42,7 +42,7 @@ export async function generateMetadata(props: MetadataProps | Promise<MetadataPr
   const canonicalPath = `/${params.id}`;
 
   if (!student) {
-    const title = `生徒が見つかりません | ${siteName}`;
+    const title = `${params.id} | ${siteName}`;
     const description = "指定された生徒が存在しないか、データが読み込めませんでした。";
     const image = buildOgImageUrl(params.id, "生徒が見つかりません", `ID: ${params.id}`);
 

@@ -13,8 +13,10 @@ services:
     build: ./go-api
     environment:
       - DATABASE_URL=postgres://ba:ba@postgres:5432/bluearchive?sslmode=disable
+      - RSS_STATE_PATH=/var/lib/bluearchive/rss-seen-ids.json
     volumes:
       - ./manifests/data/students.json:/app/data/students.json:ro
+      - rssstate:/var/lib/bluearchive
     ports:
       - "8080:8080"
     depends_on:
@@ -40,3 +42,4 @@ services:
 
 volumes:
   pgdata:
+  rssstate:

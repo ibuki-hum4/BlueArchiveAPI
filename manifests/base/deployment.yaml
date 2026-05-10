@@ -135,6 +135,8 @@ spec:
               value: "postgres://ba:ba@bluearchive-postgres/bluearchive?sslmode=disable"
             - name: SITE_ORIGIN
               value: "https://bluearchive-api.skyia.jp"
+            - name: RSS_STATE_PATH
+              value: "/var/lib/bluearchive/rss-seen-ids.json"
             - name: STUDENTS_DATA_PATH
               value: "/app/data/students.json"
             - name: STUDENTS_SYNC_INTERVAL
@@ -177,10 +179,16 @@ spec:
             - name: students-config
               mountPath: /app/data
               readOnly: true
+            - name: rss-state
+              mountPath: /var/lib/bluearchive
+              readOnly: false
       volumes:
         - name: students-config
           configMap:
             name: students-config
+        - name: rss-state
+          persistentVolumeClaim:
+            claimName: bluearchive-rss-state
 ---
 apiVersion: apps/v1
 kind: Deployment
