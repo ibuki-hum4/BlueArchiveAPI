@@ -133,6 +133,8 @@ spec:
               value: "8080"
             - name: DATABASE_URL
               value: "postgres://ba:ba@bluearchive-postgres/bluearchive?sslmode=disable"
+            - name: SITE_ORIGIN
+              value: "https://bluearchive-api.skyia.jp"
             - name: STUDENTS_DATA_PATH
               value: "/app/data/students.json"
             - name: STUDENTS_SYNC_INTERVAL

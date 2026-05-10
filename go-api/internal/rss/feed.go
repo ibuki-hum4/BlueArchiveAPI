@@ -18,7 +18,7 @@ import (
 )
 
 const (
-	defaultSiteOrigin   = "http://localhost:3000"
+	defaultSiteOrigin   = "https://bluearchive-api.skyia.jp"
 	defaultRefreshEvery = 5 * time.Second
 )
 
@@ -106,6 +106,34 @@ func (s *FeedService) Refresh() ([]byte, error) {
 	s.mu.RUnlock()
 
 	now := time.Now().UTC()
+
+	// If we have no previous seen IDs, treat this as initial baseline:
+	// record current IDs but emit an empty feed (no items).
+	if len(previous) == 0 {
+		nextSeen := make(map[string]struct{}, len(students))
+		for _, student := range students {
+			nextSeen[student.ID] = struct{}{}
+		}
+		// empty snapshots => empty feed
+		emptySnapshots := make([]itemSnapshot, 0)
+		rssBytes, err := buildRSS(emptySnapshots, s.siteOrigin, now)
+		if err != nil {
+			return nil, err
+		}
+		feedHash := sha256.Sum256(rssBytes)
+		etag := fmt.Sprintf("\"%s\"", hex.EncodeToString(feedHash[:]))
+
+		s.mu.Lock()
+		s.fingerprint = fingerprint
+		s.seenIDs = nextSeen
+		s.xml = append([]byte(nil), rssBytes...)
+		s.etag = etag
+		s.updatedAt = now
+		s.mu.Unlock()
+
+		return append([]byte(nil), rssBytes...), nil
+	}
+
 	nextSeen := make(map[string]struct{}, len(students))
 	snapshots := make([]itemSnapshot, 0, len(students))
 
