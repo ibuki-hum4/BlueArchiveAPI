@@ -5,7 +5,6 @@ metadata:
   labels:
     app: bluearchive-postgres
 spec:
-  clusterIP: None
   selector:
     app: bluearchive-postgres
   ports:
