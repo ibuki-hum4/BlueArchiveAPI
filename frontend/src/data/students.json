@@ -768,6 +768,30 @@
         }
     },
     {
+        "id": "MsCpXFZS",
+        "name": "エリカ",
+        "rarity": 3,
+        "weapon": {
+            "type": "SG",
+            "cover": false
+        },
+        "role": {
+            "type": "SPECIAL",
+            "class": "サポーター",
+            "position": "BACK"
+        },
+        "school": "ゲヘナ学園",
+        "combat": {
+            "attackType": "振動",
+            "defenseType": "軽装備"
+        },
+        "terrainAdaptation": {
+            "city": "S",
+            "outdoor": "B",
+            "indoor": "D"
+        }
+    },
+    {
         "id": "A7IfAY91",
         "name": "カエデ",
         "rarity": 3,
