@@ -13,7 +13,7 @@ WORKDIR /app
 ENV NODE_ENV=production \
     GO_API_ORIGIN=http://go-api:8080
 
-COPY next-env.d.ts next.config.ts postcss.config.mjs tailwind.config.ts tsconfig.json vercel.json ./
+COPY next.config.ts postcss.config.mjs tailwind.config.ts tsconfig.json vercel.json ./
 COPY public ./public
 COPY src ./src
 RUN bun run build
