@@ -22,6 +22,7 @@ import (
 const (
 	defaultSiteOrigin   = "https://bluearchive-api.skyia.jp"
 	defaultRefreshEvery = 5 * time.Second
+	defaultOGVersion    = "20260322a"
 )
 
 type FeedService struct {
@@ -268,12 +269,14 @@ func buildRSS(snapshots []itemSnapshot, siteOrigin string, updatedAt time.Time) 
 
 	items := make([]rssItem, 0, len(snapshots))
 	for _, snapshot := range snapshots {
+		ogImageURL := studentOGImageURL(siteOrigin, snapshot.student)
 		items = append(items, rssItem{
 			Title:       snapshot.student.Name,
 			Link:        studentURL(siteOrigin, snapshot.student.ID),
 			GUID:        studentURL(siteOrigin, snapshot.student.ID),
 			PubDate:     snapshot.publishedAt.Format(time.RFC1123Z),
 			Description: studentDescription(snapshot.student),
+			Enclosure:   rssEnclosure{URL: ogImageURL, Type: "image/png", Length: 0},
 		})
 	}
 
@@ -310,6 +313,16 @@ func studentURL(siteOrigin, id string) string {
 	return strings.TrimRight(siteOrigin, "/") + "/" + url.PathEscape(id)
 }
 
+func studentOGImageURL(siteOrigin string, student domain.Student) string {
+	params := url.Values{}
+	params.Set("id", student.ID)
+	params.Set("title", student.Name)
+	params.Set("subtitle", fmt.Sprintf("%s / レア度★%d", student.School, student.Rarity))
+	params.Set("v", defaultOGVersion)
+
+	return strings.TrimRight(siteOrigin, "/") + "/api/og?" + params.Encode()
+}
+
 type rssDocument struct {
 	XMLName   xml.Name   `xml:"rss"`
 	Version   string     `xml:"version,attr"`
@@ -334,9 +347,16 @@ type atomLink struct {
 }
 
 type rssItem struct {
-	Title       string `xml:"title"`
-	Link        string `xml:"link"`
-	GUID        string `xml:"guid"`
-	PubDate     string `xml:"pubDate"`
-	Description string `xml:"description"`
+	Title       string       `xml:"title"`
+	Link        string       `xml:"link"`
+	GUID        string       `xml:"guid"`
+	PubDate     string       `xml:"pubDate"`
+	Description string       `xml:"description"`
+	Enclosure   rssEnclosure `xml:"enclosure"`
+}
+
+type rssEnclosure struct {
+	URL    string `xml:"url,attr"`
+	Type   string `xml:"type,attr"`
+	Length int64  `xml:"length,attr"`
 }
