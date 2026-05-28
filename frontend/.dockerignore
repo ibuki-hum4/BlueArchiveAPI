@@ -1,0 +1,9 @@
+.git
+.gitignore
+.next
+node_modules
+*.log
+README.md
+coverage
+dist
+.turbo
