@@ -2904,6 +2904,30 @@
         }
     },
     {
+        "id": "Zn3ABYir",
+        "name": "ハルカ（ドレス）",
+        "rarity": 3,
+        "weapon": {
+            "type": "SG",
+            "cover": false
+        },
+        "role": {
+            "type": "STRIKER",
+            "class": "アタッカー",
+            "position": "FRONT"
+        },
+        "school": "ゲヘナ学園",
+        "combat": {
+            "attackType": "爆発",
+            "defenseType": "軽装備"
+        },
+        "terrainAdaptation": {
+            "city": "S",
+            "outdoor": "B",
+            "indoor": "D"
+        }
+    },
+    {
         "id": "4NKqfuas",
         "name": "ハルナ",
         "rarity": 3,
@@ -4125,6 +4149,30 @@
             "city": "D",
             "outdoor": "S",
             "indoor": "B"
+        }
+    },
+    {
+        "id": "3HXi4We8",
+        "name": "ムツキ（ドレス）",
+        "rarity": 3,
+        "weapon": {
+            "type": "MG",
+            "cover": false
+        },
+        "role": {
+            "type": "SPECIAL",
+            "class": "アタッカー",
+            "position": "BACK"
+        },
+        "school": "ゲヘナ学園",
+        "combat": {
+            "attackType": "神秘",
+            "defenseType": "重装甲"
+        },
+        "terrainAdaptation": {
+            "city": "B",
+            "outdoor": "S",
+            "indoor": "D"
         }
     },
     {
