@@ -136,6 +136,11 @@ spec:
                 secretKeyRef:
                   name: bluearchive-secrets
                   key: DATABASE_URL
+            - name: ADMIN_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: bluearchive-secrets
+                  key: ADMIN_PASSWORD
             - name: SITE_ORIGIN
               value: "https://bluearchive-api.skyia.jp"
             - name: RSS_STATE_PATH
