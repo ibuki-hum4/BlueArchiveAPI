@@ -12,6 +12,7 @@ resources:
   - ingress.yaml
   - pdb.yaml
   - export-students-cronjob.yaml
+  - secrets/sealedsecret.yaml
 
 images:
   - name: docker.io/kemar1/bluearchive-api
