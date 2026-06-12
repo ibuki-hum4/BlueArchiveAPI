@@ -1,6 +1,6 @@
 {
   "name": "bluearchive-api",
-  "version": "2.18.1",
+  "version": "3.0.3",
   "private": true,
   "workspaces": [
     "frontend"
