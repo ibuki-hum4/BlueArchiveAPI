@@ -2,8 +2,10 @@
 
 import { useEffect, useState } from 'react';
 import { useParams, useRouter } from 'next/navigation';
+import { ChevronLeft } from 'lucide-react';
 import Navigation from '@/components/Navigation';
 import RarityStars from '@/components/RarityStars';
+import { Button } from '@/components/ui/button';
 import { Student } from '@/types/student';
 import { fetchStudentById } from '@/lib/api';
 
@@ -50,12 +52,12 @@ export default function StudentDetailPage() {
   // 地形適応度の背景色
   const getTerrainColor = (grade: string): string => {
     switch (grade) {
-      case 'S': return 'bg-green-500 text-white';
-      case 'A': return 'bg-ba-blue-500 text-white';
-      case 'B': return 'bg-yellow-500 text-white';
-      case 'C': return 'bg-orange-500 text-white';
-      case 'D': return 'bg-red-500 text-white';
-      default: return 'bg-gray-500 text-white';
+      case 'S': return 'bg-green-50 text-green-700';
+      case 'A': return 'bg-ba-blue-50 text-ba-blue-700';
+      case 'B': return 'bg-yellow-50 text-yellow-700';
+      case 'C': return 'bg-orange-50 text-orange-700';
+      case 'D': return 'bg-red-50 text-red-700';
+      default: return 'bg-gray-100 text-gray-600';
     }
   };
 
@@ -81,12 +83,9 @@ export default function StudentDetailPage() {
           <div className="text-center">
             <h2 className="text-2xl font-bold text-red-600">エラーが発生しました</h2>
             <p className="mt-2 text-gray-600">{error}</p>
-            <button
-              className="mt-4 rounded-full bg-ba-blue-500 px-4 py-2 font-bold text-white hover:bg-ba-blue-600"
-              onClick={() => router.push('/')}
-            >
+            <Button className="mt-4 font-bold" onClick={() => router.push('/')}>
               ホームに戻る
-            </button>
+            </Button>
           </div>
         </main>
       </div>
@@ -99,28 +98,25 @@ export default function StudentDetailPage() {
 
       <main className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* 戻るボタン */}
-        <button
-          className="mb-6 flex items-center font-semibold text-ba-blue-600 hover:text-ba-blue-800"
+        <Button
+          variant="ghost"
+          className="mb-6 px-0 text-ba-blue-600 hover:bg-transparent hover:text-ba-blue-800"
           onClick={() => router.back()}
         >
-          <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-          </svg>
+          <ChevronLeft className="h-4 w-4" />
           戻る
-        </button>
+        </Button>
 
-        <div className="overflow-hidden rounded-3xl bg-white shadow-lg">
+        <div className="overflow-hidden rounded-xl border border-border bg-white">
           {/* ヘッダー部分 */}
-          <div className="ba-hero-gradient p-6 text-white">
+          <div className="ba-soft-panel p-6">
             <div className="flex items-center justify-between">
               <div>
                 <div className="mb-2 flex items-center gap-3">
-                  <h1 className="font-rounded text-3xl font-extrabold">{student.name}</h1>
+                  <h1 className="font-rounded text-3xl font-extrabold text-ba-navy-900">{student.name}</h1>
                   <RarityStars rarity={student.rarity} size="lg" />
                 </div>
-                <p className="inline-flex items-center rounded-full bg-white/15 px-3 py-1 text-sm font-medium text-white/90">
-                  {student.school}
-                </p>
+                <p className="text-sm text-ba-navy-400">{student.school}</p>
               </div>
             </div>
           </div>
@@ -160,7 +156,7 @@ export default function StudentDetailPage() {
                   </div>
                   <div className="flex items-center justify-between">
                     <span className="text-ba-navy-500">攻撃タイプ:</span>
-                    <span className={`rounded-full px-2.5 py-1 text-sm font-semibold ${getAttackTypeColor(student.combat.attackType)}`}>
+                    <span className={`rounded-md px-2.5 py-1 text-sm font-semibold ${getAttackTypeColor(student.combat.attackType)}`}>
                       {student.combat.attackType}
                     </span>
                   </div>
@@ -178,15 +174,15 @@ export default function StudentDetailPage() {
                 役割・ポジション
               </h2>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                <div className="rounded-2xl bg-ba-navy-50 p-4">
+                <div className="rounded-lg bg-ba-navy-50 p-4">
                   <div className="mb-1 text-sm text-ba-navy-400">タイプ</div>
                   <div className="font-bold text-ba-navy-900">{student.role.type}</div>
                 </div>
-                <div className="rounded-2xl bg-ba-navy-50 p-4">
+                <div className="rounded-lg bg-ba-navy-50 p-4">
                   <div className="mb-1 text-sm text-ba-navy-400">クラス</div>
                   <div className="font-bold text-ba-navy-900">{student.role.class}</div>
                 </div>
-                <div className="rounded-2xl bg-ba-navy-50 p-4">
+                <div className="rounded-lg bg-ba-navy-50 p-4">
                   <div className="mb-1 text-sm text-ba-navy-400">ポジション</div>
                   <div className="font-bold text-ba-navy-900">{student.role.position}</div>
                 </div>
@@ -199,21 +195,21 @@ export default function StudentDetailPage() {
                 地形適応度
               </h2>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                <div className="rounded-2xl border border-ba-blue-100 p-4 text-center">
+                <div className="rounded-lg border border-ba-blue-100 p-4 text-center">
                   <div className="mb-2 text-sm text-ba-navy-400">市街地</div>
-                  <div className={`inline-block rounded-full px-4 py-2 text-lg font-bold ${getTerrainColor(student.terrainAdaptation.city)}`}>
+                  <div className={`inline-block rounded-md px-4 py-2 text-lg font-bold ${getTerrainColor(student.terrainAdaptation.city)}`}>
                     {student.terrainAdaptation.city}
                   </div>
                 </div>
-                <div className="rounded-2xl border border-ba-blue-100 p-4 text-center">
+                <div className="rounded-lg border border-ba-blue-100 p-4 text-center">
                   <div className="mb-2 text-sm text-ba-navy-400">屋外</div>
-                  <div className={`inline-block rounded-full px-4 py-2 text-lg font-bold ${getTerrainColor(student.terrainAdaptation.outdoor)}`}>
+                  <div className={`inline-block rounded-md px-4 py-2 text-lg font-bold ${getTerrainColor(student.terrainAdaptation.outdoor)}`}>
                     {student.terrainAdaptation.outdoor}
                   </div>
                 </div>
-                <div className="rounded-2xl border border-ba-blue-100 p-4 text-center">
+                <div className="rounded-lg border border-ba-blue-100 p-4 text-center">
                   <div className="mb-2 text-sm text-ba-navy-400">屋内</div>
-                  <div className={`inline-block rounded-full px-4 py-2 text-lg font-bold ${getTerrainColor(student.terrainAdaptation.indoor)}`}>
+                  <div className={`inline-block rounded-md px-4 py-2 text-lg font-bold ${getTerrainColor(student.terrainAdaptation.indoor)}`}>
                     {student.terrainAdaptation.indoor}
                   </div>
                 </div>

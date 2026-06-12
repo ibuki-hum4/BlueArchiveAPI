@@ -1,9 +1,11 @@
 'use client';
 
 import { useEffect, useMemo, useState } from 'react';
+import { motion } from 'motion/react';
 import Navigation from '@/components/Navigation';
 import StudentCard from '@/components/StudentCard';
 import SearchAndFilter from '@/components/SearchAndFilter';
+import { Button } from '@/components/ui/button';
 import { useStudents } from '@/hooks/useStudents';
 
 const INITIAL_VISIBLE_COUNT = 24;
@@ -54,25 +56,17 @@ export default function Home() {
       <Navigation />
 
       {/* ヒーローセクション */}
-      <header className="ba-hero-gradient text-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16">
-          <p className="font-rounded text-sm font-bold tracking-[0.3em] text-ba-yellow-200">
-            SCHALE LIBRARY
-          </p>
-          <h1 className="font-rounded mt-2 text-3xl font-extrabold tracking-tight sm:text-4xl">
+      <header className="ba-soft-panel">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-12">
+          <h1 className="font-rounded text-3xl font-extrabold tracking-tight text-ba-navy-900 sm:text-4xl">
             おかえりなさい、先生！
           </h1>
-          <p className="mt-3 max-w-2xl text-sm text-white/85 sm:text-base">
+          <p className="mt-3 max-w-2xl text-sm text-ba-navy-500 sm:text-base">
             豊富なフィルターと並べ替え機能で、目的の生徒さんをすぐに見つけられます。
           </p>
-          <div
-            className="mt-6 inline-flex items-center gap-2 rounded-full bg-white/15 px-4 py-2 text-sm font-semibold backdrop-blur"
-            role="status"
-            aria-live="polite"
-          >
-            <span className="inline-flex h-2 w-2 rounded-full bg-ba-yellow-300" aria-hidden="true" />
+          <p className="mt-4 text-sm text-ba-navy-400" role="status" aria-live="polite">
             現在 {totalCount} 件の生徒さんが条件に一致しています
-          </div>
+          </p>
         </div>
       </header>
 
@@ -93,7 +87,7 @@ export default function Home() {
         <section aria-live="polite" aria-busy={loading} className="space-y-6">
           {/* ローディング状態 */}
           {loading && (
-            <div className="flex flex-col items-center justify-center rounded-3xl border border-ba-blue-100 bg-white py-16 text-center" role="status">
+            <div className="flex flex-col items-center justify-center rounded-xl border border-ba-blue-100 bg-white py-16 text-center" role="status">
               <div className="inline-flex h-12 w-12 items-center justify-center rounded-full border-[3px] border-ba-blue-100 border-t-ba-blue-500 animate-spin" />
               <p className="mt-5 text-sm text-ba-navy-400">生徒データを読み込み中です…</p>
             </div>
@@ -110,19 +104,22 @@ export default function Home() {
 
           {!loading && hasMore && (
             <div className="flex justify-center">
-              <button
-                type="button"
-                onClick={handleLoadMore}
-                className="rounded-full bg-ba-blue-500 px-6 py-2.5 text-sm font-bold text-white shadow-sm transition hover:bg-ba-blue-600"
+              <motion.div
+                initial={{ opacity: 0, y: 8 }}
+                animate={{ opacity: 1, y: 0 }}
+                whileHover={{ scale: 1.03 }}
+                whileTap={{ scale: 0.97 }}
               >
-                さらに表示 ({students.length - visibleStudents.length}件)
-              </button>
+                <Button type="button" onClick={handleLoadMore} className="px-6 font-bold">
+                  さらに表示 ({students.length - visibleStudents.length}件)
+                </Button>
+              </motion.div>
             </div>
           )}
 
           {/* 結果なし */}
           {!loading && students.length === 0 && (
-            <div className="rounded-3xl border border-ba-blue-100 bg-white py-16 text-center">
+            <div className="rounded-xl border border-ba-blue-100 bg-white py-16 text-center">
               <p className="text-sm text-ba-navy-400">条件に一致する生徒さんが見つかりませんでした。フィルターを調整して再度お試しください。</p>
             </div>
           )}

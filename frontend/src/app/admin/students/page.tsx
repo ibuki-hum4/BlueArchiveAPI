@@ -6,6 +6,8 @@ import { Student } from '@/types/student';
 import { fetchStudents } from '@/lib/api';
 import { deleteStudent, AdminAPIError } from '@/lib/admin-api';
 import RarityStars from '@/components/RarityStars';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
 
 export default function AdminStudentsPage() {
   const [students, setStudents] = useState<Student[]>([]);
@@ -63,39 +65,35 @@ export default function AdminStudentsPage() {
           <h1 className="font-rounded text-2xl font-extrabold text-ba-navy-900">生徒管理</h1>
           <p className="mt-1 text-sm text-ba-navy-400">{students.length}件の生徒データ</p>
         </div>
-        <Link
-          href="/admin/students/new"
-          className="rounded-full bg-ba-yellow-400 px-5 py-2.5 text-sm font-bold text-ba-navy-900 shadow-sm transition hover:bg-ba-yellow-300"
-        >
-          + 新規生徒を追加
-        </Link>
+        <Button asChild className="font-bold">
+          <Link href="/admin/students/new">+ 新規生徒を追加</Link>
+        </Button>
       </div>
 
-      <div className="rounded-3xl border border-ba-blue-100 bg-white p-4 shadow-sm">
-        <input
+      <div className="rounded-xl border border-ba-blue-100 bg-white p-4">
+        <Input
           type="text"
           placeholder="生徒名・学校名で検索..."
           value={search}
           onChange={(e) => setSearch(e.target.value)}
-          className="w-full rounded-full border border-ba-blue-200 bg-white px-4 py-2 text-ba-navy-900 placeholder:text-ba-navy-300 focus:outline-none focus:ring-2 focus:ring-ba-blue-300 focus:border-ba-blue-400"
         />
       </div>
 
       {loading && (
-        <div className="flex flex-col items-center justify-center rounded-3xl border border-ba-blue-100 bg-white py-16 text-center" role="status">
+        <div className="flex flex-col items-center justify-center rounded-xl border border-ba-blue-100 bg-white py-16 text-center" role="status">
           <div className="inline-flex h-10 w-10 animate-spin items-center justify-center rounded-full border-[3px] border-ba-blue-100 border-t-ba-blue-500" />
           <p className="mt-4 text-sm text-ba-navy-400">読み込み中...</p>
         </div>
       )}
 
       {!loading && error && (
-        <div className="rounded-3xl border border-red-200 bg-red-50 p-6 text-center text-sm font-semibold text-red-600" role="alert">
+        <div className="rounded-xl border border-red-200 bg-red-50 p-6 text-center text-sm font-semibold text-red-600" role="alert">
           {error}
         </div>
       )}
 
       {!loading && !error && (
-        <div className="overflow-hidden rounded-3xl border border-ba-blue-100 bg-white shadow-sm">
+        <div className="overflow-hidden rounded-xl border border-ba-blue-100 bg-white">
           <table className="w-full text-left text-sm">
             <thead className="bg-ba-navy-50 text-xs font-semibold uppercase tracking-wide text-ba-navy-500">
               <tr>
@@ -115,26 +113,24 @@ export default function AdminStudentsPage() {
                   <td className="px-4 py-3 font-semibold text-ba-navy-900">{student.name}</td>
                   <td className="px-4 py-3 text-ba-navy-500">{student.school}</td>
                   <td className="px-4 py-3">
-                    <span className="rounded-full bg-ba-blue-50 px-2.5 py-1 text-xs font-semibold text-ba-blue-700">
+                    <span className="rounded-md bg-ba-blue-50 px-2.5 py-1 text-xs font-semibold text-ba-blue-700">
                       {student.weapon.type}
                     </span>
                   </td>
                   <td className="px-4 py-3">
                     <div className="flex justify-end gap-2">
-                      <Link
-                        href={`/admin/students/${student.id}`}
-                        className="rounded-full border border-ba-blue-200 bg-ba-blue-50 px-3 py-1.5 text-xs font-semibold text-ba-blue-700 transition hover:bg-ba-blue-100"
-                      >
-                        編集
-                      </Link>
-                      <button
+                      <Button asChild size="sm" variant="secondary" className="border border-ba-blue-200">
+                        <Link href={`/admin/students/${student.id}`}>編集</Link>
+                      </Button>
+                      <Button
                         type="button"
+                        size="sm"
+                        variant="destructive"
                         onClick={() => handleDelete(student)}
                         disabled={deletingId === student.id}
-                        className="rounded-full border border-red-200 bg-red-50 px-3 py-1.5 text-xs font-semibold text-red-600 transition hover:bg-red-100 disabled:cursor-not-allowed disabled:opacity-60"
                       >
                         {deletingId === student.id ? '削除中...' : '削除'}
-                      </button>
+                      </Button>
                     </div>
                   </td>
                 </tr>

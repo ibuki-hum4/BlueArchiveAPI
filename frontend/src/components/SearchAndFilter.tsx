@@ -3,6 +3,10 @@
 import { memo, useId, useState } from 'react';
 import { StudentFilter, SortOptions, SortField, SortOrder } from '@/types/student';
 import { ATTACK_TYPES, DEFENSE_TYPES, POSITIONS, WEAPON_TYPES } from '@/lib/student-options';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { Select } from '@/components/ui/select';
+import { Button } from '@/components/ui/button';
 
 interface SearchAndFilterProps {
   onFilterChange: (filter: StudentFilter) => void;
@@ -47,10 +51,6 @@ function SearchAndFilter({ onFilterChange, onSortChange, totalCount, schools = [
   // 武器タイプ（propsで提供されない場合は共通定義をフォールバックとして使用）
   const displayWeaponTypes = weaponTypes.length > 0 ? weaponTypes : WEAPON_TYPES;
 
-  const inputClass =
-    'w-full rounded-full border border-ba-blue-200 bg-white px-4 py-2 text-ba-navy-900 placeholder:text-ba-navy-300 focus:outline-none focus:ring-2 focus:ring-ba-blue-300 focus:border-ba-blue-400';
-  const labelClass = 'block text-sm font-semibold text-ba-navy-700 mb-2';
-
   return (
     <form
       className="space-y-6 rounded-3xl border border-ba-blue-100 bg-white p-6 shadow-sm"
@@ -71,13 +71,10 @@ function SearchAndFilter({ onFilterChange, onSortChange, totalCount, schools = [
       {/* 検索バー */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
         <div>
-          <label htmlFor={nameId} className={labelClass}>
-            生徒名で検索
-          </label>
-          <input
+          <Label htmlFor={nameId}>生徒名で検索</Label>
+          <Input
             type="text"
             id={nameId}
-            className={inputClass}
             placeholder="生徒名を入力..."
             value={filter.name || ''}
             onChange={(e) => handleFilterChange({ name: e.target.value })}
@@ -85,12 +82,9 @@ function SearchAndFilter({ onFilterChange, onSortChange, totalCount, schools = [
           />
         </div>
         <div>
-          <label htmlFor={schoolId} className={labelClass}>
-            学校
-          </label>
-          <select
+          <Label htmlFor={schoolId}>学校</Label>
+          <Select
             id={schoolId}
-            className={inputClass}
             value={filter.school || ''}
             onChange={(e) => handleFilterChange({ school: e.target.value || undefined })}
           >
@@ -100,7 +94,7 @@ function SearchAndFilter({ onFilterChange, onSortChange, totalCount, schools = [
                 {school}
               </option>
             ))}
-          </select>
+          </Select>
         </div>
       </div>
 
@@ -109,12 +103,9 @@ function SearchAndFilter({ onFilterChange, onSortChange, totalCount, schools = [
         <legend className="text-sm font-semibold text-ba-navy-700">詳細フィルター</legend>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4">
           <div>
-            <label htmlFor={rarityId} className={labelClass}>
-              レア度
-            </label>
-            <select
+            <Label htmlFor={rarityId}>レア度</Label>
+            <Select
               id={rarityId}
-              className={inputClass}
               value={filter.rarity || ''}
               onChange={(e) => handleFilterChange({ rarity: e.target.value ? Number(e.target.value) : undefined })}
             >
@@ -122,16 +113,13 @@ function SearchAndFilter({ onFilterChange, onSortChange, totalCount, schools = [
               <option value="3">★3</option>
               <option value="2">★2</option>
               <option value="1">★1</option>
-            </select>
+            </Select>
           </div>
 
           <div>
-            <label htmlFor={weaponId} className={labelClass}>
-              武器タイプ
-            </label>
-            <select
+            <Label htmlFor={weaponId}>武器タイプ</Label>
+            <Select
               id={weaponId}
-              className={inputClass}
               value={filter.weaponType || ''}
               onChange={(e) => handleFilterChange({ weaponType: e.target.value || undefined })}
             >
@@ -141,16 +129,13 @@ function SearchAndFilter({ onFilterChange, onSortChange, totalCount, schools = [
                   {type}
                 </option>
               ))}
-            </select>
+            </Select>
           </div>
 
           <div>
-            <label htmlFor={attackId} className={labelClass}>
-              攻撃タイプ
-            </label>
-            <select
+            <Label htmlFor={attackId}>攻撃タイプ</Label>
+            <Select
               id={attackId}
-              className={inputClass}
               value={filter.attackType || ''}
               onChange={(e) => handleFilterChange({ attackType: e.target.value || undefined })}
             >
@@ -160,16 +145,13 @@ function SearchAndFilter({ onFilterChange, onSortChange, totalCount, schools = [
                   {type}
                 </option>
               ))}
-            </select>
+            </Select>
           </div>
 
           <div>
-            <label htmlFor={defenseId} className={labelClass}>
-              防御タイプ
-            </label>
-            <select
+            <Label htmlFor={defenseId}>防御タイプ</Label>
+            <Select
               id={defenseId}
-              className={inputClass}
               value={filter.defenseType || ''}
               onChange={(e) => handleFilterChange({ defenseType: e.target.value || undefined })}
             >
@@ -179,16 +161,13 @@ function SearchAndFilter({ onFilterChange, onSortChange, totalCount, schools = [
                   {type}
                 </option>
               ))}
-            </select>
+            </Select>
           </div>
 
           <div>
-            <label htmlFor={positionId} className={labelClass}>
-              ポジション
-            </label>
-            <select
+            <Label htmlFor={positionId}>ポジション</Label>
+            <Select
               id={positionId}
-              className={inputClass}
               value={filter.position || ''}
               onChange={(e) => handleFilterChange({ position: e.target.value || undefined })}
             >
@@ -198,7 +177,7 @@ function SearchAndFilter({ onFilterChange, onSortChange, totalCount, schools = [
                   {pos}
                 </option>
               ))}
-            </select>
+            </Select>
           </div>
         </div>
       </fieldset>
@@ -207,10 +186,10 @@ function SearchAndFilter({ onFilterChange, onSortChange, totalCount, schools = [
       <div className="flex flex-wrap items-center justify-between gap-4">
         <div className="flex items-center gap-3">
           <div className="flex items-center gap-2">
-            <label htmlFor={sortFieldId} className="text-sm font-semibold text-ba-navy-700">並び替え:</label>
-            <select
+            <Label htmlFor={sortFieldId} className="mb-0">並び替え:</Label>
+            <Select
               id={sortFieldId}
-              className="rounded-full border border-ba-blue-200 bg-white px-3 py-1.5 text-sm text-ba-navy-900 focus:outline-none focus:ring-2 focus:ring-ba-blue-300 focus:border-ba-blue-400"
+              className="h-9 w-auto px-3 py-1.5"
               value={sortField}
               onChange={(e) => handleSortChange(e.target.value as SortField, sortOrder)}
             >
@@ -219,23 +198,25 @@ function SearchAndFilter({ onFilterChange, onSortChange, totalCount, schools = [
               <option value="school">学校</option>
               <option value="weapon.type">武器タイプ</option>
               <option value="combat.attackType">攻撃タイプ</option>
-            </select>
-            <button
+            </Select>
+            <Button
               type="button"
-              className="rounded-full border border-ba-blue-200 bg-ba-blue-50 px-3 py-1.5 text-sm font-semibold text-ba-blue-700 transition hover:bg-ba-blue-100 focus:outline-none focus:ring-2 focus:ring-ba-blue-300"
+              variant="secondary"
+              className="h-9 border border-ba-blue-200 px-3"
               aria-label={`並び順を${sortOrder === 'asc' ? '降順' : '昇順'}に変更`}
               onClick={() => handleSortChange(sortField, sortOrder === 'asc' ? 'desc' : 'asc')}
             >
               {sortOrder === 'asc' ? '↑' : '↓'}
-            </button>
+            </Button>
           </div>
-          <button
+          <Button
             type="button"
-            className="rounded-full bg-ba-yellow-400 px-4 py-1.5 text-sm font-bold text-ba-navy-900 transition hover:bg-ba-yellow-300 focus:outline-none focus:ring-2 focus:ring-ba-yellow-500"
+            variant="outline"
+            className="h-9 border-ba-navy-200 px-4 text-ba-navy-600 hover:bg-ba-navy-50"
             onClick={clearFilters}
           >
             フィルターをクリア
-          </button>
+          </Button>
         </div>
         <div className="text-sm text-ba-navy-500" aria-live="polite">
           {totalCount}件の生徒が見つかりました

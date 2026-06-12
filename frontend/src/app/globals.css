@@ -37,11 +37,53 @@
   --color-ba-navy-950: #0b0e18;
 
   --font-rounded: var(--font-mplus-rounded), "Hiragino Maru Gothic ProN", "Yu Gothic", sans-serif;
+
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
 }
 
 :root {
   --background: #f3f7ff;
   --foreground: #131829;
+
+  --radius: 0.5rem;
+  --card: #ffffff;
+  --card-foreground: var(--foreground);
+  --popover: #ffffff;
+  --popover-foreground: var(--foreground);
+  --primary: var(--color-ba-blue-500);
+  --primary-foreground: #ffffff;
+  --secondary: var(--color-ba-blue-50);
+  --secondary-foreground: var(--color-ba-blue-700);
+  --muted: var(--color-ba-navy-50);
+  --muted-foreground: var(--color-ba-navy-400);
+  --accent: var(--color-ba-blue-50);
+  --accent-foreground: var(--color-ba-blue-700);
+  --destructive: #dc2626;
+  --destructive-foreground: #ffffff;
+  --border: var(--color-ba-blue-100);
+  --input: var(--color-ba-blue-200);
+  --ring: var(--color-ba-blue-400);
 }
 
 :root {
@@ -64,20 +106,9 @@ body {
   font-family: var(--font-geist-sans), system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 }
 
-.ba-hero-gradient {
-  background: linear-gradient(135deg, var(--color-ba-blue-600) 0%, var(--color-ba-blue-500) 45%, var(--color-ba-blue-400) 100%);
-}
-
-.ba-card-accent-3 {
-  background: linear-gradient(90deg, var(--color-ba-yellow-300), var(--color-ba-yellow-500));
-}
-
-.ba-card-accent-2 {
-  background: linear-gradient(90deg, #d8b4fe, #a855f7);
-}
-
-.ba-card-accent-1 {
-  background: linear-gradient(90deg, var(--color-ba-blue-300), var(--color-ba-blue-500));
+.ba-soft-panel {
+  background: #ffffff;
+  border-bottom: 1px solid var(--color-ba-blue-100);
 }
 
 .skip-link {

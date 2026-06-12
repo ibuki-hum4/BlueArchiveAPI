@@ -3,6 +3,8 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useState } from 'react';
+import { Menu, X } from 'lucide-react';
+import { Button } from '@/components/ui/button';
 
 const INTERNAL_LINKS = [
   { href: '/', label: '生徒一覧' },
@@ -31,17 +33,17 @@ export default function Navigation() {
   const getDesktopLinkClass = (href: string) => {
     const isActive = pathname === href;
     return [
-      'relative px-4 py-2 rounded-full text-sm font-semibold transition-colors duration-200',
+      'relative px-4 py-2 rounded-lg text-sm font-semibold transition-colors duration-200',
       isActive
-        ? 'bg-white text-ba-blue-700 shadow-sm'
-        : 'text-white/85 hover:text-white hover:bg-white/15'
+        ? 'bg-ba-blue-50 text-ba-blue-700'
+        : 'text-ba-navy-600 hover:text-ba-blue-700 hover:bg-ba-blue-50'
     ].join(' ');
   };
 
   const getMobileLinkClass = (href?: string) => {
     const isActive = href ? pathname === href : false;
     return [
-      'block px-3 py-2 rounded-xl text-base font-medium transition-colors duration-200',
+      'block px-3 py-2 rounded-lg text-base font-medium transition-colors duration-200',
       isActive
         ? 'bg-ba-blue-50 text-ba-blue-700'
         : 'text-ba-navy-700 hover:bg-ba-blue-50 hover:text-ba-blue-700'
@@ -50,17 +52,17 @@ export default function Navigation() {
 
   return (
     <nav
-      className="ba-hero-gradient sticky top-0 z-40 text-white shadow-md"
+      className="ba-soft-panel sticky top-0 z-40"
       aria-label="メインナビゲーション"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-16">
           <div className="flex items-center gap-3">
             <Link href="/" className="flex flex-col">
-              <span className="font-rounded text-lg font-extrabold tracking-wide text-white">
+              <span className="font-rounded text-lg font-extrabold tracking-wide text-ba-navy-900">
                 Schale Library
               </span>
-              <span className="text-[11px] tracking-wide text-ba-yellow-200">
+              <span className="text-[11px] tracking-wide text-ba-blue-500">
                 Blue Archive Database
               </span>
             </Link>
@@ -79,7 +81,7 @@ export default function Navigation() {
                 href={href}
                 target={external ? '_blank' : undefined}
                 rel={external ? 'noopener noreferrer' : undefined}
-                className="px-4 py-2 rounded-full text-sm font-semibold text-white/85 transition-colors duration-200 hover:text-white hover:bg-white/15"
+                className="px-4 py-2 rounded-lg text-sm font-semibold text-ba-navy-600 transition-colors duration-200 hover:text-ba-blue-700 hover:bg-ba-blue-50"
               >
                 {label}
               </a>
@@ -88,34 +90,24 @@ export default function Navigation() {
 
           {/* モバイルメニューボタン */}
           <div className="md:hidden flex items-center">
-            <button
+            <Button
+              type="button"
+              variant="outline"
+              size="icon"
               onClick={toggleMenu}
-              className="inline-flex items-center justify-center p-2 rounded-full border border-white/30 bg-white/10 text-white transition hover:bg-white/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ba-yellow-300"
               aria-label="メインメニュー"
               aria-expanded={isMenuOpen}
               aria-controls="primary-navigation"
             >
-              <svg
-                className="h-6 w-6"
-                stroke="currentColor"
-                fill="none"
-                viewBox="0 0 24 24"
-                aria-hidden="true"
-              >
-                {isMenuOpen ? (
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                ) : (
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-                )}
-              </svg>
-            </button>
+              {isMenuOpen ? <X className="h-6 w-6" aria-hidden="true" /> : <Menu className="h-6 w-6" aria-hidden="true" />}
+            </Button>
           </div>
         </div>
 
         {/* モバイルメニュー */}
         {isMenuOpen && (
           <div id="primary-navigation" className="md:hidden pb-4">
-            <div className="px-2 pt-2 space-y-1 rounded-2xl border border-white/20 bg-white shadow-lg">
+            <div className="px-2 pt-2 space-y-1 rounded-xl border border-ba-blue-100 bg-white">
               {INTERNAL_LINKS.map(({ href, label }) => (
                 <Link
                   key={href}

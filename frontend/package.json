@@ -1,7 +1,7 @@
 {
   "name": "frontend",
   "version": "2.18.1",
-    "private": true,
+  "private": true,
   "scripts": {
     "dev": "next dev --turbopack",
     "build": "next build --turbopack",
@@ -9,11 +9,18 @@
     "lint": "eslint"
   },
   "dependencies": {
+    "@radix-ui/react-label": "^2.1.9",
+    "@radix-ui/react-slot": "^1.2.5",
     "@tailwindcss/line-clamp": "^0.4.4",
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
+    "lucide-react": "^1.17.0",
+    "motion": "^12.40.0",
     "nanoid": "^5.1.6",
     "next": "15.5.4",
     "react": "19.1.0",
-    "react-dom": "19.1.0"
+    "react-dom": "19.1.0",
+    "tailwind-merge": "^3.6.0"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",

@@ -1,17 +1,17 @@
+'use client';
+
 import { memo } from 'react';
 import Link from 'next/link';
+import { motion } from 'motion/react';
 import { Student } from '@/types/student';
 import RarityStars from '@/components/RarityStars';
+import { Card } from '@/components/ui/card';
+import { Badge } from '@/components/ui/badge';
+import { cn } from '@/lib/utils';
 
 interface StudentCardProps {
   student: Student;
 }
-
-const RARITY_ACCENT_CLASSES: Record<number, string> = {
-  3: 'ba-card-accent-3',
-  2: 'ba-card-accent-2',
-  1: 'ba-card-accent-1',
-};
 
 function getAttackTypeColor(attackType: string): string {
   switch (attackType) {
@@ -23,39 +23,38 @@ function getAttackTypeColor(attackType: string): string {
   }
 }
 
-function getTerrainColor(grade: string): string {
+function getTerrainBadgeClass(grade: string): string {
   switch (grade) {
-    case 'S': return 'bg-green-500 text-white';
-    case 'A': return 'bg-ba-blue-500 text-white';
-    case 'B': return 'bg-yellow-500 text-white';
-    case 'C': return 'bg-orange-500 text-white';
-    case 'D': return 'bg-red-500 text-white';
-    default: return 'bg-gray-500 text-white';
+    case 'S': return 'border-transparent bg-green-50 text-green-700';
+    case 'A': return 'border-transparent bg-ba-blue-50 text-ba-blue-700';
+    case 'B': return 'border-transparent bg-yellow-50 text-yellow-700';
+    case 'C': return 'border-transparent bg-orange-50 text-orange-700';
+    case 'D': return 'border-transparent bg-red-50 text-red-700';
+    default: return 'border-transparent bg-gray-100 text-gray-600';
   }
 }
 
 function StudentCard({ student }: StudentCardProps) {
   const titleId = `student-${student.id}-name`;
-  const accentClass = RARITY_ACCENT_CLASSES[student.rarity] ?? 'bg-slate-300';
 
   return (
-    <Link
-      href={`/${student.id}`}
-      className="group block rounded-3xl focus:outline-none focus-visible:ring-2 focus-visible:ring-ba-blue-300"
-      aria-labelledby={titleId}
-      aria-label={`${student.name}の詳細ページを開く`}
+    <motion.div
+      initial={{ opacity: 0, y: 12 }}
+      animate={{ opacity: 1, y: 0 }}
+      whileHover={{ y: -4 }}
+      transition={{ duration: 0.2 }}
     >
-      <article className="overflow-hidden rounded-3xl border border-ba-blue-100 bg-white shadow-sm transition duration-200 group-hover:-translate-y-1 group-hover:shadow-lg group-hover:ring-2 group-hover:ring-ba-blue-300">
-        {/* レア度アクセントバー */}
-        <div className={`h-2 w-full ${accentClass}`} />
-
-        <div className="p-5">
+      <Link
+        href={`/${student.id}`}
+        className="block rounded-xl focus:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+        aria-labelledby={titleId}
+        aria-label={`${student.name}の詳細ページを開く`}
+      >
+        <Card className="p-5 transition-colors duration-200 hover:border-ba-blue-300 hover:shadow-md">
           {/* ヘッダー部分 */}
-          <div className="mb-3 flex items-center justify-between">
+          <div className="mb-2 flex items-center justify-between">
             <RarityStars rarity={student.rarity} />
-            <span className="rounded-full bg-ba-blue-50 px-2.5 py-1 text-xs font-semibold text-ba-blue-700">
-              {student.weapon.type}
-            </span>
+            <span className="text-xs font-semibold text-ba-navy-400">{student.weapon.type}</span>
           </div>
 
           {/* 生徒名 */}
@@ -64,44 +63,42 @@ function StudentCard({ student }: StudentCardProps) {
           </h3>
 
           {/* 学校 */}
-          <p className="mt-2 inline-flex items-center rounded-full bg-ba-navy-50 px-2.5 py-1 text-xs font-medium text-ba-navy-600">
-            {student.school}
-          </p>
+          <p className="mt-1 text-sm text-ba-navy-400">{student.school}</p>
 
           {/* 役割・攻撃タイプ */}
-          <div className="mt-4 flex items-center gap-2">
-            <span className="rounded-full border border-ba-blue-200 bg-ba-blue-50 px-2.5 py-1 text-xs font-medium text-ba-blue-700">
+          <div className="mt-3 flex items-center gap-2">
+            <Badge variant="outline" className="border-ba-blue-200 bg-ba-blue-50 font-medium text-ba-blue-700">
               {student.role.class}
-            </span>
+            </Badge>
             <span className={`text-xs font-semibold ${getAttackTypeColor(student.combat.attackType)}`}>
               {student.combat.attackType}
             </span>
           </div>
 
           {/* 地形適応 */}
-          <div className="mt-5 grid grid-cols-3 gap-2">
-            <div className="rounded-xl bg-ba-navy-50 py-2 text-center">
+          <div className="mt-4 grid grid-cols-3 gap-2">
+            <div className="rounded-lg bg-ba-navy-50 py-2 text-center">
               <div className="text-xs text-ba-navy-400">市街地</div>
-              <div className={`mt-1 inline-flex min-w-[2rem] justify-center rounded-full px-2.5 py-1 text-xs font-semibold ${getTerrainColor(student.terrainAdaptation.city)}`}>
+              <Badge className={cn('mt-1 min-w-[2rem] justify-center', getTerrainBadgeClass(student.terrainAdaptation.city))}>
                 {student.terrainAdaptation.city}
-              </div>
+              </Badge>
             </div>
-            <div className="rounded-xl bg-ba-navy-50 py-2 text-center">
+            <div className="rounded-lg bg-ba-navy-50 py-2 text-center">
               <div className="text-xs text-ba-navy-400">屋外</div>
-              <div className={`mt-1 inline-flex min-w-[2rem] justify-center rounded-full px-2.5 py-1 text-xs font-semibold ${getTerrainColor(student.terrainAdaptation.outdoor)}`}>
+              <Badge className={cn('mt-1 min-w-[2rem] justify-center', getTerrainBadgeClass(student.terrainAdaptation.outdoor))}>
                 {student.terrainAdaptation.outdoor}
-              </div>
+              </Badge>
             </div>
-            <div className="rounded-xl bg-ba-navy-50 py-2 text-center">
+            <div className="rounded-lg bg-ba-navy-50 py-2 text-center">
               <div className="text-xs text-ba-navy-400">屋内</div>
-              <div className={`mt-1 inline-flex min-w-[2rem] justify-center rounded-full px-2.5 py-1 text-xs font-semibold ${getTerrainColor(student.terrainAdaptation.indoor)}`}>
+              <Badge className={cn('mt-1 min-w-[2rem] justify-center', getTerrainBadgeClass(student.terrainAdaptation.indoor))}>
                 {student.terrainAdaptation.indoor}
-              </div>
+              </Badge>
             </div>
           </div>
-        </div>
-      </article>
-    </Link>
+        </Card>
+      </Link>
+    </motion.div>
   );
 }
 
