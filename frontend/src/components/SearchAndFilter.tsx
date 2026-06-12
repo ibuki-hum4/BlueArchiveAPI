@@ -2,6 +2,7 @@
 
 import { memo, useId, useState } from 'react';
 import { StudentFilter, SortOptions, SortField, SortOrder } from '@/types/student';
+import { ATTACK_TYPES, DEFENSE_TYPES, POSITIONS, WEAPON_TYPES } from '@/lib/student-options';
 
 interface SearchAndFilterProps {
   onFilterChange: (filter: StudentFilter) => void;
@@ -43,26 +44,26 @@ function SearchAndFilter({ onFilterChange, onSortChange, totalCount, schools = [
     onFilterChange(emptyFilter);
   };
 
-  // デフォルトの武器タイプ（propsで提供されない場合のフォールバック）
-  const defaultWeaponTypes = ['HG', 'AR', 'SMG', 'SR', 'SG', 'GL', 'RL', 'RG', 'MG', 'MT', 'FT'];
-  const displayWeaponTypes = weaponTypes.length > 0 ? weaponTypes : defaultWeaponTypes;
-  const attackTypes = ['神秘', '爆発', '貫通', '振動', '分解'];
-  const defenseTypes = ['重装甲', '軽装備', '特殊装甲', '弾力装甲', '複合装甲'];
-  const positions = ['FRONT', 'MIDDLE', 'BACK'];
+  // 武器タイプ（propsで提供されない場合は共通定義をフォールバックとして使用）
+  const displayWeaponTypes = weaponTypes.length > 0 ? weaponTypes : WEAPON_TYPES;
+
+  const inputClass =
+    'w-full rounded-full border border-ba-blue-200 bg-white px-4 py-2 text-ba-navy-900 placeholder:text-ba-navy-300 focus:outline-none focus:ring-2 focus:ring-ba-blue-300 focus:border-ba-blue-400';
+  const labelClass = 'block text-sm font-semibold text-ba-navy-700 mb-2';
 
   return (
     <form
-      className="rounded-lg border border-slate-300 bg-[#fcfcfc] p-6 space-y-6"
+      className="space-y-6 rounded-3xl border border-ba-blue-100 bg-white p-6 shadow-sm"
       role="search"
       aria-labelledby={`${formId}-title`}
       aria-describedby={`${formId}-summary`}
       onSubmit={(event) => event.preventDefault()}
     >
-      <div className="flex items-center justify-between gap-2 border-b border-slate-200 pb-3">
-        <h3 id={`${formId}-title`} className="text-base font-semibold text-slate-900">
+      <div className="flex items-center justify-between gap-2 border-b border-ba-blue-100 pb-3">
+        <h3 id={`${formId}-title`} className="font-rounded text-base font-bold text-ba-navy-900">
           検索とフィルター
         </h3>
-        <span id={`${formId}-summary`} className="text-xs text-slate-500">
+        <span id={`${formId}-summary`} className="text-xs text-ba-navy-400">
           条件を入力すると即座に結果が更新されます
         </span>
       </div>
@@ -70,13 +71,13 @@ function SearchAndFilter({ onFilterChange, onSortChange, totalCount, schools = [
       {/* 検索バー */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
         <div>
-          <label htmlFor={nameId} className="block text-sm font-semibold text-slate-700 mb-2">
+          <label htmlFor={nameId} className={labelClass}>
             生徒名で検索
           </label>
           <input
             type="text"
             id={nameId}
-            className="w-full rounded-md border border-slate-300 bg-white px-3 py-2 text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-sky-300/60"
+            className={inputClass}
             placeholder="生徒名を入力..."
             value={filter.name || ''}
             onChange={(e) => handleFilterChange({ name: e.target.value })}
@@ -84,12 +85,12 @@ function SearchAndFilter({ onFilterChange, onSortChange, totalCount, schools = [
           />
         </div>
         <div>
-          <label htmlFor={schoolId} className="block text-sm font-semibold text-slate-700 mb-2">
+          <label htmlFor={schoolId} className={labelClass}>
             学校
           </label>
           <select
             id={schoolId}
-            className="w-full rounded-md border border-slate-300 bg-white px-3 py-2 text-slate-900 focus:outline-none focus:ring-2 focus:ring-sky-300/60"
+            className={inputClass}
             value={filter.school || ''}
             onChange={(e) => handleFilterChange({ school: e.target.value || undefined })}
           >
@@ -105,15 +106,15 @@ function SearchAndFilter({ onFilterChange, onSortChange, totalCount, schools = [
 
       {/* フィルター */}
       <fieldset className="space-y-4">
-        <legend className="text-sm font-semibold text-slate-700">詳細フィルター</legend>
+        <legend className="text-sm font-semibold text-ba-navy-700">詳細フィルター</legend>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4">
           <div>
-            <label htmlFor={rarityId} className="block text-sm font-semibold text-slate-700 mb-2">
+            <label htmlFor={rarityId} className={labelClass}>
               レア度
             </label>
             <select
               id={rarityId}
-              className="w-full rounded-md border border-slate-300 bg-white px-3 py-2 text-slate-900 focus:outline-none focus:ring-2 focus:ring-sky-300/60"
+              className={inputClass}
               value={filter.rarity || ''}
               onChange={(e) => handleFilterChange({ rarity: e.target.value ? Number(e.target.value) : undefined })}
             >
@@ -125,12 +126,12 @@ function SearchAndFilter({ onFilterChange, onSortChange, totalCount, schools = [
           </div>
 
           <div>
-            <label htmlFor={weaponId} className="block text-sm font-semibold text-slate-700 mb-2">
+            <label htmlFor={weaponId} className={labelClass}>
               武器タイプ
             </label>
             <select
               id={weaponId}
-              className="w-full rounded-md border border-slate-300 bg-white px-3 py-2 text-slate-900 focus:outline-none focus:ring-2 focus:ring-sky-300/60"
+              className={inputClass}
               value={filter.weaponType || ''}
               onChange={(e) => handleFilterChange({ weaponType: e.target.value || undefined })}
             >
@@ -144,17 +145,17 @@ function SearchAndFilter({ onFilterChange, onSortChange, totalCount, schools = [
           </div>
 
           <div>
-            <label htmlFor={attackId} className="block text-sm font-semibold text-slate-700 mb-2">
+            <label htmlFor={attackId} className={labelClass}>
               攻撃タイプ
             </label>
             <select
               id={attackId}
-              className="w-full rounded-md border border-slate-300 bg-white px-3 py-2 text-slate-900 focus:outline-none focus:ring-2 focus:ring-sky-300/60"
+              className={inputClass}
               value={filter.attackType || ''}
               onChange={(e) => handleFilterChange({ attackType: e.target.value || undefined })}
             >
               <option value="">すべて</option>
-              {attackTypes.map((type) => (
+              {ATTACK_TYPES.map((type) => (
                 <option key={type} value={type}>
                   {type}
                 </option>
@@ -163,17 +164,17 @@ function SearchAndFilter({ onFilterChange, onSortChange, totalCount, schools = [
           </div>
 
           <div>
-            <label htmlFor={defenseId} className="block text-sm font-semibold text-slate-700 mb-2">
+            <label htmlFor={defenseId} className={labelClass}>
               防御タイプ
             </label>
             <select
               id={defenseId}
-              className="w-full rounded-md border border-slate-300 bg-white px-3 py-2 text-slate-900 focus:outline-none focus:ring-2 focus:ring-sky-300/60"
+              className={inputClass}
               value={filter.defenseType || ''}
               onChange={(e) => handleFilterChange({ defenseType: e.target.value || undefined })}
             >
               <option value="">すべて</option>
-              {defenseTypes.map((type) => (
+              {DEFENSE_TYPES.map((type) => (
                 <option key={type} value={type}>
                   {type}
                 </option>
@@ -182,17 +183,17 @@ function SearchAndFilter({ onFilterChange, onSortChange, totalCount, schools = [
           </div>
 
           <div>
-            <label htmlFor={positionId} className="block text-sm font-semibold text-slate-700 mb-2">
+            <label htmlFor={positionId} className={labelClass}>
               ポジション
             </label>
             <select
               id={positionId}
-              className="w-full rounded-md border border-slate-300 bg-white px-3 py-2 text-slate-900 focus:outline-none focus:ring-2 focus:ring-sky-300/60"
+              className={inputClass}
               value={filter.position || ''}
               onChange={(e) => handleFilterChange({ position: e.target.value || undefined })}
             >
               <option value="">すべて</option>
-              {positions.map((pos) => (
+              {POSITIONS.map((pos) => (
                 <option key={pos} value={pos}>
                   {pos}
                 </option>
@@ -204,12 +205,12 @@ function SearchAndFilter({ onFilterChange, onSortChange, totalCount, schools = [
 
       {/* ソート・アクション */}
       <div className="flex flex-wrap items-center justify-between gap-4">
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-3">
           <div className="flex items-center gap-2">
-            <label htmlFor={sortFieldId} className="text-sm font-semibold text-slate-700">並び替え:</label>
+            <label htmlFor={sortFieldId} className="text-sm font-semibold text-ba-navy-700">並び替え:</label>
             <select
               id={sortFieldId}
-              className="rounded-sm border border-slate-300 bg-white px-3 py-1 text-sm text-slate-900 focus:outline-none focus:ring-2 focus:ring-sky-300/60"
+              className="rounded-full border border-ba-blue-200 bg-white px-3 py-1.5 text-sm text-ba-navy-900 focus:outline-none focus:ring-2 focus:ring-ba-blue-300 focus:border-ba-blue-400"
               value={sortField}
               onChange={(e) => handleSortChange(e.target.value as SortField, sortOrder)}
             >
@@ -221,7 +222,7 @@ function SearchAndFilter({ onFilterChange, onSortChange, totalCount, schools = [
             </select>
             <button
               type="button"
-              className="rounded-sm border border-slate-300 px-3 py-1 text-sm text-slate-700 transition hover:bg-slate-100 focus:outline-none focus:ring-2 focus:ring-sky-300/60"
+              className="rounded-full border border-ba-blue-200 bg-ba-blue-50 px-3 py-1.5 text-sm font-semibold text-ba-blue-700 transition hover:bg-ba-blue-100 focus:outline-none focus:ring-2 focus:ring-ba-blue-300"
               aria-label={`並び順を${sortOrder === 'asc' ? '降順' : '昇順'}に変更`}
               onClick={() => handleSortChange(sortField, sortOrder === 'asc' ? 'desc' : 'asc')}
             >
@@ -230,13 +231,13 @@ function SearchAndFilter({ onFilterChange, onSortChange, totalCount, schools = [
           </div>
           <button
             type="button"
-            className="rounded-sm border border-transparent px-4 py-1 text-sm font-semibold text-slate-700 transition hover:border-slate-300 hover:bg-white"
+            className="rounded-full bg-ba-yellow-400 px-4 py-1.5 text-sm font-bold text-ba-navy-900 transition hover:bg-ba-yellow-300 focus:outline-none focus:ring-2 focus:ring-ba-yellow-500"
             onClick={clearFilters}
           >
             フィルターをクリア
           </button>
         </div>
-        <div className="text-sm text-slate-500" aria-live="polite">
+        <div className="text-sm text-ba-navy-500" aria-live="polite">
           {totalCount}件の生徒が見つかりました
         </div>
       </div>

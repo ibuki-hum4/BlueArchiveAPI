@@ -1,8 +1,47 @@
 @import "tailwindcss";
 
+@theme {
+  --color-ba-blue-50: #eef5ff;
+  --color-ba-blue-100: #dbe9ff;
+  --color-ba-blue-200: #bdd7ff;
+  --color-ba-blue-300: #8ebcff;
+  --color-ba-blue-400: #5a9aff;
+  --color-ba-blue-500: #2f7bff;
+  --color-ba-blue-600: #155ef0;
+  --color-ba-blue-700: #0e4ad1;
+  --color-ba-blue-800: #133da9;
+  --color-ba-blue-900: #163785;
+  --color-ba-blue-950: #11214d;
+
+  --color-ba-yellow-50: #fffbeb;
+  --color-ba-yellow-100: #fff3c4;
+  --color-ba-yellow-200: #ffe588;
+  --color-ba-yellow-300: #ffd24a;
+  --color-ba-yellow-400: #ffc93c;
+  --color-ba-yellow-500: #ffb627;
+  --color-ba-yellow-600: #f59300;
+  --color-ba-yellow-700: #cc6f02;
+  --color-ba-yellow-800: #a35608;
+  --color-ba-yellow-900: #85470c;
+
+  --color-ba-navy-50: #eef1f7;
+  --color-ba-navy-100: #d6dcec;
+  --color-ba-navy-200: #b0bcd9;
+  --color-ba-navy-300: #8294c0;
+  --color-ba-navy-400: #5b6da0;
+  --color-ba-navy-500: #425280;
+  --color-ba-navy-600: #324063;
+  --color-ba-navy-700: #28324f;
+  --color-ba-navy-800: #1d243b;
+  --color-ba-navy-900: #131829;
+  --color-ba-navy-950: #0b0e18;
+
+  --font-rounded: var(--font-mplus-rounded), "Hiragino Maru Gothic ProN", "Yu Gothic", sans-serif;
+}
+
 :root {
-  --background: #f8fafc;
-  --foreground: #0f172a;
+  --background: #f3f7ff;
+  --foreground: #131829;
 }
 
 :root {
@@ -14,8 +53,8 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0f172a;
-    --foreground: #e2e8f0;
+    --background: #0b0e18;
+    --foreground: #e8eefb;
   }
 }
 
@@ -23,6 +62,22 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: var(--font-geist-sans), system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+.ba-hero-gradient {
+  background: linear-gradient(135deg, var(--color-ba-blue-600) 0%, var(--color-ba-blue-500) 45%, var(--color-ba-blue-400) 100%);
+}
+
+.ba-card-accent-3 {
+  background: linear-gradient(90deg, var(--color-ba-yellow-300), var(--color-ba-yellow-500));
+}
+
+.ba-card-accent-2 {
+  background: linear-gradient(90deg, #d8b4fe, #a855f7);
+}
+
+.ba-card-accent-1 {
+  background: linear-gradient(90deg, var(--color-ba-blue-300), var(--color-ba-blue-500));
 }
 
 .skip-link {

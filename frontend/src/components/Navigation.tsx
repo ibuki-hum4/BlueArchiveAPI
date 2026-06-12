@@ -31,39 +31,43 @@ export default function Navigation() {
   const getDesktopLinkClass = (href: string) => {
     const isActive = pathname === href;
     return [
-      'relative px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200 border',
+      'relative px-4 py-2 rounded-full text-sm font-semibold transition-colors duration-200',
       isActive
-        ? 'border-slate-400 bg-white text-slate-900'
-        : 'border-transparent text-slate-600 hover:text-slate-900 hover:bg-slate-100/70'
+        ? 'bg-white text-ba-blue-700 shadow-sm'
+        : 'text-white/85 hover:text-white hover:bg-white/15'
     ].join(' ');
   };
 
   const getMobileLinkClass = (href?: string) => {
     const isActive = href ? pathname === href : false;
     return [
-      'block px-3 py-2 rounded-lg text-base font-medium transition-colors duration-200',
+      'block px-3 py-2 rounded-xl text-base font-medium transition-colors duration-200',
       isActive
-        ? 'bg-slate-200 text-slate-900'
-        : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100'
+        ? 'bg-ba-blue-50 text-ba-blue-700'
+        : 'text-ba-navy-700 hover:bg-ba-blue-50 hover:text-ba-blue-700'
     ].join(' ');
   };
 
   return (
     <nav
-      className="sticky top-0 z-40 border-b border-slate-300 bg-[#fdfdfd] text-slate-800"
+      className="ba-hero-gradient sticky top-0 z-40 text-white shadow-md"
       aria-label="メインナビゲーション"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-16">
           <div className="flex items-center gap-3">
             <Link href="/" className="flex flex-col">
-              <span className="text-lg font-semibold tracking-wide text-slate-900">Blue Archive Database</span>
-              <span className="text-xs tracking-wide text-slate-500">API &amp; データブラウジングポータル</span>
+              <span className="font-rounded text-lg font-extrabold tracking-wide text-white">
+                Schale Library
+              </span>
+              <span className="text-[11px] tracking-wide text-ba-yellow-200">
+                Blue Archive Database
+              </span>
             </Link>
           </div>
 
           {/* デスクトップメニュー */}
-          <div className="hidden md:flex items-center gap-2">
+          <div className="hidden md:flex items-center gap-1">
             {INTERNAL_LINKS.map(({ href, label }) => (
               <Link key={href} href={href} className={getDesktopLinkClass(href)}>
                 {label}
@@ -75,7 +79,7 @@ export default function Navigation() {
                 href={href}
                 target={external ? '_blank' : undefined}
                 rel={external ? 'noopener noreferrer' : undefined}
-                className="px-3 py-2 rounded-md text-sm font-medium text-slate-600 transition-colors duration-200 hover:text-slate-900 hover:bg-slate-100/70"
+                className="px-4 py-2 rounded-full text-sm font-semibold text-white/85 transition-colors duration-200 hover:text-white hover:bg-white/15"
               >
                 {label}
               </a>
@@ -86,7 +90,7 @@ export default function Navigation() {
           <div className="md:hidden flex items-center">
             <button
               onClick={toggleMenu}
-              className="inline-flex items-center justify-center p-2 rounded-md border border-slate-300 bg-white text-slate-700 transition hover:bg-slate-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-400"
+              className="inline-flex items-center justify-center p-2 rounded-full border border-white/30 bg-white/10 text-white transition hover:bg-white/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ba-yellow-300"
               aria-label="メインメニュー"
               aria-expanded={isMenuOpen}
               aria-controls="primary-navigation"
@@ -111,7 +115,7 @@ export default function Navigation() {
         {/* モバイルメニュー */}
         {isMenuOpen && (
           <div id="primary-navigation" className="md:hidden pb-4">
-            <div className="px-2 pt-2 space-y-1 rounded-lg border border-slate-300 bg-white">
+            <div className="px-2 pt-2 space-y-1 rounded-2xl border border-white/20 bg-white shadow-lg">
               {INTERNAL_LINKS.map(({ href, label }) => (
                 <Link
                   key={href}

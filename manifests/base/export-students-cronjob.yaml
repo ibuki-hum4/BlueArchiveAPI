@@ -1,0 +1,71 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: bluearchive-export-students
+  labels:
+    app: bluearchive-export-students
+spec:
+  schedule: "0 3 * * 0"
+  timeZone: "Asia/Tokyo"
+  concurrencyPolicy: Forbid
+  successfulJobsHistoryLimit: 3
+  failedJobsHistoryLimit: 3
+  jobTemplate:
+    spec:
+      backoffLimit: 1
+      template:
+        metadata:
+          labels:
+            app: bluearchive-export-students
+        spec:
+          restartPolicy: Never
+          terminationGracePeriodSeconds: 30
+          securityContext:
+            runAsNonRoot: true
+            runAsUser: 1000
+            runAsGroup: 1000
+            fsGroup: 1000
+            fsGroupChangePolicy: OnRootMismatch
+            seccompProfile:
+              type: RuntimeDefault
+          containers:
+            - name: export-students
+              image: docker.io/kemar1/bluearchive-export-students
+              imagePullPolicy: IfNotPresent
+              securityContext:
+                runAsNonRoot: true
+                runAsUser: 1000
+                runAsGroup: 1000
+                allowPrivilegeEscalation: false
+                readOnlyRootFilesystem: false
+                capabilities:
+                  drop: ["ALL"]
+              env:
+                - name: DATABASE_URL
+                  valueFrom:
+                    secretKeyRef:
+                      name: bluearchive-secrets
+                      key: DATABASE_URL
+                - name: REPO_URL
+                  value: "git@github.com:ibuki-hum4/BlueArchiveAPI.git"
+                - name: REPO_BRANCH
+                  value: "main"
+              volumeMounts:
+                - name: git-deploy-key
+                  mountPath: /etc/git-deploy-key
+                  readOnly: true
+              resources:
+                requests:
+                  cpu: 50m
+                  memory: 64Mi
+                limits:
+                  cpu: 200m
+                  memory: 128Mi
+          volumes:
+            - name: git-deploy-key
+              secret:
+                secretName: bluearchive-secrets
+                defaultMode: 0440
+                items:
+                  - key: ssh-privatekey
+                    path: ssh-privatekey

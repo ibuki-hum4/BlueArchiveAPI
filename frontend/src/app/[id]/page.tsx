@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react';
 import { useParams, useRouter } from 'next/navigation';
 import Navigation from '@/components/Navigation';
+import RarityStars from '@/components/RarityStars';
 import { Student } from '@/types/student';
 import { fetchStudentById } from '@/lib/api';
 
@@ -36,29 +37,10 @@ export default function StudentDetailPage() {
     }
   }, [params.id]);
 
-  // レア度に基づく色設定
-  const getRarityColor = (rarity: number): string => {
-    switch (rarity) {
-      case 3: return 'bg-yellow-400'; // ★3（金）
-      case 2: return 'bg-purple-400'; // ★2（紫）
-      case 1: return 'bg-blue-400'; // R（青）
-      default: return 'bg-gray-400';
-    }
-  };
-
-  const getRarityText = (rarity: number): string => {
-    switch (rarity) {
-      case 3: return '★3';
-      case 2: return '★2';
-      case 1: return '★1';
-      default: return 'N';
-    }
-  };
-
   // 攻撃タイプの色設定
   const getAttackTypeColor = (attackType: string): string => {
     switch (attackType) {
-      case '神秘': return 'text-blue-600 bg-blue-50';
+      case '神秘': return 'text-ba-blue-700 bg-ba-blue-50';
       case '爆発': return 'text-red-600 bg-red-50';
       case '貫通': return 'text-yellow-600 bg-yellow-50';
       default: return 'text-gray-600 bg-gray-50';
@@ -69,7 +51,7 @@ export default function StudentDetailPage() {
   const getTerrainColor = (grade: string): string => {
     switch (grade) {
       case 'S': return 'bg-green-500 text-white';
-      case 'A': return 'bg-blue-500 text-white';
+      case 'A': return 'bg-ba-blue-500 text-white';
       case 'B': return 'bg-yellow-500 text-white';
       case 'C': return 'bg-orange-500 text-white';
       case 'D': return 'bg-red-500 text-white';
@@ -79,12 +61,12 @@ export default function StudentDetailPage() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gray-50">
+      <div className="min-h-screen bg-ba-blue-50/40">
         <Navigation />
         <main className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
           <div className="text-center py-12">
-            <div className="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600"></div>
-            <p className="mt-4 text-gray-600">生徒データを読み込み中...</p>
+            <div className="inline-block h-8 w-8 animate-spin rounded-full border-[3px] border-ba-blue-100 border-t-ba-blue-500"></div>
+            <p className="mt-4 text-ba-navy-400">生徒データを読み込み中...</p>
           </div>
         </main>
       </div>
@@ -93,14 +75,14 @@ export default function StudentDetailPage() {
 
   if (error || !student) {
     return (
-      <div className="min-h-screen bg-gray-50">
+      <div className="min-h-screen bg-ba-blue-50/40">
         <Navigation />
         <main className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
           <div className="text-center">
             <h2 className="text-2xl font-bold text-red-600">エラーが発生しました</h2>
             <p className="mt-2 text-gray-600">{error}</p>
             <button
-              className="mt-4 px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700"
+              className="mt-4 rounded-full bg-ba-blue-500 px-4 py-2 font-bold text-white hover:bg-ba-blue-600"
               onClick={() => router.push('/')}
             >
               ホームに戻る
@@ -112,13 +94,13 @@ export default function StudentDetailPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-ba-blue-50/40 text-ba-navy-900">
       <Navigation />
-      
+
       <main className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* 戻るボタン */}
         <button
-          className="mb-6 flex items-center text-blue-600 hover:text-blue-800"
+          className="mb-6 flex items-center font-semibold text-ba-blue-600 hover:text-ba-blue-800"
           onClick={() => router.back()}
         >
           <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -127,18 +109,18 @@ export default function StudentDetailPage() {
           戻る
         </button>
 
-        <div className="bg-white rounded-lg shadow-lg overflow-hidden">
+        <div className="overflow-hidden rounded-3xl bg-white shadow-lg">
           {/* ヘッダー部分 */}
-          <div className="bg-gradient-to-r from-blue-500 to-purple-600 text-white p-6">
+          <div className="ba-hero-gradient p-6 text-white">
             <div className="flex items-center justify-between">
               <div>
-                <div className="flex items-center gap-3 mb-2">
-                  <h1 className="text-3xl font-bold">{student.name}</h1>
-                  <div className={`px-3 py-1 rounded text-sm font-bold text-white ${getRarityColor(student.rarity)}`}>
-                    {getRarityText(student.rarity)}
-                  </div>
+                <div className="mb-2 flex items-center gap-3">
+                  <h1 className="font-rounded text-3xl font-extrabold">{student.name}</h1>
+                  <RarityStars rarity={student.rarity} size="lg" />
                 </div>
-                <p className="text-blue-100">{student.school}</p>
+                <p className="inline-flex items-center rounded-full bg-white/15 px-3 py-1 text-sm font-medium text-white/90">
+                  {student.school}
+                </p>
               </div>
             </div>
           </div>
@@ -148,45 +130,43 @@ export default function StudentDetailPage() {
             {/* 基本情報 */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div className="space-y-4">
-                <h2 className="text-xl font-semibold text-gray-800 border-b border-gray-200 pb-2">
+                <h2 className="text-xl font-bold text-ba-navy-900 border-b border-ba-blue-100 pb-2">
                   基本情報
                 </h2>
                 <div className="space-y-3">
-                  <div className="flex justify-between">
-                    <span className="text-gray-600">レア度:</span>
-                    <span className={`px-2 py-1 rounded text-sm font-medium text-white ${getRarityColor(student.rarity)}`}>
-                      {getRarityText(student.rarity)} (★{student.rarity})
-                    </span>
+                  <div className="flex items-center justify-between">
+                    <span className="text-ba-navy-500">レア度:</span>
+                    <RarityStars rarity={student.rarity} />
                   </div>
-                  <div className="flex justify-between">
-                    <span className="text-gray-600">学校:</span>
-                    <span className="font-medium">{student.school}</span>
+                  <div className="flex items-center justify-between">
+                    <span className="text-ba-navy-500">学校:</span>
+                    <span className="font-semibold text-ba-navy-900">{student.school}</span>
                   </div>
                 </div>
               </div>
 
               <div className="space-y-4">
-                <h2 className="text-xl font-semibold text-gray-800 border-b border-gray-200 pb-2">
+                <h2 className="text-xl font-bold text-ba-navy-900 border-b border-ba-blue-100 pb-2">
                   戦闘情報
                 </h2>
                 <div className="space-y-3">
-                  <div className="flex justify-between">
-                    <span className="text-gray-600">武器タイプ:</span>
-                    <span className="font-medium">{student.weapon.type}</span>
+                  <div className="flex items-center justify-between">
+                    <span className="text-ba-navy-500">武器タイプ:</span>
+                    <span className="font-semibold text-ba-navy-900">{student.weapon.type}</span>
                   </div>
-                  <div className="flex justify-between">
-                    <span className="text-gray-600">カバー:</span>
-                    <span className="font-medium">{student.weapon.cover ? 'あり' : 'なし'}</span>
+                  <div className="flex items-center justify-between">
+                    <span className="text-ba-navy-500">カバー:</span>
+                    <span className="font-semibold text-ba-navy-900">{student.weapon.cover ? 'あり' : 'なし'}</span>
                   </div>
-                  <div className="flex justify-between">
-                    <span className="text-gray-600">攻撃タイプ:</span>
-                    <span className={`px-2 py-1 rounded font-medium ${getAttackTypeColor(student.combat.attackType)}`}>
+                  <div className="flex items-center justify-between">
+                    <span className="text-ba-navy-500">攻撃タイプ:</span>
+                    <span className={`rounded-full px-2.5 py-1 text-sm font-semibold ${getAttackTypeColor(student.combat.attackType)}`}>
                       {student.combat.attackType}
                     </span>
                   </div>
-                  <div className="flex justify-between">
-                    <span className="text-gray-600">防御タイプ:</span>
-                    <span className="font-medium">{student.combat.defenseType}</span>
+                  <div className="flex items-center justify-between">
+                    <span className="text-ba-navy-500">防御タイプ:</span>
+                    <span className="font-semibold text-ba-navy-900">{student.combat.defenseType}</span>
                   </div>
                 </div>
               </div>
@@ -194,46 +174,46 @@ export default function StudentDetailPage() {
 
             {/* 役割情報 */}
             <div>
-              <h2 className="text-xl font-semibold text-gray-800 border-b border-gray-200 pb-2 mb-4">
+              <h2 className="mb-4 text-xl font-bold text-ba-navy-900 border-b border-ba-blue-100 pb-2">
                 役割・ポジション
               </h2>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                <div className="bg-gray-50 p-4 rounded-lg">
-                  <div className="text-sm text-gray-600 mb-1">タイプ</div>
-                  <div className="font-semibold">{student.role.type}</div>
+                <div className="rounded-2xl bg-ba-navy-50 p-4">
+                  <div className="mb-1 text-sm text-ba-navy-400">タイプ</div>
+                  <div className="font-bold text-ba-navy-900">{student.role.type}</div>
                 </div>
-                <div className="bg-gray-50 p-4 rounded-lg">
-                  <div className="text-sm text-gray-600 mb-1">クラス</div>
-                  <div className="font-semibold">{student.role.class}</div>
+                <div className="rounded-2xl bg-ba-navy-50 p-4">
+                  <div className="mb-1 text-sm text-ba-navy-400">クラス</div>
+                  <div className="font-bold text-ba-navy-900">{student.role.class}</div>
                 </div>
-                <div className="bg-gray-50 p-4 rounded-lg">
-                  <div className="text-sm text-gray-600 mb-1">ポジション</div>
-                  <div className="font-semibold">{student.role.position}</div>
+                <div className="rounded-2xl bg-ba-navy-50 p-4">
+                  <div className="mb-1 text-sm text-ba-navy-400">ポジション</div>
+                  <div className="font-bold text-ba-navy-900">{student.role.position}</div>
                 </div>
               </div>
             </div>
 
             {/* 地形適応 */}
             <div>
-              <h2 className="text-xl font-semibold text-gray-800 border-b border-gray-200 pb-2 mb-4">
+              <h2 className="mb-4 text-xl font-bold text-ba-navy-900 border-b border-ba-blue-100 pb-2">
                 地形適応度
               </h2>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                <div className="text-center p-4 border rounded-lg">
-                  <div className="text-sm text-gray-600 mb-2">市街地</div>
-                  <div className={`inline-block px-4 py-2 rounded-full text-lg font-bold ${getTerrainColor(student.terrainAdaptation.city)}`}>
+                <div className="rounded-2xl border border-ba-blue-100 p-4 text-center">
+                  <div className="mb-2 text-sm text-ba-navy-400">市街地</div>
+                  <div className={`inline-block rounded-full px-4 py-2 text-lg font-bold ${getTerrainColor(student.terrainAdaptation.city)}`}>
                     {student.terrainAdaptation.city}
                   </div>
                 </div>
-                <div className="text-center p-4 border rounded-lg">
-                  <div className="text-sm text-gray-600 mb-2">屋外</div>
-                  <div className={`inline-block px-4 py-2 rounded-full text-lg font-bold ${getTerrainColor(student.terrainAdaptation.outdoor)}`}>
+                <div className="rounded-2xl border border-ba-blue-100 p-4 text-center">
+                  <div className="mb-2 text-sm text-ba-navy-400">屋外</div>
+                  <div className={`inline-block rounded-full px-4 py-2 text-lg font-bold ${getTerrainColor(student.terrainAdaptation.outdoor)}`}>
                     {student.terrainAdaptation.outdoor}
                   </div>
                 </div>
-                <div className="text-center p-4 border rounded-lg">
-                  <div className="text-sm text-gray-600 mb-2">屋内</div>
-                  <div className={`inline-block px-4 py-2 rounded-full text-lg font-bold ${getTerrainColor(student.terrainAdaptation.indoor)}`}>
+                <div className="rounded-2xl border border-ba-blue-100 p-4 text-center">
+                  <div className="mb-2 text-sm text-ba-navy-400">屋内</div>
+                  <div className={`inline-block rounded-full px-4 py-2 text-lg font-bold ${getTerrainColor(student.terrainAdaptation.indoor)}`}>
                     {student.terrainAdaptation.indoor}
                   </div>
                 </div>
@@ -241,8 +221,8 @@ export default function StudentDetailPage() {
             </div>
 
             {/* ID情報（デバッグ用） */}
-            <div className="border-t border-gray-200 pt-4">
-              <div className="text-sm text-gray-500">
+            <div className="border-t border-ba-blue-100 pt-4">
+              <div className="text-sm text-ba-navy-400">
                 ID: {student.id}
               </div>
             </div>

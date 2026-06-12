@@ -83,6 +83,8 @@ OGP_RENDERER_URL=http://localhost:8787/render go run ./go-api
 
 ### Go API + OGP レンダラーを Docker で起動する
 
+Go API は PostgreSQL (`DATABASE_URL`) を必須とします。`docker-compose.yaml` を使うとPostgresを含めて一括起動できます（後述の「初期データ投入」も参照）。手動でコンテナを起動する場合は以下の手順です。
+
 ```powershell
 # 1) OGP renderer イメージをビルド
 docker build -t kemar1/bluearchive-og-renderer:0.1.0 ./og-renderer
@@ -93,18 +95,22 @@ docker build -t kemar1/bluearchive-api-go:0.1.0 ./go-api
 # 3) 同一ネットワークを作成
 docker network create bluearchive-net
 
-# 4) OGP renderer を起動（フォントをマウント）
+# 4) Postgres を起動
+docker run -d --name bluearchive-postgres --network bluearchive-net `
+	-e POSTGRES_USER=ba -e POSTGRES_PASSWORD=ba -e POSTGRES_DB=bluearchive `
+	postgres:18-alpine
+
+# 5) OGP renderer を起動（フォントをマウント）
 docker run -d --name bluearchive-og-renderer --network bluearchive-net -p 8787:8787 `
 	-e OGP_FONT_REGULAR_PATH=/app/fonts/BIZUDPGothic-Regular.ttf `
 	-e OGP_FONT_BOLD_PATH=/app/fonts/BIZUDPGothic-Bold.ttf `
 	-v "${PWD}/og-renderer/fonts:/app/fonts:ro" `
 	kemar1/bluearchive-og-renderer:0.1.0
 
-# 5) Go API を起動（renderer URL を内部DNSへ向ける）
+# 6) Go API を起動（renderer URL とDB接続先を内部DNSへ向ける）
 docker run -d --name bluearchive-go-api --network bluearchive-net -p 8080:8080 `
 	-e OGP_RENDERER_URL=http://bluearchive-og-renderer:8787/render `
-	-e STUDENTS_DATA_PATH=/app/data/students.json `
-	-v "${PWD}/data:/app/data:ro" `
+	-e DATABASE_URL=postgres://ba:ba@bluearchive-postgres:5432/bluearchive?sslmode=disable `
 	kemar1/bluearchive-api-go:0.1.0
 ```
 
@@ -120,9 +126,48 @@ Go API は `http://localhost:8080` で起動し、次のエンドポイントを
 - `GET /api/health`
 - `GET /api/students`
 - `GET /api/students/:id`
-- `POST /api/students`
+- `POST /api/students` (要管理者認証)
+- `PUT /api/students/:id` (要管理者認証)
+- `DELETE /api/students/:id` (要管理者認証)
+- `POST /api/admin/login`
+- `POST /api/admin/logout`
+- `GET /api/admin/session`
 
 必要に応じて、フロントエンドの `NEXT_PUBLIC_API_BASE_URL` を `http://localhost:8080/api` に設定して接続先を切り替えられます。
+
+### データベース (PostgreSQL)
+
+生徒データは PostgreSQL の `students` テーブルで管理されます。テーブルは Go API 起動時に自動作成されます（`CREATE TABLE IF NOT EXISTS`）。
+
+| 環境変数 | 必須 | 説明 |
+|---------|------|------|
+| `DATABASE_URL` | ✅ | PostgreSQL接続文字列（例: `postgres://ba:ba@localhost:5432/bluearchive?sslmode=disable`）。未設定の場合、Go API は起動しません。 |
+
+#### 初期データ投入 (seed)
+
+リポジトリに含まれる `data/students.json` をDBへ投入するには、`seed_students` を実行します（既存の行は `ON CONFLICT DO NOTHING` でスキップされるため、何度実行しても安全です）。
+
+```bash
+DATABASE_URL=postgres://ba:ba@localhost:5432/bluearchive?sslmode=disable \
+  go run ./go-api/cmd/seed_students -json data/students.json
+```
+
+`data/students.json` はDBのバックアップ用途として、週次のk8s CronJob (`bluearchive-export-students`) によって自動更新されます。本番環境のSecret管理（`DATABASE_URL` / git push用Deploy Key のSealedSecrets化）については [`manifests/base/secrets/README.md`](manifests/base/secrets/README.md) を参照してください。
+
+### 管理者ダッシュボード
+
+`/admin` 以下に、生徒データを作成・編集・削除できる管理画面があります。利用するには Go API 起動時に管理者パスワードを設定してください。
+
+```bash
+ADMIN_PASSWORD=your-strong-password go run ./go-api
+```
+
+| 環境変数 | 必須 | 説明 |
+|---------|------|------|
+| `ADMIN_PASSWORD` | ✅ | 管理画面ログインに使用するパスワード。未設定の場合、管理API・管理画面は無効化されます（`401`/`503`）。 |
+| `ADMIN_SESSION_SECRET` | – | セッションCookie署名用のシークレット。未設定時はプロセス起動時にランダム生成されます（再起動でログアウトされます）。本番環境では固定値の設定を推奨します。 |
+
+ログイン後は `/admin/students` で生徒の一覧表示・検索・新規作成・編集・削除が行えます。
 
 ## 📂 プロジェクト構造
 
@@ -152,7 +197,12 @@ BlueArchiveAPI/
 |---------|---------------|------|
 | `GET` | `/api/students` | 全生徒データを取得 |
 | `GET` | `/api/students/[id]` | 指定IDの生徒データを取得 |
-| `POST` | `/api/students` | 新しい生徒データを追加 (要認証) |
+| `POST` | `/api/students` | 新しい生徒データを追加 (要管理者認証) |
+| `PUT` | `/api/students/[id]` | 指定IDの生徒データを更新 (要管理者認証) |
+| `DELETE` | `/api/students/[id]` | 指定IDの生徒データを削除 (要管理者認証) |
+| `POST` | `/api/admin/login` | 管理者ログイン（パスワード認証、セッションCookieを発行） |
+| `POST` | `/api/admin/logout` | 管理者ログアウト（セッションCookieを削除） |
+| `GET` | `/api/admin/session` | 管理者セッションの認証状態を確認 |
 
 ### 使用例
 

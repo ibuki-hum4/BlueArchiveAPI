@@ -37,7 +37,7 @@ export default function Home() {
 
   if (error) {
     return (
-      <div className="min-h-screen bg-gray-50">
+      <div className="min-h-screen bg-ba-blue-50/40">
         <Navigation />
         <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
           <div className="text-center" role="alert">
@@ -50,26 +50,37 @@ export default function Home() {
   }
 
   return (
-    <div className="min-h-screen bg-slate-50 text-slate-800">
+    <div className="min-h-screen bg-ba-blue-50/40 text-ba-navy-900">
       <Navigation />
+
+      {/* ヒーローセクション */}
+      <header className="ba-hero-gradient text-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16">
+          <p className="font-rounded text-sm font-bold tracking-[0.3em] text-ba-yellow-200">
+            SCHALE LIBRARY
+          </p>
+          <h1 className="font-rounded mt-2 text-3xl font-extrabold tracking-tight sm:text-4xl">
+            おかえりなさい、先生！
+          </h1>
+          <p className="mt-3 max-w-2xl text-sm text-white/85 sm:text-base">
+            豊富なフィルターと並べ替え機能で、目的の生徒さんをすぐに見つけられます。
+          </p>
+          <div
+            className="mt-6 inline-flex items-center gap-2 rounded-full bg-white/15 px-4 py-2 text-sm font-semibold backdrop-blur"
+            role="status"
+            aria-live="polite"
+          >
+            <span className="inline-flex h-2 w-2 rounded-full bg-ba-yellow-300" aria-hidden="true" />
+            現在 {totalCount} 件の生徒さんが条件に一致しています
+          </div>
+        </div>
+      </header>
 
       <main
         id="main-content"
-        className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-10"
+        className="max-w-7xl mx-auto -mt-6 space-y-8 px-4 py-10 sm:-mt-10 sm:px-6 lg:px-8"
       >
         <section id="explore" className="space-y-8">
-          <div className="flex flex-col gap-3 border-b border-slate-300/80 pb-5 sm:flex-row sm:items-end sm:justify-between">
-            <div>
-              <h2 className="text-2xl font-semibold tracking-tight text-slate-900">おかえりなさい、先生！</h2>
-              <p className="text-sm text-slate-600">
-                豊富なフィルターと並べ替え機能で目的の生徒さんをすぐに見つけられます。
-              </p>
-            </div>
-            <div className="text-sm text-slate-600" role="status" aria-live="polite">
-              現在 {totalCount} 件の生徒さんが条件に一致しています
-            </div>
-          </div>
-
           <SearchAndFilter
             onFilterChange={handleFilterChange}
             onSortChange={handleSortChange}
@@ -82,9 +93,9 @@ export default function Home() {
         <section aria-live="polite" aria-busy={loading} className="space-y-6">
           {/* ローディング状態 */}
           {loading && (
-            <div className="flex flex-col items-center justify-center rounded-lg border border-slate-300 bg-white/95 py-16 text-center" role="status">
-              <div className="inline-flex h-12 w-12 items-center justify-center rounded-full border-[3px] border-slate-200 border-t-blue-400 animate-spin" />
-              <p className="mt-5 text-sm text-slate-500">生徒データを読み込み中です…</p>
+            <div className="flex flex-col items-center justify-center rounded-3xl border border-ba-blue-100 bg-white py-16 text-center" role="status">
+              <div className="inline-flex h-12 w-12 items-center justify-center rounded-full border-[3px] border-ba-blue-100 border-t-ba-blue-500 animate-spin" />
+              <p className="mt-5 text-sm text-ba-navy-400">生徒データを読み込み中です…</p>
             </div>
           )}
 
@@ -102,7 +113,7 @@ export default function Home() {
               <button
                 type="button"
                 onClick={handleLoadMore}
-                className="rounded-md border border-slate-400 bg-white px-5 py-2 text-sm font-semibold tracking-wide text-slate-800 transition hover:bg-slate-100"
+                className="rounded-full bg-ba-blue-500 px-6 py-2.5 text-sm font-bold text-white shadow-sm transition hover:bg-ba-blue-600"
               >
                 さらに表示 ({students.length - visibleStudents.length}件)
               </button>
@@ -111,8 +122,8 @@ export default function Home() {
 
           {/* 結果なし */}
           {!loading && students.length === 0 && (
-            <div className="rounded-lg border border-slate-300 bg-white py-16 text-center">
-              <p className="text-sm text-slate-500">条件に一致する生徒さんが見つかりませんでした。フィルターを調整して再度お試しください。</p>
+            <div className="rounded-3xl border border-ba-blue-100 bg-white py-16 text-center">
+              <p className="text-sm text-ba-navy-400">条件に一致する生徒さんが見つかりませんでした。フィルターを調整して再度お試しください。</p>
             </div>
           )}
         </section>

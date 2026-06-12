@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Geist, Geist_Mono, M_PLUS_Rounded_1c } from "next/font/google";
 import Script from 'next/script';
 import { Suspense } from 'react';
 import Analytics from '@/components/Analytics';
@@ -13,6 +13,13 @@ const geistSans = Geist({
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
+});
+
+const mPlusRounded = M_PLUS_Rounded_1c({
+  variable: "--font-mplus-rounded",
+  subsets: ["latin"],
+  weight: ["400", "700", "800"],
+  display: "swap",
 });
 
 const siteName = "Blue Archive API";
@@ -73,7 +80,7 @@ export default function RootLayout({
   return (
     <html lang="ja" suppressHydrationWarning>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} ${mPlusRounded.variable} antialiased`}
       >
         {/* Cookie consent (Cookiebot) - runs before interactive so it can block other scripts until consent */}
         <Script

@@ -132,15 +132,14 @@ spec:
             - name: PORT
               value: "8080"
             - name: DATABASE_URL
-              value: "postgres://ba:ba@bluearchive-postgres/bluearchive?sslmode=disable"
+              valueFrom:
+                secretKeyRef:
+                  name: bluearchive-secrets
+                  key: DATABASE_URL
             - name: SITE_ORIGIN
               value: "https://bluearchive-api.skyia.jp"
             - name: RSS_STATE_PATH
               value: "/var/lib/bluearchive/rss-seen-ids.json"
-            - name: STUDENTS_DATA_PATH
-              value: "/app/data/students.json"
-            - name: STUDENTS_SYNC_INTERVAL
-              value: "5s"
             - name: OGP_RENDERER_URL
               value: "http://bluearchive-og-renderer/render"
           ports:
@@ -176,16 +175,10 @@ spec:
               cpu: 500m
               memory: 256Mi
           volumeMounts:
-            - name: students-config
-              mountPath: /app/data
-              readOnly: true
             - name: rss-state
               mountPath: /var/lib/bluearchive
               readOnly: false
       volumes:
-        - name: students-config
-          configMap:
-            name: students-config
         - name: rss-state
           persistentVolumeClaim:
             claimName: bluearchive-rss-state

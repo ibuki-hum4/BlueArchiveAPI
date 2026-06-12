@@ -13,7 +13,6 @@ WORKDIR /app
 RUN apk add --no-cache font-noto-cjk
 
 ENV PORT=8080
-ENV STUDENTS_DATA_PATH=/app/data/students.json
 
 COPY --from=builder /out/go-api /app/go-api
 

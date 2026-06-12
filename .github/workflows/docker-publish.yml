@@ -14,6 +14,7 @@ env:
   FRONTEND_IMAGE_NAME: ${{ secrets.DOCKERHUB_USERNAME }}/bluearchive-api
   GO_API_IMAGE_NAME: ${{ secrets.DOCKERHUB_USERNAME }}/bluearchive-api-go
   OGP_RENDERER_IMAGE_NAME: ${{ secrets.DOCKERHUB_USERNAME }}/bluearchive-og-renderer
+  EXPORT_STUDENTS_IMAGE_NAME: ${{ secrets.DOCKERHUB_USERNAME }}/bluearchive-export-students
 
 concurrency:
   group: docker-publish-${{ github.ref }}
@@ -119,6 +120,28 @@ jobs:
           cache-from: type=gha
           cache-to: type=gha,mode=max
 
+      - name: Extract Docker metadata for export-students image
+        id: export_students_meta
+        uses: docker/metadata-action@v5
+        with:
+          images: ${{ env.REGISTRY }}/${{ env.EXPORT_STUDENTS_IMAGE_NAME }}
+          tags: |
+            type=raw,value=${{ steps.tag.outputs.clean }}
+            type=raw,value=${{ steps.tag.outputs.nov }}
+            type=raw,value=latest
+
+      - name: Build and push export-students image
+        id: export_students_build
+        uses: docker/build-push-action@v6
+        with:
+          context: ./go-api
+          file: ./go-api/cmd/export_students/Dockerfile
+          push: true
+          tags: ${{ steps.export_students_meta.outputs.tags }}
+          labels: ${{ steps.export_students_meta.outputs.labels }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+
       - name: Install Cosign
         uses: sigstore/cosign-installer@v3
 
@@ -136,3 +159,8 @@ jobs:
         env:
           COSIGN_YES: "true"
         run: cosign sign ${{ env.REGISTRY }}/${{ env.OGP_RENDERER_IMAGE_NAME }}@${{ steps.og_renderer_build.outputs.digest }}
+
+      - name: Sign export-students image
+        env:
+          COSIGN_YES: "true"
+        run: cosign sign ${{ env.REGISTRY }}/${{ env.EXPORT_STUDENTS_IMAGE_NAME }}@${{ steps.export_students_build.outputs.digest }}

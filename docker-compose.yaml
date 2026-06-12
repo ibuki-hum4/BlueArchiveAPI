@@ -14,8 +14,9 @@ services:
     environment:
       - DATABASE_URL=postgres://ba:ba@postgres:5432/bluearchive?sslmode=disable
       - RSS_STATE_PATH=/var/lib/bluearchive/rss-seen-ids.json
+      # 開発用の既定値です。本番環境では必ず強力なパスワードに変更してください。
+      - ADMIN_PASSWORD=changeme
     volumes:
-      - ./manifests/data/students.json:/app/data/students.json:ro
       - rssstate:/var/lib/bluearchive
     ports:
       - "8080:8080"
