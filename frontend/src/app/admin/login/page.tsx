@@ -3,14 +3,14 @@
 import { FormEvent, useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { adminLogin, AdminAPIError } from '@/lib/admin-api';
-import { useAdminSession } from '@/hooks/useAdminSession';
+import { useAdminSessionContext } from '@/hooks/useAdminSession';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 
 export default function AdminLoginPage() {
   const router = useRouter();
-  const { loading, authenticated } = useAdminSession();
+  const { loading, authenticated, refresh } = useAdminSessionContext();
   const [password, setPassword] = useState('');
   const [error, setError] = useState<string | null>(null);
   const [submitting, setSubmitting] = useState(false);
@@ -27,6 +27,7 @@ export default function AdminLoginPage() {
     setSubmitting(true);
     try {
       await adminLogin(password);
+      await refresh();
       router.replace('/admin/students');
     } catch (err) {
       if (err instanceof AdminAPIError) {
