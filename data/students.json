@@ -1152,6 +1152,30 @@
         }
     },
     {
+        "id": "8L8cNEi5",
+        "name": "キサキ（水着）",
+        "rarity": 3,
+        "weapon": {
+            "type": "SMG",
+            "cover": true
+        },
+        "role": {
+            "type": "STRIKER",
+            "class": "サポーター",
+            "position": "BACK"
+        },
+        "school": "山海経高級中学校",
+        "combat": {
+            "attackType": "振動",
+            "defenseType": "弾力装甲"
+        },
+        "terrainAdaptation": {
+            "city": "S",
+            "outdoor": "D",
+            "indoor": "B"
+        }
+    },
+    {
         "id": "5sUhtArs",
         "name": "キララ",
         "rarity": 3,
@@ -1749,6 +1773,54 @@
             "city": "S",
             "outdoor": "D",
             "indoor": "B"
+        }
+    },
+    {
+        "id": "d1zTyxYV",
+        "name": "シュン（水着）",
+        "rarity": 3,
+        "weapon": {
+            "type": "SR",
+            "cover": true
+        },
+        "role": {
+            "type": "STRIKER",
+            "class": "アタッカー",
+            "position": "BACK"
+        },
+        "school": "山海経高級中学校",
+        "combat": {
+            "attackType": "振動",
+            "defenseType": "軽装備"
+        },
+        "terrainAdaptation": {
+            "city": "B",
+            "outdoor": "S",
+            "indoor": "D"
+        }
+    },
+    {
+        "id": "quZn3ruI",
+        "name": "シュン（水着）（幼女）",
+        "rarity": 3,
+        "weapon": {
+            "type": "SR",
+            "cover": true
+        },
+        "role": {
+            "type": "STRIKER",
+            "class": "アタッカー",
+            "position": "BACK"
+        },
+        "school": "山海経高級中学校",
+        "combat": {
+            "attackType": "振動",
+            "defenseType": "軽装備"
+        },
+        "terrainAdaptation": {
+            "city": "B",
+            "outdoor": "S",
+            "indoor": "D"
         }
     },
     {
@@ -2517,6 +2589,30 @@
             "city": "S",
             "outdoor": "B",
             "indoor": "D"
+        }
+    },
+    {
+        "id": "akm7X1QT",
+        "name": "ナグサ（水着）",
+        "rarity": 3,
+        "weapon": {
+            "type": "SR",
+            "cover": false
+        },
+        "role": {
+            "type": "STRIKER",
+            "class": "サポーター",
+            "position": "BACK"
+        },
+        "school": "百鬼夜行連合学院",
+        "combat": {
+            "attackType": "爆発",
+            "defenseType": "重装甲"
+        },
+        "terrainAdaptation": {
+            "city": "D",
+            "outdoor": "S",
+            "indoor": "B"
         }
     },
     {
