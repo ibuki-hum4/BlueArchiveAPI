@@ -1,17 +1,11 @@
 package service
 
 import (
-	"net/http"
-	"strings"
 	"sync"
 
-	"bluearchiveapi/go-api/internal/apperror"
 	"bluearchiveapi/go-api/internal/domain"
 	"bluearchiveapi/go-api/internal/storage"
-	"bluearchiveapi/go-api/internal/util"
 )
-
-const generatedIDLength = 8
 
 type StudentsQuery struct {
 	Limit  int
@@ -91,92 +85,6 @@ func (s *StudentsService) DataFingerprint() (string, error) {
 	return s.repo.Fingerprint()
 }
 
-// Create adds a new student. If input.ID is empty, a new unique ID is
-// generated.
-func (s *StudentsService) Create(input domain.Student) (domain.Student, error) {
-	if err := input.Validate(); err != nil {
-		return domain.Student{}, validationError(err)
-	}
-
-	all, err := s.getCachedStudents()
-	if err != nil {
-		return domain.Student{}, err
-	}
-
-	existing := make(map[string]bool, len(all))
-	for _, st := range all {
-		existing[st.ID] = true
-	}
-
-	id := strings.TrimSpace(input.ID)
-	if id == "" {
-		for {
-			candidate := util.GenerateID(generatedIDLength)
-			if !existing[candidate] {
-				id = candidate
-				break
-			}
-		}
-	} else if existing[id] {
-		return domain.Student{}, apperror.APIError{
-			Status: http.StatusConflict,
-			Body: map[string]any{
-				"message": "error",
-				"error":   "Student ID already exists",
-			},
-		}
-	}
-	input.ID = id
-
-	if err := s.repo.Append(input); err != nil {
-		return domain.Student{}, err
-	}
-	s.invalidateCache()
-	return input, nil
-}
-
-// Update replaces the student with the given ID, preserving that ID. It
-// returns nil, nil if no student with that ID exists.
-func (s *StudentsService) Update(id string, input domain.Student) (*domain.Student, error) {
-	input.ID = id
-	if err := input.Validate(); err != nil {
-		return nil, validationError(err)
-	}
-
-	ok, err := s.repo.Update(input)
-	if err != nil {
-		return nil, err
-	}
-	if !ok {
-		return nil, nil
-	}
-	s.invalidateCache()
-	return &input, nil
-}
-
-// Delete removes the student with the given ID. It returns false if no
-// student with that ID exists.
-func (s *StudentsService) Delete(id string) (bool, error) {
-	ok, err := s.repo.Delete(id)
-	if err != nil {
-		return false, err
-	}
-	if ok {
-		s.invalidateCache()
-	}
-	return ok, nil
-}
-
-func validationError(err error) error {
-	return apperror.APIError{
-		Status: http.StatusBadRequest,
-		Body: map[string]any{
-			"message": "error",
-			"error":   err.Error(),
-		},
-	}
-}
-
 func (s *StudentsService) getCachedStudents() ([]domain.Student, error) {
 	fingerprint, err := s.repo.Fingerprint()
 	if err != nil {
@@ -209,13 +117,4 @@ func (s *StudentsService) getCachedStudents() ([]domain.Student, error) {
 	s.cacheMu.Unlock()
 
 	return students, nil
-}
-
-func (s *StudentsService) invalidateCache() {
-	s.cacheMu.Lock()
-	s.cache = nil
-	s.cacheID = nil
-	s.cacheFP = ""
-	s.cacheLoaded = false
-	s.cacheMu.Unlock()
 }

@@ -5,19 +5,19 @@ namespace: ibuki-bluearchive-api
 
 resources:
   - rss-state-pvc.yaml
+  - students-data-pvc.yaml
   - deployment.yaml
   - service.yaml
   - ingress.yaml
   - pdb.yaml
-  - secrets/sealedsecret.yaml
 
 images:
   - name: docker.io/kemar1/bluearchive-api
-    newTag: v3.0.4
+    newTag: v5.0.0
   - name: docker.io/kemar1/bluearchive-api-go
-    newTag: v3.0.4
+    newTag: v5.0.0
   - name: docker.io/kemar1/bluearchive-og-renderer
-    newTag: v3.0.4
+    newTag: v5.0.0
 
 configMapGenerator:
   - name: students-config

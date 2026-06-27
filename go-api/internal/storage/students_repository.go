@@ -9,14 +9,11 @@ import (
 	"os"
 	"path/filepath"
 	"strings"
-	"sync"
 
 	"bluearchiveapi/go-api/internal/domain"
 )
 
-type StudentsRepository struct {
-	mu sync.RWMutex
-}
+type StudentsRepository struct{}
 
 func NewStudentsRepository() *StudentsRepository {
 	return &StudentsRepository{}
@@ -34,13 +31,7 @@ func (r *StudentsRepository) ReadAll() ([]domain.Student, error) {
 }
 
 func (r *StudentsRepository) ReadSnapshot() ([]domain.Student, string, error) {
-	r.mu.RLock()
-	defer r.mu.RUnlock()
-	return r.readSnapshotLocked()
-}
-
-func (r *StudentsRepository) readSnapshotLocked() ([]domain.Student, string, error) {
-	path, err := resolveStudentsFilePath(false)
+	path, err := resolveStudentsFilePath()
 	if err != nil {
 		return nil, "", err
 	}
@@ -63,89 +54,7 @@ func (r *StudentsRepository) readSnapshotLocked() ([]domain.Student, string, err
 	return students, fingerprintBytes(b), nil
 }
 
-// WriteAll replaces the entire dataset with the given students.
-func (r *StudentsRepository) WriteAll(students []domain.Student) error {
-	r.mu.Lock()
-	defer r.mu.Unlock()
-	return r.writeAllLocked(students)
-}
-
-func (r *StudentsRepository) Append(student domain.Student) error {
-	r.mu.Lock()
-	defer r.mu.Unlock()
-
-	students, _, err := r.readSnapshotLocked()
-	if err != nil {
-		return err
-	}
-	students = append(students, student)
-	return r.writeAllLocked(students)
-}
-
-// Update replaces the student with a matching ID. It returns false if no
-// student with that ID exists.
-func (r *StudentsRepository) Update(student domain.Student) (bool, error) {
-	r.mu.Lock()
-	defer r.mu.Unlock()
-
-	students, _, err := r.readSnapshotLocked()
-	if err != nil {
-		return false, err
-	}
-
-	found := false
-	for i, st := range students {
-		if st.ID == student.ID {
-			students[i] = student
-			found = true
-			break
-		}
-	}
-	if !found {
-		return false, nil
-	}
-	return true, r.writeAllLocked(students)
-}
-
-// Delete removes the student with the given ID. It returns false if no
-// student with that ID exists.
-func (r *StudentsRepository) Delete(id string) (bool, error) {
-	r.mu.Lock()
-	defer r.mu.Unlock()
-
-	students, _, err := r.readSnapshotLocked()
-	if err != nil {
-		return false, err
-	}
-
-	idx := -1
-	for i, st := range students {
-		if st.ID == id {
-			idx = i
-			break
-		}
-	}
-	if idx == -1 {
-		return false, nil
-	}
-	students = append(students[:idx], students[idx+1:]...)
-	return true, r.writeAllLocked(students)
-}
-
-func (r *StudentsRepository) writeAllLocked(students []domain.Student) error {
-	path, err := resolveStudentsFilePath(true)
-	if err != nil {
-		return err
-	}
-
-	b, err := json.MarshalIndent(students, "", "    ")
-	if err != nil {
-		return err
-	}
-	return os.WriteFile(path, b, 0o644)
-}
-
-func resolveStudentsFilePath(ensureForWrite bool) (string, error) {
+func resolveStudentsFilePath() (string, error) {
 	if explicit := strings.TrimSpace(os.Getenv("STUDENTS_DATA_PATH")); explicit != "" {
 		return explicit, nil
 	}
@@ -171,20 +80,6 @@ func resolveStudentsFilePath(ensureForWrite bool) (string, error) {
 		}
 	}
 
-	if ensureForWrite {
-		for _, dir := range candidateDirs {
-			if dirExists(dir) {
-				return filepath.Join(dir, "students.json"), nil
-			}
-		}
-
-		fallbackDir := filepath.Join(cwd, "data")
-		if err := os.MkdirAll(fallbackDir, 0o755); err != nil {
-			return "", err
-		}
-		return filepath.Join(fallbackDir, "students.json"), nil
-	}
-
 	return filepath.Join(candidateDirs[0], "students.json"), nil
 }
 
@@ -194,14 +89,6 @@ func fileExists(path string) bool {
 		return false
 	}
 	return !info.IsDir()
-}
-
-func dirExists(path string) bool {
-	info, err := os.Stat(path)
-	if err != nil {
-		return false
-	}
-	return info.IsDir()
 }
 
 func fingerprintBytes(b []byte) string {

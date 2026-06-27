@@ -13,7 +13,7 @@ func main() {
 	addr := ":" + cfg.Port
 
 	log.Printf("Go API server listening on %s", addr)
-	if err := http.ListenAndServe(addr, server.NewRouter(cfg)); err != nil {
+	if err := http.ListenAndServe(addr, server.NewRouter()); err != nil {
 		log.Fatalf("server error: %v", err)
 	}
 }

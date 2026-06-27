@@ -121,39 +121,16 @@ Go API は `http://localhost:8080` で起動し、次のエンドポイントを
 - `GET /api/health`
 - `GET /api/students`
 - `GET /api/students/:id`
-- `POST /api/students` (要管理者認証)
-- `PUT /api/students/:id` (要管理者認証)
-- `DELETE /api/students/:id` (要管理者認証)
-- `POST /api/admin/login`
-- `POST /api/admin/logout`
-- `GET /api/admin/session`
 
 必要に応じて、フロントエンドの `NEXT_PUBLIC_API_BASE_URL` を `http://localhost:8080/api` に設定して接続先を切り替えられます。
 
 ### データ管理 (JSON)
 
-生徒データは `data/students.json` で管理されます。Go API はこのファイルを直接読み書きします。
+生徒データは `data/students.json` で管理されます（読み取り専用）。生徒データを追加・編集・削除する場合は、このファイルを直接編集してコミットしてください。
 
 | 環境変数 | 必須 | 説明 |
 |---------|------|------|
 | `STUDENTS_DATA_PATH` | – | 生徒データJSONファイルのパス。未設定の場合、`data/students.json` などの既定の候補パスを自動検出します。 |
-
-管理画面 (`/admin`) から生徒を作成・編集・削除すると、このファイルに直接書き込まれます。本番環境（k8s）では `students.json` は ConfigMap（読み取り専用）としてマウントされているため、管理画面での変更を反映するには `data/students.json` を直接編集してコミット・再デプロイしてください。
-
-### 管理者ダッシュボード
-
-`/admin` 以下に、生徒データを作成・編集・削除できる管理画面があります。利用するには Go API 起動時に管理者パスワードを設定してください。
-
-```bash
-ADMIN_PASSWORD=your-strong-password go run ./go-api
-```
-
-| 環境変数 | 必須 | 説明 |
-|---------|------|------|
-| `ADMIN_PASSWORD` | ✅ | 管理画面ログインに使用するパスワード。未設定の場合、管理API・管理画面は無効化されます（`401`/`503`）。 |
-| `ADMIN_SESSION_SECRET` | – | セッションCookie署名用のシークレット。未設定時はプロセス起動時にランダム生成されます（再起動でログアウトされます）。本番環境では固定値の設定を推奨します。 |
-
-ログイン後は `/admin/students` で生徒の一覧表示・検索・新規作成・編集・削除が行えます。
 
 ## 📂 プロジェクト構造
 
@@ -183,12 +160,6 @@ BlueArchiveAPI/
 |---------|---------------|------|
 | `GET` | `/api/students` | 全生徒データを取得 |
 | `GET` | `/api/students/[id]` | 指定IDの生徒データを取得 |
-| `POST` | `/api/students` | 新しい生徒データを追加 (要管理者認証) |
-| `PUT` | `/api/students/[id]` | 指定IDの生徒データを更新 (要管理者認証) |
-| `DELETE` | `/api/students/[id]` | 指定IDの生徒データを削除 (要管理者認証) |
-| `POST` | `/api/admin/login` | 管理者ログイン（パスワード認証、セッションCookieを発行） |
-| `POST` | `/api/admin/logout` | 管理者ログアウト（セッションCookieを削除） |
-| `GET` | `/api/admin/session` | 管理者セッションの認証状態を確認 |
 
 ### 使用例
 

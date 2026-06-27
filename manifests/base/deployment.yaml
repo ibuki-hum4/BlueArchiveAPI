@@ -116,6 +116,32 @@ spec:
         fsGroupChangePolicy: OnRootMismatch
         seccompProfile:
           type: RuntimeDefault
+      initContainers:
+        - name: seed-students-data
+          image: docker.io/kemar1/bluearchive-api-go
+          imagePullPolicy: IfNotPresent
+          command:
+            - sh
+            - -c
+            - |
+              if [ ! -f /data/students.json ]; then
+                cp /seed/students.json /data/students.json
+              fi
+          securityContext:
+            runAsNonRoot: true
+            runAsUser: 1000
+            runAsGroup: 1000
+            allowPrivilegeEscalation: false
+            readOnlyRootFilesystem: true
+            capabilities:
+              drop: ["ALL"]
+          volumeMounts:
+            - name: students-config
+              mountPath: /seed
+              readOnly: true
+            - name: students-data
+              mountPath: /data
+              readOnly: false
       containers:
         - name: bluearchive-go-api
           image: docker.io/kemar1/bluearchive-api-go
@@ -131,11 +157,6 @@ spec:
           env:
             - name: PORT
               value: "8080"
-            - name: ADMIN_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: bluearchive-secrets
-                  key: ADMIN_PASSWORD
             - name: SITE_ORIGIN
               value: "https://bluearchive-api.skyia.jp"
             - name: RSS_STATE_PATH
@@ -177,7 +198,7 @@ spec:
               cpu: 500m
               memory: 256Mi
           volumeMounts:
-            - name: students-config
+            - name: students-data
               mountPath: /app/data
               readOnly: true
             - name: rss-state
@@ -187,6 +208,9 @@ spec:
         - name: students-config
           configMap:
             name: students-config
+        - name: students-data
+          persistentVolumeClaim:
+            claimName: bluearchive-students-data
         - name: rss-state
           persistentVolumeClaim:
             claimName: bluearchive-rss-state

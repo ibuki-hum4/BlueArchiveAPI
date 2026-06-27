@@ -1,13 +1,11 @@
 package handler
 
 import (
-	"encoding/json"
 	"net/http"
 	"strconv"
 	"strings"
 	"time"
 
-	"bluearchiveapi/go-api/internal/adminauth"
 	"bluearchiveapi/go-api/internal/apperror"
 	"bluearchiveapi/go-api/internal/domain"
 	"bluearchiveapi/go-api/internal/httpx"
@@ -21,16 +19,14 @@ const (
 )
 
 type StudentsHandler struct {
-	service   *service.StudentsService
-	adminAuth *adminauth.Service
-	limiter   *middleware.RateLimiter
+	service *service.StudentsService
+	limiter *middleware.RateLimiter
 }
 
-func NewStudentsHandler(svc *service.StudentsService, adminAuth *adminauth.Service) *StudentsHandler {
+func NewStudentsHandler(svc *service.StudentsService) *StudentsHandler {
 	return &StudentsHandler{
-		service:   svc,
-		adminAuth: adminAuth,
-		limiter:   middleware.NewRateLimiter(60*time.Second, 100),
+		service: svc,
+		limiter: middleware.NewRateLimiter(60*time.Second, 100),
 	}
 }
 
@@ -44,17 +40,15 @@ func (h *StudentsHandler) Students(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	switch r.Method {
-	case http.MethodGet:
-		h.getStudents(w, r)
-	case http.MethodPost:
-		h.adminAuth.RequireAdmin(h.createStudent)(w, r)
-	default:
+	if r.Method != http.MethodGet {
 		httpx.JSON(w, http.StatusMethodNotAllowed, map[string]string{
 			"message": "error",
 			"error":   "Method Not Allowed",
 		}, nil)
+		return
 	}
+
+	h.getStudents(w, r)
 }
 
 func (h *StudentsHandler) StudentByID(w http.ResponseWriter, r *http.Request) {
@@ -67,23 +61,15 @@ func (h *StudentsHandler) StudentByID(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	switch r.Method {
-	case http.MethodGet:
-		h.getStudentByID(w, r, id)
-	case http.MethodPut:
-		h.adminAuth.RequireAdmin(func(w http.ResponseWriter, r *http.Request) {
-			h.updateStudent(w, r, id)
-		})(w, r)
-	case http.MethodDelete:
-		h.adminAuth.RequireAdmin(func(w http.ResponseWriter, r *http.Request) {
-			h.deleteStudent(w, r, id)
-		})(w, r)
-	default:
+	if r.Method != http.MethodGet {
 		httpx.JSON(w, http.StatusMethodNotAllowed, map[string]string{
 			"message": "error",
 			"error":   "Method Not Allowed",
 		}, nil)
+		return
 	}
+
+	h.getStudentByID(w, r, id)
 }
 
 func (h *StudentsHandler) getStudents(w http.ResponseWriter, r *http.Request) {
@@ -198,85 +184,6 @@ func (h *StudentsHandler) getStudentByID(w http.ResponseWriter, r *http.Request,
 		"message": "success",
 		"data":    student,
 	}, headers)
-}
-
-func (h *StudentsHandler) createStudent(w http.ResponseWriter, r *http.Request) {
-	var input domain.Student
-	if err := json.NewDecoder(r.Body).Decode(&input); err != nil {
-		httpx.JSON(w, http.StatusBadRequest, map[string]string{
-			"message": "error",
-			"error":   "Invalid request body",
-		}, nil)
-		return
-	}
-
-	created, err := h.service.Create(input)
-	if err != nil {
-		httpx.Error(w, err, map[string]any{
-			"message": "error",
-			"error":   "Failed to create student",
-		})
-		return
-	}
-
-	httpx.JSON(w, http.StatusCreated, map[string]any{
-		"message": "success",
-		"data":    created,
-	}, nil)
-}
-
-func (h *StudentsHandler) updateStudent(w http.ResponseWriter, r *http.Request, id string) {
-	var input domain.Student
-	if err := json.NewDecoder(r.Body).Decode(&input); err != nil {
-		httpx.JSON(w, http.StatusBadRequest, map[string]string{
-			"message": "error",
-			"error":   "Invalid request body",
-		}, nil)
-		return
-	}
-
-	updated, err := h.service.Update(id, input)
-	if err != nil {
-		httpx.Error(w, err, map[string]any{
-			"message": "error",
-			"error":   "Failed to update student",
-		})
-		return
-	}
-	if updated == nil {
-		httpx.JSON(w, http.StatusNotFound, map[string]string{
-			"message": "error",
-			"error":   "Student not found",
-		}, nil)
-		return
-	}
-
-	httpx.JSON(w, http.StatusOK, map[string]any{
-		"message": "success",
-		"data":    updated,
-	}, nil)
-}
-
-func (h *StudentsHandler) deleteStudent(w http.ResponseWriter, r *http.Request, id string) {
-	ok, err := h.service.Delete(id)
-	if err != nil {
-		httpx.Error(w, err, map[string]any{
-			"message": "error",
-			"error":   "Failed to delete student",
-		})
-		return
-	}
-	if !ok {
-		httpx.JSON(w, http.StatusNotFound, map[string]string{
-			"message": "error",
-			"error":   "Student not found",
-		}, nil)
-		return
-	}
-
-	httpx.JSON(w, http.StatusOK, map[string]any{
-		"message": "success",
-	}, nil)
 }
 
 // weakETag builds a weak ETag value from the given parts.

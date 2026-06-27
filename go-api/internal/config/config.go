@@ -5,9 +5,7 @@ import (
 )
 
 type Config struct {
-	Port               string
-	AdminPassword      string
-	AdminSessionSecret string
+	Port string
 }
 
 func Load() Config {
@@ -17,8 +15,6 @@ func Load() Config {
 	}
 
 	return Config{
-		Port:               port,
-		AdminPassword:      os.Getenv("ADMIN_PASSWORD"),
-		AdminSessionSecret: os.Getenv("ADMIN_SESSION_SECRET"),
+		Port: port,
 	}
 }
