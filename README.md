@@ -83,7 +83,7 @@ OGP_RENDERER_URL=http://localhost:8787/render go run ./go-api
 
 ### Go API + OGP レンダラーを Docker で起動する
 
-Go API は PostgreSQL (`DATABASE_URL`) を必須とします。`docker-compose.yaml` を使うとPostgresを含めて一括起動できます（後述の「初期データ投入」も参照）。手動でコンテナを起動する場合は以下の手順です。
+`docker-compose.yaml` を使うと一括起動できます。手動でコンテナを起動する場合は以下の手順です。
 
 ```powershell
 # 1) OGP renderer イメージをビルド
@@ -95,22 +95,17 @@ docker build -t kemar1/bluearchive-api-go:0.1.0 ./go-api
 # 3) 同一ネットワークを作成
 docker network create bluearchive-net
 
-# 4) Postgres を起動
-docker run -d --name bluearchive-postgres --network bluearchive-net `
-	-e POSTGRES_USER=ba -e POSTGRES_PASSWORD=ba -e POSTGRES_DB=bluearchive `
-	postgres:18-alpine
-
-# 5) OGP renderer を起動（フォントをマウント）
+# 4) OGP renderer を起動（フォントをマウント）
 docker run -d --name bluearchive-og-renderer --network bluearchive-net -p 8787:8787 `
 	-e OGP_FONT_REGULAR_PATH=/app/fonts/BIZUDPGothic-Regular.ttf `
 	-e OGP_FONT_BOLD_PATH=/app/fonts/BIZUDPGothic-Bold.ttf `
 	-v "${PWD}/og-renderer/fonts:/app/fonts:ro" `
 	kemar1/bluearchive-og-renderer:0.1.0
 
-# 6) Go API を起動（renderer URL とDB接続先を内部DNSへ向ける）
+# 5) Go API を起動（renderer URL を内部DNSへ向ける、データファイルをマウント）
 docker run -d --name bluearchive-go-api --network bluearchive-net -p 8080:8080 `
 	-e OGP_RENDERER_URL=http://bluearchive-og-renderer:8787/render `
-	-e DATABASE_URL=postgres://ba:ba@bluearchive-postgres:5432/bluearchive?sslmode=disable `
+	-v "${PWD}/data/students.json:/app/data/students.json" `
 	kemar1/bluearchive-api-go:0.1.0
 ```
 
@@ -135,24 +130,15 @@ Go API は `http://localhost:8080` で起動し、次のエンドポイントを
 
 必要に応じて、フロントエンドの `NEXT_PUBLIC_API_BASE_URL` を `http://localhost:8080/api` に設定して接続先を切り替えられます。
 
-### データベース (PostgreSQL)
+### データ管理 (JSON)
 
-生徒データは PostgreSQL の `students` テーブルで管理されます。テーブルは Go API 起動時に自動作成されます（`CREATE TABLE IF NOT EXISTS`）。
+生徒データは `data/students.json` で管理されます。Go API はこのファイルを直接読み書きします。
 
 | 環境変数 | 必須 | 説明 |
 |---------|------|------|
-| `DATABASE_URL` | ✅ | PostgreSQL接続文字列（例: `postgres://ba:ba@localhost:5432/bluearchive?sslmode=disable`）。未設定の場合、Go API は起動しません。 |
+| `STUDENTS_DATA_PATH` | – | 生徒データJSONファイルのパス。未設定の場合、`data/students.json` などの既定の候補パスを自動検出します。 |
 
-#### 初期データ投入 (seed)
-
-リポジトリに含まれる `data/students.json` をDBへ投入するには、`seed_students` を実行します（既存の行は `ON CONFLICT DO NOTHING` でスキップされるため、何度実行しても安全です）。
-
-```bash
-DATABASE_URL=postgres://ba:ba@localhost:5432/bluearchive?sslmode=disable \
-  go run ./go-api/cmd/seed_students -json data/students.json
-```
-
-`data/students.json` はDBのバックアップ用途として、週次のk8s CronJob (`bluearchive-export-students`) によって自動更新されます。本番環境のSecret管理（`DATABASE_URL` / git push用Deploy Key のSealedSecrets化）については [`manifests/base/secrets/README.md`](manifests/base/secrets/README.md) を参照してください。
+管理画面 (`/admin`) から生徒を作成・編集・削除すると、このファイルに直接書き込まれます。本番環境（k8s）では `students.json` は ConfigMap（読み取り専用）としてマウントされているため、管理画面での変更を反映するには `data/students.json` を直接編集してコミット・再デプロイしてください。
 
 ### 管理者ダッシュボード
 

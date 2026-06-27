@@ -1,193 +1,210 @@
 package storage
 
 import (
-	"database/sql"
-	"fmt"
+	"bytes"
+	"crypto/sha256"
+	"encoding/hex"
+	"encoding/json"
+	"errors"
+	"os"
+	"path/filepath"
+	"strings"
+	"sync"
 
 	"bluearchiveapi/go-api/internal/domain"
 )
 
-const schemaDDL = `CREATE TABLE IF NOT EXISTS students (
-    id                  TEXT PRIMARY KEY,
-    name                TEXT NOT NULL,
-    rarity              INTEGER NOT NULL,
-    weapon_type         TEXT NOT NULL,
-    weapon_cover        BOOLEAN NOT NULL DEFAULT false,
-    role_type           TEXT NOT NULL,
-    role_class          TEXT NOT NULL,
-    role_position       TEXT NOT NULL,
-    school              TEXT NOT NULL,
-    combat_attack_type  TEXT NOT NULL,
-    combat_defense_type TEXT NOT NULL,
-    terrain_city        TEXT NOT NULL,
-    terrain_outdoor     TEXT NOT NULL,
-    terrain_indoor      TEXT NOT NULL,
-    updated_at          TIMESTAMPTZ NOT NULL DEFAULT now()
-);`
-
-const selectColumns = `id, name, rarity, weapon_type, weapon_cover, role_type, role_class, role_position, school, combat_attack_type, combat_defense_type, terrain_city, terrain_outdoor, terrain_indoor`
-
 type StudentsRepository struct {
-	db *sql.DB
+	mu sync.RWMutex
 }
 
-// NewStudentsRepository creates the students table if it does not already
-// exist and returns a repository backed by db.
-func NewStudentsRepository(db *sql.DB) (*StudentsRepository, error) {
-	if _, err := db.Exec(schemaDDL); err != nil {
-		return nil, fmt.Errorf("ensure students schema: %w", err)
-	}
-	return &StudentsRepository{db: db}, nil
+func NewStudentsRepository() *StudentsRepository {
+	return &StudentsRepository{}
 }
 
-// Fingerprint returns a cheap fingerprint derived from the row count and the
-// most recent update time, without reading the full dataset. Callers can use
-// it to detect changes before paying for a full read.
+// Fingerprint returns a cheap fingerprint of the underlying data file.
 func (r *StudentsRepository) Fingerprint() (string, error) {
-	var count int64
-	var maxUpdatedAt sql.NullTime
-	if err := r.db.QueryRow(`SELECT COUNT(*), MAX(updated_at) FROM students`).Scan(&count, &maxUpdatedAt); err != nil {
-		return "", err
-	}
-
-	if !maxUpdatedAt.Valid {
-		return fmt.Sprintf("%d-0", count), nil
-	}
-	return fmt.Sprintf("%d-%d", count, maxUpdatedAt.Time.UnixNano()), nil
+	_, fingerprint, err := r.ReadSnapshot()
+	return fingerprint, err
 }
 
-// ReadAll reads and returns all students from the database.
 func (r *StudentsRepository) ReadAll() ([]domain.Student, error) {
-	rows, err := r.db.Query(`SELECT ` + selectColumns + ` FROM students ORDER BY id`)
-	if err != nil {
-		return nil, err
-	}
-	defer rows.Close()
-
-	students := []domain.Student{}
-	for rows.Next() {
-		var s domain.Student
-		if err := rows.Scan(
-			&s.ID, &s.Name, &s.Rarity,
-			&s.Weapon.Type, &s.Weapon.Cover,
-			&s.Role.Type, &s.Role.Class, &s.Role.Position,
-			&s.School,
-			&s.Combat.AttackType, &s.Combat.DefenseType,
-			&s.TerrainAdaptation.City, &s.TerrainAdaptation.Outdoor, &s.TerrainAdaptation.Indoor,
-		); err != nil {
-			return nil, err
-		}
-		students = append(students, s)
-	}
-	if err := rows.Err(); err != nil {
-		return nil, err
-	}
-	return students, nil
+	students, _, err := r.ReadSnapshot()
+	return students, err
 }
 
-// ReadSnapshot reads the students data along with a fingerprint that changes
-// whenever the underlying data is modified.
 func (r *StudentsRepository) ReadSnapshot() ([]domain.Student, string, error) {
-	fingerprint, err := r.Fingerprint()
-	if err != nil {
-		return nil, "", err
-	}
-
-	students, err := r.ReadAll()
-	if err != nil {
-		return nil, "", err
-	}
-
-	return students, fingerprint, nil
+	r.mu.RLock()
+	defer r.mu.RUnlock()
+	return r.readSnapshotLocked()
 }
 
-// WriteAll replaces the entire dataset with the given students, upserting
-// each row in a single transaction.
+func (r *StudentsRepository) readSnapshotLocked() ([]domain.Student, string, error) {
+	path, err := resolveStudentsFilePath(false)
+	if err != nil {
+		return nil, "", err
+	}
+
+	b, err := os.ReadFile(path)
+	if err != nil {
+		if errors.Is(err, os.ErrNotExist) {
+			return []domain.Student{}, "", nil
+		}
+		return nil, "", err
+	}
+	if len(bytes.TrimSpace(b)) == 0 {
+		return []domain.Student{}, fingerprintBytes(b), nil
+	}
+
+	var students []domain.Student
+	if err := json.Unmarshal(b, &students); err != nil {
+		return nil, "", err
+	}
+	return students, fingerprintBytes(b), nil
+}
+
+// WriteAll replaces the entire dataset with the given students.
 func (r *StudentsRepository) WriteAll(students []domain.Student) error {
-	tx, err := r.db.Begin()
+	r.mu.Lock()
+	defer r.mu.Unlock()
+	return r.writeAllLocked(students)
+}
+
+func (r *StudentsRepository) Append(student domain.Student) error {
+	r.mu.Lock()
+	defer r.mu.Unlock()
+
+	students, _, err := r.readSnapshotLocked()
 	if err != nil {
 		return err
 	}
-	defer tx.Rollback()
-
-	for _, student := range students {
-		if err := upsertStudent(tx, student); err != nil {
-			return err
-		}
-	}
-
-	return tx.Commit()
-}
-
-// Append adds a new student to the dataset.
-func (r *StudentsRepository) Append(student domain.Student) error {
-	_, err := r.db.Exec(
-		`INSERT INTO students (`+selectColumns+`, updated_at) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14, now())`,
-		student.ID, student.Name, student.Rarity,
-		student.Weapon.Type, student.Weapon.Cover,
-		student.Role.Type, student.Role.Class, student.Role.Position,
-		student.School,
-		student.Combat.AttackType, student.Combat.DefenseType,
-		student.TerrainAdaptation.City, student.TerrainAdaptation.Outdoor, student.TerrainAdaptation.Indoor,
-	)
-	return err
+	students = append(students, student)
+	return r.writeAllLocked(students)
 }
 
 // Update replaces the student with a matching ID. It returns false if no
 // student with that ID exists.
 func (r *StudentsRepository) Update(student domain.Student) (bool, error) {
-	res, err := r.db.Exec(
-		`UPDATE students SET name=$2, rarity=$3, weapon_type=$4, weapon_cover=$5, role_type=$6, role_class=$7, role_position=$8, school=$9, combat_attack_type=$10, combat_defense_type=$11, terrain_city=$12, terrain_outdoor=$13, terrain_indoor=$14, updated_at=now() WHERE id=$1`,
-		student.ID, student.Name, student.Rarity,
-		student.Weapon.Type, student.Weapon.Cover,
-		student.Role.Type, student.Role.Class, student.Role.Position,
-		student.School,
-		student.Combat.AttackType, student.Combat.DefenseType,
-		student.TerrainAdaptation.City, student.TerrainAdaptation.Outdoor, student.TerrainAdaptation.Indoor,
-	)
+	r.mu.Lock()
+	defer r.mu.Unlock()
+
+	students, _, err := r.readSnapshotLocked()
 	if err != nil {
 		return false, err
 	}
 
-	affected, err := res.RowsAffected()
-	if err != nil {
-		return false, err
+	found := false
+	for i, st := range students {
+		if st.ID == student.ID {
+			students[i] = student
+			found = true
+			break
+		}
 	}
-	return affected > 0, nil
+	if !found {
+		return false, nil
+	}
+	return true, r.writeAllLocked(students)
 }
 
 // Delete removes the student with the given ID. It returns false if no
 // student with that ID exists.
 func (r *StudentsRepository) Delete(id string) (bool, error) {
-	res, err := r.db.Exec(`DELETE FROM students WHERE id=$1`, id)
+	r.mu.Lock()
+	defer r.mu.Unlock()
+
+	students, _, err := r.readSnapshotLocked()
 	if err != nil {
 		return false, err
 	}
 
-	affected, err := res.RowsAffected()
-	if err != nil {
-		return false, err
+	idx := -1
+	for i, st := range students {
+		if st.ID == id {
+			idx = i
+			break
+		}
 	}
-	return affected > 0, nil
+	if idx == -1 {
+		return false, nil
+	}
+	students = append(students[:idx], students[idx+1:]...)
+	return true, r.writeAllLocked(students)
 }
 
-func upsertStudent(tx *sql.Tx, student domain.Student) error {
-	_, err := tx.Exec(
-		`INSERT INTO students (`+selectColumns+`, updated_at) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14, now())
-		 ON CONFLICT (id) DO UPDATE SET
-		   name=EXCLUDED.name, rarity=EXCLUDED.rarity,
-		   weapon_type=EXCLUDED.weapon_type, weapon_cover=EXCLUDED.weapon_cover,
-		   role_type=EXCLUDED.role_type, role_class=EXCLUDED.role_class, role_position=EXCLUDED.role_position,
-		   school=EXCLUDED.school,
-		   combat_attack_type=EXCLUDED.combat_attack_type, combat_defense_type=EXCLUDED.combat_defense_type,
-		   terrain_city=EXCLUDED.terrain_city, terrain_outdoor=EXCLUDED.terrain_outdoor, terrain_indoor=EXCLUDED.terrain_indoor,
-		   updated_at=now()`,
-		student.ID, student.Name, student.Rarity,
-		student.Weapon.Type, student.Weapon.Cover,
-		student.Role.Type, student.Role.Class, student.Role.Position,
-		student.School,
-		student.Combat.AttackType, student.Combat.DefenseType,
-		student.TerrainAdaptation.City, student.TerrainAdaptation.Outdoor, student.TerrainAdaptation.Indoor,
-	)
-	return err
+func (r *StudentsRepository) writeAllLocked(students []domain.Student) error {
+	path, err := resolveStudentsFilePath(true)
+	if err != nil {
+		return err
+	}
+
+	b, err := json.MarshalIndent(students, "", "    ")
+	if err != nil {
+		return err
+	}
+	return os.WriteFile(path, b, 0o644)
+}
+
+func resolveStudentsFilePath(ensureForWrite bool) (string, error) {
+	if explicit := strings.TrimSpace(os.Getenv("STUDENTS_DATA_PATH")); explicit != "" {
+		return explicit, nil
+	}
+
+	cwd, err := os.Getwd()
+	if err != nil {
+		return "", err
+	}
+
+	candidateDirs := []string{
+		filepath.Join("/app", "data"),
+		filepath.Join(cwd, "data"),
+		filepath.Join(cwd, "..", "data"),
+		filepath.Join(cwd, "..", "frontend", "src", "data"),
+		filepath.Join(cwd, "..", "manifests", "data"),
+		filepath.Join(cwd, ".vercel", "project", "data"),
+	}
+
+	for _, dir := range candidateDirs {
+		candidate := filepath.Join(dir, "students.json")
+		if fileExists(candidate) {
+			return candidate, nil
+		}
+	}
+
+	if ensureForWrite {
+		for _, dir := range candidateDirs {
+			if dirExists(dir) {
+				return filepath.Join(dir, "students.json"), nil
+			}
+		}
+
+		fallbackDir := filepath.Join(cwd, "data")
+		if err := os.MkdirAll(fallbackDir, 0o755); err != nil {
+			return "", err
+		}
+		return filepath.Join(fallbackDir, "students.json"), nil
+	}
+
+	return filepath.Join(candidateDirs[0], "students.json"), nil
+}
+
+func fileExists(path string) bool {
+	info, err := os.Stat(path)
+	if err != nil {
+		return false
+	}
+	return !info.IsDir()
+}
+
+func dirExists(path string) bool {
+	info, err := os.Stat(path)
+	if err != nil {
+		return false
+	}
+	return info.IsDir()
+}
+
+func fingerprintBytes(b []byte) string {
+	sum := sha256.Sum256(b)
+	return hex.EncodeToString(sum[:])
 }

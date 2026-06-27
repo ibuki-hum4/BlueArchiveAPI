@@ -1,27 +1,16 @@
 version: "3.8"
 services:
-  postgres:
-    image: postgres:18-alpine
-    environment:
-      POSTGRES_USER: ba
-      POSTGRES_PASSWORD: ba
-      POSTGRES_DB: bluearchive
-    volumes:
-      - pgdata:/var/lib/postgresql
-
   go-api:
     build: ./go-api
     environment:
-      - DATABASE_URL=postgres://ba:ba@postgres:5432/bluearchive?sslmode=disable
       - RSS_STATE_PATH=/var/lib/bluearchive/rss-seen-ids.json
       # 開発用の既定値です。本番環境では必ず強力なパスワードに変更してください。
       - ADMIN_PASSWORD=changeme
     volumes:
+      - ./data/students.json:/app/data/students.json
       - rssstate:/var/lib/bluearchive
     ports:
       - "8080:8080"
-    depends_on:
-      - postgres
 
   og-renderer:
     build: ./og-renderer
@@ -35,12 +24,11 @@ services:
     environment:
       - GO_API_ORIGIN=http://go-api:8080
     volumes:
-      - ./manifests/data/students.json:/app/data/students.json:ro
+      - ./data/students.json:/app/data/students.json:ro
     ports:
       - "3000:3000"
     depends_on:
       - go-api
 
 volumes:
-  pgdata:
   rssstate:

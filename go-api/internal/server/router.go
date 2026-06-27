@@ -2,7 +2,6 @@ package server
 
 import (
 	"context"
-	"database/sql"
 	"net/http"
 
 	"bluearchiveapi/go-api/internal/adminauth"
@@ -14,11 +13,8 @@ import (
 	"bluearchiveapi/go-api/internal/storage"
 )
 
-func NewRouter(db *sql.DB, cfg config.Config) (http.Handler, error) {
-	repo, err := storage.NewStudentsRepository(db)
-	if err != nil {
-		return nil, err
-	}
+func NewRouter(cfg config.Config) http.Handler {
+	repo := storage.NewStudentsRepository()
 	svc := service.NewStudentsService(repo)
 	rssService := rss.NewFeedService(repo)
 	go rssService.Start(context.Background())
@@ -44,5 +40,5 @@ func NewRouter(db *sql.DB, cfg config.Config) (http.Handler, error) {
 	mux.HandleFunc("/api/admin/logout", middleware.Gzip(adminHandler.Logout))
 	mux.HandleFunc("/api/admin/session", middleware.Gzip(adminHandler.Session))
 
-	return mux, nil
+	return mux
 }
