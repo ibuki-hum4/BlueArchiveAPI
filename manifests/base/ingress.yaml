@@ -4,6 +4,12 @@ metadata:
   name: bluearchive
   labels:
     name: bluearchive
+  annotations:
+    # Traefik はデフォルトでルール文字列の長さから優先度を計算するため、
+    # 同一Ingress内に "/" のcatch-allルールが混在すると、より具体的な
+    # /api 等のExactルールが意図せず負けることがある。明示的に高い優先度
+    # を指定して、このIngressのルールを必ず先に評価させる。
+    traefik.ingress.kubernetes.io/router.priority: "100"
 spec:
   ingressClassName: traefik
   rules:
@@ -45,6 +51,21 @@ spec:
                 name: bluearchive-go-api
                 port:
                   number: 80
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: bluearchive-frontend-catchall
+  labels:
+    name: bluearchive
+  annotations:
+    traefik.ingress.kubernetes.io/router.priority: "1"
+spec:
+  ingressClassName: traefik
+  rules:
+    - host: bluearchive-api.skyia.jp
+      http:
+        paths:
           - pathType: Prefix
             path: "/"
             backend:
