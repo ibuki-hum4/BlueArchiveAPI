@@ -124,9 +124,9 @@ spec:
             - sh
             - -c
             - |
-              if [ ! -f /data/students.json ]; then
-                cp /seed/students.json /data/students.json
-              fi
+              set -e
+              cp /seed/students.json /data/students.json.tmp
+              mv /data/students.json.tmp /data/students.json
           securityContext:
             runAsNonRoot: true
             runAsUser: 1000

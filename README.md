@@ -132,6 +132,14 @@ Go API は `http://localhost:8080` で起動し、次のエンドポイントを
 |---------|------|------|
 | `STUDENTS_DATA_PATH` | – | 生徒データJSONファイルのパス。未設定の場合、`data/students.json` などの既定の候補パスを自動検出します。 |
 
+#### k8s環境でのデータ反映
+
+本番環境では、`data/students.json`（kustomize上は `manifests/base/data/students.json`）から生成した ConfigMap (`students-config`) を初期データソースとして、PVC (`bluearchive-students-data`) にコピーしています。go-api コンテナはこのPVCを読み取り専用でマウントするため、アプリ自体は一切書き込みません。
+
+- Pod起動時、initContainer (`seed-students-data`) が ConfigMap の内容を**毎回**PVCへ上書き同期します（`cp` + `mv` によるアトミック更新）。
+- そのため、`data/students.json` を編集してコミットし、Podを再作成（再デプロイ、または `kubectl rollout restart deployment/bluearchive-go-api`）すれば、PVC上のデータも確実に最新化されます。
+- 既存のPVCを使い続ける構成のため、Podを再作成しない限り（コミットだけでは）データは反映されません。
+
 ## 📂 プロジェクト構造
 
 ```

@@ -41,6 +41,7 @@ func (h *StudentsHandler) Students(w http.ResponseWriter, r *http.Request) {
 	}
 
 	if r.Method != http.MethodGet {
+		w.Header().Set("Allow", http.MethodGet)
 		httpx.JSON(w, http.StatusMethodNotAllowed, map[string]string{
 			"message": "error",
 			"error":   "Method Not Allowed",
@@ -62,6 +63,7 @@ func (h *StudentsHandler) StudentByID(w http.ResponseWriter, r *http.Request) {
 	}
 
 	if r.Method != http.MethodGet {
+		w.Header().Set("Allow", http.MethodGet)
 		httpx.JSON(w, http.StatusMethodNotAllowed, map[string]string{
 			"message": "error",
 			"error":   "Method Not Allowed",
