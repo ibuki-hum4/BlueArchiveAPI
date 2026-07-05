@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useMemo, useState } from 'react';
+import { useMemo, useState } from 'react';
 import { motion } from 'motion/react';
 import Navigation from '@/components/Navigation';
 import StudentCard from '@/components/StudentCard';
@@ -23,14 +23,15 @@ export default function Home() {
     handleSortChange,
   } = useStudents();
   const [visibleCount, setVisibleCount] = useState(INITIAL_VISIBLE_COUNT);
+  const [prevStudents, setPrevStudents] = useState(students);
+  if (students !== prevStudents) {
+    setPrevStudents(students);
+    setVisibleCount(INITIAL_VISIBLE_COUNT);
+  }
   const visibleStudents = useMemo(
     () => students.slice(0, visibleCount),
     [students, visibleCount]
   );
-
-  useEffect(() => {
-    setVisibleCount(INITIAL_VISIBLE_COUNT);
-  }, [students]);
 
   const hasMore = students.length > visibleStudents.length;
   const handleLoadMore = () => {

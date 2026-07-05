@@ -17,20 +17,20 @@
     "lucide-react": "^1.17.0",
     "motion": "^12.40.0",
     "nanoid": "^5.1.6",
-    "next": "15.5.4",
+    "next": "16.2.10",
     "react": "19.1.0",
     "react-dom": "19.1.0",
     "tailwind-merge": "^3.6.0"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
-    "@next/eslint-plugin-next": "15.5.4",
+    "@next/eslint-plugin-next": "16.2.10",
     "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "eslint": "^9",
-    "eslint-config-next": "15.5.4",
+    "eslint-config-next": "16.2.10",
     "eslint-plugin-react-hooks": "^5.2.0",
     "tailwindcss": "^4",
     "typescript": "^5"
