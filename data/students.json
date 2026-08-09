@@ -551,6 +551,30 @@
             "indoor": "D"
         }
     },
+        {
+        "id": "ddT7OKKN",
+        "name": "イブキ（水着）",
+        "rarity": 3,
+        "weapon": {
+            "type": "SR",
+            "cover": false
+        },
+        "role": {
+            "type": "SPECIAL",
+            "class": "サポーター",
+            "position": "BACK"
+        },
+        "school": "ゲヘナ学園",
+        "combat": {
+            "attackType": "爆発",
+            "defenseType": "特殊装甲"
+        },
+        "terrainAdaptation": {
+            "city": "S",
+            "outdoor": "A",
+            "indoor": "D"
+        }
+    },
     {
         "id": "kjLnAzsd",
         "name": "イロハ",
@@ -573,6 +597,54 @@
             "city": "D",
             "outdoor": "B",
             "indoor": "S"
+        }
+    },
+        {
+        "id": "kjLnAzsd",
+        "name": "イロハ",
+        "rarity": 3,
+        "weapon": {
+            "type": "HG",
+            "cover": false
+        },
+        "role": {
+            "type": "SPECIAL",
+            "class": "T.S",
+            "position": "BACK"
+        },
+        "school": "ゲヘナ学園",
+        "combat": {
+            "attackType": "神秘",
+            "defenseType": "重装甲"
+        },
+        "terrainAdaptation": {
+            "city": "D",
+            "outdoor": "B",
+            "indoor": "S"
+        }
+    },
+        {
+        "id": "x2gCz11t",
+        "name": "イロハ（水着）",
+        "rarity": 3,
+        "weapon": {
+            "type": "HG",
+            "cover": true
+        },
+        "role": {
+            "type": "STRIKER",
+            "class": "アタッカー",
+            "position": "MIDDLE"
+        },
+        "school": "ゲヘナ学園",
+        "combat": {
+            "attackType": "爆発",
+            "defenseType": "特殊装甲"
+        },
+        "terrainAdaptation": {
+            "city": "S",
+            "outdoor": "A",
+            "indoor": "D"
         }
     },
     {
@@ -1604,6 +1676,30 @@
         "terrainAdaptation": {
             "city": "B",
             "outdoor": "S",
+            "indoor": "D"
+        }
+    },
+        {
+        "id": "C6dEr6mY",
+        "name": "サツキ（水着）",
+        "rarity": 3,
+        "weapon": {
+            "type": "HG",
+            "cover": true
+        },
+        "role": {
+            "type": "STRIKER",
+            "class": "ヒーラー",
+            "position": "MIDDLE"
+        },
+        "school": "ゲヘナ学園",
+        "combat": {
+            "attackType": "振動",
+            "defenseType": "弾力装甲"
+        },
+        "terrainAdaptation": {
+            "city": "S",
+            "outdoor": "B",
             "indoor": "D"
         }
     },
@@ -3692,6 +3788,30 @@
         "terrainAdaptation": {
             "city": "D",
             "outdoor": "B",
+            "indoor": "S"
+        }
+    },
+        {
+        "id": "P6NQTxKa",
+        "name": "マコト（水着）",
+        "rarity": 3,
+        "weapon": {
+            "type": "SR",
+            "cover": true
+        },
+        "role": {
+            "type": "STRIKER",
+            "class": "アタッカー",
+            "position": "BACK"
+        },
+        "school": "ゲヘナ学園",
+        "combat": {
+            "attackType": "神秘",
+            "defenseType": "重装甲"
+        },
+        "terrainAdaptation": {
+            "city": "B",
+            "outdoor": "D",
             "indoor": "S"
         }
     },
@@ -5997,6 +6117,30 @@
             "city": "A",
             "outdoor": "C",
             "indoor": "B"
+        }
+    },
+        {
+        "id": "UvdFvzvu",
+        "name": "チアキ（水着）",
+        "rarity": 1,
+        "weapon": {
+            "type": "SR",
+            "cover": false
+        },
+        "role": {
+            "type": "SPECIAL",
+            "class": "アタッカー",
+            "position": "BACK"
+        },
+        "school": "ゲヘナ学園",
+        "combat": {
+            "attackType": "貫通",
+            "defenseType": "重装甲"
+        },
+        "terrainAdaptation": {
+            "city": "B",
+            "outdoor": "A",
+            "indoor": "C"
         }
     },
     {
