@@ -887,6 +887,30 @@
             "indoor": "D"
         }
     },
+        {
+        "id": "A9WFhLjO",
+        "name": "カスミ（水着）",
+        "rarity": 3,
+        "weapon": {
+            "type": "HG",
+            "cover": false
+        },
+        "role": {
+            "type": "SPECIAL",
+            "class": "サポーター",
+            "position": "BACK"
+        },
+        "school": "ゲヘナ学園",
+        "combat": {
+            "attackType": "貫通",
+            "defenseType": "特殊装甲"
+        },
+        "terrainAdaptation": {
+            "city": "D",
+            "outdoor": "B",
+            "indoor": "S"
+        }
+    },
     {
         "id": "jKQNEqEG",
         "name": "カノエ",
@@ -1247,6 +1271,30 @@
             "indoor": "D"
         }
     },
+        {
+        "id": "gmQYIghd",
+        "name": "ココロ",
+        "rarity": 3,
+        "weapon": {
+            "type": "AR",
+            "cover": false
+        },
+        "role": {
+            "type": "STRIKER",
+            "class": "サポーター",
+            "position": "MIDDLE"
+        },
+        "school": "オデュッセイア海洋高等学校",
+        "combat": {
+            "attackType": "神秘",
+            "defenseType": "特殊装甲"
+        },
+        "terrainAdaptation": {
+            "city": "S",
+            "outdoor": "D",
+            "indoor": "B"
+        }
+    },
     {
         "id": "Zf9umjC4",
         "name": "コタマ（キャンプ）",
@@ -1269,6 +1317,30 @@
             "city": "B",
             "outdoor": "S",
             "indoor": "D"
+        }
+    },
+        {
+        "id": "EL15mxCy",
+        "name": "コトネ",
+        "rarity": 3,
+        "weapon": {
+            "type": "AR",
+            "cover": true
+        },
+        "role": {
+            "type": "STRIKER",
+            "class": "タンク",
+            "position": "FRONT"
+        },
+        "school": "オデュッセイア海洋高等学校",
+        "combat": {
+            "attackType": "爆発",
+            "defenseType": "特殊装甲"
+        },
+        "terrainAdaptation": {
+            "city": "B",
+            "outdoor": "D",
+            "indoor": "S"
         }
     },
     {
