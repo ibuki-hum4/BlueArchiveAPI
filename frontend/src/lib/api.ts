@@ -44,36 +44,3 @@ export async function fetchStudents(options?: FetchOptions): Promise<Student[]> 
     throw error;
   }
 }
-
-/**
- * IDで特定の生徒データを取得
- */
-export async function fetchStudentById(id: string, options?: FetchOptions): Promise<Student | null> {
-  try {
-    const response = await fetch(`${API_BASE_URL}/students/${id}`, {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      cache: options?.noStore ? 'no-store' : 'default',
-    });
-
-    if (response.status === 404) {
-      return null;
-    }
-
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
-    }
-
-    const result = await response.json();
-    if (result.message !== 'success') {
-      throw new Error(result.error || 'Failed to fetch student');
-    }
-
-    return result.data as Student;
-  } catch (error) {
-    console.error(`Error fetching student with id ${id}:`, error);
-    throw error;
-  }
-}

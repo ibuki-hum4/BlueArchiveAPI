@@ -4,9 +4,12 @@ import { useState, useEffect, useMemo } from 'react';
 import { Student, StudentFilter, SortOptions } from '@/types/student';
 import { fetchStudents } from '@/lib/api';
 
-export function useStudents() {
-  const [students, setStudents] = useState<Student[]>([]);
-  const [loading, setLoading] = useState(true);
+/**
+ * @param initialStudents サーバーで取得済みの生徒データ。渡された場合はクライアントでの初回取得を省略する
+ */
+export function useStudents(initialStudents?: Student[]) {
+  const [students, setStudents] = useState<Student[]>(initialStudents ?? []);
+  const [loading, setLoading] = useState(!initialStudents);
   const [error, setError] = useState<string | null>(null);
   const [filter, setFilter] = useState<StudentFilter>({});
   const [sortOptions, setSortOptions] = useState<SortOptions>({
@@ -16,6 +19,8 @@ export function useStudents() {
 
   // 生徒データの取得
   useEffect(() => {
+    if (initialStudents) return;
+
     const loadStudents = async () => {
       try {
         setLoading(true);
@@ -30,7 +35,7 @@ export function useStudents() {
     };
 
     loadStudents();
-  }, []);
+  }, [initialStudents]);
 
   // フィルターとソートの適用
   const filteredAndSortedStudents = useMemo(() => {

@@ -3,6 +3,7 @@ import { Geist, Geist_Mono, M_PLUS_Rounded_1c } from "next/font/google";
 import Script from 'next/script';
 import { Suspense } from 'react';
 import Analytics from '@/components/Analytics';
+import { buildOgImageUrl, siteDescription, siteName, siteUrl } from '@/lib/site';
 import "./globals.css";
 
 const geistSans = Geist({
@@ -21,11 +22,6 @@ const mPlusRounded = M_PLUS_Rounded_1c({
   weight: ["400", "700", "800"],
   display: "swap",
 });
-
-const siteName = "Blue Archive API";
-const siteDescription = "ブルーアーカイブの生徒データを検索・閲覧できる非公式データベース";
-const siteUrl = "https://bluearchive-api.skyia.jp";
-const ogVersion = "20260322a";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
@@ -53,7 +49,7 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: `/api/og?v=${ogVersion}`,
+        url: buildOgImageUrl(),
         width: 1200,
         height: 630,
         alt: `${siteName}のOGP画像`,
@@ -64,7 +60,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: siteName,
     description: siteDescription,
-    images: [`/api/og?v=${ogVersion}`],
+    images: [buildOgImageUrl()],
   },
   icons: {
     icon: "/favicon.ico",

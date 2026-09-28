@@ -1,15 +1,14 @@
 import type { MetadataRoute } from 'next';
-import { readStudentsData } from '@/lib/students/storage';
+import { getStudents } from '@/lib/students/server';
+import { siteUrl } from '@/lib/site';
 
 // 生徒データはPVCで実行時にマウントされるため、ビルド時の静的生成を無効化する
 export const dynamic = 'force-dynamic';
 export const revalidate = 0;
 export const runtime = 'nodejs';
 
-const siteUrl = 'https://bluearchive-api.skyia.jp';
-
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const students = await readStudentsData();
+  const students = await getStudents();
 
   const staticRoutes: MetadataRoute.Sitemap = [
     {

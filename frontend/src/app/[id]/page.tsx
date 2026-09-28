@@ -1,111 +1,126 @@
-'use client';
-
-import { useEffect, useState } from 'react';
-import { useParams, useRouter } from 'next/navigation';
+import type { Metadata } from 'next';
+import Link from 'next/link';
+import { notFound } from 'next/navigation';
 import { ChevronLeft } from 'lucide-react';
 import Navigation from '@/components/Navigation';
 import RarityStars from '@/components/RarityStars';
-import { Button } from '@/components/ui/button';
-import { Student } from '@/types/student';
-import { fetchStudentById } from '@/lib/api';
+import { getStudentById } from '@/lib/students/server';
+import { buildOgImageUrl, siteName, siteUrl } from '@/lib/site';
 
-export default function StudentDetailPage() {
-  const params = useParams();
-  const router = useRouter();
-  const [student, setStudent] = useState<Student | null>(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
+// 生徒データはPVCで実行時にマウントされるため、リクエストごとにレンダリングする
+export const dynamic = 'force-dynamic';
 
-  useEffect(() => {
-    if (params.id) {
-      const loadStudent = async () => {
-        try {
-          setLoading(true);
-          const data = await fetchStudentById(params.id as string);
-          if (data) {
-            setStudent(data);
-          } else {
-            setError('指定された生徒が見つかりません');
-          }
-        } catch (err) {
-          console.error('Error loading student:', err);
-          setError('生徒データの読み込みに失敗しました');
-        } finally {
-          setLoading(false);
-        }
-      };
+type PageProps = {
+  params: Promise<{ id: string }>;
+};
 
-      loadStudent();
-    }
-  }, [params.id]);
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+  const { id } = await params;
+  const student = await getStudentById(id);
 
-  // 攻撃タイプの色設定
-  const getAttackTypeColor = (attackType: string): string => {
-    switch (attackType) {
-      case '神秘': return 'text-ba-blue-700 bg-ba-blue-50';
-      case '爆発': return 'text-red-600 bg-red-50';
-      case '貫通': return 'text-yellow-600 bg-yellow-50';
-      default: return 'text-gray-600 bg-gray-50';
-    }
-  };
-
-  // 地形適応度の背景色
-  const getTerrainColor = (grade: string): string => {
-    switch (grade) {
-      case 'S': return 'bg-green-50 text-green-700';
-      case 'A': return 'bg-ba-blue-50 text-ba-blue-700';
-      case 'B': return 'bg-yellow-50 text-yellow-700';
-      case 'C': return 'bg-orange-50 text-orange-700';
-      case 'D': return 'bg-red-50 text-red-700';
-      default: return 'bg-gray-100 text-gray-600';
-    }
-  };
-
-  if (loading) {
-    return (
-      <div className="min-h-screen bg-ba-blue-50/40">
-        <Navigation />
-        <main className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-          <div className="text-center py-12">
-            <div className="inline-block h-8 w-8 animate-spin rounded-full border-[3px] border-ba-blue-100 border-t-ba-blue-500"></div>
-            <p className="mt-4 text-ba-navy-400">生徒データを読み込み中...</p>
-          </div>
-        </main>
-      </div>
-    );
+  if (!student) {
+    return {
+      title: '生徒が見つかりません',
+      robots: { index: false },
+    };
   }
 
-  if (error || !student) {
-    return (
-      <div className="min-h-screen bg-ba-blue-50/40">
-        <Navigation />
-        <main className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-          <div className="text-center">
-            <h2 className="text-2xl font-bold text-red-600">エラーが発生しました</h2>
-            <p className="mt-2 text-gray-600">{error}</p>
-            <Button className="mt-4 font-bold" onClick={() => router.push('/')}>
-              ホームに戻る
-            </Button>
-          </div>
-        </main>
-      </div>
-    );
+  const fullTitle = `${student.name} | ${siteName}`;
+  const description = `${student.school}所属の${student.name}の詳細情報。レア度★${student.rarity}、攻撃タイプ${student.combat.attackType}などを掲載。`;
+  const image = buildOgImageUrl({
+    id: student.id,
+    title: student.name,
+    subtitle: `${student.school} / レア度★${student.rarity}`,
+  });
+  const canonicalPath = `/${student.id}`;
+
+  return {
+    // ルートレイアウトの title.template で「| Blue Archive API」が付与される
+    title: student.name,
+    description,
+    alternates: {
+      canonical: canonicalPath,
+    },
+    openGraph: {
+      title: fullTitle,
+      description,
+      url: canonicalPath,
+      type: 'profile',
+      images: [
+        {
+          url: image,
+          width: 1200,
+          height: 630,
+          alt: `${student.name}のOGP画像`,
+        },
+      ],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: fullTitle,
+      description,
+      images: [image],
+    },
+  };
+}
+
+// 攻撃タイプの色設定
+const getAttackTypeColor = (attackType: string): string => {
+  switch (attackType) {
+    case '神秘': return 'text-ba-blue-700 bg-ba-blue-50';
+    case '爆発': return 'text-red-600 bg-red-50';
+    case '貫通': return 'text-yellow-600 bg-yellow-50';
+    default: return 'text-gray-600 bg-gray-50';
   }
+};
+
+// 地形適応度の背景色
+const getTerrainColor = (grade: string): string => {
+  switch (grade) {
+    case 'S': return 'bg-green-50 text-green-700';
+    case 'A': return 'bg-ba-blue-50 text-ba-blue-700';
+    case 'B': return 'bg-yellow-50 text-yellow-700';
+    case 'C': return 'bg-orange-50 text-orange-700';
+    case 'D': return 'bg-red-50 text-red-700';
+    default: return 'bg-gray-100 text-gray-600';
+  }
+};
+
+export default async function StudentDetailPage({ params }: PageProps) {
+  const { id } = await params;
+  const student = await getStudentById(id);
+
+  if (!student) {
+    notFound();
+  }
+
+  const breadcrumbJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: '生徒一覧', item: siteUrl },
+      { '@type': 'ListItem', position: 2, name: student.name, item: `${siteUrl}/${student.id}` },
+    ],
+  };
 
   return (
     <div className="min-h-screen bg-ba-blue-50/40 text-ba-navy-900">
+      <script
+        type="application/ld+json"
+        // JSON内の "<" をエスケープして </script> によるタグ脱出を防ぐ
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd).replace(/</g, '\\u003c') }}
+      />
       <Navigation />
 
-      <main className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        {/* 戻るボタン */}
-        <Button
-          variant="ghost"
-          className="mb-6 px-0 text-ba-blue-600 hover:bg-transparent hover:text-ba-blue-800"
-          onClick={() => router.back()}
+      <main id="main-content" className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        {/* 戻るリンク */}
+        <Link
+          href="/"
+          className="mb-6 inline-flex items-center gap-1 text-sm font-medium text-ba-blue-600 hover:text-ba-blue-800"
         >
-          <ChevronLeft className="h-4 w-4" />
-          戻る
-        </Button>
+          <ChevronLeft className="h-4 w-4" aria-hidden="true" />
+          生徒一覧に戻る
+        </Link>
 
         <div className="overflow-hidden rounded-xl border border-border bg-white">
           {/* ヘッダー部分 */}
