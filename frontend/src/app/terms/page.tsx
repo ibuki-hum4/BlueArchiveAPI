@@ -1,7 +1,11 @@
-'use client';
-
-import Navigation from '@/components/Navigation';
+import type { Metadata } from 'next';
 import Link from 'next/link';
+import PageHeader from '@/components/PageHeader';
+
+export const metadata: Metadata = {
+  title: '利用規約',
+  description: 'Blue Archive API および関連サービスの利用規約です。',
+};
 
 export default function TermsPage() {
   const sections = [
@@ -106,24 +110,22 @@ export default function TermsPage() {
   ];
 
   return (
-    <div className="min-h-screen bg-slate-50">
-      <Navigation />
-      
-      <main className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <div className="bg-white rounded-xl border border-slate-200 shadow-sm p-8">
-          <h1 className="text-3xl font-bold text-slate-900 mb-8">利用規約</h1>
-          
+    <>
+      <PageHeader width="md" title="利用規約" />
+
+      <main id="main-content" className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <div className="ba-panel p-6 sm:p-8">
           <div className="prose prose-gray max-w-none">
             {sections.map(({ title, paragraphs, list }) => (
-              <section key={title} className="mb-8 border-b border-slate-100 pb-6 last:border-b-0 last:pb-0">
-                <h2 className="text-2xl font-semibold text-slate-800 mb-4">{title}</h2>
+              <section key={title} className="mb-8 border-b border-gray-100 pb-6 last:border-b-0 last:pb-0">
+                <h2 className="text-base font-semibold text-gray-900 mb-3">{title}</h2>
                 {paragraphs?.map((text) => (
-                  <p key={text} className="text-slate-600 mb-4 leading-7">
+                  <p key={text} className="text-[15px] text-gray-600 mb-3 leading-7">
                     {text}
                   </p>
                 ))}
                 {list && (
-                  <ul className="text-slate-600 space-y-2 ml-6 list-disc">
+                  <ul className="text-gray-600 space-y-2 ml-6 list-disc">
                     {list.map((item) => (
                       <li key={item}>{item}</li>
                     ))}
@@ -136,10 +138,10 @@ export default function TermsPage() {
               <p className="text-sm text-gray-500 mb-4">最終更新日: 2025年10月2日</p>
 
               <div className="space-y-2">
-                <Link href="/api-docs" className="block text-blue-600 hover:text-blue-800 underline">
+                <Link href="/api-docs" className="block text-gray-600 underline underline-offset-4 hover:text-gray-900">
                   API使用方法
                 </Link>
-                <Link href="/" className="block text-blue-600 hover:text-blue-800 underline">
+                <Link href="/" className="block text-gray-600 underline underline-offset-4 hover:text-gray-900">
                   ホームに戻る
                 </Link>
               </div>
@@ -147,6 +149,6 @@ export default function TermsPage() {
           </div>
         </div>
       </main>
-    </div>
+    </>
   );
 }

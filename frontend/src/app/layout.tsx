@@ -1,8 +1,10 @@
-import type { Metadata } from "next";
-import { Geist, Geist_Mono, M_PLUS_Rounded_1c } from "next/font/google";
+import type { Metadata, Viewport } from "next";
+import { Geist, Geist_Mono } from "next/font/google";
 import Script from 'next/script';
 import { Suspense } from 'react';
 import Analytics from '@/components/Analytics';
+import Navigation from '@/components/Navigation';
+import SiteFooter from '@/components/SiteFooter';
 import { buildOgImageUrl, siteDescription, siteName, siteUrl } from '@/lib/site';
 import "./globals.css";
 
@@ -16,12 +18,11 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-const mPlusRounded = M_PLUS_Rounded_1c({
-  variable: "--font-mplus-rounded",
-  subsets: ["latin"],
-  weight: ["400", "700", "800"],
-  display: "swap",
-});
+// ノッチ・ホームインジケーター領域まで描画し、下部タブバーは safe-area-inset で避ける
+export const viewport: Viewport = {
+  viewportFit: "cover",
+  themeColor: "#eaf3ff",
+};
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
@@ -76,7 +77,7 @@ export default function RootLayout({
   return (
     <html lang="ja" suppressHydrationWarning>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} ${mPlusRounded.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} flex min-h-screen flex-col supports-[height:100dvh]:min-h-dvh pb-[calc(env(safe-area-inset-bottom)+6rem)] antialiased md:pb-10`}
       >
         {/* Cookie consent (Cookiebot) - runs before interactive so it can block other scripts until consent */}
         <Script
@@ -104,7 +105,9 @@ export default function RootLayout({
         <Suspense fallback={null}>
           <Analytics />
         </Suspense>
-        {children}
+        <Navigation />
+        <div className="flex-1">{children}</div>
+        <SiteFooter />
       </body>
     </html>
   );

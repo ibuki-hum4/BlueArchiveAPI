@@ -1,12 +1,14 @@
 'use client';
 
 import { memo, useId, useState } from 'react';
+import { ArrowDownWideNarrow, ArrowUpNarrowWide, Search, X } from 'lucide-react';
 import { StudentFilter, SortOptions, SortField, SortOrder } from '@/types/student';
 import { ATTACK_TYPES, DEFENSE_TYPES, POSITIONS, WEAPON_TYPES } from '@/lib/student-options';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Select } from '@/components/ui/select';
 import { Button } from '@/components/ui/button';
+import { cn } from '@/lib/utils';
 
 interface SearchAndFilterProps {
   onFilterChange: (filter: StudentFilter) => void;
@@ -51,44 +53,70 @@ function SearchAndFilter({ onFilterChange, onSortChange, totalCount, schools = [
   // 武器タイプ（propsで提供されない場合は共通定義をフォールバックとして使用）
   const displayWeaponTypes = weaponTypes.length > 0 ? weaponTypes : WEAPON_TYPES;
 
+  const hasActiveFilter = Object.values(filter).some((value) => value !== undefined && value !== '');
+  // 未選択のセレクトは控えめに、選択中は強調して見分けやすくする
+  const selectClass = (active: boolean) =>
+    cn('h-10', active ? 'border-gray-900 font-medium text-gray-900' : 'text-gray-500');
+
   return (
     <form
-      className="space-y-6 rounded-3xl border border-ba-blue-100 bg-white p-6 shadow-sm"
+      className="space-y-3"
       role="search"
-      aria-labelledby={`${formId}-title`}
-      aria-describedby={`${formId}-summary`}
+      aria-label="生徒の検索とフィルター"
       onSubmit={(event) => event.preventDefault()}
     >
-      <div className="flex items-center justify-between gap-2 border-b border-ba-blue-100 pb-3">
-        <h3 id={`${formId}-title`} className="font-rounded text-base font-bold text-ba-navy-900">
-          検索とフィルター
-        </h3>
-        <span id={`${formId}-summary`} className="text-xs text-ba-navy-400">
-          条件を入力すると即座に結果が更新されます
-        </span>
-      </div>
-
-      {/* 検索バー */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-        <div>
-          <Label htmlFor={nameId}>生徒名で検索</Label>
+      <div className="flex flex-col gap-2 sm:flex-row">
+        <div className="relative flex-1">
+          <Label htmlFor={nameId} className="sr-only">生徒名で検索</Label>
+          <Search className="pointer-events-none absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-400" aria-hidden="true" />
           <Input
-            type="text"
+            type="search"
             id={nameId}
-            placeholder="生徒名を入力..."
+            placeholder="生徒名で検索"
             value={filter.name || ''}
             onChange={(e) => handleFilterChange({ name: e.target.value })}
-            autoComplete="name"
+            autoComplete="off"
+            className="h-11 rounded-xl pl-10"
           />
         </div>
+        <div className="flex gap-2">
+          <Label htmlFor={sortFieldId} className="sr-only">並び替え</Label>
+          <Select
+            id={sortFieldId}
+            className="h-11 rounded-xl"
+            value={sortField}
+            onChange={(e) => handleSortChange(e.target.value as SortField, sortOrder)}
+          >
+            <option value="name">名前順</option>
+            <option value="rarity">レア度順</option>
+            <option value="school">学校順</option>
+            <option value="weapon.type">武器タイプ順</option>
+            <option value="combat.attackType">攻撃タイプ順</option>
+          </Select>
+          <Button
+            type="button"
+            variant="outline"
+            size="icon"
+            className="h-11 w-11 shrink-0 rounded-xl"
+            aria-label={`並び順を${sortOrder === 'asc' ? '降順' : '昇順'}に変更`}
+            onClick={() => handleSortChange(sortField, sortOrder === 'asc' ? 'desc' : 'asc')}
+          >
+            {sortOrder === 'asc' ? <ArrowUpNarrowWide aria-hidden="true" /> : <ArrowDownWideNarrow aria-hidden="true" />}
+          </Button>
+        </div>
+      </div>
+
+      <fieldset className="grid grid-cols-2 gap-2 sm:grid-cols-3 lg:grid-cols-6">
+        <legend className="sr-only">詳細フィルター</legend>
         <div>
-          <Label htmlFor={schoolId}>学校</Label>
+          <Label htmlFor={schoolId} className="sr-only">学校</Label>
           <Select
             id={schoolId}
+            className={selectClass(!!filter.school)}
             value={filter.school || ''}
             onChange={(e) => handleFilterChange({ school: e.target.value || undefined })}
           >
-            <option value="">すべての学校</option>
+            <option value="">学校</option>
             {schools.map((school) => (
               <option key={school} value={school}>
                 {school}
@@ -96,131 +124,100 @@ function SearchAndFilter({ onFilterChange, onSortChange, totalCount, schools = [
             ))}
           </Select>
         </div>
-      </div>
-
-      {/* フィルター */}
-      <fieldset className="space-y-4">
-        <legend className="text-sm font-semibold text-ba-navy-700">詳細フィルター</legend>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4">
-          <div>
-            <Label htmlFor={rarityId}>レア度</Label>
-            <Select
-              id={rarityId}
-              value={filter.rarity || ''}
-              onChange={(e) => handleFilterChange({ rarity: e.target.value ? Number(e.target.value) : undefined })}
-            >
-              <option value="">すべて</option>
-              <option value="3">★3</option>
-              <option value="2">★2</option>
-              <option value="1">★1</option>
-            </Select>
-          </div>
-
-          <div>
-            <Label htmlFor={weaponId}>武器タイプ</Label>
-            <Select
-              id={weaponId}
-              value={filter.weaponType || ''}
-              onChange={(e) => handleFilterChange({ weaponType: e.target.value || undefined })}
-            >
-              <option value="">すべて</option>
-              {displayWeaponTypes.map((type) => (
-                <option key={type} value={type}>
-                  {type}
-                </option>
-              ))}
-            </Select>
-          </div>
-
-          <div>
-            <Label htmlFor={attackId}>攻撃タイプ</Label>
-            <Select
-              id={attackId}
-              value={filter.attackType || ''}
-              onChange={(e) => handleFilterChange({ attackType: e.target.value || undefined })}
-            >
-              <option value="">すべて</option>
-              {ATTACK_TYPES.map((type) => (
-                <option key={type} value={type}>
-                  {type}
-                </option>
-              ))}
-            </Select>
-          </div>
-
-          <div>
-            <Label htmlFor={defenseId}>防御タイプ</Label>
-            <Select
-              id={defenseId}
-              value={filter.defenseType || ''}
-              onChange={(e) => handleFilterChange({ defenseType: e.target.value || undefined })}
-            >
-              <option value="">すべて</option>
-              {DEFENSE_TYPES.map((type) => (
-                <option key={type} value={type}>
-                  {type}
-                </option>
-              ))}
-            </Select>
-          </div>
-
-          <div>
-            <Label htmlFor={positionId}>ポジション</Label>
-            <Select
-              id={positionId}
-              value={filter.position || ''}
-              onChange={(e) => handleFilterChange({ position: e.target.value || undefined })}
-            >
-              <option value="">すべて</option>
-              {POSITIONS.map((pos) => (
-                <option key={pos} value={pos}>
-                  {pos}
-                </option>
-              ))}
-            </Select>
-          </div>
+        <div>
+          <Label htmlFor={rarityId} className="sr-only">レア度</Label>
+          <Select
+            id={rarityId}
+            className={selectClass(filter.rarity !== undefined)}
+            value={filter.rarity || ''}
+            onChange={(e) => handleFilterChange({ rarity: e.target.value ? Number(e.target.value) : undefined })}
+          >
+            <option value="">レア度</option>
+            <option value="3">★3</option>
+            <option value="2">★2</option>
+            <option value="1">★1</option>
+          </Select>
+        </div>
+        <div>
+          <Label htmlFor={weaponId} className="sr-only">武器タイプ</Label>
+          <Select
+            id={weaponId}
+            className={selectClass(!!filter.weaponType)}
+            value={filter.weaponType || ''}
+            onChange={(e) => handleFilterChange({ weaponType: e.target.value || undefined })}
+          >
+            <option value="">武器タイプ</option>
+            {displayWeaponTypes.map((type) => (
+              <option key={type} value={type}>
+                {type}
+              </option>
+            ))}
+          </Select>
+        </div>
+        <div>
+          <Label htmlFor={attackId} className="sr-only">攻撃タイプ</Label>
+          <Select
+            id={attackId}
+            className={selectClass(!!filter.attackType)}
+            value={filter.attackType || ''}
+            onChange={(e) => handleFilterChange({ attackType: e.target.value || undefined })}
+          >
+            <option value="">攻撃タイプ</option>
+            {ATTACK_TYPES.map((type) => (
+              <option key={type} value={type}>
+                {type}
+              </option>
+            ))}
+          </Select>
+        </div>
+        <div>
+          <Label htmlFor={defenseId} className="sr-only">防御タイプ</Label>
+          <Select
+            id={defenseId}
+            className={selectClass(!!filter.defenseType)}
+            value={filter.defenseType || ''}
+            onChange={(e) => handleFilterChange({ defenseType: e.target.value || undefined })}
+          >
+            <option value="">防御タイプ</option>
+            {DEFENSE_TYPES.map((type) => (
+              <option key={type} value={type}>
+                {type}
+              </option>
+            ))}
+          </Select>
+        </div>
+        <div>
+          <Label htmlFor={positionId} className="sr-only">ポジション</Label>
+          <Select
+            id={positionId}
+            className={selectClass(!!filter.position)}
+            value={filter.position || ''}
+            onChange={(e) => handleFilterChange({ position: e.target.value || undefined })}
+          >
+            <option value="">ポジション</option>
+            {POSITIONS.map((pos) => (
+              <option key={pos} value={pos}>
+                {pos}
+              </option>
+            ))}
+          </Select>
         </div>
       </fieldset>
 
-      {/* ソート・アクション */}
-      <div className="flex flex-wrap items-center justify-between gap-4">
-        <div className="flex items-center gap-3">
-          <div className="flex items-center gap-2">
-            <Label htmlFor={sortFieldId} className="mb-0">並び替え:</Label>
-            <Select
-              id={sortFieldId}
-              className="h-9 w-auto px-3 py-1.5"
-              value={sortField}
-              onChange={(e) => handleSortChange(e.target.value as SortField, sortOrder)}
-            >
-              <option value="name">生徒名</option>
-              <option value="rarity">レア度</option>
-              <option value="school">学校</option>
-              <option value="weapon.type">武器タイプ</option>
-              <option value="combat.attackType">攻撃タイプ</option>
-            </Select>
-            <Button
-              type="button"
-              variant="secondary"
-              className="h-9 border border-ba-blue-200 px-3"
-              aria-label={`並び順を${sortOrder === 'asc' ? '降順' : '昇順'}に変更`}
-              onClick={() => handleSortChange(sortField, sortOrder === 'asc' ? 'desc' : 'asc')}
-            >
-              {sortOrder === 'asc' ? '↑' : '↓'}
-            </Button>
-          </div>
-          <Button
+      <div className="flex h-8 items-center justify-between text-sm text-gray-500">
+        <p aria-live="polite">
+          <span className="font-semibold text-gray-900">{totalCount}</span> 件
+        </p>
+        {hasActiveFilter && (
+          <button
             type="button"
-            variant="outline"
-            className="h-9 border-ba-navy-200 px-4 text-ba-navy-600 hover:bg-ba-navy-50"
             onClick={clearFilters}
+            className="inline-flex items-center gap-1 rounded-full px-2 py-1 hover:bg-gray-100 hover:text-gray-900"
           >
-            フィルターをクリア
-          </Button>
-        </div>
-        <div className="text-sm text-ba-navy-500" aria-live="polite">
-          {totalCount}件の生徒が見つかりました
-        </div>
+            <X className="h-3.5 w-3.5" aria-hidden="true" />
+            条件をクリア
+          </button>
+        )}
       </div>
     </form>
   );

@@ -2,138 +2,95 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { useState } from 'react';
-import { Menu, X } from 'lucide-react';
-import { Button } from '@/components/ui/button';
+import { ArrowUpRight, BookOpen, Code2, FileText, Users } from 'lucide-react';
+import { cn } from '@/lib/utils';
+import { siteName } from '@/lib/site';
 
 const INTERNAL_LINKS = [
-  { href: '/', label: '生徒一覧' },
-  { href: '/overview', label: '概要' },
-  { href: '/api-docs', label: 'API使用方法' },
-  { href: '/terms', label: '利用規約' },
+  { href: '/', label: '生徒一覧', shortLabel: '生徒', icon: Users },
+  { href: '/overview', label: '概要', shortLabel: '概要', icon: BookOpen },
+  { href: '/api-docs', label: 'API使用方法', shortLabel: 'API', icon: Code2 },
+  { href: '/terms', label: '利用規約', shortLabel: '規約', icon: FileText },
 ];
 
-const EXTERNAL_LINKS = [
-  { href: '/api', label: 'API' },
-  { href: 'https://github.com/ibuki-hum4/BlueArchiveAPI', label: 'GitHub', external: true },
-];
+const STATIC_PATHS = new Set(INTERNAL_LINKS.map(({ href }) => href));
 
 export default function Navigation() {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const pathname = usePathname();
 
-  const toggleMenu = () => {
-    setIsMenuOpen((prev) => !prev);
-  };
-
-  const handleMenuNavigate = () => {
-    setIsMenuOpen(false);
-  };
-
-  const getDesktopLinkClass = (href: string) => {
-    const isActive = pathname === href;
-    return [
-      'relative px-4 py-2 rounded-lg text-sm font-semibold transition-colors duration-200',
-      isActive
-        ? 'bg-ba-blue-50 text-ba-blue-700'
-        : 'text-ba-navy-600 hover:text-ba-blue-700 hover:bg-ba-blue-50'
-    ].join(' ');
-  };
-
-  const getMobileLinkClass = (href?: string) => {
-    const isActive = href ? pathname === href : false;
-    return [
-      'block px-3 py-2 rounded-lg text-base font-medium transition-colors duration-200',
-      isActive
-        ? 'bg-ba-blue-50 text-ba-blue-700'
-        : 'text-ba-navy-700 hover:bg-ba-blue-50 hover:text-ba-blue-700'
-    ].join(' ');
-  };
+  // 生徒詳細（/{id}）は「生徒一覧」の配下として扱う
+  const isActive = (href: string) =>
+    pathname === href || (href === '/' && !!pathname && !STATIC_PATHS.has(pathname));
 
   return (
-    <nav
-      className="ba-soft-panel sticky top-0 z-40"
-      aria-label="メインナビゲーション"
-    >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between h-16">
-          <div className="flex items-center gap-3">
-            <Link href="/" className="flex flex-col">
-              <span className="font-rounded text-lg font-extrabold tracking-wide text-ba-navy-900">
-                Schale Library
-              </span>
-              <span className="text-[11px] tracking-wide text-ba-blue-500">
-                Blue Archive Database
-              </span>
-            </Link>
-          </div>
+    <>
+      {/* 上部に浮かぶガラスのバー */}
+      <header className="sticky top-0 z-40 px-3 pt-3 sm:px-4">
+        <nav
+          aria-label="メインナビゲーション"
+          className="glass mx-auto flex h-14 max-w-7xl items-center justify-between rounded-full pl-5 pr-2"
+        >
+          <Link href="/" className="text-[15px] font-semibold tracking-tight text-gray-900">
+            {siteName}
+          </Link>
 
-          {/* デスクトップメニュー */}
-          <div className="hidden md:flex items-center gap-1">
-            {INTERNAL_LINKS.map(({ href, label }) => (
-              <Link key={href} href={href} className={getDesktopLinkClass(href)}>
-                {label}
-              </Link>
-            ))}
-            {EXTERNAL_LINKS.map(({ href, label, external }) => (
-              <a
-                key={href}
-                href={href}
-                target={external ? '_blank' : undefined}
-                rel={external ? 'noopener noreferrer' : undefined}
-                className="px-4 py-2 rounded-lg text-sm font-semibold text-ba-navy-600 transition-colors duration-200 hover:text-ba-blue-700 hover:bg-ba-blue-50"
-              >
-                {label}
-              </a>
-            ))}
-          </div>
-
-          {/* モバイルメニューボタン */}
-          <div className="md:hidden flex items-center">
-            <Button
-              type="button"
-              variant="outline"
-              size="icon"
-              onClick={toggleMenu}
-              aria-label="メインメニュー"
-              aria-expanded={isMenuOpen}
-              aria-controls="primary-navigation"
-            >
-              {isMenuOpen ? <X className="h-6 w-6" aria-hidden="true" /> : <Menu className="h-6 w-6" aria-hidden="true" />}
-            </Button>
-          </div>
-        </div>
-
-        {/* モバイルメニュー */}
-        {isMenuOpen && (
-          <div id="primary-navigation" className="md:hidden pb-4">
-            <div className="px-2 pt-2 space-y-1 rounded-xl border border-ba-blue-100 bg-white">
+          <div className="flex items-center gap-1">
+            <div className="hidden items-center gap-1 md:flex">
               {INTERNAL_LINKS.map(({ href, label }) => (
                 <Link
                   key={href}
                   href={href}
-                  className={getMobileLinkClass(href)}
-                  onClick={handleMenuNavigate}
+                  aria-current={isActive(href) ? 'page' : undefined}
+                  className={cn(
+                    'rounded-full px-3.5 py-2 text-sm transition-colors',
+                    isActive(href)
+                      ? 'bg-gray-900/[0.06] font-medium text-gray-900'
+                      : 'text-gray-500 hover:text-gray-900'
+                  )}
                 >
                   {label}
                 </Link>
               ))}
-              {EXTERNAL_LINKS.map(({ href, label, external }) => (
-                <a
-                  key={href}
-                  href={href}
-                  target={external ? '_blank' : undefined}
-                  rel={external ? 'noopener noreferrer' : undefined}
-                  className={getMobileLinkClass()}
-                  onClick={handleMenuNavigate}
-                >
-                  {label}
-                </a>
-              ))}
             </div>
+            {/* /api は Next のページではなく Go API へ転送されるため Link ではなく a を使う */}
+            {/* eslint-disable-next-line @next/next/no-html-link-for-pages */}
+            <a
+              href="/api"
+              className="inline-flex items-center gap-0.5 rounded-full bg-gray-900 px-3.5 py-2 text-sm font-medium text-white hover:bg-gray-800"
+            >
+              API
+              <ArrowUpRight className="h-3.5 w-3.5" aria-hidden="true" />
+            </a>
           </div>
-        )}
-      </div>
-    </nav>
+        </nav>
+      </header>
+
+      {/* スマホ: 画面下に浮かぶガラスのタブバー */}
+      <nav
+        aria-label="モバイルナビゲーション"
+        className="glass fixed inset-x-4 bottom-[calc(env(safe-area-inset-bottom)+0.75rem)] z-50 rounded-full p-1.5 md:hidden"
+      >
+        <ul className="grid grid-cols-4">
+          {INTERNAL_LINKS.map(({ href, shortLabel, icon: Icon }) => {
+            const active = isActive(href);
+            return (
+              <li key={href}>
+                <Link
+                  href={href}
+                  aria-current={active ? 'page' : undefined}
+                  className={cn(
+                    'flex flex-col items-center gap-0.5 rounded-full py-1.5 text-[10px] font-medium transition-colors duration-200',
+                    active ? 'bg-gray-900/[0.06] text-ba-blue-600' : 'text-gray-500 active:bg-gray-900/[0.04]'
+                  )}
+                >
+                  <Icon className="h-5 w-5" strokeWidth={active ? 2.25 : 1.75} aria-hidden="true" />
+                  {shortLabel}
+                </Link>
+              </li>
+            );
+          })}
+        </ul>
+      </nav>
+    </>
   );
 }

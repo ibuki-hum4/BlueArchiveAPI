@@ -5,98 +5,69 @@ import Link from 'next/link';
 import { motion } from 'motion/react';
 import { Student } from '@/types/student';
 import RarityStars from '@/components/RarityStars';
-import { Card } from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
+import TypeChip from '@/components/TypeChip';
+import { attackDotClass, defenseDotClass, terrainGradeClass } from '@/lib/student-style';
 import { cn } from '@/lib/utils';
 
 interface StudentCardProps {
   student: Student;
+  /** falseの場合は登場アニメーションを行わない（SSRで出力する初期表示分は最初から見せる） */
+  animateIn?: boolean;
 }
 
-function getAttackTypeColor(attackType: string): string {
-  switch (attackType) {
-    case '神秘': return 'text-ba-blue-600';
-    case '爆発': return 'text-red-600';
-    case '貫通': return 'text-yellow-600';
-    case '分解': return 'text-teal-600';
-    default: return 'text-gray-600';
-  }
-}
+const TERRAINS = [
+  { key: 'city', label: '市街地' },
+  { key: 'outdoor', label: '屋外' },
+  { key: 'indoor', label: '屋内' },
+] as const;
 
-function getTerrainBadgeClass(grade: string): string {
-  switch (grade) {
-    case 'S': return 'border-transparent bg-green-50 text-green-700';
-    case 'A': return 'border-transparent bg-ba-blue-50 text-ba-blue-700';
-    case 'B': return 'border-transparent bg-yellow-50 text-yellow-700';
-    case 'C': return 'border-transparent bg-orange-50 text-orange-700';
-    case 'D': return 'border-transparent bg-red-50 text-red-700';
-    default: return 'border-transparent bg-gray-100 text-gray-600';
-  }
-}
-
-function StudentCard({ student }: StudentCardProps) {
+function StudentCard({ student, animateIn = true }: StudentCardProps) {
   const titleId = `student-${student.id}-name`;
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 12 }}
+      initial={animateIn ? { opacity: 0, y: 8 } : false}
       animate={{ opacity: 1, y: 0 }}
-      whileHover={{ y: -4 }}
       transition={{ duration: 0.2 }}
+      className="h-full"
     >
       <Link
         href={`/${student.id}`}
-        className="block rounded-xl focus:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+        className="group block h-full rounded-2xl focus:outline-none focus-visible:ring-2 focus-visible:ring-ba-blue-500 focus-visible:ring-offset-2"
         aria-labelledby={titleId}
-        aria-label={`${student.name}の詳細ページを開く`}
       >
-        <Card className="p-5 transition-colors duration-200 hover:border-ba-blue-300 hover:shadow-md">
-          {/* ヘッダー部分 */}
-          <div className="mb-2 flex items-center justify-between">
-            <RarityStars rarity={student.rarity} />
-            <span className="text-xs font-semibold text-ba-navy-400">{student.weapon.type}</span>
+        <article className="ba-panel flex h-full flex-col p-5 transition-[border-color,box-shadow] duration-200 group-hover:border-gray-300 group-hover:shadow-[0_4px_16px_-6px_rgba(15,23,42,0.12)]">
+          <div className="flex items-center justify-between text-xs text-gray-400">
+            <RarityStars rarity={student.rarity} size="sm" />
+            <span className="ba-skew px-2.5 py-0.5 text-[11px] font-semibold italic tracking-wide text-white">{student.weapon.type}</span>
           </div>
 
-          {/* 生徒名 */}
-          <h3 id={titleId} className="text-lg font-bold leading-tight text-ba-navy-900 line-clamp-2">
+          <h3 id={titleId} className="mt-3 text-base font-semibold leading-snug text-gray-900 line-clamp-2">
             {student.name}
           </h3>
+          <p className="mt-0.5 text-xs text-gray-500">
+            {student.school} · {student.role.class}
+          </p>
 
-          {/* 学校 */}
-          <p className="mt-1 text-sm text-ba-navy-400">{student.school}</p>
-
-          {/* 役割・攻撃タイプ */}
-          <div className="mt-3 flex items-center gap-2">
-            <Badge variant="outline" className="border-ba-blue-200 bg-ba-blue-50 font-medium text-ba-blue-700">
-              {student.role.class}
-            </Badge>
-            <span className={`text-xs font-semibold ${getAttackTypeColor(student.combat.attackType)}`}>
-              {student.combat.attackType}
-            </span>
+          <div className="mt-3 flex flex-wrap items-center gap-x-3 gap-y-1">
+            <TypeChip label={student.combat.attackType} dotClass={attackDotClass(student.combat.attackType)} />
+            <TypeChip label={student.combat.defenseType} dotClass={defenseDotClass(student.combat.defenseType)} />
           </div>
 
           {/* 地形適応 */}
-          <div className="mt-4 grid grid-cols-3 gap-2">
-            <div className="rounded-lg bg-ba-navy-50 py-2 text-center">
-              <div className="text-xs text-ba-navy-400">市街地</div>
-              <Badge className={cn('mt-1 min-w-[2rem] justify-center', getTerrainBadgeClass(student.terrainAdaptation.city))}>
-                {student.terrainAdaptation.city}
-              </Badge>
-            </div>
-            <div className="rounded-lg bg-ba-navy-50 py-2 text-center">
-              <div className="text-xs text-ba-navy-400">屋外</div>
-              <Badge className={cn('mt-1 min-w-[2rem] justify-center', getTerrainBadgeClass(student.terrainAdaptation.outdoor))}>
-                {student.terrainAdaptation.outdoor}
-              </Badge>
-            </div>
-            <div className="rounded-lg bg-ba-navy-50 py-2 text-center">
-              <div className="text-xs text-ba-navy-400">屋内</div>
-              <Badge className={cn('mt-1 min-w-[2rem] justify-center', getTerrainBadgeClass(student.terrainAdaptation.indoor))}>
-                {student.terrainAdaptation.indoor}
-              </Badge>
-            </div>
+          <div className="mt-auto pt-4">
+            <dl className="grid grid-cols-3 border-t border-gray-100 pt-3">
+              {TERRAINS.map(({ key, label }) => (
+                <div key={key} className="text-center">
+                  <dt className="text-[10px] text-gray-400">{label}</dt>
+                  <dd className={cn('text-sm font-semibold', terrainGradeClass(student.terrainAdaptation[key]))}>
+                    {student.terrainAdaptation[key]}
+                  </dd>
+                </div>
+              ))}
+            </dl>
           </div>
-        </Card>
+        </article>
       </Link>
     </motion.div>
   );

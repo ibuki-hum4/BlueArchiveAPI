@@ -36,7 +36,6 @@
   --color-ba-navy-900: #131829;
   --color-ba-navy-950: #0b0e18;
 
-  --font-rounded: var(--font-mplus-rounded), "Hiragino Maru Gothic ProN", "Yu Gothic", sans-serif;
 
   --color-card: var(--card);
   --color-card-foreground: var(--card-foreground);
@@ -63,7 +62,7 @@
 }
 
 :root {
-  --background: #f3f7ff;
+  --background: #f7f8fa;
   --foreground: #131829;
 
   --radius: 0.5rem;
@@ -81,8 +80,8 @@
   --accent-foreground: var(--color-ba-blue-700);
   --destructive: #dc2626;
   --destructive-foreground: #ffffff;
-  --border: var(--color-ba-blue-100);
-  --input: var(--color-ba-blue-200);
+  --border: #e6e8ec;
+  --input: #dfe2e8;
   --ring: var(--color-ba-blue-400);
 }
 
@@ -93,22 +92,70 @@
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0b0e18;
-    --foreground: #e8eefb;
-  }
-}
-
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: var(--font-geist-sans), system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-family: var(--font-geist-sans), system-ui, -apple-system, BlinkMacSystemFont, "Hiragino Sans", "Segoe UI", sans-serif;
+  font-feature-settings: "palt";
+  /* iOS Safari: タップ時の灰色ハイライトを消す */
+  -webkit-tap-highlight-color: transparent;
+  /* 横向きでノッチ側にコンテンツが潜らないようにする */
+  padding-left: env(safe-area-inset-left);
+  padding-right: env(safe-area-inset-right);
 }
 
-.ba-soft-panel {
-  background: #ffffff;
-  border-bottom: 1px solid var(--color-ba-blue-100);
+/* ---- Liquid Glass ----
+   Apple のガイドラインに合わせ、ガラスはナビゲーションなど本文の上に浮く操作系だけに使う */
+:root {
+  --glass-bg: rgba(255, 255, 255, 0.72);
+  /* Safari 18 未満は -webkit- 付きでしか backdrop-filter が効かない */
+  --glass-filter: blur(20px) saturate(180%);
+  --glass-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.9),
+    0 0 0 1px rgba(15, 23, 42, 0.06),
+    0 8px 24px -8px rgba(15, 23, 42, 0.12);
+}
+
+@utility glass {
+  background: var(--glass-bg);
+  -webkit-backdrop-filter: var(--glass-filter);
+  backdrop-filter: var(--glass-filter);
+  box-shadow: var(--glass-shadow);
+}
+
+/* backdrop-filter 非対応環境では不透明に近づけて文字を読めるようにする */
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  :root {
+    --glass-bg: rgba(255, 255, 255, 0.96);
+  }
+}
+
+@layer components {
+  /* 本文のカード */
+  .ba-panel {
+    position: relative;
+    /* Safari: 角丸 + overflow:hidden の中で transform するとはみ出す不具合を防ぐ */
+    isolation: isolate;
+    background: #ffffff;
+    border: 1px solid rgba(15, 23, 42, 0.07);
+    border-radius: 1rem;
+  }
+
+  /* 平行四辺形のタグ（武器種など）。背景だけを傾け、文字は傾けない */
+  .ba-skew {
+    position: relative;
+    isolation: isolate;
+  }
+
+  .ba-skew::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    border-radius: 2px;
+    background: var(--ba-skew-bg, var(--color-gray-900));
+    transform: skewX(-14deg);
+  }
 }
 
 .skip-link {

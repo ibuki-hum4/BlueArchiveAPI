@@ -1,9 +1,12 @@
 import type { Metadata } from 'next';
+import type { ReactNode } from 'react';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
-import { ChevronLeft } from 'lucide-react';
-import Navigation from '@/components/Navigation';
+import { ChevronRight } from 'lucide-react';
 import RarityStars from '@/components/RarityStars';
+import TypeChip from '@/components/TypeChip';
+import { attackDotClass, defenseDotClass, terrainGradeClass } from '@/lib/student-style';
+import { cn } from '@/lib/utils';
 import { getStudentById } from '@/lib/students/server';
 import { buildOgImageUrl, siteName, siteUrl } from '@/lib/site';
 
@@ -64,27 +67,29 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   };
 }
 
-// 攻撃タイプの色設定
-const getAttackTypeColor = (attackType: string): string => {
-  switch (attackType) {
-    case '神秘': return 'text-ba-blue-700 bg-ba-blue-50';
-    case '爆発': return 'text-red-600 bg-red-50';
-    case '貫通': return 'text-yellow-600 bg-yellow-50';
-    default: return 'text-gray-600 bg-gray-50';
-  }
-};
+const TERRAINS = [
+  { key: 'city', label: '市街地' },
+  { key: 'outdoor', label: '屋外' },
+  { key: 'indoor', label: '屋内' },
+] as const;
 
-// 地形適応度の背景色
-const getTerrainColor = (grade: string): string => {
-  switch (grade) {
-    case 'S': return 'bg-green-50 text-green-700';
-    case 'A': return 'bg-ba-blue-50 text-ba-blue-700';
-    case 'B': return 'bg-yellow-50 text-yellow-700';
-    case 'C': return 'bg-orange-50 text-orange-700';
-    case 'D': return 'bg-red-50 text-red-700';
-    default: return 'bg-gray-100 text-gray-600';
-  }
-};
+function Section({ title, children }: { title: string; children: ReactNode }) {
+  return (
+    <section className="ba-panel p-5 sm:p-6">
+      <h2 className="mb-3 text-sm font-semibold text-gray-900">{title}</h2>
+      {children}
+    </section>
+  );
+}
+
+function InfoRow({ label, children }: { label: string; children: ReactNode }) {
+  return (
+    <div className="flex items-center justify-between gap-4 border-b border-gray-100 py-2.5 text-sm last:border-b-0">
+      <dt className="text-gray-500">{label}</dt>
+      <dd className="text-right font-medium text-gray-900">{children}</dd>
+    </div>
+  );
+}
 
 export default async function StudentDetailPage({ params }: PageProps) {
   const { id } = await params;
@@ -104,142 +109,91 @@ export default async function StudentDetailPage({ params }: PageProps) {
   };
 
   return (
-    <div className="min-h-screen bg-ba-blue-50/40 text-ba-navy-900">
+    <main id="main-content" className="mx-auto max-w-4xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8">
       <script
         type="application/ld+json"
         // JSON内の "<" をエスケープして </script> によるタグ脱出を防ぐ
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd).replace(/</g, '\\u003c') }}
       />
-      <Navigation />
 
-      <main id="main-content" className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        {/* 戻るリンク */}
-        <Link
-          href="/"
-          className="mb-6 inline-flex items-center gap-1 text-sm font-medium text-ba-blue-600 hover:text-ba-blue-800"
-        >
-          <ChevronLeft className="h-4 w-4" aria-hidden="true" />
-          生徒一覧に戻る
-        </Link>
+      {/* パンくず（JSON-LDと同じ階層） */}
+      <nav aria-label="パンくずリスト" className="text-sm">
+        <ol className="flex items-center gap-1 text-gray-400">
+          <li>
+            <Link href="/" className="text-gray-500 hover:text-gray-900">
+              生徒一覧
+            </Link>
+          </li>
+          <li aria-hidden="true">
+            <ChevronRight className="h-3.5 w-3.5" />
+          </li>
+          <li aria-current="page" className="truncate text-gray-900">{student.name}</li>
+        </ol>
+      </nav>
 
-        <div className="overflow-hidden rounded-xl border border-border bg-white">
-          {/* ヘッダー部分 */}
-          <div className="ba-soft-panel p-6">
-            <div className="flex items-center justify-between">
-              <div>
-                <div className="mb-2 flex items-center gap-3">
-                  <h1 className="font-rounded text-3xl font-extrabold text-ba-navy-900">{student.name}</h1>
-                  <RarityStars rarity={student.rarity} size="lg" />
-                </div>
-                <p className="text-sm text-ba-navy-400">{student.school}</p>
-              </div>
-            </div>
-          </div>
-
-          {/* 詳細情報 */}
-          <div className="p-6 space-y-6">
-            {/* 基本情報 */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div className="space-y-4">
-                <h2 className="text-xl font-bold text-ba-navy-900 border-b border-ba-blue-100 pb-2">
-                  基本情報
-                </h2>
-                <div className="space-y-3">
-                  <div className="flex items-center justify-between">
-                    <span className="text-ba-navy-500">レア度:</span>
-                    <RarityStars rarity={student.rarity} />
-                  </div>
-                  <div className="flex items-center justify-between">
-                    <span className="text-ba-navy-500">学校:</span>
-                    <span className="font-semibold text-ba-navy-900">{student.school}</span>
-                  </div>
-                </div>
-              </div>
-
-              <div className="space-y-4">
-                <h2 className="text-xl font-bold text-ba-navy-900 border-b border-ba-blue-100 pb-2">
-                  戦闘情報
-                </h2>
-                <div className="space-y-3">
-                  <div className="flex items-center justify-between">
-                    <span className="text-ba-navy-500">武器タイプ:</span>
-                    <span className="font-semibold text-ba-navy-900">{student.weapon.type}</span>
-                  </div>
-                  <div className="flex items-center justify-between">
-                    <span className="text-ba-navy-500">カバー:</span>
-                    <span className="font-semibold text-ba-navy-900">{student.weapon.cover ? 'あり' : 'なし'}</span>
-                  </div>
-                  <div className="flex items-center justify-between">
-                    <span className="text-ba-navy-500">攻撃タイプ:</span>
-                    <span className={`rounded-md px-2.5 py-1 text-sm font-semibold ${getAttackTypeColor(student.combat.attackType)}`}>
-                      {student.combat.attackType}
-                    </span>
-                  </div>
-                  <div className="flex items-center justify-between">
-                    <span className="text-ba-navy-500">防御タイプ:</span>
-                    <span className="font-semibold text-ba-navy-900">{student.combat.defenseType}</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* 役割情報 */}
-            <div>
-              <h2 className="mb-4 text-xl font-bold text-ba-navy-900 border-b border-ba-blue-100 pb-2">
-                役割・ポジション
-              </h2>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                <div className="rounded-lg bg-ba-navy-50 p-4">
-                  <div className="mb-1 text-sm text-ba-navy-400">タイプ</div>
-                  <div className="font-bold text-ba-navy-900">{student.role.type}</div>
-                </div>
-                <div className="rounded-lg bg-ba-navy-50 p-4">
-                  <div className="mb-1 text-sm text-ba-navy-400">クラス</div>
-                  <div className="font-bold text-ba-navy-900">{student.role.class}</div>
-                </div>
-                <div className="rounded-lg bg-ba-navy-50 p-4">
-                  <div className="mb-1 text-sm text-ba-navy-400">ポジション</div>
-                  <div className="font-bold text-ba-navy-900">{student.role.position}</div>
-                </div>
-              </div>
-            </div>
-
-            {/* 地形適応 */}
-            <div>
-              <h2 className="mb-4 text-xl font-bold text-ba-navy-900 border-b border-ba-blue-100 pb-2">
-                地形適応度
-              </h2>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                <div className="rounded-lg border border-ba-blue-100 p-4 text-center">
-                  <div className="mb-2 text-sm text-ba-navy-400">市街地</div>
-                  <div className={`inline-block rounded-md px-4 py-2 text-lg font-bold ${getTerrainColor(student.terrainAdaptation.city)}`}>
-                    {student.terrainAdaptation.city}
-                  </div>
-                </div>
-                <div className="rounded-lg border border-ba-blue-100 p-4 text-center">
-                  <div className="mb-2 text-sm text-ba-navy-400">屋外</div>
-                  <div className={`inline-block rounded-md px-4 py-2 text-lg font-bold ${getTerrainColor(student.terrainAdaptation.outdoor)}`}>
-                    {student.terrainAdaptation.outdoor}
-                  </div>
-                </div>
-                <div className="rounded-lg border border-ba-blue-100 p-4 text-center">
-                  <div className="mb-2 text-sm text-ba-navy-400">屋内</div>
-                  <div className={`inline-block rounded-md px-4 py-2 text-lg font-bold ${getTerrainColor(student.terrainAdaptation.indoor)}`}>
-                    {student.terrainAdaptation.indoor}
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* ID情報（デバッグ用） */}
-            <div className="border-t border-ba-blue-100 pt-4">
-              <div className="text-sm text-ba-navy-400">
-                ID: {student.id}
-              </div>
-            </div>
-          </div>
+      <header className="mt-6">
+        <div className="flex items-center gap-3">
+          <RarityStars rarity={student.rarity} />
+          <span className="ba-skew px-3 py-0.5 text-xs font-semibold italic tracking-wide text-white">
+            {student.weapon.type}
+          </span>
         </div>
-      </main>
-    </div>
+        <h1 className="mt-2 text-3xl font-semibold tracking-tight text-gray-900 sm:text-4xl">{student.name}</h1>
+        <p className="mt-1 text-gray-500">{student.school}</p>
+        <div className="mt-4 flex flex-wrap items-center gap-x-4 gap-y-2">
+          <TypeChip label={`攻撃 ${student.combat.attackType}`} dotClass={attackDotClass(student.combat.attackType)} />
+          <TypeChip label={`防御 ${student.combat.defenseType}`} dotClass={defenseDotClass(student.combat.defenseType)} />
+          <span className="text-xs text-gray-500">{student.role.type} · {student.role.class}</span>
+        </div>
+      </header>
+
+      <div className="mt-8 grid gap-4 md:grid-cols-2">
+        <Section title="基本情報">
+          <dl>
+            <InfoRow label="学校">{student.school}</InfoRow>
+            <InfoRow label="レア度"><RarityStars rarity={student.rarity} size="sm" /></InfoRow>
+            <InfoRow label="タイプ">{student.role.type}</InfoRow>
+            <InfoRow label="クラス">{student.role.class}</InfoRow>
+            <InfoRow label="ポジション">{student.role.position}</InfoRow>
+          </dl>
+        </Section>
+
+        <Section title="戦闘情報">
+          <dl>
+            <InfoRow label="武器タイプ">{student.weapon.type}</InfoRow>
+            <InfoRow label="遮蔽物">{student.weapon.cover ? '使用する' : '使用しない'}</InfoRow>
+            <InfoRow label="攻撃タイプ">
+              <TypeChip label={student.combat.attackType} dotClass={attackDotClass(student.combat.attackType)} />
+            </InfoRow>
+            <InfoRow label="防御タイプ">
+              <TypeChip label={student.combat.defenseType} dotClass={defenseDotClass(student.combat.defenseType)} />
+            </InfoRow>
+          </dl>
+        </Section>
+      </div>
+
+      <div className="mt-4">
+        <Section title="地形適応度">
+          <dl className="grid grid-cols-3 divide-x divide-gray-100">
+            {TERRAINS.map(({ key, label }) => (
+              <div key={key} className="py-2 text-center">
+                <dt className="text-xs text-gray-500">{label}</dt>
+                <dd className={cn('mt-1 text-3xl font-semibold tracking-tight', terrainGradeClass(student.terrainAdaptation[key]))}>
+                  {student.terrainAdaptation[key]}
+                </dd>
+              </div>
+            ))}
+          </dl>
+        </Section>
+      </div>
+
+      {/* API利用者向け */}
+      <div className="mt-6 flex flex-wrap items-center justify-between gap-2 text-xs text-gray-400">
+        <span>ID: <code className="font-mono">{student.id}</code></span>
+        <a href={`/api/students/${student.id}`} className="font-mono hover:text-gray-900">
+          GET /api/students/{student.id}
+        </a>
+      </div>
+    </main>
   );
 }
