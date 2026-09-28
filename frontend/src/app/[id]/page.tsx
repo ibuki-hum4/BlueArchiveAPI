@@ -44,10 +44,13 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     alternates: {
       canonical: canonicalPath,
     },
+    // openGraph はルートレイアウトの設定と統合されず丸ごと置き換わるため、共通項目もここで指定する
     openGraph: {
       title: fullTitle,
       description,
       url: canonicalPath,
+      siteName,
+      locale: 'ja_JP',
       type: 'profile',
       images: [
         {
