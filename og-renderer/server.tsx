@@ -109,14 +109,25 @@ function validatePayload(payload: unknown): string | null {
   }
 
   const obj = payload as Record<string, unknown>;
-  const fields = ["title", "subtitle", "rarity", "weapon", "city", "outdoor", "indoor"];
-  for (const field of fields) {
+  for (const field of ["title", "subtitle"]) {
     if (typeof obj[field] !== "string" || obj[field].trim() === "") {
       return `missing or invalid field: ${field}`;
     }
   }
+  // 生徒ページ以外（サイト全体のOGP）では生徒情報を省略できる
+  for (const field of ["rarity", "weapon", "city", "outdoor", "indoor"]) {
+    if (obj[field] !== undefined && typeof obj[field] !== "string") {
+      return `invalid field: ${field}`;
+    }
+  }
 
   return null;
+}
+
+// 旧バージョンの Go API は生徒情報がないとき "★?" や "-" を送ってくるため、空として扱う
+function optionalText(value: unknown, maxLen: number): string {
+  const text = clampText(value, maxLen);
+  return text === "-" || text === "★?" ? "" : text;
 }
 
 function toPayload(input: unknown): RenderPayload {
@@ -124,16 +135,17 @@ function toPayload(input: unknown): RenderPayload {
   return {
     title: clampText(obj.title, 42),
     subtitle: clampText(obj.subtitle, 72),
-    rarity: clampText(obj.rarity, 8),
-    weapon: clampText(obj.weapon, 10),
-    city: clampText(obj.city, 2).toUpperCase(),
-    outdoor: clampText(obj.outdoor, 2).toUpperCase(),
-    indoor: clampText(obj.indoor, 2).toUpperCase()
+    rarity: optionalText(obj.rarity, 8),
+    weapon: optionalText(obj.weapon, 10),
+    city: optionalText(obj.city, 2).toUpperCase(),
+    outdoor: optionalText(obj.outdoor, 2).toUpperCase(),
+    indoor: optionalText(obj.indoor, 2).toUpperCase()
   };
 }
 
 async function renderImage(payload: RenderPayload): Promise<Uint8Array> {
   const fonts = await fontCachePromise;
+  const hasTerrain = payload.city !== "" || payload.outdoor !== "" || payload.indoor !== "";
 
   const svg = await satori(
     <div
@@ -164,44 +176,52 @@ async function renderImage(payload: RenderPayload): Promise<Uint8Array> {
           style={{
             display: "flex",
             justifyContent: "space-between",
-            alignItems: "center"
+            alignItems: "center",
+            // バッジがなくてもレイアウトが崩れないよう高さを固定する
+            height: "48px"
           }}
         >
-          <div
-            style={{
-              minWidth: "96px",
-              height: "48px",
-              padding: "0 18px",
-              borderRadius: "12px",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              fontSize: "24px",
-              fontWeight: 700,
-              color: "#FFFFFF",
-              backgroundColor: "#A855F7"
-            }}
-          >
-            {payload.rarity}
-          </div>
+          {payload.rarity !== "" ? (
+            <div
+              style={{
+                minWidth: "96px",
+                height: "48px",
+                padding: "0 18px",
+                borderRadius: "12px",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                fontSize: "24px",
+                fontWeight: 700,
+                color: "#FFFFFF",
+                backgroundColor: "#A855F7"
+              }}
+            >
+              {payload.rarity}
+            </div>
+          ) : (
+            <div style={{ display: "flex" }} />
+          )}
 
-          <div
-            style={{
-              minWidth: "96px",
-              height: "48px",
-              padding: "0 18px",
-              borderRadius: "12px",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              fontSize: "24px",
-              fontWeight: 400,
-              color: "#475569",
-              backgroundColor: "#E2E8F0"
-            }}
-          >
-            {payload.weapon}
-          </div>
+          {payload.weapon !== "" && (
+            <div
+              style={{
+                minWidth: "96px",
+                height: "48px",
+                padding: "0 18px",
+                borderRadius: "12px",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                fontSize: "24px",
+                fontWeight: 400,
+                color: "#475569",
+                backgroundColor: "#E2E8F0"
+              }}
+            >
+              {payload.weapon}
+            </div>
+          )}
         </div>
 
         <div
@@ -247,8 +267,8 @@ async function renderImage(payload: RenderPayload): Promise<Uint8Array> {
             alignItems: "flex-end"
           }}
         >
-          <div style={{ display: "flex", gap: "18px" }}>
-            {[
+          <div style={{ display: "flex", gap: "18px", height: "88px" }}>
+            {hasTerrain && [
               ["市街地", payload.city],
               ["屋外", payload.outdoor],
               ["屋内", payload.indoor]
@@ -326,11 +346,31 @@ async function renderImage(payload: RenderPayload): Promise<Uint8Array> {
     fitTo: {
       mode: "width",
       value: WIDTH
+    },
+    // satori が文字をパスに変換済みなのでフォントは不要。
+    // 既定の true だと描画のたびにシステムフォントを走査し、1枚あたり約1秒かかる
+    font: {
+      loadSystemFonts: false
     }
   });
 
   return resvg.render().asPng();
 }
+
+// 初回の描画はフォント・satori・resvg の初期化で数秒かかり、Go API 側のタイムアウトを超えてしまう。
+// 起動時に一度描画して温め、終わるまで /health を 503 にして readinessProbe でトラフィックを止める。
+let warmedUp = false;
+const warmUpStarted = Bun.nanoseconds();
+renderImage({ title: "warm up", subtitle: "warm up", rarity: "★3", weapon: "HG", city: "S", outdoor: "A", indoor: "B" })
+  .then(() => {
+    warmedUp = true;
+    console.log(`[warmup] done ${((Bun.nanoseconds() - warmUpStarted) / 1_000_000).toFixed(1)}ms`);
+  })
+  .catch((err) => {
+    // 温めに失敗してもリクエストは受け付ける（フォント不足などは実リクエストでもエラーとして出る）
+    warmedUp = true;
+    console.error("[warmup] failed", err);
+  });
 
 const server = Bun.serve({
   port: PORT,
@@ -339,7 +379,9 @@ const server = Bun.serve({
     const url = new URL(req.url);
 
     if (req.method === "GET" && url.pathname === "/health") {
-      return Response.json({ ok: true });
+      return warmedUp
+        ? Response.json({ ok: true })
+        : Response.json({ ok: false, reason: "warming up" }, { status: 503 });
     }
 
     if (req.method !== "POST" || url.pathname !== "/render") {
