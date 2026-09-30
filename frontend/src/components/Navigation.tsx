@@ -1,11 +1,12 @@
 'use client';
 
-import { useEffect, useRef, useState, type PointerEvent } from 'react';
+import { useEffect, useRef, useState, type CSSProperties, type PointerEvent } from 'react';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import {
   motion,
   useAnimationFrame,
+  useMotionTemplate,
   useMotionValue,
   useReducedMotion,
   useSpring,
@@ -44,6 +45,28 @@ const DRAG_THRESHOLD_PX = 6;
 const SNAP_SPRING = { stiffness: 520, damping: 40, mass: 1 };
 /** 伸縮のバネ。追従中の伸びと、着地時に 1 へ戻る動きの両方に使う */
 const STRETCH_SPRING = { stiffness: 700, damping: 45, mass: 1 };
+
+// ---- 光沢ハイライト（白い反射。速度・向きに連動させる） ----
+
+/** 静止時 / 追従中の最大不透明度。追従の速さに応じてこの間を線形補間する */
+const HIGHLIGHT_IDLE_OPACITY = 0.25;
+const HIGHLIGHT_MAX_OPACITY = 0.6;
+/** この速度（px/ms）で不透明度が HIGHLIGHT_MAX_OPACITY に達する */
+const HIGHLIGHT_OPACITY_VELOCITY_REF = 1.4;
+/** 速度 1px/ms あたりのハイライトの傾き（deg）と横オフセット（%）。符号は進行方向 */
+const HIGHLIGHT_TILT_PER_VELOCITY = 12;
+const HIGHLIGHT_SHIFT_PER_VELOCITY = 16;
+const HIGHLIGHT_TILT_MAX = 20;
+const HIGHLIGHT_SHIFT_MAX = 26;
+/** ハイライトが目標値へ収束するバネ。伸縮よりわずかに柔らかくして、反射が遅れてついてくるようにする */
+const HIGHLIGHT_SPRING = { stiffness: 500, damping: 40, mass: 1 };
+
+// ---- ホールド時の拡大（押している間、少しだけ大きくなるタッチフィードバック） ----
+
+/** 押している間の拡大率 */
+const HOLD_SCALE = 1.08;
+/** 拡大 / 復帰のバネ */
+const HOLD_SPRING = { stiffness: 600, damping: 30, mass: 1 };
 
 export default function Navigation() {
   const pathname = usePathname();
@@ -126,6 +149,19 @@ function MobileTabBar({ activeIndex }: { activeIndex: number }) {
   const stretch = useSpring(1, STRETCH_SPRING);
   const stretchOrigin = useMotionValue(0.5);
 
+  // 光沢ハイライト。白い反射の芯に、色収差のようなごく薄い色のにじみ(片側は寒色、反対側は暖色)を添えて
+  // 「屈折してうっすら虹色に見える」質感にする。はっきりした虹色のリングにはしない
+  const highlightOpacity = useSpring(HIGHLIGHT_IDLE_OPACITY, HIGHLIGHT_SPRING);
+  const highlightTilt = useSpring(0, HIGHLIGHT_SPRING);
+  const highlightShift = useSpring(0, HIGHLIGHT_SPRING);
+  const highlightTiltDeg = useMotionTemplate`${highlightTilt}deg`;
+  const highlightShiftPercent = useMotionTemplate`${highlightShift}%`;
+
+  // 押している間だけ少し拡大する(ホールドのタッチフィードバック)
+  const holdScale = useSpring(1, HOLD_SPRING);
+  // 横方向は「速度による伸び」と「ホールドの拡大」を掛け合わせる。縦方向はホールドの拡大のみ
+  const combinedScaleX = useTransform([stretch, holdScale], ([s, h]) => (s as number) * (h as number));
+
   // 追従中に指の下にあるタブ。文字色の強調だけに使い、タブが変わったときだけ再描画される
   const [previewIndex, setPreviewIndex] = useState<number | null>(null);
   const gestureRef = useRef<TabGesture | null>(null);
@@ -150,6 +186,24 @@ function MobileTabBar({ activeIndex }: { activeIndex: number }) {
     stretch.set(reduceMotion ? 1 : Math.min(1 + speed * STRETCH_PER_VELOCITY, MAX_STRETCH));
     // 右へ動くほど基準点が左端（0）に寄り、進行方向側へ伸びる
     stretchOrigin.set(0.5 - 0.5 * Math.tanh(gesture.velocity / ORIGIN_VELOCITY_REF));
+
+    // ハイライトも速度に連動させる。動くほど反射が強く、傾きも進行方向へ振れる
+    if (reduceMotion) {
+      highlightOpacity.set(HIGHLIGHT_IDLE_OPACITY);
+      highlightTilt.set(0);
+      highlightShift.set(0);
+    } else {
+      const opacityRatio = Math.min(speed / HIGHLIGHT_OPACITY_VELOCITY_REF, 1);
+      highlightOpacity.set(
+        HIGHLIGHT_IDLE_OPACITY + opacityRatio * (HIGHLIGHT_MAX_OPACITY - HIGHLIGHT_IDLE_OPACITY)
+      );
+      highlightTilt.set(
+        Math.max(-HIGHLIGHT_TILT_MAX, Math.min(HIGHLIGHT_TILT_MAX, gesture.velocity * HIGHLIGHT_TILT_PER_VELOCITY))
+      );
+      highlightShift.set(
+        Math.max(-HIGHLIGHT_SHIFT_MAX, Math.min(HIGHLIGHT_SHIFT_MAX, gesture.velocity * HIGHLIGHT_SHIFT_PER_VELOCITY))
+      );
+    }
   });
 
   const positionAt = (gesture: TabGesture, clientX: number) => {
@@ -170,6 +224,8 @@ function MobileTabBar({ activeIndex }: { activeIndex: number }) {
       velocity: 0,
       dragging: false,
     };
+    // 押した瞬間から少し膨らませる(ドラッグに入るかどうかに関わらず、押している間のフィードバック)
+    if (!reduceMotion) holdScale.set(HOLD_SCALE);
   };
 
   const handlePointerMove = (e: PointerEvent<HTMLDivElement>) => {
@@ -203,6 +259,10 @@ function MobileTabBar({ activeIndex }: { activeIndex: number }) {
     gestureRef.current = null;
     setPreviewIndex(null);
     stretch.set(1);
+    holdScale.set(1);
+    highlightOpacity.set(HIGHLIGHT_IDLE_OPACITY);
+    highlightTilt.set(0);
+    highlightShift.set(0);
 
     // 動かさずに離した場合はタップなので、Link の遷移に任せる
     if (!gesture.dragging) return;
@@ -244,9 +304,34 @@ function MobileTabBar({ activeIndex }: { activeIndex: number }) {
       >
         <motion.div
           aria-hidden="true"
-          className="pointer-events-none absolute inset-y-0 left-0 rounded-full bg-gray-900/[0.06]"
-          style={{ width: `${100 / tabCount}%`, x: pillX, scaleX: stretch, originX: stretchOrigin }}
-        />
+          className="pointer-events-none absolute inset-y-0 left-0 rounded-full border border-white/40 bg-white/35 shadow-[inset_0_1px_0_rgba(255,255,255,0.85),inset_0_-1px_2px_rgba(15,23,42,0.12)] backdrop-blur-sm"
+          style={{
+            width: `${100 / tabCount}%`,
+            x: pillX,
+            scaleX: combinedScaleX,
+            scaleY: holdScale,
+            originX: stretchOrigin,
+          }}
+        >
+          {/* 光沢ハイライト。白い反射の芯の両脇に、色収差のようなごく薄い寒色/暖色のフリンジを添えて
+              「屈折してうっすら虹色に見える」質感にする(はっきりした虹色のリングにはしない)。
+              白背景では mix-blend-screen だと沈んでしまうため、通常合成で不透明度だけ操る */}
+          <motion.div
+            aria-hidden="true"
+            className="absolute inset-0 rounded-full"
+            style={
+              {
+                background:
+                  'linear-gradient(calc(90deg + var(--hl-tilt)), rgba(15,23,42,0.10) 0%, transparent 26%, transparent 42%, rgba(120,190,255,0.35) 52%, rgba(255,255,255,0.95) 58%, rgba(255,150,210,0.3) 64%, transparent 78%, rgba(15,23,42,0.08) 100%)',
+                backgroundSize: '220% 100%',
+                backgroundPosition: 'calc(50% + var(--hl-x)) 0',
+                opacity: highlightOpacity,
+                '--hl-tilt': highlightTiltDeg,
+                '--hl-x': highlightShiftPercent,
+              } as unknown as CSSProperties
+            }
+          />
+        </motion.div>
         <ul className="relative grid grid-cols-4">
           {INTERNAL_LINKS.map(({ href, shortLabel, icon: Icon }, index) => {
             const highlighted = index === highlightIndex;
